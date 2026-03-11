@@ -48,6 +48,9 @@ _docx/~$*
 _posts/**/*_csp.md
 _posts/**/*_csa.md
 _posts/**/*_csse.md
+
+# Local theme directories (not needed for remote_theme)
+_themes/
 _posts/**/*_cwgu.md
 _posts/**/*_content.md
 _notebooks/**/*_csp.ipynb
