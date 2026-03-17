@@ -6,4 +6,5 @@ title: DAD
 description: An extention of the DAD website (unofficial)
 permalink: /
 ---
-Site Under Development
+
+<a href="dad">Click here to view the Home page</a>
