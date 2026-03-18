@@ -939,6 +939,297 @@ search_exclude: true
       .footer-bottom { flex-direction: column; gap: 16px; }
       .about-img-stack { height: 300px; }
     }
+
+    /* ── AI CHATBOT ── */
+    #dad-chat-toggle {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 58px;
+      height: 58px;
+      background: var(--gold);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.28);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    #dad-chat-toggle:hover {
+      background: var(--gold-light);
+      transform: scale(1.07);
+    }
+
+    #dad-chat-toggle svg {
+      width: 26px;
+      height: 26px;
+      fill: var(--navy);
+      transition: opacity 0.2s;
+    }
+
+    #dad-chat-toggle .icon-close {
+      display: none;
+    }
+
+    #dad-chat-toggle.open .icon-chat {
+      display: none;
+    }
+
+    #dad-chat-toggle.open .icon-close {
+      display: block;
+    }
+
+    #dad-chat-window {
+      position: fixed;
+      bottom: 98px;
+      right: 28px;
+      z-index: 9998;
+      width: 360px;
+      max-height: 520px;
+      background: var(--white);
+      border-radius: 4px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.22);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(200,151,58,0.25);
+      transform: translateY(16px) scale(0.97);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    #dad-chat-window.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .chat-header {
+      background: var(--navy);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 3px solid var(--gold);
+      flex-shrink: 0;
+    }
+
+    .chat-header-avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+
+    .chat-header-info {
+      flex: 1;
+    }
+
+    .chat-header-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .chat-header-status {
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #f4f1ea;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(200,151,58,0.3);
+      border-radius: 2px;
+    }
+
+    .chat-msg {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .chat-msg.user {
+      flex-direction: row-reverse;
+    }
+
+    .chat-bubble {
+      max-width: 78%;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      border-radius: 2px;
+    }
+
+    .chat-msg.bot .chat-bubble {
+      background: var(--navy);
+      color: var(--off-white);
+      border-bottom-left-radius: 0;
+    }
+
+    .chat-msg.user .chat-bubble {
+      background: var(--gold);
+      color: var(--navy);
+      border-bottom-right-radius: 0;
+      font-weight: 500;
+    }
+
+    .chat-msg-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .chat-msg.user .chat-msg-avatar {
+      background: var(--navy);
+      color: var(--gold);
+    }
+
+    .chat-typing {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 14px;
+      background: var(--navy);
+      border-radius: 2px;
+      border-bottom-left-radius: 0;
+      width: fit-content;
+    }
+
+    .chat-typing span {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: typing-dot 1.2s infinite;
+    }
+
+    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing-dot {
+      0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+      30% { opacity: 1; transform: translateY(-3px); }
+    }
+
+    .chat-input-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border-top: 1px solid rgba(200,151,58,0.2);
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    #dad-chat-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 14px 16px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.88rem;
+      color: var(--dark-gray);
+      resize: none;
+    }
+
+    #dad-chat-input::placeholder {
+      color: #aaa;
+    }
+
+    #dad-chat-send {
+      width: 46px;
+      height: 46px;
+      background: var(--gold);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+      margin: 4px;
+      border-radius: 2px;
+    }
+
+    #dad-chat-send:hover {
+      background: var(--gold-light);
+    }
+
+    #dad-chat-send svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--navy);
+    }
+
+    .chat-footer-note {
+      text-align: center;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: #bbb;
+      padding: 6px 16px 8px;
+      background: var(--white);
+      text-transform: uppercase;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 480px) {
+      #dad-chat-window {
+        right: 12px;
+        left: 12px;
+        width: auto;
+        bottom: 88px;
+      }
+      #dad-chat-toggle {
+        right: 16px;
+        bottom: 16px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1290,6 +1581,188 @@ search_exclude: true
       </div>
     </div>
   </footer>
+
+  <!-- ── AI CHATBOT WIDGET ── -->
+
+  <!-- Toggle Button -->
+  <button id="dad-chat-toggle" aria-label="Open chat assistant" title="Chat with D.A.D. Assistant">
+    <!-- Chat icon -->
+    <svg class="icon-chat" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z"/>
+    </svg>
+    <!-- Close icon -->
+    <svg class="icon-close" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+    </svg>
+  </button>
+
+  <!-- Chat Window -->
+  <div id="dad-chat-window" role="dialog" aria-label="D.A.D. Chat Assistant">
+
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="chat-header-avatar">D.A.D.</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">D.A.D. Assistant</div>
+        <div class="chat-header-status">● Online — Ask us anything</div>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="chat-messages" id="dad-chat-messages">
+      <!-- Initial bot greeting -->
+      <div class="chat-msg bot">
+        <div class="chat-msg-avatar">D</div>
+        <div class="chat-bubble">
+          Hi! 👋 I'm the D.A.D. assistant. I can help you learn about our programs, how to get involved, or how to donate. What can I help you with today?
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Row -->
+    <div class="chat-input-row">
+      <textarea
+        id="dad-chat-input"
+        placeholder="Type your message…"
+        rows="1"
+        aria-label="Chat message input"
+      ></textarea>
+      <button id="dad-chat-send" aria-label="Send message">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Footer note -->
+    <div class="chat-footer-note">Powered by D.A.D. · Doing Exceptional Deeds</div>
+  </div>
+
+  <script>
+    (function () {
+      const toggleBtn  = document.getElementById('dad-chat-toggle');
+      const chatWindow = document.getElementById('dad-chat-window');
+      const messagesEl = document.getElementById('dad-chat-messages');
+      const inputEl    = document.getElementById('dad-chat-input');
+      const sendBtn    = document.getElementById('dad-chat-send');
+
+      /* ── Toggle open/close ── */
+      toggleBtn.addEventListener('click', function () {
+        const isOpen = chatWindow.classList.toggle('open');
+        toggleBtn.classList.toggle('open', isOpen);
+        toggleBtn.setAttribute('aria-label', isOpen ? 'Close chat assistant' : 'Open chat assistant');
+        if (isOpen) inputEl.focus();
+      });
+
+      /* ── Auto-resize textarea ── */
+      inputEl.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 96) + 'px';
+      });
+
+      /* ── Send on Enter (Shift+Enter = newline) ── */
+      inputEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleSend();
+        }
+      });
+
+      sendBtn.addEventListener('click', handleSend);
+
+      /* ── Append a message bubble ── */
+      function appendMessage(role, text) {
+        const wrap   = document.createElement('div');
+        wrap.className = 'chat-msg ' + role;
+
+        const avatar = document.createElement('div');
+        avatar.className = 'chat-msg-avatar';
+        avatar.textContent = role === 'bot' ? 'D' : 'You';
+
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        bubble.textContent = text;
+
+        wrap.appendChild(avatar);
+        wrap.appendChild(bubble);
+        messagesEl.appendChild(wrap);
+        scrollToBottom();
+        return wrap;
+      }
+
+      /* ── Typing indicator ── */
+      function showTyping() {
+        const wrap = document.createElement('div');
+        wrap.className = 'chat-msg bot';
+        wrap.id = 'dad-typing-indicator';
+
+        const avatar = document.createElement('div');
+        avatar.className = 'chat-msg-avatar';
+        avatar.textContent = 'D';
+
+        const dots = document.createElement('div');
+        dots.className = 'chat-typing';
+        dots.innerHTML = '<span></span><span></span><span></span>';
+
+        wrap.appendChild(avatar);
+        wrap.appendChild(dots);
+        messagesEl.appendChild(wrap);
+        scrollToBottom();
+      }
+
+      function hideTyping() {
+        const indicator = document.getElementById('dad-typing-indicator');
+        if (indicator) indicator.remove();
+      }
+
+      /* ── Scroll to bottom of messages ── */
+      function scrollToBottom() {
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      /* ── Handle send ── */
+      function handleSend() {
+        const text = inputEl.value.trim();
+        if (!text) return;
+
+        appendMessage('user', text);
+        inputEl.value = '';
+        inputEl.style.height = 'auto';
+
+        showTyping();
+
+        // ── TODO: Replace this mock reply with your AI API call ──
+        // Example: fetch('/api/chat', { method:'POST', body: JSON.stringify({ message: text }) })
+        //   .then(r => r.json()).then(data => { hideTyping(); appendMessage('bot', data.reply); });
+        setTimeout(function () {
+          hideTyping();
+          appendMessage('bot', getMockReply(text));
+        }, 1000 + Math.random() * 600);
+      }
+
+      /* ── Mock replies (placeholder until AI is connected) ── */
+      function getMockReply(msg) {
+        const m = msg.toLowerCase();
+        if (m.includes('program') || m.includes('youth') || m.includes('athlete')) {
+          return "We offer 6 programs including Youth Wellness (6–12), Athlete Education & Transition, Student Success Advisory, Industry Voices, and more. Visit our Programs section above to explore each one!";
+        }
+        if (m.includes('donat') || m.includes('give') || m.includes('support')) {
+          return "Thank you for your generosity! Every donation helps us serve youth, student-athletes, and seniors. Click the 'Donate Now' button in the section above to contribute today.";
+        }
+        if (m.includes('senior') || m.includes('elder')) {
+          return "Our Senior Engagement Program creates meaningful intergenerational connections between seniors and youth — including holiday events, mentorship pairings, and social wellness activities.";
+        }
+        if (m.includes('contact') || m.includes('reach') || m.includes('address')) {
+          return "You can reach us at 420 Smilax Road, San Marcos, CA 92078. Scroll down to the footer for more contact details, or fill out our contact form.";
+        }
+        if (m.includes('volunteer') || m.includes('involved')) {
+          return "We'd love to have you! D.A.D. welcomes volunteers who want to make a difference in the community. Head to the 'Get Involved' section to learn how you can help.";
+        }
+        return "Thanks for reaching out! For more information, feel free to explore our Programs section or contact us directly at 420 Smilax Road, San Marcos, CA 92078. We're happy to help!";
+      }
+
+    })();
+  </script>
 
 </body>
 </html>
