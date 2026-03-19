@@ -1720,49 +1720,56 @@ search_exclude: true
         messagesEl.scrollTop = messagesEl.scrollHeight;
       }
 
-      /* ── Handle send ── */
+      /* -- Conversation history (kept in memory for context) -- */
+      var conversationHistory = [
+        {
+          role: 'system',
+          content: 'You are a strict assistant ONLY for the Doing Exceptional Deeds (D.A.D.) nonprofit website. You ONLY answer questions directly related to D.A.D., its programs, its mission, donations, volunteering, seniors engagement, and contact information. If a user asks ANYTHING not related to D.A.D. or this website — such as directions, banks, restaurants, general knowledge, news, other organizations, or any off-topic subject — you must politely decline and redirect them. Say something like: "I can only help with questions about D.A.D. and our programs. Is there something about our organization I can help you with?" Never answer off-topic questions under any circumstances, even if they seem loosely related. D.A.D. facts: 501(c)(3) nonprofit, MBE #23002138, founded 2021, located at 420 Smilax Road, San Marcos, CA 92078. Programs: (1) Youth Wellness & Student Success grades 6-12, (2) Athlete Education & Transition Portal, (3) Athlete Development & Wellness Program, (4) Student Success Advisory Pilot, (5) Industry Voices Pilot, (6) Athlete & Family Education Support. Also runs a Senior Engagement Program with intergenerational events and mentorship. Keep answers concise and warm.'
+        }
+      ];
+
+      /* -- Handle send -- */
       function handleSend() {
-        const text = inputEl.value.trim();
+        var text = inputEl.value.trim();
         if (!text) return;
 
         appendMessage('user', text);
         inputEl.value = '';
         inputEl.style.height = 'auto';
 
+        conversationHistory.push({ role: 'user', content: text });
+
         showTyping();
+        sendBtn.disabled = true;
 
-        // ── TODO: Replace this mock reply with your AI API call ──
-        // Example: fetch('/api/chat', { method:'POST', body: JSON.stringify({ message: text }) })
-        //   .then(r => r.json()).then(data => { hideTyping(); appendMessage('bot', data.reply); });
-        setTimeout(function () {
+        fetch('http://localhost:8301/api/groq/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({
+            messages: conversationHistory,
+            model: 'llama-3.3-70b-versatile',
+            temperature: 0.7,
+            max_tokens: 300
+          })
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
           hideTyping();
-          appendMessage('bot', getMockReply(text));
-        }, 1000 + Math.random() * 600);
-      }
-
-      /* ── Mock replies (placeholder until AI is connected) ── */
-      function getMockReply(msg) {
-        const m = msg.toLowerCase();
-        if (m.includes('program') || m.includes('youth') || m.includes('athlete')) {
-          return "We offer 6 programs including Youth Wellness (6–12), Athlete Education & Transition, Student Success Advisory, Industry Voices, and more. Visit our Programs section above to explore each one!";
-        }
-        if (m.includes('donat') || m.includes('give') || m.includes('support')) {
-          return "Thank you for your generosity! Every donation helps us serve youth, student-athletes, and seniors. Click the 'Donate Now' button in the section above to contribute today.";
-        }
-        if (m.includes('senior') || m.includes('elder')) {
-          return "Our Senior Engagement Program creates meaningful intergenerational connections between seniors and youth — including holiday events, mentorship pairings, and social wellness activities.";
-        }
-        if (m.includes('contact') || m.includes('reach') || m.includes('address')) {
-          return "You can reach us at 420 Smilax Road, San Marcos, CA 92078. Scroll down to the footer for more contact details, or fill out our contact form.";
-        }
-        if (m.includes('volunteer') || m.includes('involved')) {
-          return "We'd love to have you! D.A.D. welcomes volunteers who want to make a difference in the community. Head to the 'Get Involved' section to learn how you can help.";
-        }
-        return "Thanks for reaching out! For more information, feel free to explore our Programs section or contact us directly at 420 Smilax Road, San Marcos, CA 92078. We're happy to help!";
+          sendBtn.disabled = false;
+          if (data.success && data.response) {
+            conversationHistory.push({ role: 'assistant', content: data.response });
+            appendMessage('bot', data.response);
+          } else {
+            appendMessage('bot', 'Sorry, I had trouble getting a response. Please try again or contact us at 420 Smilax Road, San Marcos, CA 92078.');
+          }
+        })
+        .catch(function() {
+          hideTyping();
+          sendBtn.disabled = false;
+          appendMessage('bot', 'Connection error. Please check your internet connection and try again.');
+        });
       }
 
     })();
   </script>
-
-</body>
-</html>
