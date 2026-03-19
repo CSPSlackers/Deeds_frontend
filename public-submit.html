@@ -1,0 +1,713 @@
+---
+permalink: /public-submit
+search_exclude: true
+title: Submit a Deed
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit a Deed | D.A.D.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0a1628;
+            --gold: #c8973a;
+            --gold-light: #e8b55a;
+            --white: #f9f7f2;
+            --off-white: #ede9e0;
+            --gray: #6b6b6b;
+            --dark-gray: #2a2a2a;
+            --red-accent: #b03030;
+            --accent-cyan: #00d9ff;
+            --text-secondary: #888;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            background: var(--white);
+            color: var(--dark-gray);
+            overflow-x: hidden;
+        }
+
+        /* ── TOP BAR ── */
+        .top-bar {
+            background: var(--navy);
+            color: var(--gold);
+            text-align: center;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 0.18em;
+            padding: 6px 20px;
+            text-transform: uppercase;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: var(--white);
+            border-bottom: 3px solid var(--gold);
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+        }
+
+        .nav-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 32px;
+            height: 72px;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .nav-logo {
+            width: 52px;
+            height: 42px;
+            background: var(--navy);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--gold);
+            letter-spacing: 0.05em;
+            flex-shrink: 0;
+        }
+
+        .nav-title {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.15;
+        }
+
+        .nav-title .name {
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: var(--navy);
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .nav-title .sub {
+            font-size: 0.62rem;
+            color: var(--gold);
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--navy);
+            text-decoration: none;
+            padding: 8px 10px;
+            cursor: pointer;
+            transition: color 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        #loginArea {
+            opacity: 0;
+        }
+
+        /* ── MAIN CONTENT ── */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .page-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 12px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .login-required {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .login-required p {
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+        }
+
+        .login-required a {
+            display: inline-block;
+            background: var(--navy);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .login-required a:hover {
+            background: var(--gold);
+            color: var(--navy);
+        }
+
+        /* ── FORM STYLES ── */
+        .form-card {
+            background: var(--off-white);
+            border-radius: 12px;
+            padding: 32px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+
+        .form-section {
+            margin-bottom: 28px;
+        }
+
+        .form-section:last-of-type {
+            margin-bottom: 32px;
+        }
+
+        .form-label {
+            display: block;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--navy);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .form-input,
+        .form-textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(10, 22, 40, 0.15);
+            border-radius: 6px;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.95rem;
+            color: var(--dark-gray);
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(200, 151, 58, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'Source Sans 3', sans-serif;
+        }
+
+        .char-counter {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            text-align: right;
+        }
+
+        /* ── IMAGE UPLOAD ── */
+        .image-upload-area {
+            border: 2px dashed rgba(200, 151, 58, 0.4);
+            border-radius: 8px;
+            padding: 32px 16px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(200, 151, 58, 0.02);
+        }
+
+        .image-upload-area:hover {
+            border-color: var(--gold);
+            background: rgba(200, 151, 58, 0.05);
+        }
+
+        .image-upload-area.dragging {
+            border-color: var(--gold);
+            background: rgba(200, 151, 58, 0.1);
+            transform: scale(1.02);
+        }
+
+        .image-upload-area div:first-child {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .image-upload-area .upload-text {
+            color: var(--accent-cyan);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .image-upload-area .upload-hint {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .image-preview {
+            display: none;
+            margin-top: 16px;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            border: 2px solid rgba(0, 217, 255, 0.2);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+
+        .btn-submit {
+            background: var(--navy);
+            color: var(--gold);
+            width: 100%;
+            padding: 14px 24px;
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            margin-top: 12px;
+        }
+
+        .btn-submit:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(10, 22, 40, 0.15);
+        }
+
+        .btn-submit:disabled {
+            background: var(--text-secondary);
+            color: white;
+            cursor: not-allowed;
+            opacity: 0.6;
+            transform: none;
+        }
+
+        .btn-delete {
+            background: var(--red-accent);
+            color: white;
+            font-size: 0.85rem;
+            padding: 10px 16px;
+            margin-top: 12px;
+        }
+
+        .btn-delete:hover {
+            background: #8b2828;
+        }
+
+        /* ── SUCCESS/ERROR MESSAGES ── */
+        .alert {
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 2px solid #bee5eb;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .page-title {
+                font-size: 1.8rem;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .nav-inner {
+                padding: 0 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Bar -->
+    <div class="top-bar">
+        ✨ Celebrating Exceptional Deeds ✨
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-inner">
+            <a href="/" class="nav-brand">
+                <div class="nav-logo">D.A.D.</div>
+                <div class="nav-title">
+                    <div class="name">D.A.D.</div>
+                    <div class="sub">Doing Exceptional Deeds</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li id="loginArea"></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1 class="page-title">Submit Your Deed</h1>
+        <p class="page-subtitle">Share your exceptional deed with our community. Help others be inspired to do good.</p>
+
+        <!-- Login Required Alert -->
+        <div id="loginAlert" class="login-required hidden">
+            <p>You must be logged in to submit a deed.</p>
+            <a href="/login">Login Now</a>
+        </div>
+
+        <!-- Form -->
+        <div class="form-card">
+            <div class="form-section">
+                <label class="form-label">CATEGORY</label>
+                <select id="categorySelect" class="form-input">
+                    <option value="">Select a category...</option>
+                    <option value="volunteer">Volunteer</option>
+                    <option value="charity">Charity</option>
+                    <option value="environmental">Environmental</option>
+                    <option value="mentoring">Mentoring</option>
+                    <option value="community">Community</option>
+                    <option value="fundraising">Fundraising</option>
+                    <option value="cleanup">Cleanup</option>
+                    <option value="donation">Donation</option>
+                    <option value="support">Support</option>
+                    <option value="Misc">Miscellaneous</option>
+                </select>
+            </div>
+
+            <div class="form-section">
+                <label class="form-label">DESCRIPTION</label>
+                <textarea id="descriptionInput" class="form-input form-textarea" placeholder="Describe the deed you want to submit..." maxlength="2000"></textarea>
+                <div class="char-counter">
+                    <span id="charCount">0</span>/2000 characters
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label class="form-label">UPLOAD IMAGE (OPTIONAL)</label>
+                <div class="image-upload-area" id="imageUploadArea">
+                    <div>📸</div>
+                    <div class="upload-text">Click to upload or drag & drop</div>
+                    <div class="upload-hint">PNG, JPG, GIF, WEBP (Max 10MB)</div>
+                    <input type="file" id="imageInput" style="display: none;" accept="image/*">
+                </div>
+                <div class="image-preview" id="imagePreview">
+                    <img id="previewImg" alt="Preview">
+                    <button type="button" class="btn btn-delete" onclick="clearImage()">Remove Image</button>
+                </div>
+            </div>
+
+            <button class="btn btn-submit" id="submitBtn" onclick="submitDeed()" disabled>
+                <span>✨ SUBMIT DEED</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Auth and submission script -->
+    <script>
+        // API configuration
+        let pythonURI;
+        if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+            pythonURI = "http://localhost:8301";
+        } else {
+            pythonURI = "https://flask.opencodingsociety.com";
+        }
+
+        const fetchOptions = {
+            method: 'GET',
+            mode: 'cors',
+            cache: 'default',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-Origin': 'client'
+            }
+        };
+
+        let currentUser = null;
+        let uploadedImage = null;
+
+        // Check auth status on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            checkAuthStatus();
+            setupFormHandlers();
+        });
+
+        // Check if user is authenticated
+        function checkAuthStatus() {
+            fetch(pythonURI + '/api/id', fetchOptions)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Not authenticated');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    currentUser = data;
+                    document.getElementById('loginAlert').classList.add('hidden');
+                    document.getElementById('submitBtn').disabled = false;
+                    console.log('User authenticated:', currentUser);
+                })
+                .catch(error => {
+                    console.log('User not authenticated:', error);
+                    document.getElementById('loginAlert').classList.remove('hidden');
+                    document.getElementById('submitBtn').disabled = true;
+                    // Hide form if not logged in
+                    document.querySelector('.form-card').style.opacity = '0.5';
+                    document.querySelector('.form-card').style.pointerEvents = 'none';
+                });
+        }
+
+        // Setup form event handlers
+        function setupFormHandlers() {
+            const imageUploadArea = document.getElementById('imageUploadArea');
+            const imageInput = document.getElementById('imageInput');
+            const descriptionInput = document.getElementById('descriptionInput');
+
+            // Image upload click
+            imageUploadArea.addEventListener('click', () => imageInput.click());
+
+            // Drag and drop
+            imageUploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                imageUploadArea.classList.add('dragging');
+            });
+
+            imageUploadArea.addEventListener('dragleave', () => {
+                imageUploadArea.classList.remove('dragging');
+            });
+
+            imageUploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                imageUploadArea.classList.remove('dragging');
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleImageFile(files[0]);
+                }
+            });
+
+            // File input change
+            imageInput.addEventListener('change', (e) => {
+                if (e.target.files.length > 0) {
+                    handleImageFile(e.target.files[0]);
+                }
+            });
+
+            // Character counter
+            descriptionInput.addEventListener('input', function() {
+                document.getElementById('charCount').textContent = this.value.length;
+            });
+        }
+
+        // Handle image file upload
+        function handleImageFile(file) {
+            const maxSize = 10 * 1024 * 1024; // 10MB
+
+            if (file.size > maxSize) {
+                alert('File size exceeds 10MB limit');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                uploadedImage = e.target.result.split(',')[1];
+                document.getElementById('previewImg').src = e.target.result;
+                document.getElementById('imagePreview').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Clear image
+        function clearImage() {
+            uploadedImage = null;
+            document.getElementById('imageInput').value = '';
+            document.getElementById('imagePreview').style.display = 'none';
+        }
+
+        // Submit deed
+        function submitDeed() {
+            if (!currentUser) {
+                alert('Please log in to submit a deed');
+                window.location.href = '/login';
+                return;
+            }
+
+            const category = document.getElementById('categorySelect').value;
+            if (!category) {
+                alert('Please select a category');
+                return;
+            }
+
+            const description = document.getElementById('descriptionInput').value.trim();
+            if (!description) {
+                alert('Please enter a description');
+                return;
+            }
+
+            // Disable submit button during request
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = '⏳ SUBMITTING...';
+
+            const payload = {
+                content: description,
+                category: category
+            };
+
+            if (uploadedImage) {
+                payload.image = uploadedImage;
+            }
+
+            const userId = currentUser.id || currentUser.user_id || currentUser.uid;
+            const submitUrl = `${pythonURI}/submit/create/${userId}`;
+            console.log('Submitting to:', submitUrl);
+            console.log('User ID:', userId);
+            console.log('Payload:', payload);
+
+            fetch(submitUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                credentials: 'include',
+                body: JSON.stringify(payload)
+            })
+            .then(r => {
+                console.log('Response status:', r.status);
+                // Check if response is JSON first
+                const contentType = r.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    return r.json().then(data => ({ ok: r.ok, data: data }));
+                } else {
+                    return r.text().then(text => {
+                        console.error('Non-JSON response:', text);
+                        return { ok: r.ok, data: null, error: 'Invalid response format' };
+                    });
+                }
+            })
+            .then(result => {
+                console.log('Result:', result);
+                if (result.ok && result.data && result.data.id) {
+                    alert('✨ Deed submitted successfully! Thank you for making a difference.');
+                    // Reset form
+                    document.getElementById('categorySelect').value = '';
+                    document.getElementById('descriptionInput').value = '';
+                    document.getElementById('charCount').textContent = '0';
+                    document.getElementById('imagePreview').style.display = 'none';
+                    uploadedImage = null;
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '✨ SUBMIT DEED';
+                } else if (result.error) {
+                    alert('Error: ' + result.error + '\n\nPlease check the server endpoint and user ID.');
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '✨ SUBMIT DEED';
+                } else if (result.data && result.data.message) {
+                    alert('Error submitting deed: ' + result.data.message);
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '✨ SUBMIT DEED';
+                } else {
+                    alert('Error submitting deed. Status: ' + (result.ok ? 'OK but invalid response' : 'Request failed'));
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = '✨ SUBMIT DEED';
+                }
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+                alert('Error submitting deed: ' + error.message);
+                submitBtn.disabled = false;
+                submitBtn.textContent = '✨ SUBMIT DEED';
+            });
+        }
+    </script>
+</body>
+</html>
