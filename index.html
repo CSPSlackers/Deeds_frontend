@@ -1441,6 +1441,551 @@ search_exclude: true
         bottom: 16px;
       }
     }
+
+    /* ── CAROUSEL ── */
+    .carousel-section {
+      background: var(--white);
+      padding: 60px 40px;
+      border-top: 1px solid var(--off-white);
+    }
+
+    .carousel-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .carousel-title-main {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .carousel-title-main em {
+      color: var(--gold);
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-weight: 400;
+      text-transform: none;
+      font-size: 90%;
+    }
+
+    .carousel-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      max-height: 380px;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      background: var(--navy);
+    }
+
+    .carousel-items {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none; /* Disable clicks on inactive items */
+    }
+
+    .carousel-item.active {
+      opacity: 1;
+      pointer-events: auto; /* Enable clicks on active item */
+    }
+
+    .carousel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10,22,40,0.9) 60%, rgba(10,22,40,1) 100%);
+      padding: 30px 24px 20px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .carousel-description {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(249, 247, 242, 0.85);
+      line-height: 1.4;
+      margin-top: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .carousel-description:hover {
+      color: var(--gold);
+    }
+
+    .carousel-description-expand {
+      display: inline;
+      margin-left: 4px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .carousel-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .carousel-attribution {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .carousel-category {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(200, 151, 58, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 12px;
+    }
+
+    /* ── CAROUSEL CONTROLS ── */
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(200, 151, 58, 0.85);
+      color: var(--navy);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 10;
+      font-weight: 700;
+    }
+
+    .carousel-nav:hover {
+      background: var(--gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-nav:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .carousel-nav.prev {
+      left: 20px;
+    }
+
+    .carousel-nav.next {
+      right: 20px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none;
+      padding: 0;
+    }
+
+    .carousel-dot:hover {
+      background: rgba(255, 255, 255, 0.7);
+      transform: scale(1.15);
+    }
+
+    .carousel-dot.active {
+      background: var(--gold);
+      transform: scale(1.2);
+    }
+
+    /* ── CAROUSEL STATES ── */
+    .carousel-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy);
+      z-index: 5;
+    }
+
+    .carousel-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(200, 151, 58, 0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .carousel-error,
+    .carousel-empty {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 40px;
+      z-index: 5;
+    }
+
+    .carousel-error-icon,
+    .carousel-empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    .carousel-error-title,
+    .carousel-empty-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .carousel-error-message,
+    .carousel-empty-message {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(249, 247, 242, 0.7);
+      max-width: 400px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .carousel-section {
+        padding: 50px 20px;
+      }
+
+      .carousel-header {
+        margin-bottom: 32px;
+      }
+
+      .carousel-container {
+        padding: 0 20px;
+      }
+
+      .carousel-wrapper {
+        aspect-ratio: 4 / 3;
+        max-height: 340px;
+      }
+
+      .carousel-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+      }
+
+      .carousel-nav.prev {
+        left: 12px;
+      }
+
+      .carousel-nav.next {
+        right: 12px;
+      }
+
+      .carousel-overlay {
+        min-height: 110px;
+        padding: 24px 18px 16px;
+      }
+
+      .carousel-title {
+        font-size: 0.9rem;
+      }
+
+      .carousel-attribution {
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .carousel-section {
+        padding: 40px 16px;
+      }
+
+      .carousel-header {
+        margin-bottom: 24px;
+      }
+
+      .carousel-container {
+        padding: 0 16px;
+      }
+
+      .carousel-wrapper {
+        aspect-ratio: 3 / 2;
+        max-height: 300px;
+      }
+
+      .carousel-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+      }
+
+      .carousel-nav.prev {
+        left: 8px;
+      }
+
+      .carousel-nav.next {
+        right: 8px;
+      }
+
+      .carousel-overlay {
+        min-height: 110px;
+        padding: 24px 16px 16px;
+      }
+
+      .carousel-title {
+        font-size: 0.95rem;
+      }
+
+      .carousel-attribution {
+        font-size: 0.75rem;
+      }
+
+      .carousel-category {
+        font-size: 0.6rem;
+        margin-top: 8px;
+        padding: 3px 8px;
+      }
+
+      .carousel-dots {
+        bottom: 12px;
+        gap: 6px;
+      }
+
+      .carousel-dot {
+        width: 8px;
+        height: 8px;
+      }
+    }
+
+    /* ── CAROUSEL DETAIL MODAL ── */
+    .carousel-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .carousel-modal.active {
+      display: flex;
+    }
+
+    .carousel-modal-content {
+      background: var(--white);
+      border-radius: 8px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .carousel-modal-header {
+      position: sticky;
+      top: 0;
+      background: var(--navy);
+      color: var(--white);
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--gold);
+      z-index: 1010;
+    }
+
+    .carousel-modal-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .carousel-modal-close {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.8rem;
+      cursor: pointer;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .carousel-modal-close:hover {
+      color: var(--gold);
+    }
+
+    .carousel-modal-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-modal-body {
+      padding: 28px;
+    }
+
+    .carousel-modal-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .carousel-modal-badge {
+      display: inline-block;
+      background: rgba(200, 151, 58, 0.12);
+      border: 1px solid var(--gold);
+      color: var(--navy);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .carousel-modal-by {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .carousel-modal-description {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark-gray);
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    @media (max-width: 480px) {
+      .carousel-modal-content {
+        border-radius: 8px 8px 0 0;
+        max-height: 85vh;
+      }
+
+      .carousel-modal-header {
+        padding: 20px 20px;
+      }
+
+      .carousel-modal-title {
+        font-size: 1.1rem;
+      }
+
+      .carousel-modal-body {
+        padding: 20px;
+      }
+
+      .carousel-modal-image {
+        max-height: 300px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1565,6 +2110,67 @@ search_exclude: true
         <span class="quick-label">Get Involved</span>
         <span class="quick-read">Read More →</span>
       </a>
+    </div>
+  </div>
+
+  <!-- FEATURED DEEDS CAROUSEL -->
+  <section class="carousel-section">
+    <div class="carousel-container">
+      <div class="carousel-header">
+        <div class="section-label">Community Impact</div>
+        <h2 class="carousel-title-main">Featured <em>Deeds</em></h2>
+      </div>
+      <div class="carousel-wrapper">
+        <div class="carousel-items" id="carousel-items">
+          <!-- Items will be populated by JavaScript -->
+        </div>
+
+        <!-- Loading State -->
+        <div class="carousel-loading" id="carousel-loading" style="display: none;">
+          <div class="carousel-spinner"></div>
+        </div>
+
+        <!-- Error State -->
+        <div class="carousel-error" id="carousel-error" style="display: none;">
+          <div class="carousel-error-icon">⚠️</div>
+          <div class="carousel-error-title">Unable to Load Carousel</div>
+          <div class="carousel-error-message" id="carousel-error-message">
+            We're having trouble loading the carousel. Please try refreshing the page.
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="carousel-empty" id="carousel-empty" style="display: none;">
+          <div class="carousel-empty-icon">🖼️</div>
+          <div class="carousel-empty-title">No Deeds Yet</div>
+          <div class="carousel-empty-message">
+            Featured community deeds will appear here soon. Check back later!
+          </div>
+        </div>
+
+        <!-- Controls (hidden until items load) -->
+        <button class="carousel-nav prev" id="carousel-prev" aria-label="Previous slide" style="display: none;">‹</button>
+        <button class="carousel-nav next" id="carousel-next" aria-label="Next slide" style="display: none;">›</button>
+        <div class="carousel-dots" id="carousel-dots" style="display: none;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAROUSEL DETAIL MODAL -->
+  <div class="carousel-modal" id="carousel-modal">
+    <div class="carousel-modal-content">
+      <div class="carousel-modal-header">
+        <h2 class="carousel-modal-title">Deed Details</h2>
+        <button class="carousel-modal-close" id="carousel-modal-close" aria-label="Close details">×</button>
+      </div>
+      <img class="carousel-modal-image" id="carousel-modal-image" src="" alt="">
+      <div class="carousel-modal-body">
+        <div class="carousel-modal-meta">
+          <span class="carousel-modal-badge" id="carousel-modal-category"></span>
+          <span class="carousel-modal-by" id="carousel-modal-by"></span>
+        </div>
+        <div class="carousel-modal-description" id="carousel-modal-description"></div>
+      </div>
     </div>
   </div>
 
@@ -2062,6 +2668,411 @@ search_exclude: true
       document.addEventListener('DOMContentLoaded', updateUserDisplay);
     } else {
       updateUserDisplay();
+    }
+  </script>
+
+  <!-- CAROUSEL SCRIPT -->
+  <script type="module">
+    import { pythonURI, fetchOptions } from '/assets/js/api/config.js';
+
+    class Carousel {
+      constructor() {
+        this.items = [];
+        this.submissionData = {}; // Store submission data by index
+        this.currentIndex = 0;
+        this.autoplayInterval = null;
+        this.isAutoplayEnabled = true;
+        this.isTransitioning = false;
+        this.imageCache = new Map(); // Cache base64 images to avoid re-decoding
+
+        this.initElements();
+        this.attachEventListeners();
+        this.loadCarousel();
+      }
+
+      initElements() {
+        this.itemsContainer = document.getElementById('carousel-items');
+        this.loadingEl = document.getElementById('carousel-loading');
+        this.errorEl = document.getElementById('carousel-error');
+        this.errorMessageEl = document.getElementById('carousel-error-message');
+        this.emptyEl = document.getElementById('carousel-empty');
+        this.prevBtn = document.getElementById('carousel-prev');
+        this.nextBtn = document.getElementById('carousel-next');
+        this.dotsContainer = document.getElementById('carousel-dots');
+        this.wrapper = document.querySelector('.carousel-wrapper');
+      }
+
+      attachEventListeners() {
+        // Navigation buttons
+        this.prevBtn?.addEventListener('click', () => this.goToPrevious());
+        this.nextBtn?.addEventListener('click', () => this.goToNext());
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') this.goToPrevious();
+          if (e.key === 'ArrowRight') this.goToNext();
+        });
+
+        // Pause autoplay on hover
+        this.wrapper?.addEventListener('mouseenter', () => this.stopAutoplay());
+        this.wrapper?.addEventListener('mouseleave', () => this.startAutoplay());
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        this.wrapper?.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].clientX;
+          this.stopAutoplay();
+        });
+        this.wrapper?.addEventListener('touchend', (e) => {
+          const touchEndX = e.changedTouches[0].clientX;
+          const diff = touchStartX - touchEndX;
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) this.goToNext();
+            else this.goToPrevious();
+          }
+          this.startAutoplay();
+        });
+
+        // Modal event listeners
+        const modal = document.getElementById('carousel-modal');
+        const modalClose = document.getElementById('carousel-modal-close');
+        
+        modalClose?.addEventListener('click', () => this.closeDetailModal());
+        
+        // Close on background click
+        modal?.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            this.closeDetailModal();
+          }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            this.closeDetailModal();
+          }
+        });
+      }
+
+      async loadCarousel() {
+        try {
+          // Show loading state
+          this.loadingEl.style.display = 'flex';
+          this.errorEl.style.display = 'none';
+          this.emptyEl.style.display = 'none';
+          this.itemsContainer.innerHTML = '';
+          this.currentIndex = 0;
+
+          // Fetch carousel data
+          const response = await fetch(`${pythonURI}/carousel/`, fetchOptions);
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+
+          const data = await response.json();
+
+          // Handle empty carousel
+          if (!data || !Array.isArray(data) || data.length === 0) {
+            this.showEmpty();
+            return;
+          }
+
+          this.items = data;
+          this.renderItems();
+          this.renderDots();
+          this.showControls();
+          this.loadingEl.style.display = 'none';
+          this.startAutoplay();
+        } catch (error) {
+          console.error('Carousel loading error:', error);
+          this.showError(error.message);
+        }
+      }
+
+      renderItems() {
+        this.itemsContainer.innerHTML = '';
+        this.submissionData = {}; // Reset submission data
+        console.log('renderItems called with', this.items.length, 'items');
+
+        this.items.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+          div.setAttribute('data-index', index);
+
+          const submission = item.submission || {};
+          const imageBase64 = submission.image || '';
+          const userName = submission.user_name || 'Anonymous';
+          const category = submission.category || 'deed';
+          // Get description from content field (or fallback to other possible names)
+          const description = submission.content || submission.description || submission.text || submission.message || submission.story || '';
+
+          // Store submission data in the carousel instance (not in HTML)
+          this.submissionData[index] = {
+            userName,
+            category,
+            imageBase64,
+            description
+          };
+          
+          console.log(`[Carousel] Index ${index}: userName="${userName}", hasDescription=${!!description}, descLength=${description ? description.length : 0}`);
+          console.log(`[Carousel] Stored in submissionData[${index}]:`, this.submissionData[index].userName);
+
+          // Create image element with error handling
+          const img = document.createElement('img');
+          img.className = 'carousel-img';
+          img.alt = `${userName}'s deed`;
+
+          // Set the image source as data URI
+          if (imageBase64) {
+            try {
+              // Check if it's already a full data URI
+              if (imageBase64.startsWith('data:')) {
+                img.src = imageBase64;
+              } else {
+                // Assume it's base64 encoded PNG
+                img.src = `data:image/png;base64,${imageBase64}`;
+              }
+
+              // Handle image load errors
+              img.addEventListener('error', () => {
+                console.warn(`Failed to load image for ${userName}`);
+                img.style.display = 'none';
+                // Show a placeholder overlay
+                div.style.background = 'linear-gradient(135deg, #c8973a 0%, #0a1628 100%)';
+              });
+            } catch (e) {
+              console.error('Image processing error:', e);
+              img.style.display = 'none';
+            }
+          } else {
+            img.style.display = 'none';
+          }
+
+          div.appendChild(img);
+
+          // Add overlay with text
+          const overlay = document.createElement('div');
+          overlay.className = 'carousel-overlay';
+          
+          // Truncate description if needed
+          const maxDescLength = 80;
+          const truncatedDesc = description && description.length > maxDescLength 
+            ? description.substring(0, maxDescLength) + '...' 
+            : description;
+          
+          let descriptionHtml = '';
+          if (description) {
+            descriptionHtml = `<div class="carousel-description" style="cursor: pointer;">${this.escapeHTML(truncatedDesc)}<span class="carousel-description-expand">Read More</span></div>`;
+          }
+          
+          overlay.innerHTML = `
+            <span class="carousel-category">${this.formatCategory(category)}</span>
+            <div class="carousel-title">Featured Deed</div>
+            <div class="carousel-attribution">By ${this.escapeHTML(userName)}</div>
+            ${descriptionHtml}
+          `;
+          
+          div.appendChild(overlay);
+
+          this.itemsContainer.appendChild(div);
+        });
+        
+        console.log('[Carousel] Final submissionData:', this.submissionData);
+        console.log('[Carousel] All carousel items in DOM:', Array.from(this.itemsContainer.querySelectorAll('.carousel-item')).map(el => ({
+          domIndex: el.getAttribute('data-index'),
+          userName: el.querySelector('.carousel-attribution')?.textContent || 'N/A'
+        })));
+        
+        // Add event delegation for all description clicks
+        this.itemsContainer.removeEventListener('click', this.descriptionClickHandler);
+        this.descriptionClickHandler = (e) => {
+          const descElem = e.target.closest('.carousel-description');
+          if (descElem) {
+            // Get index from the carousel-item parent
+            const itemDiv = e.target.closest('.carousel-item');
+            const clickedIndex = parseInt(itemDiv.getAttribute('data-index'), 10);
+            console.log(`[Carousel] Read More clicked - itemDiv data-index="${itemDiv.getAttribute('data-index')}", parsed index=${clickedIndex}`);
+            console.log(`[Carousel] submissionData[${clickedIndex}]:`, this.submissionData[clickedIndex]);
+            this.openDetailModal(clickedIndex);
+          }
+        };
+        this.itemsContainer.addEventListener('click', this.descriptionClickHandler.bind(this));
+      }
+
+      openDetailModal(index) {
+        console.log(`[Carousel] openDetailModal called with index: ${index}`);
+        console.log('[Carousel] Available indices:', Object.keys(this.submissionData));
+        
+        const modal = document.getElementById('carousel-modal');
+        const modalImage = document.getElementById('carousel-modal-image');
+        const modalCategory = document.getElementById('carousel-modal-category');
+        const modalBy = document.getElementById('carousel-modal-by');
+        const modalDescription = document.getElementById('carousel-modal-description');
+        
+        // Get data from the stored submission data
+        const data = this.submissionData[index];
+        if (!data) {
+          console.error(`[Carousel] No submission data found for index: ${index}`);
+          return;
+        }
+        
+        console.log(`[Carousel] Opening modal for: ${data.userName}`);
+        const { imageBase64, userName, category, description } = data;
+        
+        // Set image
+        if (imageBase64) {
+          try {
+            if (imageBase64.startsWith('data:')) {
+              modalImage.src = imageBase64;
+            } else {
+              modalImage.src = `data:image/png;base64,${imageBase64}`;
+            }
+            modalImage.style.display = 'block';
+          } catch (e) {
+            console.error('Error setting modal image:', e);
+            modalImage.style.display = 'none';
+          }
+        } else {
+          modalImage.style.display = 'none';
+        }
+        
+        // Set content
+        modalCategory.textContent = this.formatCategory(category);
+        modalBy.textContent = `By ${this.escapeHTML(userName)}`;
+        modalDescription.textContent = description;
+        
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      closeDetailModal() {
+        const modal = document.getElementById('carousel-modal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      renderDots() {
+        this.dotsContainer.innerHTML = '';
+
+        for (let i = 0; i < this.items.length; i++) {
+          const dot = document.createElement('button');
+          dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.onclick = () => this.goToSlide(i);
+          this.dotsContainer.appendChild(dot);
+        }
+      }
+
+      showControls() {
+        if (this.items.length > 1) {
+          this.prevBtn.style.display = 'flex';
+          this.nextBtn.style.display = 'flex';
+          this.dotsContainer.style.display = 'flex';
+        } else {
+          this.prevBtn.style.display = 'none';
+          this.nextBtn.style.display = 'none';
+          this.dotsContainer.style.display = 'none';
+        }
+      }
+
+      goToSlide(index) {
+        if (this.isTransitioning || this.items.length === 0) return;
+
+        this.isTransitioning = true;
+        this.currentIndex = (index + this.items.length) % this.items.length;
+        this.updateCarousel();
+
+        // Reset transition flag after animation completes
+        setTimeout(() => {
+          this.isTransitioning = false;
+        }, 500);
+
+        // Reset autoplay
+        this.stopAutoplay();
+        this.startAutoplay();
+      }
+
+      goToNext() {
+        this.goToSlide(this.currentIndex + 1);
+      }
+
+      goToPrevious() {
+        this.goToSlide(this.currentIndex - 1);
+      }
+
+      updateCarousel() {
+        // Update active item
+        const items = this.itemsContainer.querySelectorAll('.carousel-item');
+        items.forEach((item, index) => {
+          item.classList.toggle('active', index === this.currentIndex);
+        });
+
+        // Update active dot
+        const dots = this.dotsContainer.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === this.currentIndex);
+        });
+      }
+
+      startAutoplay() {
+        if (!this.isAutoplayEnabled || this.items.length <= 1) return;
+
+        this.stopAutoplay();
+        this.autoplayInterval = setInterval(() => {
+          this.goToNext();
+        }, 5000); // 5 seconds per slide
+      }
+
+      stopAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+          this.autoplayInterval = null;
+        }
+      }
+
+      showError(message = '') {
+        this.loadingEl.style.display = 'none';
+        this.emptyEl.style.display = 'none';
+        this.errorEl.style.display = 'flex';
+        this.errorMessageEl.textContent = message || 'We\'re having trouble loading the carousel. Please try refreshing the page.';
+        this.itemsContainer.innerHTML = '';
+      }
+
+      showEmpty() {
+        this.loadingEl.style.display = 'none';
+        this.errorEl.style.display = 'none';
+        this.emptyEl.style.display = 'flex';
+        this.itemsContainer.innerHTML = '';
+      }
+
+      formatCategory(category) {
+        const categoryMap = {
+          'volunteer': '✦ Volunteer Deed',
+          'donation': '♡ Donation',
+          'community': '👥 Community',
+          'youth': '🎓 Youth Program',
+          'elderly': '👴 Senior Support',
+          'default': '✦ Exceptional Deed'
+        };
+        return categoryMap[category] || categoryMap['default'];
+      }
+
+      escapeHTML(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+    }
+
+    // Initialize carousel when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        new Carousel();
+      });
+    } else {
+      new Carousel();
     }
   </script>
 
