@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' http://localhost:* https:;">
   <title>D.A.D. | Login</title>
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
@@ -106,10 +107,43 @@
       box-shadow: 0 4px 12px rgba(200, 151, 58, 0.3);
     }
 
-    @keyframes slideInLeft {
+    .user-menu {
+      position: absolute;
+      top: 24px;
+      right: 24px;
+      z-index: 10;
+    }
+
+    .user-btn {
+      background: var(--gold);
+      color: var(--navy) !important;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 2px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      animation: slideInRight 0.6s ease;
+      max-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .user-btn:hover {
+      background: var(--gold-light);
+      transform: translateX(4px);
+      box-shadow: 0 4px 12px rgba(200, 151, 58, 0.3);
+    }
+
+    @keyframes slideInRight {
       from {
         opacity: 0;
-        transform: translateX(-20px);
+        transform: translateX(20px);
       }
       to {
         opacity: 1;
@@ -496,6 +530,9 @@
 
 <div class="auth-container">
   <a href="/dad" class="back-button">← Back</a>
+  <div id="user-menu" class="user-menu">
+    <button id="user-btn" class="user-btn">Login</button>
+  </div>
   <div class="auth-wrapper">
     <div class="auth-header">
       <h1>Access Your Account</h1>
@@ -559,366 +596,11 @@
   </div>
 </div>
 
-<script type="module">
-    import { baseurl, pythonURI, javaURI, fetchOptions } from './assets/js/api/config.js';
-
-    let signupFormData = {};
-    let validationTimeout = null;
-
-    // Interactive background effect
-    const container = document.querySelector('.auth-container');
-    document.addEventListener('mousemove', (e) => {
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
-      
-      if (container) {
-        container.style.setProperty('--mouse-x', x);
-        container.style.setProperty('--mouse-y', y);
-      }
-    });
-
-    // Form card smooth transitions
-    window.switchToSignup = function(e) {
-      e.preventDefault();
-      const loginCard = document.querySelector('.auth-card:first-child');
-      const signupCard = document.querySelector('.auth-card:last-child');
-      
-      loginCard.style.animation = 'fadeOut 0.4s ease forwards';
-      setTimeout(() => {
-        loginCard.style.display = 'none';
-        signupCard.style.display = 'flex';
-        signupCard.style.animation = 'fadeInScale 0.5s ease';
-      }, 400);
-    };
-
-    window.switchToLogin = function(e) {
-      e.preventDefault();
-      const loginCard = document.querySelector('.auth-card:first-child');
-      const signupCard = document.querySelector('.auth-card:last-child');
-      
-      signupCard.style.animation = 'fadeOut 0.4s ease forwards';
-      setTimeout(() => {
-        signupCard.style.display = 'none';
-        loginCard.style.display = 'flex';
-        loginCard.style.animation = 'fadeInScale 0.5s ease';
-      }, 400);
-    };
-
-    // Add style animations
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fadeOut {
-        from { opacity: 1; transform: scale(1); }
-        to { opacity: 0; transform: scale(0.98); }
-      }
-      
-      @keyframes fadeInScale {
-        from { opacity: 0; transform: scale(0.98); }
-        to { opacity: 1; transform: scale(1); }
-      }
-    `;
-    document.head.appendChild(style);
-
-    // Input field interactions
-    const inputs = document.querySelectorAll('.form-group input, .form-group select');
-    inputs.forEach(input => {
-      input.addEventListener('focus', function() {
-        this.parentElement.classList.add('focused');
-      });
-      
-      input.addEventListener('blur', function() {
-        if (!this.value) {
-          this.parentElement.classList.remove('focused');
-        }
-      });
-      
-      input.addEventListener('input', function() {
-        if (this.value) {
-          this.parentElement.classList.add('has-value');
-        } else {
-          this.parentElement.classList.remove('has-value');
-        }
-      });
-    });
-
-    // Password validation with debouncing
-    function validatePasswordsDebounced() {
-        if (validationTimeout) {
-            clearTimeout(validationTimeout);
-        }
-
-        validationTimeout = setTimeout(() => {
-            validateForm();
-        }, 1500);
-    }
-
-    function validateForm() {
-        const password = document.getElementById('signupPassword').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-        const confirmField = document.getElementById('confirmPassword');
-        const messageDiv = document.getElementById('password-validation-message');
-
-        confirmField.classList.remove('error');
-        messageDiv.classList.remove('show', 'validation-success');
-        messageDiv.textContent = '';
-
-        if (confirmPassword === '') {
-            return true;
-        }
-
-        if (password.length < 8) {
-            confirmField.classList.add('error');
-            messageDiv.classList.add('show');
-            messageDiv.textContent = '✗ Passwords must be at least 8 characters';
-            return false;
-        }
-
-        if (password === confirmPassword) {
-            messageDiv.classList.add('validation-success');
-            messageDiv.textContent = '✓ Passwords match';
-            return true;
-        } else {
-            confirmField.classList.add('error');
-            messageDiv.classList.add('show');
-            messageDiv.textContent = '✗ Passwords do not match';
-            return false;
-        }
-    }
-
-    function validateSignupForm() {
-        const password = document.getElementById('signupPassword').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-
-        if (password !== confirmPassword) {
-            alert('Passwords do not match. Please try again.');
-            document.getElementById('confirmPassword').focus();
-            return false;
-        }
-
-        if (password.length < 8) {
-            alert('Password must be at least 8 characters long.');
-            document.getElementById('signupPassword').focus();
-            return false;
-        }
-
-        return true;
-    }
-
-    window.handleSignupSubmit = function(event) {
-        event.preventDefault();
-
-        const form = document.getElementById('signupForm');
-        if (!form.checkValidity()) {
-            form.reportValidity();
-            return;
-        }
-
-        if (!validateSignupForm()) {
-            return;
-        }
-
-        signupFormData = {
-            name: document.getElementById("name").value,
-            uid: document.getElementById("signupUid").value,
-            email: document.getElementById("signupEmail").value,
-            password: document.getElementById("signupPassword").value,
-        };
-
-        signup();
-    }
-
-    // Function to handle both Python and Java login simultaneously
-    window.loginBoth = function () {
-        const uid = document.getElementById("uid").value;
-        const password = document.getElementById("password").value;
-        const messageDiv = document.getElementById('message');
-
-        if (!uid || !password) {
-            messageDiv.textContent = 'Please enter both username and password';
-            messageDiv.classList.add('show');
-            return;
-        }
-
-        messageDiv.classList.remove('show');
-
-        let javaPromise = new Promise((resolve) => {
-            window.javaLogin(resolve);
-        });
-        let pythonPromise = new Promise((resolve) => {
-            window.pythonLogin(resolve);
-        });
-
-        Promise.allSettled([javaPromise, pythonPromise]).then(() => {
-            window.location.href = '/';
-        });
-    };
-
-    window.pythonLogin = function (done) {
-        const options = {
-            URL: `${pythonURI}/api/authenticate`,
-            callback: function() {
-                if (done) done();
-            },
-            message: "message",
-            method: "POST",
-            cache: "no-cache",
-            body: {
-                uid: document.getElementById("uid").value,
-                password: document.getElementById("password").value,
-            }
-        };
-        fetch(options.URL, {
-            method: options.method,
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
-            body: JSON.stringify(options.body)
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Authentication failed');
-            }
-            if (done) done();
-        })
-        .catch(error => {
-            console.error('Python login error:', error);
-            if (done) done();
-        });
-    }
-
-    window.javaLogin = function (done) {
-        const loginURL = `${javaURI}/authenticate`;
-        const userCredentials = JSON.stringify({
-            uid: document.getElementById("uid").value,
-            password: document.getElementById("password").value,
-        });
-        const loginOptions = {
-            ...fetchOptions,
-            method: "POST",
-            body: userCredentials,
-        };
-
-        console.log("Attempting login...");
-        fetch(loginURL, loginOptions)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Invalid credentials");
-                }
-                return response.text();
-            })
-            .then(data => {
-                console.log("Login successful!");
-                if (done) done();
-            })
-            .catch(error => {
-                console.error("Login error:", error.message);
-                // Show error message
-                const messageDiv = document.getElementById('message');
-                messageDiv.textContent = 'Invalid username or password';
-                messageDiv.classList.add('show');
-                if (done) done();
-            });
-    };
-
-    window.signup = function () {
-        const signupButton = document.querySelector(".auth-card:last-child .btn-submit");
-        const statusDiv = document.getElementById('signupStatus');
-
-        signupButton.disabled = true;
-        statusDiv.textContent = 'Creating account...';
-        statusDiv.classList.add('show');
-
-        const data = {
-            name: signupFormData.name || document.getElementById("name").value,
-            uid: signupFormData.uid || document.getElementById("signupUid").value,
-            email: signupFormData.email || document.getElementById("signupEmail").value,
-            password: signupFormData.password || document.getElementById("signupPassword").value,
-        };
-
-        const signupDataJava = {
-            uid: data.uid,
-            sid: "0000000",
-            email: data.email,
-            dob: "01-01-2000",
-            name: data.name,
-            password: data.password,
-            kasmServerNeeded: false,
-        };
-
-        console.log("Creating account with data:", data);
-
-        // Flask Backend Request
-        const flaskPromise = fetch(`${pythonURI}/api/user`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                return response.text().then(errorText => {
-                    throw new Error(`Server error: ${response.status}`);
-                });
-            }
-        })
-        .catch(error => {
-            console.error("Flask error:", error);
-        });
-
-        // Spring Backend Request
-        const springPromise = fetch(`${javaURI}/api/person/create`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(signupDataJava)
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error(`Server error: ${response.status}`);
-            }
-        })
-        .catch(error => {
-            console.error("Spring error:", error);
-        });
-
-        Promise.allSettled([flaskPromise, springPromise])
-            .then(results => {
-                signupButton.disabled = false;
-
-                const hasSuccess = results.some(r => r.status === 'fulfilled');
-
-                if (hasSuccess) {
-                    statusDiv.textContent = '✓ Account created successfully! Redirecting...';
-                    statusDiv.classList.remove('error');
-                    statusDiv.classList.add('success');
-
-                    setTimeout(() => {
-                        window.location.href = '/';
-                    }, 2000);
-                } else {
-                    statusDiv.textContent = '✗ Failed to create account. Please try again.';
-                    statusDiv.classList.add('error');
-                    statusDiv.classList.remove('success');
-                }
-            });
-    }
-
-    // Initialize password validation
-    window.addEventListener('load', function() {
-        const passwordField = document.getElementById('signupPassword');
-        const confirmPasswordField = document.getElementById('confirmPassword');
-
-        if (passwordField && confirmPasswordField) {
-            passwordField.addEventListener('input', validatePasswordsDebounced);
-            confirmPasswordField.addEventListener('input', validatePasswordsDebounced);
-        }
-    });
+<script>
+console.log('TEST: Inline script is running!');
 </script>
+
+<script src="./assets/js/login.js"></script>
 
 </body>
 </html>

@@ -185,6 +185,62 @@ search_exclude: true
 
     .nav-donate:hover { background: var(--gold-light) !important; }
 
+    .user-display {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .user-name {
+      color: var(--gold);
+      font-weight: 600;
+      display: none;
+    }
+
+    .user-name.active {
+      display: inline;
+    }
+
+    .user-logout {
+      background: var(--red-accent);
+      color: white !important;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 2px;
+      font-weight: 600;
+      transition: background 0.2s;
+      cursor: pointer;
+      border: none;
+      display: none;
+    }
+
+    .user-logout.active {
+      display: inline-block;
+    }
+
+    .user-logout:hover {
+      background: #8b2424;
+    }
+
+    .user-login {
+      background: var(--gold);
+      color: var(--navy) !important;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 2px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .user-login:hover {
+      background: var(--gold-light) !important;
+    }
+
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -1408,7 +1464,11 @@ search_exclude: true
         <li><a href="#seniors">Seniors</a></li>
         <li><a href="#contact">Contact</a></li>
         <li><a href="/public-submit">Submit a Deed</a></li>
-        <li><a href="/login" class="nav-donate">Login</a></li>
+        <li><a href="/login" class="user-login nav-donate">Log In</a></li>
+        <li class="user-display" style="display:none;">
+          <span class="user-name" style="padding: 8px 12px; color: var(--gold); font-weight: 600; font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;"></span>
+          <button class="user-logout nav-donate" style="padding: 8px 14px;">Log Out</button>
+        </li>
         <li><a href="#donate" class="nav-donate">Donate</a></li>
       </ul>
       <div class="hamburger">
@@ -1933,6 +1993,76 @@ search_exclude: true
       }
 
     })();
+  </script>
+
+  <script type="module">
+    // Import configuration from config.js
+    import { pythonURI, fetchOptions } from '/assets/js/api/config.js';
+
+    // User authentication display
+    async function updateUserDisplay() {
+      const userLoginEl = document.querySelector('.user-login');
+      const userDisplayLi = document.querySelector('.user-display');
+      const userNameEl = document.querySelector('.user-name');
+
+      try {
+        // Fetch current logged-in user from /api/id
+        const response = await fetch(`${pythonURI}/api/id`, fetchOptions);
+        
+        if (response.ok) {
+          const userData = await response.json();
+          
+          // Check if user data exists and has a name property
+          if (userData && (userData.name || userData.username || userData.firstName)) {
+            const displayName = userData.name || userData.username || userData.firstName;
+            
+            // Show username and logout, hide login
+            userNameEl.textContent = displayName;
+            userDisplayLi.style.display = 'flex';
+            userLoginEl.style.display = 'none';
+          } else {
+            // No user data, show login
+            userDisplayLi.style.display = 'none';
+            userLoginEl.style.display = 'block';
+          }
+        } else {
+          // Not authenticated, show login
+          userDisplayLi.style.display = 'none';
+          userLoginEl.style.display = 'block';
+        }
+      } catch (error) {
+        console.log('Error fetching user data:', error);
+        // Show login button on error
+        userDisplayLi.style.display = 'none';
+        userLoginEl.style.display = 'block';
+      }
+    }
+
+    // Log out functionality - use event delegation on the nav
+    document.addEventListener('click', async function(e) {
+      if (e.target && e.target.classList.contains('user-logout')) {
+        try {
+          // Optionally call a logout endpoint if available
+          // await fetch(`${pythonURI}/api/logout`, { method: 'POST', ...fetchOptions });
+          
+          // Refresh the page to clear session and update UI
+          window.location.href = '/dad?t=' + Date.now();
+        } catch (error) {
+          console.log('Error during logout:', error);
+          window.location.href = '/dad?t=' + Date.now();
+        }
+      }
+    });
+
+    // Update user display when page loads
+    document.addEventListener('DOMContentLoaded', updateUserDisplay);
+    
+    // Also run immediately in case DOM is already loaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateUserDisplay);
+    } else {
+      updateUserDisplay();
+    }
   </script>
 
 </body>
