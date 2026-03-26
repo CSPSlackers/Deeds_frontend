@@ -291,21 +291,39 @@ window.javaLogin = function (done, onStatus) {
         });
 };
 
-window.signup = function () {
-    const signupButton = document.querySelector(".auth-card:last-child .btn-submit");
-    const statusDiv = document.getElementById('signupStatus');
-
+// Responsibility 1: Show the loading/pending status
+function showSignupLoadingState(signupButton, statusDiv) {
     signupButton.disabled = true;
     statusDiv.textContent = 'Creating account...';
     statusDiv.classList.add('show');
+}
 
-    const data = {
+// Responsibility 2: Collect form data into a structured object
+function collectSignupFormData() {
+    return {
         name: signupFormData.name || document.getElementById("name").value,
         uid: signupFormData.uid || document.getElementById("signupUid").value,
         email: signupFormData.email || document.getElementById("signupEmail").value,
         password: signupFormData.password || document.getElementById("signupPassword").value,
     };
+}
 
+// Responsibility 3: Send signup request to Flask backend
+function submitToFlask(data) {
+    return fetch(`${pythonURI}/api/user`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    })
+    .then(response => {
+        if (response.ok) return response.json();
+        throw new Error(`Server error: ${response.status}`);
+    })
+    .catch(error => { console.error("Flask error:", error); });
+}
+
+// Responsibility 4: Send signup request to Spring backend
+function submitToSpring(data) {
     const signupDataJava = {
         uid: data.uid,
         sid: "0000000",
@@ -315,74 +333,64 @@ window.signup = function () {
         password: data.password,
         kasmServerNeeded: false,
     };
-
-    console.log("Creating account with data:", data);
-
-    // Flask Backend Request
-    const flaskPromise = fetch(`${pythonURI}/api/user`, {
+    return fetch(`${javaURI}/api/person/create`, {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            return response.text().then(errorText => {
-                throw new Error(`Server error: ${response.status}`);
-            });
-        }
-    })
-    .catch(error => {
-        console.error("Flask error:", error);
-    });
-
-    // Spring Backend Request
-    const springPromise = fetch(`${javaURI}/api/person/create`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signupDataJava)
     })
     .then(response => {
-        if (response.ok) {
-            return response.json();
-        } else {
-            throw new Error(`Server error: ${response.status}`);
-        }
+        if (response.ok) return response.json();
+        throw new Error(`Server error: ${response.status}`);
     })
-    .catch(error => {
-        console.error("Spring error:", error);
-    });
+    .catch(error => { console.error("Spring error:", error); });
+}
 
-    Promise.allSettled([flaskPromise, springPromise])
-        .then(results => {
-            signupButton.disabled = false;
+// Responsibility 5: Check if at least one backend succeeded
+function isSignupSuccessful(results) {
+    return results.some(r => r.status === 'fulfilled');
+}
 
-            const hasSuccess = results.some(r => r.status === 'fulfilled');
+// Responsibility 6: Show success state and redirect to login
+function handleSignupSuccess(signupButton, statusDiv) {
+    signupButton.disabled = false;
+    statusDiv.textContent = '✓ Account created successfully! Switching to sign in...';
+    statusDiv.classList.remove('error');
+    statusDiv.classList.add('success');
+    document.getElementById('signupForm').reset();
+    setTimeout(() => {
+        switchToLogin({preventDefault: () => {}});
+        statusDiv.classList.remove('show');
+    }, 1500);
+}
 
-            if (hasSuccess) {
-                statusDiv.textContent = '✓ Account created successfully! Switching to sign in...';
-                statusDiv.classList.remove('error');
-                statusDiv.classList.add('success');
+// Responsibility 7: Show failure state
+function handleSignupFailure(signupButton, statusDiv) {
+    signupButton.disabled = false;
+    statusDiv.textContent = '✗ Failed to create account. Please try again.';
+    statusDiv.classList.add('error');
+    statusDiv.classList.remove('success');
+}
 
-                // Clear the signup form
-                document.getElementById('signupForm').reset();
-                
-                setTimeout(() => {
-                    switchToLogin({preventDefault: () => {}});
-                    // Clear any status messages
-                    statusDiv.classList.remove('show');
-                }, 1500);
-            } else {
-                statusDiv.textContent = '✗ Failed to create account. Please try again.';
-                statusDiv.classList.add('error');
-                statusDiv.classList.remove('success');
-            }
-        });
+// Responsibility 8: Orchestrate the full signup flow
+window.signup = async function () {
+    const signupButton = document.querySelector(".auth-card:last-child .btn-submit");
+    const statusDiv = document.getElementById('signupStatus');
+
+    showSignupLoadingState(signupButton, statusDiv);
+
+    const data = collectSignupFormData();
+    console.log("Creating account with data:", data);
+
+    const results = await Promise.allSettled([
+        submitToFlask(data),
+        submitToSpring(data)
+    ]);
+
+    if (isSignupSuccessful(results)) {
+        handleSignupSuccess(signupButton, statusDiv);
+    } else {
+        handleSignupFailure(signupButton, statusDiv);
+    }
 }
 
 // Check for existing valid session by trying to get current user

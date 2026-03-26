@@ -125,63 +125,71 @@ async function secondbotResponse(msgText) {
   elements.spinner.style.display = "none"; // Hide the loading spinner
 }
 
-// Function to handle bot responses
-async function botResponse(msgText) {
-  console.log("Bot Response");
-  console.log(msgText);
-  // Show the loading spinner
+// Responsibility 1: Show the loading spinner
+function showBotLoadingState() {
   elements.spinner.style.display = "block";
-
-  // Fetch the bot's response
-  const data = await fetchData(`${urls.chat}${msgText}&personid=${elements.personid.value}`);
-if(data.chatResponse == null) {
-  console.log("No Response");
 }
-  console.log(data);
-  console.log(data.chatResponse);
-  console.log(data.id);
 
-  if (instantChatResponseFlag){
-    appendMessage(assets.botName, assets.botImg, "left", data.chatResponse, assets.botTitle,data.id, formatMessageDate(data.timestamp)); // Append the bot's response to the chat
-    elements.spinner.style.display = "none"; // Hide the loading spinner
-  } else {
-  // Function to split the data into smaller chunks
-  function* chunkString(str, size) {
-    for (let i = 0; i < str.length; i += size) {
-      yield str.slice(i, i + size);
-    }
+// Responsibility 2: Hide the loading spinner
+function hideBotLoadingState() {
+  elements.spinner.style.display = "none";
+}
+
+// Responsibility 3: Fetch the bot's response from the API
+async function fetchBotResponse(msgText) {
+  return await fetchData(`${urls.chat}${msgText}&personid=${elements.personid.value}`);
+}
+
+// Responsibility 4: Validate the bot's response data
+function isValidBotResponse(data) {
+  return data && data.chatResponse != null;
+}
+
+// Responsibility 5: Split a string into chunks for streaming
+function* chunkString(str, size) {
+  for (let i = 0; i < str.length; i += size) {
+    yield str.slice(i, i + size);
   }
+}
 
-
-  
-  // Split the response into chunks of a specified size (e.g., 10 characters)
+// Responsibility 6: Stream the bot's response chunk by chunk
+function streamBotMessage(data) {
   const chunks = Array.from(chunkString(data.chatResponse, 10));
-
-  // Create a single message container for the response
   appendMessage(assets.botName, assets.botImg, "left", "", assets.botTitle, data.id, formatMessageDate(data.timestamp));
-
-  // Get the newly created message element
   const lastMsgTextElement = elements.chat.querySelector(".msg.left-msg:last-child .msg-text");
 
-  // Function to append the next chunk
   let currentChunk = 0;
-  function appendNextChunk() {
+  const intervalId = setInterval(() => {
     if (currentChunk < chunks.length) {
       lastMsgTextElement.innerHTML += chunks[currentChunk];
       currentChunk++;
-      elements.chat.scrollTop += 500; // Ensure the chat scrolls to show the latest content
+      elements.chat.scrollTop += 500;
     } else {
-      // Stop the interval when all chunks are appended
       clearInterval(intervalId);
-      // Hide the loading spinner
-      elements.spinner.style.display = "none";
+      hideBotLoadingState();
     }
-  }
+  }, 100);
+}
 
-  // Set an interval to append chunks at specified intervals (e.g., every 100 milliseconds)
-  const intervalId = setInterval(appendNextChunk, 100);
-
+// Responsibility 7: Render the bot's response (instant or streamed)
+function renderBotResponse(data) {
+  if (instantChatResponseFlag) {
+    appendMessage(assets.botName, assets.botImg, "left", data.chatResponse, assets.botTitle, data.id, formatMessageDate(data.timestamp));
+    hideBotLoadingState();
+  } else {
+    streamBotMessage(data);
   }
+}
+
+// Responsibility 8: Orchestrate the full bot response flow
+async function botResponse(msgText) {
+  showBotLoadingState();
+  const data = await fetchBotResponse(msgText);
+  if (!isValidBotResponse(data)) {
+    console.log("No Response");
+    return;
+  }
+  renderBotResponse(data);
 }
 
 // Function to format the date/time for messages
