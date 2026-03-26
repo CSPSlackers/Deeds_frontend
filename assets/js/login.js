@@ -2,11 +2,11 @@
 console.log('✓ Script starting');
 
 var pythonURI = location.hostname === "localhost" || location.hostname === "127.0.0.1" 
-    ? "http://localhost:8301"
+    ? "http://localhost:8328"
     : "https://flask.opencodingsociety.com";
     
 var javaURI = location.hostname === "localhost" || location.hostname === "127.0.0.1"
-    ? "http://localhost:8301" 
+    ? "http://localhost:8328" 
     : "https://spring.opencodingsociety.com";
 
 var fetchOptions = {
