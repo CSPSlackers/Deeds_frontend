@@ -90,9 +90,17 @@ search_exclude: true
       display: flex;
       flex-direction: column;
       gap: 12px;
-      max-width: 800px;
+      width: 100%;
+    }
+
+    .messages-inner {
+      max-width: 760px;
       width: 100%;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
     }
     #messages::-webkit-scrollbar { width: 4px; }
     #messages::-webkit-scrollbar-thumb { background: rgba(200,151,58,0.3); border-radius: 2px; }
@@ -292,15 +300,18 @@ search_exclude: true
         const res = await fetch(`${FLASK}/api/id`, { credentials: 'include' });
         if (!res.ok) throw new Error('not logged in');
         const data = await res.json();
-        currentUid = data._uid || data.uid;
+        console.log('[Chat] User data:', data);
+        currentUid = data.uid || data._uid;
+        console.log('[Chat] currentUid:', currentUid);
         // If admin, redirect to admin chat page
-        if (data._role === 'Admin' || data.role === 'Admin') {
+        if (data.is_admin || data.role === 'Admin' || data._role === 'Admin') {
           window.location.href = '/chat-admin';
           return;
         }
         startPolling();
         loadMessages();
-      } catch {
+      } catch(err) {
+        console.error('[Chat] Auth error:', err);
         document.getElementById('auth-wall').style.display = 'flex';
         document.getElementById('input-bar').style.display = 'none';
         document.querySelector('.input-footer').style.display = 'none';
@@ -311,14 +322,22 @@ search_exclude: true
     async function loadMessages() {
       try {
         const res = await fetch(`${FLASK}/api/chat/messages`, { credentials: 'include' });
-        const data = await res.json();
-        if (!data.success) return;
-
-        if (data.messages.length !== lastCount) {
-          lastCount = data.messages.length;
-          renderMessages(data.messages, data.current_uid);
+        const text = await res.text();
+        let data;
+        try {
+          data = JSON.parse(text);
+        } catch (e) {
+          // Response was HTML (not logged in or server error) - stop polling
+          console.warn('[Chat] Non-JSON response, user may not be logged in to Flask');
+          return;
         }
-      } catch (e) { console.error('Poll error:', e); }
+        if (!data.success) {
+          console.error('[Chat] Messages error:', data.error);
+          return;
+        }
+        lastCount = data.messages.length;
+        renderMessages(data.messages, data.current_uid);
+      } catch (e) { console.error('[Chat] Poll error:', e); }
     }
 
     // ── Render messages ──
@@ -331,21 +350,36 @@ search_exclude: true
       messages.forEach(m => {
         const isMine = m.sender_uid === myUid;
         const row = document.createElement('div');
-        row.className = 'msg-row ' + (isMine ? 'mine' : 'theirs');
+        row.style.cssText = 'display:flex; gap:10px; align-items:flex-end; width:100%; margin-bottom:4px;';
+        if (isMine) row.style.flexDirection = 'row-reverse';
 
         const avatar = document.createElement('div');
-        avatar.className = 'msg-avatar';
+        avatar.style.cssText = 'width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:Oswald,sans-serif;font-size:0.6rem;font-weight:700;flex-shrink:0;';
+        avatar.style.background = isMine ? 'var(--gold)' : 'var(--navy)';
+        avatar.style.color = isMine ? 'var(--navy)' : 'var(--gold)';
         avatar.textContent = isMine ? 'YOU' : 'ADM';
 
         const wrap = document.createElement('div');
-        wrap.className = 'msg-wrap';
+        wrap.style.cssText = 'display:flex;flex-direction:column;max-width:65%;';
+        if (isMine) wrap.style.alignItems = 'flex-end';
 
         const bubble = document.createElement('div');
-        bubble.className = 'msg-bubble';
+        bubble.style.cssText = 'padding:10px 16px;font-size:0.92rem;line-height:1.55;border-radius:2px;word-break:break-word;';
+        if (isMine) {
+          bubble.style.background = 'var(--gold)';
+          bubble.style.color = 'var(--navy)';
+          bubble.style.fontWeight = '500';
+          bubble.style.borderBottomRightRadius = '0';
+        } else {
+          bubble.style.background = 'var(--navy)';
+          bubble.style.color = 'var(--white)';
+          bubble.style.borderBottomLeftRadius = '0';
+        }
         bubble.textContent = m.message;
 
         const time = document.createElement('div');
-        time.className = 'msg-time';
+        time.style.cssText = 'font-size:0.62rem;color:#aaa;margin-top:4px;';
+        time.style.textAlign = isMine ? 'right' : 'left';
         time.textContent = m.timestamp;
 
         wrap.appendChild(bubble);
@@ -362,25 +396,42 @@ search_exclude: true
       const text = inputEl.value.trim();
       if (!text) return;
       sendBtn.disabled = true;
-      inputEl.value = '';
-      inputEl.style.height = 'auto';
 
       try {
-        await fetch(`${FLASK}/api/chat/send`, {
+        const res = await fetch(`${FLASK}/api/chat/send`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',
           body: JSON.stringify({ message: text })
         });
-        loadMessages();
-      } catch (e) { console.error('Send error:', e); }
+        const data = await res.json();
+        console.log('[Chat] Send response:', data);
+        if (data.success) {
+          inputEl.value = '';
+          inputEl.style.height = 'auto';
+          loadMessages();
+        } else {
+          console.error('[Chat] Send failed:', data.error);
+          alert('Failed to send: ' + (data.error || 'Unknown error'));
+        }
+      } catch (e) {
+        console.error('[Chat] Send error:', e);
+        alert('Connection error. Is Flask running on port 8328?');
+      }
       sendBtn.disabled = false;
     }
 
     // ── Poll every 2 seconds ──
     function startPolling() {
       if (pollInterval) clearInterval(pollInterval);
-      pollInterval = setInterval(loadMessages, 2000);
+      pollInterval = setInterval(async function() {
+        // Re-verify Flask session is still active before polling
+        try {
+          const res = await fetch(`${FLASK}/api/id`, { credentials: 'include' });
+          if (!res.ok) { clearInterval(pollInterval); return; }
+          loadMessages();
+        } catch(e) { /* ignore */ }
+      }, 2000);
     }
 
     // ── Events ──
