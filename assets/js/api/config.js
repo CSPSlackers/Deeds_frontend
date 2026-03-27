@@ -18,7 +18,7 @@ export var javaURI;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
         javaURI = "http://localhost:8328";
 } else {
-    javaURI = "https://spring.opencodingsociety.com";
+    javaURI = "https://dad.opencodingsociety.com";
 }
 
 export const fetchOptions = {
