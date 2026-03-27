@@ -241,6 +241,39 @@ search_exclude: true
       background: var(--gold-light) !important;
     }
 
+    .user-dropdown { position: relative; }
+    .user-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--navy);
+      min-width: 190px;
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      z-index: 200;
+    }
+    .user-dropdown-menu a,
+    .user-dropdown-menu button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.82rem;
+      color: var(--off-white);
+      text-decoration: none;
+      padding: 10px 16px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.15s, color 0.15s;
+      box-sizing: border-box;
+    }
+    .user-dropdown-menu a:hover,
+    .user-dropdown-menu button:hover { background: var(--gold); color: var(--navy); }
+    .user-dropdown.open .user-dropdown-menu { display: block; }
+
     /* ── HERO ── */
     .hero {
       position: relative;
@@ -2010,9 +2043,12 @@ search_exclude: true
         <li><a href="#contact">Contact</a></li>
         <li><a href="/public-submit">Submit a Deed</a></li>
         <li><a href="/login" class="user-login nav-donate">Log In</a></li>
-        <li class="user-display" style="display:none;">
-          <span class="user-name" style="padding: 8px 12px; color: var(--gold); font-weight: 600; font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase;"></span>
-          <button class="user-logout nav-donate" style="padding: 8px 14px;">Log Out</button>
+        <li class="user-display user-dropdown" style="display:none;">
+          <span class="user-name" id="user-name-toggle" style="padding: 8px 12px; color: var(--gold); font-weight: 600; font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; cursor:pointer;"></span>
+          <div class="user-dropdown-menu">
+            <a href="/chat" id="dropdown-chat-link">Chat with Admin</a>
+            <button class="user-logout">Log Out</button>
+          </div>
         </li>
         <li><a href="#donate" class="nav-donate">Donate</a></li>
       </ul>
@@ -2623,9 +2659,16 @@ search_exclude: true
             const displayName = userData.name || userData.username || userData.firstName;
             
             // Show username and logout, hide login
-            userNameEl.textContent = displayName;
+            userNameEl.textContent = displayName + ' ▾';
             userDisplayLi.style.display = 'flex';
             userLoginEl.style.display = 'none';
+
+            // Set admin chat link
+            const chatLink = document.getElementById('dropdown-chat-link');
+            if (chatLink && (userData.role === 'Admin' || userData._role === 'Admin')) {
+              chatLink.href = '/chat-admin';
+              chatLink.textContent = 'Admin Chat Panel';
+            }
           } else {
             // No user data, show login
             userDisplayLi.style.display = 'none';
@@ -2658,6 +2701,15 @@ search_exclude: true
           window.location.href = '/dad?t=' + Date.now();
         }
       }
+    });
+
+    // Dropdown toggle
+    document.getElementById('user-name-toggle')?.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.querySelector('.user-dropdown')?.classList.toggle('open');
+    });
+    document.addEventListener('click', function() {
+      document.querySelector('.user-dropdown')?.classList.remove('open');
     });
 
     // Update user display when page loads
