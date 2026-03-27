@@ -303,6 +303,7 @@ function submitToFlask(data) {
     return fetch(`${pythonURI}/api/user`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: 'include',
         body: JSON.stringify(data)
     })
     .then(response => {
@@ -326,6 +327,7 @@ function submitToSpring(data) {
     return fetch(`${javaURI}/api/person/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        credentials: 'include',
         body: JSON.stringify(signupDataJava)
     })
     .then(response => {
