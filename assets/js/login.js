@@ -1,5 +1,5 @@
 // Configuration imported from config.js
-import { pythonURI, javaURI } from './api/config.js';
+import { pythonURI, javaURI, baseurl } from './api/config.js';
 
 console.log('✓ Script starting');
 
@@ -208,7 +208,7 @@ window.loginBoth = function () {
         if (pythonSuccess) {
             // Clear any error messages before redirecting
             messageDiv.classList.remove('show');
-            window.location.href = '/dad';
+            window.location.href = baseurl + '/dad';
         } else {
             // Show error if login failed
             messageDiv.textContent = 'Invalid username or password';
