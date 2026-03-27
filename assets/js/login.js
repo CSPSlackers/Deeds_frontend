@@ -1,5 +1,5 @@
 // Configuration imported from config.js
-import { pythonURI, javaURI } from '../api/config.js';
+import { pythonURI, javaURI } from './api/config.js';
 
 console.log('✓ Script starting');
 

@@ -2691,6 +2691,9 @@ search_exclude: true
     document.addEventListener('click', async function(e) {
       if (e.target && e.target.classList.contains('user-logout')) {
         try {
+          // Clear the jwt_python_flask cookie
+          document.cookie = "jwt_python_flask=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          
           // Optionally call a logout endpoint if available
           // await fetch(`${pythonURI}/api/logout`, { method: 'POST', ...fetchOptions });
           
