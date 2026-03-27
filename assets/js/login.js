@@ -198,23 +198,19 @@ window.loginBoth = function () {
     messageDiv.classList.remove('show');
 
     let pythonSuccess = false;
-    let javaSuccess = false;
 
-    let javaPromise = new Promise((resolve) => {
-        window.javaLogin(resolve, (success) => { javaSuccess = success; });
-    });
     let pythonPromise = new Promise((resolve) => {
         window.pythonLogin(resolve, (success) => { pythonSuccess = success; });
     });
 
-    Promise.allSettled([javaPromise, pythonPromise]).then(() => {
-        // Only redirect if at least one login succeeded
-        if (pythonSuccess || javaSuccess) {
+    pythonPromise.then(() => {
+        // Only redirect if login succeeded
+        if (pythonSuccess) {
             // Clear any error messages before redirecting
             messageDiv.classList.remove('show');
             window.location.href = '/dad';
         } else {
-            // Show error only if both failed
+            // Show error if login failed
             messageDiv.textContent = 'Invalid username or password';
             messageDiv.classList.add('show');
         }
