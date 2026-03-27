@@ -1,13 +1,7 @@
-// Configuration - inline to avoid module import issues
-console.log('✓ Script starting');
+// Configuration imported from config.js
+import { pythonURI, javaURI } from '../api/config.js';
 
-var pythonURI = location.hostname === "localhost" || location.hostname === "127.0.0.1" 
-    ? "http://localhost:8328"
-    : "https://flask.opencodingsociety.com";
-    
-var javaURI = location.hostname === "localhost" || location.hostname === "127.0.0.1"
-    ? "http://localhost:8328" 
-    : "https://spring.opencodingsociety.com";
+console.log('✓ Script starting');
 
 var fetchOptions = {
     method: 'GET',
