@@ -8,16 +8,18 @@ export const baseurl = "{{ site.baseurl }}";
 // Helper function to build full redirect URLs
 export function getFullURL(path) {
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-        // Development environment: use relative path
-        return path.startsWith('/') ? path : '/' + path;
+        // Development environment: use relative path with baseurl
+        const cleanPath = path.startsWith('/') ? path : '/' + path;
+        return baseurl ? baseurl + cleanPath : cleanPath;
     } else {
-        // Production environment: use absolute URL with the current domain
+        // Production environment: use absolute URL with the current domain and baseurl
         const protocol = location.protocol;
         const hostname = location.hostname;
         const port = location.port ? ':' + location.port : '';
         const base = protocol + '//' + hostname + port;
         const cleanPath = path.startsWith('/') ? path : '/' + path;
-        return base + cleanPath;
+        const urlPath = baseurl ? baseurl + cleanPath : cleanPath;
+        return base + urlPath;
     }
 }
 
