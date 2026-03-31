@@ -2639,7 +2639,7 @@ search_exclude: true
 
   <script type="module">
     // Import configuration from config.js
-    import { pythonURI, fetchOptions } from './assets/js/api/config.js';
+    import { pythonURI, fetchOptions, getFullURL } from './assets/js/api/config.js';
 
     // User authentication display
     async function updateUserDisplay() {
@@ -2698,10 +2698,10 @@ search_exclude: true
           // await fetch(`${pythonURI}/api/logout`, { method: 'POST', ...fetchOptions });
           
           // Refresh the page to clear session and update UI
-          window.location.href = '/dad?t=' + Date.now();
+          window.location.href = getFullURL('/dad');
         } catch (error) {
           console.log('Error during logout:', error);
-          window.location.href = '/dad?t=' + Date.now();
+          window.location.href = getFullURL('/dad');
         }
       }
     });
@@ -2728,7 +2728,7 @@ search_exclude: true
 
   <!-- CAROUSEL SCRIPT -->
   <script type="module">
-    import { pythonURI, fetchOptions } from './assets/js/api/config.js';
+    import { pythonURI, fetchOptions, getFullURL } from './assets/js/api/config.js';
 
     class Carousel {
       constructor() {

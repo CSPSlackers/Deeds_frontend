@@ -264,7 +264,7 @@ search_exclude: true
   <div class="auth-wall" id="auth-wall" style="display:none;">
     <h2>Please Log In</h2>
     <p>You need to be logged in to chat with a D.A.D. admin.</p>
-    <a href="/login?next=/chat" class="btn-gold">Log In</a>
+    <a href="/" class="btn-gold">Log In</a>
   </div>
 
   <!-- MESSAGES -->
@@ -294,6 +294,22 @@ search_exclude: true
     let lastCount = 0;
     let pollInterval = null;
 
+    // Get full URL helper
+    function getFullURL(path) {
+        if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+            // Development environment: use relative path
+            return path.startsWith('/') ? path : '/' + path;
+        } else {
+            // Production environment: use absolute URL with the current domain
+            const protocol = location.protocol;
+            const hostname = location.hostname;
+            const port = location.port ? ':' + location.port : '';
+            const base = protocol + '//' + hostname + port;
+            const cleanPath = path.startsWith('/') ? path : '/' + path;
+            return base + cleanPath;
+        }
+    }
+
     // ── Check login ──
     async function checkAuth() {
       try {
@@ -305,7 +321,7 @@ search_exclude: true
         console.log('[Chat] currentUid:', currentUid);
         // If admin, redirect to admin chat page
         if (data.is_admin || data.role === 'Admin' || data._role === 'Admin') {
-          window.location.href = '/chat-admin';
+          window.location.href = getFullURL('/chat-admin');
           return;
         }
         startPolling();

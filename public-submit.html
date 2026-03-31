@@ -429,7 +429,7 @@ title: Submit a Deed
                 </div>
             </a>
             <ul class="nav-links">
-                <li><a href="/dad">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li id="loginArea"></li>
             </ul>
         </div>
@@ -443,7 +443,7 @@ title: Submit a Deed
         <!-- Login Required Alert -->
         <div id="loginAlert" class="login-required hidden">
             <p>You must be logged in to submit a deed.</p>
-            <a href="/login">Login Now</a>
+            <a href="/">Login Now</a>
         </div>
 
         <!-- Form -->
@@ -496,7 +496,7 @@ title: Submit a Deed
     <!-- Auth and submission script -->
     <script type="module">
         // API configuration imported from config.js
-        import { pythonURI } from './assets/js/api/config.js';
+        import { pythonURI, getFullURL } from './assets/js/api/config.js';
 
         const fetchOptions = {
             method: 'GET',
@@ -613,7 +613,7 @@ title: Submit a Deed
         function submitDeed() {
             if (!currentUser) {
                 alert('Please log in to submit a deed');
-                window.location.href = '/login';
+                window.location.href = getFullURL('/');
                 return;
             }
 

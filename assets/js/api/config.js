@@ -5,11 +5,27 @@
 
 export const baseurl = "{{ site.baseurl }}";
 
+// Helper function to build full redirect URLs
+export function getFullURL(path) {
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+        // Development environment: use relative path
+        return path.startsWith('/') ? path : '/' + path;
+    } else {
+        // Production environment: use absolute URL with the current domain
+        const protocol = location.protocol;
+        const hostname = location.hostname;
+        const port = location.port ? ':' + location.port : '';
+        const base = protocol + '//' + hostname + port;
+        const cleanPath = path.startsWith('/') ? path : '/' + path;
+        return base + cleanPath;
+    }
+}
+
 export var pythonURI;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     pythonURI = "http://localhost:8328";  // Same URI for localhost or 127.0.0.1
 } else {
-    pythonURI = "https://dad.opencodingsociety.com";
+    pythonURI = "https://deeds.opencodingsociety.com";
 
 }
 
@@ -18,7 +34,7 @@ export var javaURI;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
         javaURI = "http://localhost:8328";
 } else {
-    javaURI = "https://dad.opencodingsociety.com";
+    javaURI = "https://deeds.opencodingsociety.com";
 }
 
 export const fetchOptions = {
