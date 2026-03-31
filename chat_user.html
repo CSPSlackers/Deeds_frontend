@@ -284,8 +284,9 @@ search_exclude: true
   </div>
   <div class="input-footer">Messages are monitored by D.A.D. staff</div>
 
-  <script>
-    const FLASK = 'http://localhost:8328';
+  <script type="module">
+    import { pythonURI } from './assets/js/api/config.js';
+    const FLASK = pythonURI;
     const msgEl = document.getElementById('messages');
     const inputEl = document.getElementById('msg-input');
     const sendBtn = document.getElementById('send-btn');

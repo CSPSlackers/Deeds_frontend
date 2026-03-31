@@ -2500,9 +2500,14 @@ search_exclude: true
       }, { threshold: 0.5 });
       statEls.forEach(function (el) { statObserver.observe(el); });
     })();
+  </script>
+
+  <script type="module">
+    import { pythonURI } from './assets/js/api/config.js';
 
     /* ── AI Chatbot ── */
     (function () {
+      
       const toggleBtn  = document.getElementById('dad-chat-toggle');
       const chatWindow = document.getElementById('dad-chat-window');
       const messagesEl = document.getElementById('dad-chat-messages');
@@ -2605,7 +2610,7 @@ search_exclude: true
         showTyping();
         sendBtn.disabled = true;
 
-        fetch('http://localhost:8328/api/groq/chat', {
+        fetch(pythonURI + '/api/groq/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           credentials: 'include',

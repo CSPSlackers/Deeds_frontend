@@ -380,8 +380,9 @@ search_exclude: true
     </div>
   </div>
 
-  <script>
-    const FLASK = 'http://localhost:8328';
+  <script type="module">
+    import { pythonURI } from './assets/js/api/config.js';
+    const FLASK = pythonURI;
     let currentUid = null;
     let selectedUserUid = null;
     let lastMsgCount = 0;
