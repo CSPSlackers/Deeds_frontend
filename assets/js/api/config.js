@@ -27,7 +27,7 @@ export var pythonURI;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
     pythonURI = "http://localhost:8328";  // Same URI for localhost or 127.0.0.1
 } else {
-    pythonURI = "https://deeds.opencodingsociety.com";
+    pythonURI = "https://dad.opencodingsociety.com";
 
 }
 
@@ -36,7 +36,7 @@ export var javaURI;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
         javaURI = "http://localhost:8328";
 } else {
-    javaURI = "https://deeds.opencodingsociety.com";
+    javaURI = "https://dad.opencodingsociety.com";
 }
 
 export const fetchOptions = {
