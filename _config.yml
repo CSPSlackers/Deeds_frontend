@@ -20,7 +20,7 @@ description: ""
 owner_name: CSPSlackers
 github_username: CSPSlackers
 github_repo: "Deeds_frontend" 
-baseurl: "/" 
+baseurl: "/Deeds_frontend" 
 future: true
 
 # Exclude from Jekyll watch - these are processed by our conversion scripts
