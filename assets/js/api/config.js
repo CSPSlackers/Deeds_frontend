@@ -7,10 +7,13 @@ export const baseurl = "{{ site.baseurl }}";
 
 // Helper function to build full redirect URLs
 export function getFullURL(path) {
+    // Only use baseurl if it's a valid value (not empty and not the literal Jekyll template string)
+    const validBaseurl = baseurl && baseurl !== "" && !baseurl.includes("{{") ? baseurl : "";
+    
     if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
-        // Development environment: use relative path with baseurl
+        // Development environment: use relative path with baseurl if valid
         const cleanPath = path.startsWith('/') ? path : '/' + path;
-        return baseurl ? baseurl + cleanPath : cleanPath;
+        return validBaseurl ? validBaseurl + cleanPath : cleanPath;
     } else {
         // Production environment: use absolute URL with the current domain and baseurl
         const protocol = location.protocol;
@@ -18,7 +21,7 @@ export function getFullURL(path) {
         const port = location.port ? ':' + location.port : '';
         const base = protocol + '//' + hostname + port;
         const cleanPath = path.startsWith('/') ? path : '/' + path;
-        const urlPath = baseurl ? baseurl + cleanPath : cleanPath;
+        const urlPath = validBaseurl ? validBaseurl + cleanPath : cleanPath;
         return base + urlPath;
     }
 }
