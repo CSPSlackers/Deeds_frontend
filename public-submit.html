@@ -643,10 +643,8 @@ title: Submit a Deed
                 payload.image = uploadedImage;
             }
 
-            const userId = currentUser.id || currentUser.user_id || currentUser.uid;
-            const submitUrl = `${pythonURI}/submit/create/${userId}`;
+            const submitUrl = `${pythonURI}/submit/create`;
             console.log('Submitting to:', submitUrl);
-            console.log('User ID:', userId);
             console.log('Payload:', payload);
 
             fetch(submitUrl, {
