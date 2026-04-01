@@ -703,6 +703,11 @@ title: Submit a Deed
                 submitBtn.textContent = '✨ SUBMIT DEED';
             });
         }
+
+        // Expose submitDeed to global scope for inline onclick handler
+        window.submitDeed = submitDeed;
+        // Expose clearImage to global scope for inline onclick handler
+        window.clearImage = clearImage;
     </script>
 </body>
 </html>
