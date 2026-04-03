@@ -213,8 +213,8 @@ btn.addEventListener('click', async () => {
     btn.disabled = true; fb.innerHTML = 'Grading...';
     try {
         const res = await fetch(`${javaURI}/api/gemini-frq/grade`, {
-            method: 'POST', mode: 'cors', credentials: 'include',
-            headers: { 'Content-Type': 'application/json' },
+            ...window.fetchOptions,
+            method: 'POST',
             body: JSON.stringify({ question: q, answer: a })
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

@@ -1,20 +1,7 @@
 // Configuration imported from config.js
-import { pythonURI, javaURI } from './api/config.js';
+import { pythonURI, javaURI, fetchOptions } from './api/config.js';
 
 console.log('✓ Script starting');
-
-var fetchOptions = {
-    method: 'GET',
-    mode: 'cors',
-    cache: 'default',
-    credentials: 'include',
-    headers: {
-        'Content-Type': 'application/json',
-        'X-Origin': 'client'
-    }
-};
-
-console.log('✓ Config initialized - pythonURI:', pythonURI);
 
 let signupFormData = {};
 let validationTimeout = null;
@@ -232,9 +219,8 @@ window.pythonLogin = function (done, onStatus) {
         }
     };
     fetch(options.URL, {
+        ...fetchOptions,
         method: options.method,
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
         body: JSON.stringify(options.body)
     })
     .then(response => {
@@ -301,9 +287,8 @@ function collectSignupFormData() {
 // Responsibility 3: Send signup request to Flask backend
 function submitToFlask(data) {
     return fetch(`${pythonURI}/api/user`, {
+        ...fetchOptions,
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
         body: JSON.stringify(data)
     })
     .then(response => {
@@ -325,9 +310,8 @@ function submitToSpring(data) {
         kasmServerNeeded: false,
     };
     return fetch(`${javaURI}/api/person/create`, {
+        ...fetchOptions,
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        credentials: 'include',
         body: JSON.stringify(signupDataJava)
     })
     .then(response => {

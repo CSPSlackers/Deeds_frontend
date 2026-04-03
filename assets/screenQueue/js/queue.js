@@ -511,13 +511,9 @@ window.addEventListener('load', () => {
 
 function fetchUser() {
     fetch(javaURI + `/api/person/get`, {
+        ...window.fetchOptions,
         method: 'GET',
-        cache: "no-cache",
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-Origin': 'client'
-        }
+        cache: "no-cache"
     })
         .then(response => response.json())
         .then(userInfo => {

@@ -178,11 +178,8 @@
             try {
                 // Try to save to Python backend
                 const response = await fetch(`${this.pythonURI}/api/lessons/complete`, {
+                    ...window.fetchOptions,
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    credentials: 'include',
                     body: JSON.stringify(metadata)
                 });
                 
@@ -191,11 +188,8 @@
                     
                     // Try Java backend
                     const javaResponse = await fetch(`${this.javaURI}/api/lessons/complete`, {
+                        ...window.fetchOptions,
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        credentials: 'include',
                         body: JSON.stringify(metadata)
                     });
                     

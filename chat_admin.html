@@ -381,7 +381,7 @@ search_exclude: true
   </div>
 
   <script type="module">
-    import { pythonURI } from './assets/js/api/config.js';
+    import { pythonURI, fetchOptions } from './assets/js/api/config.js';
     const FLASK = pythonURI;
     let currentUid = null;
     let selectedUserUid = null;
@@ -391,7 +391,7 @@ search_exclude: true
     // ── Auth check ──
     async function checkAuth() {
       try {
-        const res = await fetch(`${FLASK}/api/id`, { credentials: 'include' });
+        const res = await fetch(`${FLASK}/api/id`, fetchOptions);
         if (!res.ok) throw new Error();
         const data = await res.json();
         const isAdmin = data.role === 'Admin' || data._role === 'Admin' || data.is_admin === true;
@@ -408,7 +408,7 @@ search_exclude: true
     // ── Load sidebar conversations ──
     async function loadConversations() {
       try {
-        const res = await fetch(`${FLASK}/api/chat/conversations`, { credentials: 'include' });
+        const res = await fetch(`${FLASK}/api/chat/conversations`, fetchOptions);
         const data = await res.json();
         if (!data.success) return;
         renderSidebar(data.conversations);
@@ -467,7 +467,7 @@ search_exclude: true
     async function loadMessages() {
       if (!selectedUserUid) return;
       try {
-        const res = await fetch(`${FLASK}/api/chat/messages?with=${selectedUserUid}`, { credentials: 'include' });
+        const res = await fetch(`${FLASK}/api/chat/messages?with=${selectedUserUid}`, fetchOptions);
         const data = await res.json();
         if (!data.success) return;
         if (data.messages.length !== lastMsgCount) {
@@ -520,9 +520,8 @@ search_exclude: true
 
       try {
         await fetch(`${FLASK}/api/chat/send`, {
+          ...fetchOptions,
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
           body: JSON.stringify({ message: text, receiver_uid: selectedUserUid })
         });
         loadMessages();

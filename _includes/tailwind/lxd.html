@@ -335,11 +335,8 @@
   async function loadGradeData() {
     try {
       const response = await fetch(`${API_BASE}/api/grade_data`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        ...window.fetchOptions,
+        method: 'GET'
       });
 
       if (response.ok) {
@@ -391,11 +388,8 @@
     if (isAuthenticated) {
       try {
         const response = await fetch(`${API_BASE}/api/grade_data`, {
+          ...window.fetchOptions,
           method: 'POST',
-          credentials: 'include',
-          headers: {
-            'Content-Type': 'application/json'
-          },
           body: JSON.stringify({ grade_data: userGradeData })
         });
 
@@ -883,7 +877,7 @@
     } else {
       // Fallback: try to fetch if window.user doesn't exist yet
       try {
-        const userResp = await fetch(`${API_BASE}/api/id`, { credentials: 'include' });
+        const userResp = await fetch(`${API_BASE}/api/id`, window.fetchOptions);
         if (userResp.ok) {
           const userData = await userResp.json();
           if (userData && userData.uid) {
@@ -1477,7 +1471,7 @@
   // Load and log credentials data
   async function loadCredentials() {
     try {
-      const response = await fetch(`${API_BASE}/api/id`, { credentials: 'include' });
+      const response = await fetch(`${API_BASE}/api/id`, window.fetchOptions);
       if (response.ok) {
         const data = await response.json();
         console.log('Credentials data:', data);

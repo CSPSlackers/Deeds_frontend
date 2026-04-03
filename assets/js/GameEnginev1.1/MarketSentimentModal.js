@@ -265,12 +265,8 @@ class MarketSentimentModal {
     const fetchStats = async () => {
       try {
         const response = await fetch(this.javaURI + `/rpg_answer/market-stats`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          credentials: 'include'
+          ...window.fetchOptions,
+          method: 'GET'
         });
         
         if (!response.ok) {
@@ -312,12 +308,8 @@ class MarketSentimentModal {
 
       try {
         const response = await fetch(this.javaURI + `/rpg_answer/market-sentiment`, {
+          ...window.fetchOptions,
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          credentials: 'include',
           body: JSON.stringify(formData)
         });
 

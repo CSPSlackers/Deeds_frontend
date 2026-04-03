@@ -81,3 +81,10 @@ export function login(options) {
         document.getElementById(options.message).textContent = 'Possible CORS or service down error: ' + error;
     });
 }
+
+// Export to window for non-module scripts
+if (typeof window !== 'undefined') {
+    window.pythonURI = pythonURI;
+    window.javaURI = javaURI;
+    window.fetchOptions = fetchOptions;
+}

@@ -2611,9 +2611,8 @@ search_exclude: true
         sendBtn.disabled = true;
 
         fetch(pythonURI + '/api/groq/chat', {
+          ...fetchOptions,
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
           body: JSON.stringify({
             messages: conversationHistory,
             model: 'llama-3.3-70b-versatile',

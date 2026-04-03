@@ -496,18 +496,7 @@ title: Submit a Deed
     <!-- Auth and submission script -->
     <script type="module">
         // API configuration imported from config.js
-        import { pythonURI, getFullURL } from './assets/js/api/config.js';
-
-        const fetchOptions = {
-            method: 'GET',
-            mode: 'cors',
-            cache: 'default',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Origin': 'client'
-            }
-        };
+        import { pythonURI, getFullURL, fetchOptions } from './assets/js/api/config.js';
 
         let currentUser = null;
         let uploadedImage = null;
@@ -648,11 +637,8 @@ title: Submit a Deed
             console.log('Payload:', payload);
 
             fetch(submitUrl, {
+                ...fetchOptions,
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
                 body: JSON.stringify(payload)
             })
             .then(r => {

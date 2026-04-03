@@ -262,13 +262,8 @@
 
             try {
                 const response = await fetch(`${javaURI}/api/challenge-submission/submit`, {
+                    ...fetchOptions,
                     method: 'POST',
-                    credentials: 'include',
-                    headers: {
-                        ...(fetchOptions.headers || {}),
-                        'Content-Type': 'application/json',
-                        'X-Origin': 'client'
-                    },
                     body: JSON.stringify({
                         lessonKey: lessonKey,
                         challenges: challenges

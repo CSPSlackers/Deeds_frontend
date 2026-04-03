@@ -314,9 +314,7 @@
             // Try to get user from Python backend first
             let userId = null;
             try {
-                const res = await fetch(pythonURI + '/api/id', {
-                    credentials: 'include'
-                });
+                const res = await fetch(pythonURI + '/api/id', window.fetchOptions);
                 if (res.ok) {
                     const data = await res.json();
                     userId = data.id || null;
@@ -421,11 +419,8 @@
             }
             
             const response = await fetch(javaURI + '/api/ocs-analytics/save', {
+                ...window.fetchOptions,
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
                 body: JSON.stringify(payload)
             });
             

@@ -285,7 +285,7 @@ search_exclude: true
   <div class="input-footer">Messages are monitored by D.A.D. staff</div>
 
   <script type="module">
-    import { pythonURI } from './assets/js/api/config.js';
+    import { pythonURI, fetchOptions } from './assets/js/api/config.js';
     const FLASK = pythonURI;
     const msgEl = document.getElementById('messages');
     const inputEl = document.getElementById('msg-input');
@@ -314,7 +314,7 @@ search_exclude: true
     // ── Check login ──
     async function checkAuth() {
       try {
-        const res = await fetch(`${FLASK}/api/id`, { credentials: 'include' });
+        const res = await fetch(`${FLASK}/api/id`, fetchOptions);
         if (!res.ok) throw new Error('not logged in');
         const data = await res.json();
         console.log('[Chat] User data:', data);
@@ -338,7 +338,7 @@ search_exclude: true
     // ── Load messages ──
     async function loadMessages() {
       try {
-        const res = await fetch(`${FLASK}/api/chat/messages`, { credentials: 'include' });
+        const res = await fetch(`${FLASK}/api/chat/messages`, fetchOptions);
         const text = await res.text();
         let data;
         try {
@@ -416,9 +416,8 @@ search_exclude: true
 
       try {
         const res = await fetch(`${FLASK}/api/chat/send`, {
+          ...fetchOptions,
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
           body: JSON.stringify({ message: text })
         });
         const data = await res.json();
@@ -444,7 +443,7 @@ search_exclude: true
       pollInterval = setInterval(async function() {
         // Re-verify Flask session is still active before polling
         try {
-          const res = await fetch(`${FLASK}/api/id`, { credentials: 'include' });
+          const res = await fetch(`${FLASK}/api/id`, fetchOptions);
           if (!res.ok) { clearInterval(pollInterval); return; }
           loadMessages();
         } catch(e) { /* ignore */ }

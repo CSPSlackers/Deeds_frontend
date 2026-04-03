@@ -264,12 +264,12 @@
         
         try {
             const response = await fetch(`${window.javaURI}/api/ocs-analytics/events/batch`, {
+                ...window.fetchOptions,
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    ...window.fetchOptions.headers,
                     'Authorization': `Bearer ${window.jwt_java_spring || ''}`
                 },
-                credentials: 'include',
                 body: JSON.stringify(batch)
             });
             
@@ -291,11 +291,8 @@
     async function sendLessonCompletion(lessonId, questName, moduleName) {
         try {
             const response = await fetch(`${window.javaURI}/api/ocs-analytics/lesson-complete`, {
+                ...window.fetchOptions,
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include',
                 body: JSON.stringify({
                     lessonId: lessonId,
                     questName: questName,
@@ -362,9 +359,7 @@
      */
     async function fetchUserUID() {
         try {
-            const response = await fetch(`${window.pythonURI}/api/id`, {
-                credentials: 'include'
-            });
+            const response = await fetch(`${window.pythonURI}/api/id`, window.fetchOptions);
             
             if (response.ok) {
                 const data = await response.json();
