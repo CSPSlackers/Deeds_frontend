@@ -7,4 +7,4 @@ description: An extention of the DAD website (unofficial)
 permalink: /
 ---
 
-<a href="dad">Click here to view the Home page</a>
+<a href="{{ '/dad' | relative_url }}">Click here to view the Home page</a>
