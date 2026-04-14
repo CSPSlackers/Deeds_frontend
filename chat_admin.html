@@ -1,0 +1,551 @@
+---
+permalink: /chat-admin
+layout: none
+search_exclude: true
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Chat | D.A.D.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --gold: #c8973a;
+      --gold-light: #e8b55a;
+      --white: #f9f7f2;
+      --off-white: #ede9e0;
+      --dark-gray: #2a2a2a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--off-white);
+      color: var(--dark-gray);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--navy);
+      border-bottom: 3px solid var(--gold);
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .top-bar-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .top-bar-title span { color: var(--gold); }
+    .header-back {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(249,247,242,0.6);
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 14px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .header-back:hover { color: var(--gold); border-color: var(--gold); }
+
+    /* ── LAYOUT ── */
+    .layout {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      width: 260px;
+      background: var(--white);
+      border-right: 1px solid rgba(200,151,58,0.2);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+    }
+    .sidebar-header {
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(200,151,58,0.15);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+    .user-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+    .user-list::-webkit-scrollbar { width: 3px; }
+    .user-list::-webkit-scrollbar-thumb { background: rgba(200,151,58,0.3); }
+
+    .user-item {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: background 0.15s;
+    }
+    .user-item:hover { background: var(--off-white); }
+    .user-item.active { background: rgba(200,151,58,0.12); border-left: 3px solid var(--gold); }
+
+    .user-avatar {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem; font-weight: 700;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .user-info { flex: 1; min-width: 0; }
+    .user-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--navy);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .user-uid {
+      font-size: 0.68rem;
+      color: #999;
+      letter-spacing: 0.06em;
+    }
+    .unread-badge {
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .no-conversations {
+      padding: 40px 20px;
+      text-align: center;
+      color: #bbb;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    /* ── CHAT PANEL ── */
+    .chat-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-panel-header {
+      background: var(--white);
+      border-bottom: 1px solid rgba(200,151,58,0.2);
+      padding: 0 24px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .panel-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem; font-weight: 700;
+      color: var(--gold);
+    }
+    .panel-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+    .panel-uid { font-size: 0.7rem; color: #999; }
+
+    #messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    #messages::-webkit-scrollbar { width: 4px; }
+    #messages::-webkit-scrollbar-thumb { background: rgba(200,151,58,0.3); border-radius: 2px; }
+
+    .msg-row { display: flex; gap: 10px; align-items: flex-end; }
+    .msg-row.mine { flex-direction: row-reverse; }
+
+    .msg-avatar {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.55rem; font-weight: 700;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+    .msg-row.mine .msg-avatar { background: var(--gold); color: var(--navy); }
+
+    .msg-wrap { display: flex; flex-direction: column; max-width: 60%; }
+    .msg-row.mine .msg-wrap { align-items: flex-end; }
+
+    .msg-bubble {
+      padding: 10px 14px;
+      font-size: 0.9rem;
+      line-height: 1.55;
+      border-radius: 2px;
+    }
+    .msg-row.theirs .msg-bubble { background: var(--navy); color: var(--white); border-bottom-left-radius: 0; }
+    .msg-row.mine .msg-bubble { background: var(--gold); color: var(--navy); font-weight: 500; border-bottom-right-radius: 0; }
+
+    .msg-time { font-size: 0.6rem; color: #aaa; margin-top: 3px; }
+    .msg-row.theirs .msg-time { text-align: left; }
+    .msg-row.mine .msg-time { text-align: right; }
+
+    /* ── SELECT STATE ── */
+    .select-state {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 12px;
+      color: #bbb;
+      text-align: center;
+      padding: 40px;
+    }
+    .select-state .icon { font-size: 3rem; }
+    .select-state p { font-size: 0.9rem; line-height: 1.6; }
+
+    /* ── INPUT ── */
+    .input-bar {
+      background: var(--white);
+      border-top: 1px solid rgba(200,151,58,0.2);
+      padding: 12px 24px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+    #msg-input {
+      flex: 1;
+      border: 1px solid rgba(200,151,58,0.3);
+      outline: none;
+      padding: 10px 14px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.9rem;
+      color: var(--dark-gray);
+      background: var(--off-white);
+      resize: none;
+      border-radius: 2px;
+      max-height: 100px;
+    }
+    #msg-input:focus { border-color: var(--gold); }
+    #send-btn {
+      background: var(--gold);
+      border: none;
+      cursor: pointer;
+      width: 44px; height: 44px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 2px;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    #send-btn:hover { background: var(--gold-light); }
+    #send-btn svg { width: 18px; height: 18px; fill: var(--navy); }
+    #send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ── NOT ADMIN ── */
+    .auth-wall {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      text-align: center;
+      padding: 40px;
+    }
+    .auth-wall h2 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.4rem;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .auth-wall p { font-size: 0.9rem; color: #666; }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 28px;
+      display: inline-block;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 600px) {
+      .sidebar { width: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-title">D.A.D. <span>Admin Chat</span></div>
+    <a href="/" class="header-back">← Back to Site</a>
+  </div>
+
+  <!-- AUTH WALL -->
+  <div class="auth-wall" id="auth-wall" style="display:none;">
+    <h2>Admins Only</h2>
+    <p>This page is only accessible to D.A.D. administrators.</p>
+    <a href="/" class="btn-gold">Back to Site</a>
+  </div>
+
+  <!-- MAIN LAYOUT -->
+  <div class="layout" id="main-layout" style="display:none;">
+
+    <!-- SIDEBAR: user list -->
+    <div class="sidebar">
+      <div class="sidebar-header">Conversations</div>
+      <div class="user-list" id="user-list">
+        <div class="no-conversations">No conversations yet.<br>Users will appear here when they message you.</div>
+      </div>
+    </div>
+
+    <!-- CHAT PANEL -->
+    <div class="chat-panel">
+
+      <!-- Select state -->
+      <div class="select-state" id="select-state">
+        <div class="icon">👈</div>
+        <p>Select a user from the left<br>to view their conversation.</p>
+      </div>
+
+      <!-- Active chat -->
+      <div id="active-chat" style="display:none; flex:1; flex-direction:column; overflow:hidden;">
+        <div class="chat-panel-header">
+          <div class="panel-avatar" id="panel-avatar">?</div>
+          <div>
+            <div class="panel-name" id="panel-name">—</div>
+            <div class="panel-uid" id="panel-uid">—</div>
+          </div>
+        </div>
+        <div id="messages"></div>
+        <div class="input-bar">
+          <textarea id="msg-input" placeholder="Type a message…" rows="1"></textarea>
+          <button id="send-btn">
+            <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="module">
+    import { pythonURI, fetchOptions } from './assets/js/api/config.js';
+    const FLASK = pythonURI;
+    let currentUid = null;
+    let selectedUserUid = null;
+    let lastMsgCount = 0;
+    let pollInterval = null;
+
+    // ── Auth check ──
+    async function checkAuth() {
+      try {
+        const res = await fetch(`${FLASK}/api/id`, fetchOptions);
+        if (!res.ok) throw new Error();
+        const data = await res.json();
+        const isAdmin = data.role === 'Admin' || data._role === 'Admin' || data.is_admin === true;
+        if (!isAdmin) throw new Error('not admin');
+        currentUid = data._uid || data.uid;
+        document.getElementById('main-layout').style.display = 'flex';
+        loadConversations();
+        startConversationPoll();
+      } catch {
+        document.getElementById('auth-wall').style.display = 'flex';
+      }
+    }
+
+    // ── Load sidebar conversations ──
+    async function loadConversations() {
+      try {
+        const res = await fetch(`${FLASK}/api/chat/conversations`, fetchOptions);
+        const data = await res.json();
+        if (!data.success) return;
+        renderSidebar(data.conversations);
+      } catch (e) { console.error(e); }
+    }
+
+    function renderSidebar(conversations) {
+      const list = document.getElementById('user-list');
+      if (conversations.length === 0) {
+        list.innerHTML = '<div class="no-conversations">No conversations yet.<br>Users will appear here when they message you.</div>';
+        return;
+      }
+      list.innerHTML = '';
+      conversations.forEach(u => {
+        const item = document.createElement('div');
+        item.className = 'user-item' + (u.uid === selectedUserUid ? ' active' : '');
+        item.dataset.uid = u.uid;
+        item.dataset.name = u.name;
+        item.innerHTML = `
+          <div class="user-avatar">${u.name.substring(0,2).toUpperCase()}</div>
+          <div class="user-info">
+            <div class="user-name">${u.name}</div>
+            <div class="user-uid">@${u.uid}</div>
+          </div>
+          ${u.unread > 0 ? `<div class="unread-badge">${u.unread}</div>` : ''}
+        `;
+        item.addEventListener('click', () => selectUser(u.uid, u.name));
+        list.appendChild(item);
+      });
+    }
+
+    // ── Select a user to chat with ──
+    function selectUser(uid, name) {
+      selectedUserUid = uid;
+      lastMsgCount = 0;
+
+      document.getElementById('select-state').style.display = 'none';
+      const activeChat = document.getElementById('active-chat');
+      activeChat.style.display = 'flex';
+
+      document.getElementById('panel-name').textContent = name;
+      document.getElementById('panel-uid').textContent = '@' + uid;
+      document.getElementById('panel-avatar').textContent = name.substring(0,2).toUpperCase();
+
+      // Update active class in sidebar
+      document.querySelectorAll('.user-item').forEach(el => {
+        el.classList.toggle('active', el.dataset.uid === uid);
+      });
+
+      loadMessages();
+      if (pollInterval) clearInterval(pollInterval);
+      pollInterval = setInterval(loadMessages, 2000);
+    }
+
+    // ── Load messages ──
+    async function loadMessages() {
+      if (!selectedUserUid) return;
+      try {
+        const res = await fetch(`${FLASK}/api/chat/messages?with=${selectedUserUid}`, fetchOptions);
+        const data = await res.json();
+        if (!data.success) return;
+        if (data.messages.length !== lastMsgCount) {
+          lastMsgCount = data.messages.length;
+          renderMessages(data.messages, data.current_uid);
+        }
+      } catch (e) { console.error(e); }
+    }
+
+    function renderMessages(messages, myUid) {
+      const msgEl = document.getElementById('messages');
+      msgEl.innerHTML = '';
+      messages.forEach(m => {
+        const isMine = m.sender_uid === myUid;
+        const row = document.createElement('div');
+        row.className = 'msg-row ' + (isMine ? 'mine' : 'theirs');
+
+        const avatar = document.createElement('div');
+        avatar.className = 'msg-avatar';
+        avatar.textContent = isMine ? 'ADM' : m.sender_uid.substring(0,2).toUpperCase();
+
+        const wrap = document.createElement('div');
+        wrap.className = 'msg-wrap';
+
+        const bubble = document.createElement('div');
+        bubble.className = 'msg-bubble';
+        bubble.textContent = m.message;
+
+        const time = document.createElement('div');
+        time.className = 'msg-time';
+        time.textContent = m.timestamp;
+
+        wrap.appendChild(bubble);
+        wrap.appendChild(time);
+        row.appendChild(avatar);
+        row.appendChild(wrap);
+        msgEl.appendChild(row);
+      });
+      msgEl.scrollTop = msgEl.scrollHeight;
+    }
+
+    // ── Send message ──
+    async function sendMessage() {
+      const inputEl = document.getElementById('msg-input');
+      const text = inputEl.value.trim();
+      if (!text || !selectedUserUid) return;
+      document.getElementById('send-btn').disabled = true;
+      inputEl.value = '';
+      inputEl.style.height = 'auto';
+
+      try {
+        await fetch(`${FLASK}/api/chat/send`, {
+          ...fetchOptions,
+          method: 'POST',
+          body: JSON.stringify({ message: text, receiver_uid: selectedUserUid })
+        });
+        loadMessages();
+        loadConversations();
+      } catch (e) { console.error(e); }
+      document.getElementById('send-btn').disabled = false;
+    }
+
+    // ── Poll sidebar every 5s for new conversations ──
+    function startConversationPoll() {
+      setInterval(loadConversations, 5000);
+    }
+
+    // ── Events ──
+    document.getElementById('send-btn').addEventListener('click', sendMessage);
+    document.getElementById('msg-input').addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+    document.getElementById('msg-input').addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 100) + 'px';
+    });
+
+    checkAuth();
+  </script>
+</body>
+</html>

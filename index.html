@@ -1,0 +1,3139 @@
+---
+permalink: /dad
+search_exclude: true
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>D.A.D. | Doing Exceptional Deeds</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy: #0a1628;
+      --gold: #c8973a;
+      --gold-light: #e8b55a;
+      --white: #f9f7f2;
+      --off-white: #ede9e0;
+      --gray: #6b6b6b;
+      --dark-gray: #2a2a2a;
+      --red-accent: #b03030;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Source Sans 3', sans-serif;
+      background: var(--white);
+      color: var(--dark-gray);
+      overflow-x: hidden;
+    }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--navy);
+      color: var(--gold);
+      text-align: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      padding: 6px 20px;
+      text-transform: uppercase;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--white);
+      border-bottom: 3px solid var(--gold);
+      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 72px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .nav-logo {
+      width: 52px;
+      height: 42px;
+      background: var(--navy);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+
+    .nav-title {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .nav-title .name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--navy);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nav-title .sub {
+      font-size: 0.62rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      list-style: none;
+    }
+
+    .nav-links > li {
+      position: relative;
+    }
+
+    .nav-links > li > a,
+    .nav-links > li > span {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+      text-decoration: none;
+      padding: 8px 10px;
+      cursor: pointer;
+      display: block;
+      transition: color 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-links > li > a:hover,
+    .nav-links > li > span:hover { color: var(--gold); }
+
+    .nav-links > li:hover .dropdown { display: block; }
+
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--navy);
+      min-width: 220px;
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .dropdown a {
+      display: block;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      color: var(--off-white);
+      text-decoration: none;
+      padding: 10px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .dropdown a:hover {
+      background: var(--gold);
+      color: var(--navy);
+    }
+
+    .nav-donate {
+      background: var(--gold);
+      color: var(--navy) !important;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 9px 18px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .nav-donate:hover { background: var(--gold-light) !important; }
+
+    .user-display {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--navy);
+    }
+
+    .user-name {
+      color: var(--gold);
+      font-weight: 600;
+      display: none;
+    }
+
+    .user-name.active {
+      display: inline;
+    }
+
+    .user-logout {
+      background: var(--red-accent);
+      color: white !important;
+      text-decoration: none;
+      padding: 8px 14px;
+      border-radius: 2px;
+      font-weight: 600;
+      transition: background 0.2s;
+      cursor: pointer;
+      border: none;
+      display: none;
+    }
+
+    .user-logout.active {
+      display: inline-block;
+    }
+
+    .user-logout:hover {
+      background: #8b2424;
+    }
+
+    .user-login {
+      background: var(--gold);
+      color: var(--navy) !important;
+      text-decoration: none;
+      padding: 9px 18px;
+      border-radius: 2px;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .user-login:hover {
+      background: var(--gold-light) !important;
+    }
+
+    .user-dropdown { position: relative; }
+    .user-dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: var(--navy);
+      min-width: 190px;
+      border-top: 3px solid var(--gold);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      z-index: 200;
+    }
+    .user-dropdown-menu a,
+    .user-dropdown-menu button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.82rem;
+      color: var(--off-white);
+      text-decoration: none;
+      padding: 10px 16px;
+      border: none;
+      background: none;
+      cursor: pointer;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.15s, color 0.15s;
+      box-sizing: border-box;
+    }
+    .user-dropdown-menu a:hover,
+    .user-dropdown-menu button:hover { background: var(--gold); color: var(--navy); }
+    .user-dropdown.open .user-dropdown-menu { display: block; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: var(--navy);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(200,151,58,0.15) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 30%, rgba(10,22,40,0.8) 0%, transparent 60%),
+        linear-gradient(160deg, #0a1628 0%, #152240 50%, #0d1e38 100%);
+    }
+
+    .hero-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image:
+        repeating-linear-gradient(0deg, #fff 0, #fff 1px, transparent 1px, transparent 60px),
+        repeating-linear-gradient(90deg, #fff 0, #fff 1px, transparent 1px, transparent 60px);
+    }
+
+    .hero-img {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 52%;
+      object-fit: cover;
+      opacity: 0.22;
+      mix-blend-mode: luminosity;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      padding: 48px 40px 24px;
+      text-align: center;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    /* ── HERO PROGRAM CARDS ── */
+    .hero-programs {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding: 0 40px 60px;
+      animation: fadeUp 1.1s ease both;
+    }
+
+    .hero-program-card {
+      background: rgba(255,255,255,0.04);
+      border-top: 1px solid rgba(200,151,58,0.18);
+      border-left: 1px solid rgba(255,255,255,0.05);
+      padding: 24px 22px;
+      text-decoration: none;
+      display: block;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .hero-program-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .hero-program-card:hover::before { transform: scaleX(1); }
+    .hero-program-card:hover { background: rgba(200,151,58,0.08); transform: translateY(-3px); }
+
+    .hero-program-card .program-num { color: var(--gold); opacity: 0.35; }
+    .hero-program-card .program-title { color: var(--white); }
+    .hero-program-card .program-desc { color: rgba(249,247,242,0.58); }
+    .hero-program-card .program-link { color: var(--gold); border-bottom-color: rgba(200,151,58,0.5); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      height: 1px;
+      width: 48px;
+      background: var(--gold);
+      opacity: 0.6;
+    }
+
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero-title span {
+      color: var(--gold);
+      font-style: italic;
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      text-transform: none;
+      font-size: 90%;
+    }
+
+    .hero-sub {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 1.1rem;
+      color: rgba(249,247,242,0.75);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+
+    .hero-badges {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .badge {
+      background: rgba(200,151,58,0.15);
+      border: 1px solid rgba(200,151,58,0.4);
+      color: var(--gold-light);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 2px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 32px;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 2px solid rgba(249,247,242,0.35);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 12px 30px;
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* ── QUICK LINKS ── */
+    .quick-links {
+      background: var(--navy);
+      padding: 0;
+    }
+
+    .quick-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .quick-item {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 20px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+      transition: background 0.2s;
+      gap: 12px;
+    }
+
+    .quick-item:last-child { border-right: none; }
+    .quick-item:hover { background: rgba(200,151,58,0.1); }
+
+    .quick-icon {
+      width: 48px;
+      height: 48px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 1.3rem;
+    }
+
+    .quick-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--off-white);
+    }
+
+    .quick-read {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: 'Oswald', sans-serif;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    .quick-item:hover .quick-read { border-bottom-color: var(--gold); }
+
+    /* ── MISSION ── */
+    .mission {
+      padding: 100px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .mission-img-wrap {
+      position: relative;
+    }
+
+    .mission-img-wrap::before {
+      content: '';
+      position: absolute;
+      top: -18px;
+      left: -18px;
+      right: 18px;
+      bottom: 18px;
+      border: 3px solid var(--gold);
+      opacity: 0.4;
+      z-index: 0;
+    }
+
+    .mission-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      background: var(--off-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mission-img-placeholder {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #1a2a44 0%, #0d1e38 100%);
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .mission-img-placeholder::after {
+      content: 'D.A.D.';
+      font-family: 'Oswald', sans-serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: rgba(200,151,58,0.2);
+      letter-spacing: 0.2em;
+    }
+
+    .section-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::after {
+      content: '';
+      height: 1px;
+      flex: 1;
+      max-width: 40px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .section-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      font-weight: 700;
+      color: var(--navy);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .section-title em {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      color: var(--gold);
+      text-transform: none;
+      font-weight: 400;
+    }
+
+    .section-body {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 16px;
+    }
+
+    /* ── UPDATES TICKER ── */
+    .updates-ticker {
+      background: var(--gold);
+      overflow: hidden;
+      padding: 8px 0;
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: inline-flex;
+      gap: 0;
+      animation: ticker-scroll 30s linear infinite;
+    }
+
+    .updates-ticker:hover .ticker-track { animation-play-state: paused; }
+
+    @keyframes ticker-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--navy);
+      padding: 0 32px;
+    }
+
+    .ticker-dot {
+      width: 5px; height: 5px;
+      background: var(--navy);
+      border-radius: 50%;
+      opacity: 0.4;
+      flex-shrink: 0;
+    }
+
+    /* ── ADVISORY CALLOUT ── */
+    .advisory {
+      background: var(--navy);
+      padding: 48px 40px;
+    }
+
+    .advisory-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .advisory blockquote {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1.25rem;
+      line-height: 1.75;
+      color: var(--off-white);
+      margin-bottom: 20px;
+      position: relative;
+      padding: 0 20px;
+    }
+
+    .advisory blockquote::before {
+      content: '\201C';
+      font-size: 5rem;
+      color: var(--gold);
+      opacity: 0.3;
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      line-height: 1;
+    }
+
+    .advisory .note {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(200,151,58,0.7);
+      letter-spacing: 0.08em;
+      margin-top: 10px;
+    }
+
+    /* ── PROGRAMS GRID ── */
+    .programs-section {
+      padding: 60px 40px;
+      background: var(--off-white);
+    }
+
+    .programs-section .section-header {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .programs-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .program-card {
+      background: var(--white);
+      padding: 24px 22px;
+      text-decoration: none;
+      display: block;
+      border-bottom: 4px solid transparent;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .program-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .program-card:hover::before { transform: scaleX(1); }
+    .program-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+
+    .program-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.3;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    .program-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .program-desc {
+      font-size: 0.82rem;
+      color: #555;
+      line-height: 1.55;
+    }
+
+    .program-link {
+      display: inline-block;
+      margin-top: 12px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding-bottom: 2px;
+    }
+
+    .card-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .card-btn {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .card-btn-primary {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .card-btn-primary:hover { background: var(--gold-light); }
+
+    .card-btn-outline {
+      border: 1px solid var(--navy);
+      color: var(--navy);
+    }
+    .card-btn-outline:hover { background: var(--navy); color: var(--white); }
+
+    /* dark variant (inside hero) */
+    .hero-program-card .card-btn-outline,
+    .hero-programs-cta .card-btn-outline {
+      border-color: rgba(249,247,242,0.5);
+      color: var(--off-white);
+    }
+    .hero-program-card .card-btn-outline:hover,
+    .hero-programs-cta .card-btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--gold); color: var(--gold); }
+
+    /* ── HERO PROGRAMS CTA BAR ── */
+    .hero-programs-cta {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      padding: 16px 40px 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-programs-cta-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(249,247,242,0.45);
+      margin-right: 4px;
+    }
+
+    /* ── CARD STAGGER ANIMATION ── */
+    .hero-program-card {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s;
+    }
+    .hero-program-card.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── ABOUT SECTION ── */
+    .about-section {
+      padding: 60px 40px;
+      background: var(--white);
+    }
+
+    .about-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-img-stack {
+      position: relative;
+      height: 480px;
+    }
+
+    .about-img-main {
+      position: absolute;
+      top: 0; left: 0;
+      width: 78%;
+      height: 78%;
+      background: linear-gradient(135deg, #152240 0%, #0a1628 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-img-main::after {
+      content: 'COMMUNITY\AFIRST';
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      color: rgba(200,151,58,0.35);
+      text-align: center;
+      white-space: pre;
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: 0; right: 0;
+      width: 52%;
+      height: 52%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .about-img-accent::after {
+      content: 'Est. 2021';
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--navy);
+    }
+
+    /* ── STATS ── */
+    .stats-bar {
+      background: var(--gold);
+      padding: 50px 40px;
+    }
+
+    .stats-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 2.8rem;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(10,22,40,0.65);
+      font-weight: 600;
+    }
+
+    /* ── SENIORS ── */
+    .seniors-section {
+      padding: 60px 40px;
+      background: #f0ebe0;
+    }
+
+    .seniors-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .seniors-card {
+      background: var(--navy);
+      padding: 48px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .seniors-card::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; right: -30px;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 3px solid rgba(200,151,58,0.2);
+    }
+
+    .seniors-card .section-title { color: var(--white); }
+    .seniors-card .section-body { color: rgba(249,247,242,0.72); }
+
+    /* ── DONATE ── */
+    .donate-section {
+      padding: 60px 40px;
+      background: var(--navy);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .donate-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(200,151,58,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 50%, rgba(200,151,58,0.08) 0%, transparent 60%);
+    }
+
+    .donate-section .section-label { justify-content: center; }
+    .donate-section .section-label::after { display: none; }
+    .donate-section .section-label::before {
+      content: '';
+      height: 1px;
+      width: 40px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    .donate-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .donate-section .section-title { color: var(--white); }
+    .donate-section .section-body { color: rgba(249,247,242,0.72); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #060e1c;
+      padding: 60px 40px 30px;
+      color: rgba(249,247,242,0.6);
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .footer-brand .name {
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--white);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .footer-brand .tagline {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .footer-brand p {
+      font-size: 0.85rem;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul { list-style: none; }
+
+    .footer-col ul li {
+      margin-bottom: 8px;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.82rem;
+      color: rgba(249,247,242,0.55);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-col ul li a:hover { color: var(--gold); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: rgba(249,247,242,0.3);
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+    }
+
+    .social-btn {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(249,247,242,0.5);
+      text-decoration: none;
+      font-size: 0.75rem;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    .address {
+      font-size: 0.82rem;
+      line-height: 1.6;
+      color: rgba(249,247,242,0.5);
+    }
+
+    /* ── MOBILE ── */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      width: 22px; height: 2px;
+      background: var(--navy);
+      transition: 0.3s;
+    }
+
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mission, .about-inner, .seniors-inner { grid-template-columns: 1fr; gap: 40px; }
+      .quick-grid { grid-template-columns: repeat(2, 1fr); }
+      .programs-grid { grid-template-columns: 1fr; }
+      .hero-programs { grid-template-columns: 1fr; padding: 0 20px 40px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 16px; }
+      .about-img-stack { height: 300px; }
+    }
+
+    /* ── AI CHATBOT ── */
+    #dad-chat-toggle {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 58px;
+      height: 58px;
+      background: var(--gold);
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.28);
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    #dad-chat-toggle:hover {
+      background: var(--gold-light);
+      transform: scale(1.07);
+    }
+
+    #dad-chat-toggle svg {
+      width: 26px;
+      height: 26px;
+      fill: var(--navy);
+      transition: opacity 0.2s;
+    }
+
+    #dad-chat-toggle .icon-close {
+      display: none;
+    }
+
+    #dad-chat-toggle.open .icon-chat {
+      display: none;
+    }
+
+    #dad-chat-toggle.open .icon-close {
+      display: block;
+    }
+
+    #dad-chat-window {
+      position: fixed;
+      bottom: 98px;
+      right: 28px;
+      z-index: 9998;
+      width: 360px;
+      max-height: 520px;
+      background: var(--white);
+      border-radius: 4px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.22);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(200,151,58,0.25);
+      transform: translateY(16px) scale(0.97);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    #dad-chat-window.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .chat-header {
+      background: var(--navy);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 3px solid var(--gold);
+      flex-shrink: 0;
+    }
+
+    .chat-header-avatar {
+      width: 36px;
+      height: 36px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 0.75rem;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+
+    .chat-header-info {
+      flex: 1;
+    }
+
+    .chat-header-name {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .chat-header-status {
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #f4f1ea;
+    }
+
+    .chat-messages::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    .chat-messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .chat-messages::-webkit-scrollbar-thumb {
+      background: rgba(200,151,58,0.3);
+      border-radius: 2px;
+    }
+
+    .chat-msg {
+      display: flex;
+      gap: 8px;
+      align-items: flex-end;
+    }
+
+    .chat-msg.user {
+      flex-direction: row-reverse;
+    }
+
+    .chat-bubble {
+      max-width: 78%;
+      padding: 10px 14px;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      border-radius: 2px;
+    }
+
+    .chat-msg.bot .chat-bubble {
+      background: var(--navy);
+      color: var(--off-white);
+      border-bottom-left-radius: 0;
+    }
+
+    .chat-msg.user .chat-bubble {
+      background: var(--gold);
+      color: var(--navy);
+      border-bottom-right-radius: 0;
+      font-weight: 500;
+    }
+
+    .chat-msg-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--navy);
+      flex-shrink: 0;
+    }
+
+    .chat-msg.user .chat-msg-avatar {
+      background: var(--navy);
+      color: var(--gold);
+    }
+
+    .chat-typing {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 14px;
+      background: var(--navy);
+      border-radius: 2px;
+      border-bottom-left-radius: 0;
+      width: fit-content;
+    }
+
+    .chat-typing span {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: typing-dot 1.2s infinite;
+    }
+
+    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing-dot {
+      0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+      30% { opacity: 1; transform: translateY(-3px); }
+    }
+
+    .chat-input-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border-top: 1px solid rgba(200,151,58,0.2);
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    #dad-chat-input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 14px 16px;
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.88rem;
+      color: var(--dark-gray);
+      resize: none;
+    }
+
+    #dad-chat-input::placeholder {
+      color: #aaa;
+    }
+
+    #dad-chat-send {
+      width: 46px;
+      height: 46px;
+      background: var(--gold);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s;
+      margin: 4px;
+      border-radius: 2px;
+    }
+
+    #dad-chat-send:hover {
+      background: var(--gold-light);
+    }
+
+    #dad-chat-send svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--navy);
+    }
+
+    .chat-footer-note {
+      text-align: center;
+      font-size: 0.6rem;
+      letter-spacing: 0.08em;
+      color: #bbb;
+      padding: 6px 16px 8px;
+      background: var(--white);
+      text-transform: uppercase;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    @media (max-width: 480px) {
+      #dad-chat-window {
+        right: 12px;
+        left: 12px;
+        width: auto;
+        bottom: 88px;
+      }
+      #dad-chat-toggle {
+        right: 16px;
+        bottom: 16px;
+      }
+    }
+
+    /* ── CAROUSEL ── */
+    .carousel-section {
+      background: var(--white);
+      padding: 60px 40px;
+      border-top: 1px solid var(--off-white);
+    }
+
+    .carousel-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .carousel-title-main {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--navy);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.1;
+    }
+
+    .carousel-title-main em {
+      color: var(--gold);
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-weight: 400;
+      text-transform: none;
+      font-size: 90%;
+    }
+
+    .carousel-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+      position: relative;
+    }
+
+    .carousel-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      max-height: 380px;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+      background: var(--navy);
+    }
+
+    .carousel-items {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none; /* Disable clicks on inactive items */
+    }
+
+    .carousel-item.active {
+      opacity: 1;
+      pointer-events: auto; /* Enable clicks on active item */
+    }
+
+    .carousel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10,22,40,0.9) 60%, rgba(10,22,40,1) 100%);
+      padding: 30px 24px 20px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .carousel-description {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.85rem;
+      color: rgba(249, 247, 242, 0.85);
+      line-height: 1.4;
+      margin-top: 12px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .carousel-description:hover {
+      color: var(--gold);
+    }
+
+    .carousel-description-expand {
+      display: inline;
+      margin-left: 4px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .carousel-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+      text-transform: uppercase;
+    }
+
+    .carousel-attribution {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.8rem;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .carousel-category {
+      display: inline-block;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(200, 151, 58, 0.15);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-top: 12px;
+    }
+
+    /* ── CAROUSEL CONTROLS ── */
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(200, 151, 58, 0.85);
+      color: var(--navy);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 10;
+      font-weight: 700;
+    }
+
+    .carousel-nav:hover {
+      background: var(--gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .carousel-nav:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .carousel-nav.prev {
+      left: 20px;
+    }
+
+    .carousel-nav.next {
+      right: 20px;
+    }
+
+    .carousel-dots {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      z-index: 10;
+    }
+
+    .carousel-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      border: none;
+      padding: 0;
+    }
+
+    .carousel-dot:hover {
+      background: rgba(255, 255, 255, 0.7);
+      transform: scale(1.15);
+    }
+
+    .carousel-dot.active {
+      background: var(--gold);
+      transform: scale(1.2);
+    }
+
+    /* ── CAROUSEL STATES ── */
+    .carousel-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy);
+      z-index: 5;
+    }
+
+    .carousel-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(200, 151, 58, 0.2);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .carousel-error,
+    .carousel-empty {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy);
+      color: var(--white);
+      text-align: center;
+      padding: 40px;
+      z-index: 5;
+    }
+
+    .carousel-error-icon,
+    .carousel-empty-icon {
+      font-size: 3rem;
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    .carousel-error-title,
+    .carousel-empty-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      color: var(--gold);
+      text-transform: uppercase;
+    }
+
+    .carousel-error-message,
+    .carousel-empty-message {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      color: rgba(249, 247, 242, 0.7);
+      max-width: 400px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .carousel-section {
+        padding: 50px 20px;
+      }
+
+      .carousel-header {
+        margin-bottom: 32px;
+      }
+
+      .carousel-container {
+        padding: 0 20px;
+      }
+
+      .carousel-wrapper {
+        aspect-ratio: 4 / 3;
+        max-height: 340px;
+      }
+
+      .carousel-nav {
+        width: 36px;
+        height: 36px;
+        font-size: 0.95rem;
+      }
+
+      .carousel-nav.prev {
+        left: 12px;
+      }
+
+      .carousel-nav.next {
+        right: 12px;
+      }
+
+      .carousel-overlay {
+        min-height: 110px;
+        padding: 24px 18px 16px;
+      }
+
+      .carousel-title {
+        font-size: 0.9rem;
+      }
+
+      .carousel-attribution {
+        font-size: 0.75rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .carousel-section {
+        padding: 40px 16px;
+      }
+
+      .carousel-header {
+        margin-bottom: 24px;
+      }
+
+      .carousel-container {
+        padding: 0 16px;
+      }
+
+      .carousel-wrapper {
+        aspect-ratio: 3 / 2;
+        max-height: 300px;
+      }
+
+      .carousel-nav {
+        width: 32px;
+        height: 32px;
+        font-size: 0.8rem;
+      }
+
+      .carousel-nav.prev {
+        left: 8px;
+      }
+
+      .carousel-nav.next {
+        right: 8px;
+      }
+
+      .carousel-overlay {
+        min-height: 110px;
+        padding: 24px 16px 16px;
+      }
+
+      .carousel-title {
+        font-size: 0.95rem;
+      }
+
+      .carousel-attribution {
+        font-size: 0.75rem;
+      }
+
+      .carousel-category {
+        font-size: 0.6rem;
+        margin-top: 8px;
+        padding: 3px 8px;
+      }
+
+      .carousel-dots {
+        bottom: 12px;
+        gap: 6px;
+      }
+
+      .carousel-dot {
+        width: 8px;
+        height: 8px;
+      }
+    }
+
+    /* ── CAROUSEL DETAIL MODAL ── */
+    .carousel-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .carousel-modal.active {
+      display: flex;
+    }
+
+    .carousel-modal-content {
+      background: var(--white);
+      border-radius: 8px;
+      max-width: 600px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .carousel-modal-header {
+      position: sticky;
+      top: 0;
+      background: var(--navy);
+      color: var(--white);
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--gold);
+      z-index: 1010;
+    }
+
+    .carousel-modal-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .carousel-modal-close {
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 1.8rem;
+      cursor: pointer;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .carousel-modal-close:hover {
+      color: var(--gold);
+    }
+
+    .carousel-modal-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-modal-body {
+      padding: 28px;
+    }
+
+    .carousel-modal-meta {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+    }
+
+    .carousel-modal-badge {
+      display: inline-block;
+      background: rgba(200, 151, 58, 0.12);
+      border: 1px solid var(--gold);
+      color: var(--navy);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .carousel-modal-by {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .carousel-modal-description {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 0.95rem;
+      color: var(--dark-gray);
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    @media (max-width: 480px) {
+      .carousel-modal-content {
+        border-radius: 8px 8px 0 0;
+        max-height: 85vh;
+      }
+
+      .carousel-modal-header {
+        padding: 20px 20px;
+      }
+
+      .carousel-modal-title {
+        font-size: 1.1rem;
+      }
+
+      .carousel-modal-body {
+        padding: 20px;
+      }
+
+      .carousel-modal-image {
+        max-height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">501(c)(3) Nonprofit Organization &nbsp;|&nbsp; MBE #23002138 &nbsp;|&nbsp; San Marcos, CA</div>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">
+        <div class="nav-logo">D.A.D.</div>
+        <div class="nav-title">
+          <span class="name">Doing Exceptional Deeds</span>
+          <span class="sub">A 501c(3) Nonprofit &nbsp;·&nbsp; MBE #23002138</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#seniors">Seniors</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="/public-submit">Submit a Deed</a></li>
+        <li><a href="login" class="user-login nav-donate">Log In</a></li>
+        <li class="user-display user-dropdown" style="display:none;">
+          <span class="user-name" id="user-name-toggle" style="padding: 8px 12px; color: var(--gold); font-weight: 600; font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; cursor:pointer;"></span>
+          <div class="user-dropdown-menu">
+            <a href="/chat" id="dropdown-chat-link">Chat with Admin</a>
+            <button class="user-logout">Log Out</button>
+          </div>
+        </li>
+        <li><a href="#donate" class="nav-donate">Donate</a></li>
+      </ul>
+      <div class="hamburger">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- UPDATES TICKER -->
+  <div class="updates-ticker" aria-label="Latest updates">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item"><span class="ticker-dot"></span>Now Enrolling — Youth Wellness Program (6–12)</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Industry Voices Pilot launching Spring 2025</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>New: Athlete & Family Education workshops available</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Senior Engagement Program — Holiday events open for sign-up</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Student Success Advisory: now accepting middle school cohorts</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>501(c)(3) Nonprofit · MBE #23002138 · San Marcos, CA</span>
+      <!-- duplicated for seamless loop -->
+      <span class="ticker-item"><span class="ticker-dot"></span>Now Enrolling — Youth Wellness Program (6–12)</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Industry Voices Pilot launching Spring 2025</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>New: Athlete & Family Education workshops available</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Senior Engagement Program — Holiday events open for sign-up</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>Student Success Advisory: now accepting middle school cohorts</span>
+      <span class="ticker-item"><span class="ticker-dot"></span>501(c)(3) Nonprofit · MBE #23002138 · San Marcos, CA</span>
+    </div>
+  </div>
+
+  <!-- HERO + PROGRAMS combined landing section -->
+  <section class="hero" id="programs">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Building <span>Communities</span><br>One Deed at a Time</h1>
+    </div>
+    <div class="hero-programs">
+      <div class="hero-program-card">
+        <div class="program-num">01</div>
+        <div class="program-title">Youth Wellness &amp; Student Success (6–12)</div>
+        <p class="program-desc">School-aligned programming for middle and high school students focused on wellness, life skills, and academic accountability.</p>
+      </div>
+      <div class="hero-program-card">
+        <div class="program-num">02</div>
+        <div class="program-title">Athlete Education &amp; Transition Portal</div>
+        <p class="program-desc">Post-secondary education and career transition support designed specifically for student-athletes navigating life beyond sports.</p>
+      </div>
+      <div class="hero-program-card">
+        <div class="program-num">03</div>
+        <div class="program-title">Athlete Development &amp; Wellness Program</div>
+        <p class="program-desc">Comprehensive wellness and development resources to support athletes holistically — mentally, physically, and academically.</p>
+      </div>
+      <div class="hero-program-card">
+        <div class="program-num">04</div>
+        <div class="program-title">Student Success Advisory Pilot</div>
+        <p class="program-desc">A continuity-based advisory model that follows students across grade levels, providing consistent mentorship and goal-setting support.</p>
+      </div>
+      <div class="hero-program-card">
+        <div class="program-num">05</div>
+        <div class="program-title">Industry Voices (Pilot)</div>
+        <p class="program-desc">Career exposure and industry mentorship connecting students with professionals across sectors to expand their vision of the future.</p>
+      </div>
+      <div class="hero-program-card">
+        <div class="program-num">06</div>
+        <div class="program-title">Athlete &amp; Family Education Support</div>
+        <p class="program-desc">Resources and guidance for student-athletes and their families to navigate academic, financial, and life planning decisions together.</p>
+      </div>
+    </div>
+    <div class="hero-programs-cta">
+      <span class="hero-programs-cta-label">Support these programs</span>
+      <a href="#donate" class="card-btn card-btn-primary">Donate</a>
+      <a href="#contact" class="card-btn card-btn-outline">Get Involved</a>
+    </div>
+  </section>
+
+  <!-- QUICK LINKS -->
+  <div class="quick-links">
+    <div class="quick-grid">
+      <a href="#about" class="quick-item">
+        <div class="quick-icon">👥</div>
+        <span class="quick-label">About Us</span>
+        <span class="quick-read">Read More →</span>
+      </a>
+      <a href="#programs" class="quick-item">
+        <div class="quick-icon">🏆</div>
+        <span class="quick-label">Exceptional Projects</span>
+        <span class="quick-read">Read More →</span>
+      </a>
+      <a href="#donate" class="quick-item">
+        <div class="quick-icon">❤️</div>
+        <span class="quick-label">Donate</span>
+        <span class="quick-read">Read More →</span>
+      </a>
+      <a href="#contact" class="quick-item">
+        <div class="quick-icon">🤝</div>
+        <span class="quick-label">Get Involved</span>
+        <span class="quick-read">Read More →</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- FEATURED DEEDS CAROUSEL -->
+  <section class="carousel-section">
+    <div class="carousel-container">
+      <div class="carousel-header">
+        <div class="section-label">Community Impact</div>
+        <h2 class="carousel-title-main">Featured <em>Deeds</em></h2>
+      </div>
+      <div class="carousel-wrapper">
+        <div class="carousel-items" id="carousel-items">
+          <!-- Items will be populated by JavaScript -->
+        </div>
+
+        <!-- Loading State -->
+        <div class="carousel-loading" id="carousel-loading" style="display: none;">
+          <div class="carousel-spinner"></div>
+        </div>
+
+        <!-- Error State -->
+        <div class="carousel-error" id="carousel-error" style="display: none;">
+          <div class="carousel-error-icon">⚠️</div>
+          <div class="carousel-error-title">Unable to Load Carousel</div>
+          <div class="carousel-error-message" id="carousel-error-message">
+            We're having trouble loading the carousel. Please try refreshing the page.
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="carousel-empty" id="carousel-empty" style="display: none;">
+          <div class="carousel-empty-icon">🖼️</div>
+          <div class="carousel-empty-title">No Deeds Yet</div>
+          <div class="carousel-empty-message">
+            Featured community deeds will appear here soon. Check back later!
+          </div>
+        </div>
+
+        <!-- Controls (hidden until items load) -->
+        <button class="carousel-nav prev" id="carousel-prev" aria-label="Previous slide" style="display: none;">‹</button>
+        <button class="carousel-nav next" id="carousel-next" aria-label="Next slide" style="display: none;">›</button>
+        <div class="carousel-dots" id="carousel-dots" style="display: none;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAROUSEL DETAIL MODAL -->
+  <div class="carousel-modal" id="carousel-modal">
+    <div class="carousel-modal-content">
+      <div class="carousel-modal-header">
+        <h2 class="carousel-modal-title">Deed Details</h2>
+        <button class="carousel-modal-close" id="carousel-modal-close" aria-label="Close details">×</button>
+      </div>
+      <img class="carousel-modal-image" id="carousel-modal-image" src="" alt="">
+      <div class="carousel-modal-body">
+        <div class="carousel-modal-meta">
+          <span class="carousel-modal-badge" id="carousel-modal-category"></span>
+          <span class="carousel-modal-by" id="carousel-modal-by"></span>
+        </div>
+        <div class="carousel-modal-description" id="carousel-modal-description"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MISSION -->
+  <section style="padding: 60px 40px; background: var(--white);">
+    <div class="mission" style="padding: 0;">
+      <div class="mission-img-wrap">
+        <div class="mission-img-placeholder"></div>
+      </div>
+      <div>
+        <div class="section-label">Our Mission</div>
+        <h2 class="section-title">Empowering <em>Every</em> Generation</h2>
+        <p class="section-body">
+          At Doing Exceptional Deeds (D.A.D.), our mission is to uplift individuals and strengthen communities across generations through education-first programs that build confidence, character, accountability, and purpose.
+        </p>
+        <p class="section-body">
+          We serve youth, young adults, student-athletes, and seniors through thoughtfully designed initiatives that support personal growth, life skills development, mentorship, and community engagement — meeting people where they are and guiding them toward their full potential.
+        </p>
+        <p class="section-body">
+          Our work begins locally, extends nationally, and is built to scale globally — recognizing that the challenges facing today's youth and communities transcend borders, backgrounds, and generations.
+        </p>
+        <a href="#about" class="btn-primary" style="margin-top: 10px;">Learn More About Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADVISORY CALLOUT -->
+  <section class="advisory">
+    <div class="advisory-inner">
+      <div class="section-label" style="justify-content:center; color: var(--gold);">Student Success</div>
+      <blockquote>
+        Doing Exceptional Deeds now offers a continuity-based Student Success Advisory model designed to support students from middle school through high school — providing consistent adult guidance, goal-setting, accountability, and reflection that follows students across grade levels and key transitions.
+      </blockquote>
+      <p class="note">Rooted in high expectations, personal responsibility, and support delivered with care.</p>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bar">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-num">501c3</div>
+        <div class="stat-label">Nonprofit Status</div>
+      </div>
+      <div>
+        <div class="stat-num" data-count="6" data-suffix="+">6+</div>
+        <div class="stat-label">Active Programs</div>
+      </div>
+      <div>
+        <div class="stat-num">K–12</div>
+        <div class="stat-label">School Partnerships</div>
+      </div>
+      <div>
+        <div class="stat-num" data-count="2021" data-suffix="">2021</div>
+        <div class="stat-label">Year Founded</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-inner">
+      <div class="about-img-stack">
+        <div class="about-img-main"></div>
+        <div class="about-img-accent"></div>
+      </div>
+      <div>
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">Doing. <em>ExceptionAl.</em> Deeds.</h2>
+        <p class="section-body">
+          At Doing Exceptional Deeds, our mission is to uplift underserved communities through programs that inspire, empower, and address the needs of today while shaping a better tomorrow.
+        </p>
+        <p class="section-body">
+          We believe in the potential of every child, and through sports, mental health initiatives, and community engagement, we strive to unlock that potential and provide the tools and support they need to thrive. By fostering resilience, teamwork, and personal growth, we empower tomorrow's youth to be leaders, dreamers, and changemakers.
+        </p>
+        <p class="section-body">
+          Our commitment extends beyond youth. We embrace the wisdom and value of our seniors, creating meaningful connections that bridge generations through intergenerational programs that keep seniors engaged, connected, and inspired.
+        </p>
+        <div style="display:flex; gap: 12px; margin-top: 28px; flex-wrap: wrap;">
+          <a href="#programs" class="btn-primary">Our Programs</a>
+          <a href="#contact" class="btn-outline" style="border-color: var(--navy); color: var(--navy);">Get Involved</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SENIORS -->
+  <section class="seniors-section" id="seniors">
+    <div class="seniors-inner">
+      <div>
+        <div class="section-label">Intergenerational Impact</div>
+        <h2 class="section-title">Seniors &amp; <em>Community</em></h2>
+        <p class="section-body">
+          We embrace the wisdom and value of our senior community members, creating meaningful intergenerational connections — especially during the holidays — that provide seniors opportunities to stay engaged, connected, and inspired.
+        </p>
+        <p class="section-body">
+          Through our Senior Engagement Program, we partner seniors with youth in mentorship and community service, building bridges across generations that strengthen our entire community.
+        </p>
+        <a href="#" class="btn-primary">Senior Engagement Program</a>
+      </div>
+      <div class="seniors-card">
+        <div class="section-label" style="color: var(--gold);">Program Highlights</div>
+        <h3 style="font-family:'Oswald',sans-serif; color:white; font-size:1.2rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:24px;">Bridging <em style='font-family:Libre Baskerville,serif; text-transform:none; font-style:italic;'>Generations</em></h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:14px;">
+          <li style="display:flex; gap:12px; align-items:flex-start; color:rgba(249,247,242,0.75); font-size:0.9rem; line-height:1.5;">
+            <span style="color:var(--gold); font-size:1rem; margin-top:1px;">✦</span>
+            Holiday intergenerational events and shared programming
+          </li>
+          <li style="display:flex; gap:12px; align-items:flex-start; color:rgba(249,247,242,0.75); font-size:0.9rem; line-height:1.5;">
+            <span style="color:var(--gold); font-size:1rem; margin-top:1px;">✦</span>
+            Senior mentorship pairings with student participants
+          </li>
+          <li style="display:flex; gap:12px; align-items:flex-start; color:rgba(249,247,242,0.75); font-size:0.9rem; line-height:1.5;">
+            <span style="color:var(--gold); font-size:1rem; margin-top:1px;">✦</span>
+            Community engagement and volunteer opportunities
+          </li>
+          <li style="display:flex; gap:12px; align-items:flex-start; color:rgba(249,247,242,0.75); font-size:0.9rem; line-height:1.5;">
+            <span style="color:var(--gold); font-size:1rem; margin-top:1px;">✦</span>
+            Connection and social wellness activities for seniors
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- DONATE -->
+  <section class="donate-section" id="donate">
+    <div class="donate-inner">
+      <div class="section-label" style="justify-content:center; color:var(--gold);">Support Our Work</div>
+      <h2 class="section-title" style="color:var(--white);">Help Us Do <em>Exceptional</em> Deeds</h2>
+      <p class="section-body" style="color:rgba(249,247,242,0.7); margin-bottom:36px;">
+        Your donation directly funds programs that serve youth, student-athletes, and seniors across our community. Every contribution — large or small — creates lasting impact in lives that need it most.
+      </p>
+      <a href="#" class="btn-primary" style="font-size:1rem; padding:16px 40px;">Donate Now</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="name">Doing Exceptional Deeds</div>
+          <div class="tagline">A 501c(3) Nonprofit · MBE #23002138</div>
+          <p>Uplifting individuals and strengthening communities across generations through education-first programs that build confidence, character, accountability, and purpose.</p>
+          <div class="address">
+            420 Smilax Road<br>
+            San Marcos, CA 92078
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <ul>
+            <li><a href="#">Youth Wellness (6–12)</a></li>
+            <li><a href="#">Athlete Education Portal</a></li>
+            <li><a href="#">Student Success Advisory</a></li>
+            <li><a href="#">Industry Voices</a></li>
+            <li><a href="#">Family Support</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Partners</h4>
+          <ul>
+            <li><a href="#">K–12 School Districts</a></li>
+            <li><a href="#">Post-Secondary</a></li>
+            <li><a href="#">Higher Education</a></li>
+            <li><a href="#">Compliance & Safeguards</a></li>
+            <li><a href="#">Sponsors & Foundations</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Organization</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Exceptional Projects</a></li>
+            <li><a href="#">Seniors & Community</a></li>
+            <li><a href="#">Volunteers</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Donate</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2021 Doing Exceptional Deeds (D.A.D.). All rights reserved.</span>
+        <div class="footer-social">
+          <a href="#" class="social-btn" title="Twitter">𝕏</a>
+          <a href="#" class="social-btn" title="Facebook">f</a>
+          <a href="#" class="social-btn" title="YouTube">▶</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ── AI CHATBOT WIDGET ── -->
+
+  <!-- Toggle Button -->
+  <button id="dad-chat-toggle" aria-label="Open chat assistant" title="Chat with D.A.D. Assistant">
+    <!-- Chat icon -->
+    <svg class="icon-chat" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z"/>
+    </svg>
+    <!-- Close icon -->
+    <svg class="icon-close" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+    </svg>
+  </button>
+
+  <!-- Chat Window -->
+  <div id="dad-chat-window" role="dialog" aria-label="D.A.D. Chat Assistant">
+
+    <!-- Header -->
+    <div class="chat-header">
+      <div class="chat-header-avatar">D.A.D.</div>
+      <div class="chat-header-info">
+        <div class="chat-header-name">D.A.D. Assistant</div>
+        <div class="chat-header-status">● Online — Ask us anything</div>
+      </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="chat-messages" id="dad-chat-messages">
+      <!-- Initial bot greeting -->
+      <div class="chat-msg bot">
+        <div class="chat-msg-avatar">D</div>
+        <div class="chat-bubble">
+          Hi! 👋 I'm the D.A.D. assistant. I can help you learn about our programs, how to get involved, or how to donate. What can I help you with today?
+        </div>
+      </div>
+    </div>
+
+    <!-- Input Row -->
+    <div class="chat-input-row">
+      <textarea
+        id="dad-chat-input"
+        placeholder="Type your message…"
+        rows="1"
+        aria-label="Chat message input"
+      ></textarea>
+      <button id="dad-chat-send" aria-label="Send message">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Footer note -->
+    <div class="chat-footer-note">Powered by D.A.D. · Doing Exceptional Deeds</div>
+  </div>
+
+  <script>
+    /* ── Card stagger entrance ── */
+    (function () {
+      const cards = document.querySelectorAll('.hero-program-card');
+      const observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            const card = entry.target;
+            const idx = Array.from(cards).indexOf(card);
+            setTimeout(function () { card.classList.add('visible'); }, idx * 80);
+            observer.unobserve(card);
+          }
+        });
+      }, { threshold: 0.1 });
+      cards.forEach(function (c) { observer.observe(c); });
+    })();
+
+    /* ── Stat counter animation ── */
+    (function () {
+      function animateCount(el, target, suffix) {
+        var start = 0, duration = 1200, startTime = null;
+        function step(ts) {
+          if (!startTime) startTime = ts;
+          var progress = Math.min((ts - startTime) / duration, 1);
+          var val = Math.floor(progress * target);
+          el.textContent = val + suffix;
+          if (progress < 1) requestAnimationFrame(step);
+          else el.textContent = target + suffix;
+        }
+        requestAnimationFrame(step);
+      }
+
+      var statEls = document.querySelectorAll('.stat-num[data-count]');
+      var statObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var el = entry.target;
+            animateCount(el, parseInt(el.dataset.count), el.dataset.suffix || '');
+            statObserver.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+      statEls.forEach(function (el) { statObserver.observe(el); });
+    })();
+  </script>
+
+  <script type="module">
+    import { pythonURI } from './assets/js/api/config.js';
+
+    /* ── AI Chatbot ── */
+    (function () {
+      
+      const toggleBtn  = document.getElementById('dad-chat-toggle');
+      const chatWindow = document.getElementById('dad-chat-window');
+      const messagesEl = document.getElementById('dad-chat-messages');
+      const inputEl    = document.getElementById('dad-chat-input');
+      const sendBtn    = document.getElementById('dad-chat-send');
+
+      /* ── Toggle open/close ── */
+      toggleBtn.addEventListener('click', function () {
+        const isOpen = chatWindow.classList.toggle('open');
+        toggleBtn.classList.toggle('open', isOpen);
+        toggleBtn.setAttribute('aria-label', isOpen ? 'Close chat assistant' : 'Open chat assistant');
+        if (isOpen) inputEl.focus();
+      });
+
+      /* ── Auto-resize textarea ── */
+      inputEl.addEventListener('input', function () {
+        this.style.height = 'auto';
+        this.style.height = Math.min(this.scrollHeight, 96) + 'px';
+      });
+
+      /* ── Send on Enter (Shift+Enter = newline) ── */
+      inputEl.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          handleSend();
+        }
+      });
+
+      sendBtn.addEventListener('click', handleSend);
+
+      /* ── Append a message bubble ── */
+      function appendMessage(role, text) {
+        const wrap   = document.createElement('div');
+        wrap.className = 'chat-msg ' + role;
+
+        const avatar = document.createElement('div');
+        avatar.className = 'chat-msg-avatar';
+        avatar.textContent = role === 'bot' ? 'D' : 'You';
+
+        const bubble = document.createElement('div');
+        bubble.className = 'chat-bubble';
+        bubble.textContent = text;
+
+        wrap.appendChild(avatar);
+        wrap.appendChild(bubble);
+        messagesEl.appendChild(wrap);
+        scrollToBottom();
+        return wrap;
+      }
+
+      /* ── Typing indicator ── */
+      function showTyping() {
+        const wrap = document.createElement('div');
+        wrap.className = 'chat-msg bot';
+        wrap.id = 'dad-typing-indicator';
+
+        const avatar = document.createElement('div');
+        avatar.className = 'chat-msg-avatar';
+        avatar.textContent = 'D';
+
+        const dots = document.createElement('div');
+        dots.className = 'chat-typing';
+        dots.innerHTML = '<span></span><span></span><span></span>';
+
+        wrap.appendChild(avatar);
+        wrap.appendChild(dots);
+        messagesEl.appendChild(wrap);
+        scrollToBottom();
+      }
+
+      function hideTyping() {
+        const indicator = document.getElementById('dad-typing-indicator');
+        if (indicator) indicator.remove();
+      }
+
+      /* ── Scroll to bottom of messages ── */
+      function scrollToBottom() {
+        messagesEl.scrollTop = messagesEl.scrollHeight;
+      }
+
+      /* ── Conversation history (kept in memory for context) ── */
+      var conversationHistory = [
+        {
+          role: 'system',
+          content: 'You are a strict assistant ONLY for the Doing Exceptional Deeds (D.A.D.) nonprofit website. You ONLY answer questions directly related to D.A.D., its programs, its mission, donations, volunteering, seniors engagement, and contact information. If a user asks ANYTHING not related to D.A.D. or this website — such as directions, banks, restaurants, general knowledge, news, other organizations, or any off-topic subject — you must politely decline and redirect them. Say something like: "I can only help with questions about D.A.D. and our programs. Is there something about our organization I can help you with?" Never answer off-topic questions under any circumstances, even if they seem loosely related. D.A.D. facts: 501(c)(3) nonprofit, MBE #23002138, founded 2021, located at 420 Smilax Road, San Marcos, CA 92078. Programs: (1) Youth Wellness & Student Success grades 6-12, (2) Athlete Education & Transition Portal, (3) Athlete Development & Wellness Program, (4) Student Success Advisory Pilot, (5) Industry Voices Pilot, (6) Athlete & Family Education Support. Also runs a Senior Engagement Program with intergenerational events and mentorship. Keep answers concise and warm.'
+        }
+      ];
+
+      /* ── Handle send ── */
+      function handleSend() {
+        var text = inputEl.value.trim();
+        if (!text) return;
+
+        appendMessage('user', text);
+        inputEl.value = '';
+        inputEl.style.height = 'auto';
+
+        conversationHistory.push({ role: 'user', content: text });
+
+        showTyping();
+        sendBtn.disabled = true;
+
+        fetch(pythonURI + '/api/groq/chat', {
+          ...fetchOptions,
+          method: 'POST',
+          body: JSON.stringify({
+            messages: conversationHistory,
+            model: 'llama-3.3-70b-versatile',
+            temperature: 0.7,
+            max_tokens: 300
+          })
+        })
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          hideTyping();
+          sendBtn.disabled = false;
+          if (data.success && data.response) {
+            conversationHistory.push({ role: 'assistant', content: data.response });
+            appendMessage('bot', data.response);
+          } else {
+            appendMessage('bot', 'Sorry, I had trouble getting a response. Please try again or contact us at 420 Smilax Road, San Marcos, CA 92078.');
+          }
+        })
+        .catch(function() {
+          hideTyping();
+          sendBtn.disabled = false;
+          appendMessage('bot', 'Connection error. Please check your internet connection and try again.');
+        });
+      }
+
+    })();
+  </script>
+
+  <script type="module">
+    // Import configuration from config.js
+    import { pythonURI, fetchOptions, getFullURL } from './assets/js/api/config.js';
+
+    // User authentication display
+    async function updateUserDisplay() {
+      const userLoginEl = document.querySelector('.user-login');
+      const userDisplayLi = document.querySelector('.user-display');
+      const userNameEl = document.querySelector('.user-name');
+
+      try {
+        // Fetch current logged-in user from /api/id
+        const response = await fetch(`${pythonURI}/api/id`, fetchOptions);
+        
+        if (response.ok) {
+          const userData = await response.json();
+          
+          // Check if user data exists and has a name property
+          if (userData && (userData.name || userData.username || userData.firstName)) {
+            const displayName = userData.name || userData.username || userData.firstName;
+            
+            // Show username and logout, hide login
+            userNameEl.textContent = displayName + ' ▾';
+            userDisplayLi.style.display = 'flex';
+            userLoginEl.style.display = 'none';
+
+            // Set admin chat link
+            const chatLink = document.getElementById('dropdown-chat-link');
+            if (chatLink && (userData.role === 'Admin' || userData._role === 'Admin')) {
+              chatLink.href = '/chat-admin';
+              chatLink.textContent = 'Admin Chat Panel';
+            }
+          } else {
+            // No user data, show login
+            userDisplayLi.style.display = 'none';
+            userLoginEl.style.display = 'block';
+          }
+        } else {
+          // Not authenticated, show login
+          userDisplayLi.style.display = 'none';
+          userLoginEl.style.display = 'block';
+        }
+      } catch (error) {
+        console.log('Error fetching user data:', error);
+        // Show login button on error
+        userDisplayLi.style.display = 'none';
+        userLoginEl.style.display = 'block';
+      }
+    }
+
+    // Log out functionality - use event delegation on the nav
+    document.addEventListener('click', async function(e) {
+      if (e.target && e.target.classList.contains('user-logout')) {
+        try {
+          // Clear the jwt_python_flask cookie
+          document.cookie = "jwt_python_flask=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+          
+          // Optionally call a logout endpoint if available
+          // await fetch(`${pythonURI}/api/logout`, { method: 'POST', ...fetchOptions });
+          
+          // Refresh the page to clear session and update UI
+          window.location.href = getFullURL('/dad');
+        } catch (error) {
+          console.log('Error during logout:', error);
+          window.location.href = getFullURL('/dad');
+        }
+      }
+    });
+
+    // Dropdown toggle
+    document.getElementById('user-name-toggle')?.addEventListener('click', function(e) {
+      e.stopPropagation();
+      document.querySelector('.user-dropdown')?.classList.toggle('open');
+    });
+    document.addEventListener('click', function() {
+      document.querySelector('.user-dropdown')?.classList.remove('open');
+    });
+
+    // Update user display when page loads
+    document.addEventListener('DOMContentLoaded', updateUserDisplay);
+    
+    // Also run immediately in case DOM is already loaded
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', updateUserDisplay);
+    } else {
+      updateUserDisplay();
+    }
+  </script>
+
+  <!-- CAROUSEL SCRIPT -->
+  <script type="module">
+    import { pythonURI, fetchOptions, getFullURL } from './assets/js/api/config.js';
+
+    class Carousel {
+      constructor() {
+        this.items = [];
+        this.submissionData = {}; // Store submission data by index
+        this.currentIndex = 0;
+        this.autoplayInterval = null;
+        this.isAutoplayEnabled = true;
+        this.isTransitioning = false;
+        this.imageCache = new Map(); // Cache base64 images to avoid re-decoding
+
+        this.initElements();
+        this.attachEventListeners();
+        this.loadCarousel();
+      }
+
+      initElements() {
+        this.itemsContainer = document.getElementById('carousel-items');
+        this.loadingEl = document.getElementById('carousel-loading');
+        this.errorEl = document.getElementById('carousel-error');
+        this.errorMessageEl = document.getElementById('carousel-error-message');
+        this.emptyEl = document.getElementById('carousel-empty');
+        this.prevBtn = document.getElementById('carousel-prev');
+        this.nextBtn = document.getElementById('carousel-next');
+        this.dotsContainer = document.getElementById('carousel-dots');
+        this.wrapper = document.querySelector('.carousel-wrapper');
+      }
+
+      attachEventListeners() {
+        // Navigation buttons
+        this.prevBtn?.addEventListener('click', () => this.goToPrevious());
+        this.nextBtn?.addEventListener('click', () => this.goToNext());
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowLeft') this.goToPrevious();
+          if (e.key === 'ArrowRight') this.goToNext();
+        });
+
+        // Pause autoplay on hover
+        this.wrapper?.addEventListener('mouseenter', () => this.stopAutoplay());
+        this.wrapper?.addEventListener('mouseleave', () => this.startAutoplay());
+
+        // Touch/swipe support
+        let touchStartX = 0;
+        this.wrapper?.addEventListener('touchstart', (e) => {
+          touchStartX = e.touches[0].clientX;
+          this.stopAutoplay();
+        });
+        this.wrapper?.addEventListener('touchend', (e) => {
+          const touchEndX = e.changedTouches[0].clientX;
+          const diff = touchStartX - touchEndX;
+          if (Math.abs(diff) > 50) {
+            if (diff > 0) this.goToNext();
+            else this.goToPrevious();
+          }
+          this.startAutoplay();
+        });
+
+        // Modal event listeners
+        const modal = document.getElementById('carousel-modal');
+        const modalClose = document.getElementById('carousel-modal-close');
+        
+        modalClose?.addEventListener('click', () => this.closeDetailModal());
+        
+        // Close on background click
+        modal?.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            this.closeDetailModal();
+          }
+        });
+        
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+            this.closeDetailModal();
+          }
+        });
+      }
+
+      async loadCarousel() {
+        try {
+          // Show loading state
+          this.loadingEl.style.display = 'flex';
+          this.errorEl.style.display = 'none';
+          this.emptyEl.style.display = 'none';
+          this.itemsContainer.innerHTML = '';
+          this.currentIndex = 0;
+
+          // Fetch carousel data
+          const response = await fetch(`${pythonURI}/carousel/`, fetchOptions);
+
+          if (!response.ok) {
+            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+          }
+
+          const data = await response.json();
+
+          // Handle empty carousel
+          if (!data || !Array.isArray(data) || data.length === 0) {
+            this.showEmpty();
+            return;
+          }
+
+          this.items = data;
+          this.renderItems();
+          this.renderDots();
+          this.showControls();
+          this.loadingEl.style.display = 'none';
+          this.startAutoplay();
+        } catch (error) {
+          console.error('Carousel loading error:', error);
+          this.showError(error.message);
+        }
+      }
+
+      renderItems() {
+        this.itemsContainer.innerHTML = '';
+        this.submissionData = {}; // Reset submission data
+        console.log('renderItems called with', this.items.length, 'items');
+
+        this.items.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+          div.setAttribute('data-index', index);
+
+          const submission = item.submission || {};
+          const imageBase64 = submission.image || '';
+          const userName = submission.user_name || 'Anonymous';
+          const category = submission.category || 'deed';
+          // Get description from content field (or fallback to other possible names)
+          const description = submission.content || submission.description || submission.text || submission.message || submission.story || '';
+
+          // Store submission data in the carousel instance (not in HTML)
+          this.submissionData[index] = {
+            userName,
+            category,
+            imageBase64,
+            description
+          };
+          
+          console.log(`[Carousel] Index ${index}: userName="${userName}", hasDescription=${!!description}, descLength=${description ? description.length : 0}`);
+          console.log(`[Carousel] Stored in submissionData[${index}]:`, this.submissionData[index].userName);
+
+          // Create image element with error handling
+          const img = document.createElement('img');
+          img.className = 'carousel-img';
+          img.alt = `${userName}'s deed`;
+
+          // Set the image source as data URI
+          if (imageBase64) {
+            try {
+              // Check if it's already a full data URI
+              if (imageBase64.startsWith('data:')) {
+                img.src = imageBase64;
+              } else {
+                // Assume it's base64 encoded PNG
+                img.src = `data:image/png;base64,${imageBase64}`;
+              }
+
+              // Handle image load errors
+              img.addEventListener('error', () => {
+                console.warn(`Failed to load image for ${userName}`);
+                img.style.display = 'none';
+                // Show a placeholder overlay
+                div.style.background = 'linear-gradient(135deg, #c8973a 0%, #0a1628 100%)';
+              });
+            } catch (e) {
+              console.error('Image processing error:', e);
+              img.style.display = 'none';
+            }
+          } else {
+            img.style.display = 'none';
+          }
+
+          div.appendChild(img);
+
+          // Add overlay with text
+          const overlay = document.createElement('div');
+          overlay.className = 'carousel-overlay';
+          
+          // Truncate description if needed
+          const maxDescLength = 80;
+          const truncatedDesc = description && description.length > maxDescLength 
+            ? description.substring(0, maxDescLength) + '...' 
+            : description;
+          
+          let descriptionHtml = '';
+          if (description) {
+            descriptionHtml = `<div class="carousel-description" style="cursor: pointer;">${this.escapeHTML(truncatedDesc)}<span class="carousel-description-expand">Read More</span></div>`;
+          }
+          
+          overlay.innerHTML = `
+            <span class="carousel-category">${this.formatCategory(category)}</span>
+            <div class="carousel-title">Featured Deed</div>
+            <div class="carousel-attribution">By ${this.escapeHTML(userName)}</div>
+            ${descriptionHtml}
+          `;
+          
+          div.appendChild(overlay);
+
+          this.itemsContainer.appendChild(div);
+        });
+        
+        console.log('[Carousel] Final submissionData:', this.submissionData);
+        console.log('[Carousel] All carousel items in DOM:', Array.from(this.itemsContainer.querySelectorAll('.carousel-item')).map(el => ({
+          domIndex: el.getAttribute('data-index'),
+          userName: el.querySelector('.carousel-attribution')?.textContent || 'N/A'
+        })));
+        
+        // Add event delegation for all description clicks
+        this.itemsContainer.removeEventListener('click', this.descriptionClickHandler);
+        this.descriptionClickHandler = (e) => {
+          const descElem = e.target.closest('.carousel-description');
+          if (descElem) {
+            // Get index from the carousel-item parent
+            const itemDiv = e.target.closest('.carousel-item');
+            const clickedIndex = parseInt(itemDiv.getAttribute('data-index'), 10);
+            console.log(`[Carousel] Read More clicked - itemDiv data-index="${itemDiv.getAttribute('data-index')}", parsed index=${clickedIndex}`);
+            console.log(`[Carousel] submissionData[${clickedIndex}]:`, this.submissionData[clickedIndex]);
+            this.openDetailModal(clickedIndex);
+          }
+        };
+        this.itemsContainer.addEventListener('click', this.descriptionClickHandler.bind(this));
+      }
+
+      openDetailModal(index) {
+        console.log(`[Carousel] openDetailModal called with index: ${index}`);
+        console.log('[Carousel] Available indices:', Object.keys(this.submissionData));
+        
+        const modal = document.getElementById('carousel-modal');
+        const modalImage = document.getElementById('carousel-modal-image');
+        const modalCategory = document.getElementById('carousel-modal-category');
+        const modalBy = document.getElementById('carousel-modal-by');
+        const modalDescription = document.getElementById('carousel-modal-description');
+        
+        // Get data from the stored submission data
+        const data = this.submissionData[index];
+        if (!data) {
+          console.error(`[Carousel] No submission data found for index: ${index}`);
+          return;
+        }
+        
+        console.log(`[Carousel] Opening modal for: ${data.userName}`);
+        const { imageBase64, userName, category, description } = data;
+        
+        // Set image
+        if (imageBase64) {
+          try {
+            if (imageBase64.startsWith('data:')) {
+              modalImage.src = imageBase64;
+            } else {
+              modalImage.src = `data:image/png;base64,${imageBase64}`;
+            }
+            modalImage.style.display = 'block';
+          } catch (e) {
+            console.error('Error setting modal image:', e);
+            modalImage.style.display = 'none';
+          }
+        } else {
+          modalImage.style.display = 'none';
+        }
+        
+        // Set content
+        modalCategory.textContent = this.formatCategory(category);
+        modalBy.textContent = `By ${this.escapeHTML(userName)}`;
+        modalDescription.textContent = description;
+        
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      closeDetailModal() {
+        const modal = document.getElementById('carousel-modal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      renderDots() {
+        this.dotsContainer.innerHTML = '';
+
+        for (let i = 0; i < this.items.length; i++) {
+          const dot = document.createElement('button');
+          dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+          dot.onclick = () => this.goToSlide(i);
+          this.dotsContainer.appendChild(dot);
+        }
+      }
+
+      showControls() {
+        if (this.items.length > 1) {
+          this.prevBtn.style.display = 'flex';
+          this.nextBtn.style.display = 'flex';
+          this.dotsContainer.style.display = 'flex';
+        } else {
+          this.prevBtn.style.display = 'none';
+          this.nextBtn.style.display = 'none';
+          this.dotsContainer.style.display = 'none';
+        }
+      }
+
+      goToSlide(index) {
+        if (this.isTransitioning || this.items.length === 0) return;
+
+        this.isTransitioning = true;
+        this.currentIndex = (index + this.items.length) % this.items.length;
+        this.updateCarousel();
+
+        // Reset transition flag after animation completes
+        setTimeout(() => {
+          this.isTransitioning = false;
+        }, 500);
+
+        // Reset autoplay
+        this.stopAutoplay();
+        this.startAutoplay();
+      }
+
+      goToNext() {
+        this.goToSlide(this.currentIndex + 1);
+      }
+
+      goToPrevious() {
+        this.goToSlide(this.currentIndex - 1);
+      }
+
+      updateCarousel() {
+        // Update active item
+        const items = this.itemsContainer.querySelectorAll('.carousel-item');
+        items.forEach((item, index) => {
+          item.classList.toggle('active', index === this.currentIndex);
+        });
+
+        // Update active dot
+        const dots = this.dotsContainer.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === this.currentIndex);
+        });
+      }
+
+      startAutoplay() {
+        if (!this.isAutoplayEnabled || this.items.length <= 1) return;
+
+        this.stopAutoplay();
+        this.autoplayInterval = setInterval(() => {
+          this.goToNext();
+        }, 5000); // 5 seconds per slide
+      }
+
+      stopAutoplay() {
+        if (this.autoplayInterval) {
+          clearInterval(this.autoplayInterval);
+          this.autoplayInterval = null;
+        }
+      }
+
+      showError(message = '') {
+        this.loadingEl.style.display = 'none';
+        this.emptyEl.style.display = 'none';
+        this.errorEl.style.display = 'flex';
+        this.errorMessageEl.textContent = message || 'We\'re having trouble loading the carousel. Please try refreshing the page.';
+        this.itemsContainer.innerHTML = '';
+      }
+
+      showEmpty() {
+        this.loadingEl.style.display = 'none';
+        this.errorEl.style.display = 'none';
+        this.emptyEl.style.display = 'flex';
+        this.itemsContainer.innerHTML = '';
+      }
+
+      formatCategory(category) {
+        const categoryMap = {
+          'volunteer': '✦ Volunteer Deed',
+          'donation': '♡ Donation',
+          'community': '👥 Community',
+          'youth': '🎓 Youth Program',
+          'elderly': '👴 Senior Support',
+          'default': '✦ Exceptional Deed'
+        };
+        return categoryMap[category] || categoryMap['default'];
+      }
+
+      escapeHTML(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+    }
+
+    // Initialize carousel when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', () => {
+        new Carousel();
+      });
+    } else {
+      new Carousel();
+    }
+  </script>
+
+</body>
+</html
