@@ -3342,7 +3342,6 @@ search_exclude: true
   //   gameEnv.stats.playerScore / aiScore / hits   — score & difficulty
   //   gameEnv.playerMode                            — true = human controls right paddle
   //   gameEnv.mouseY                                — latest mouse Y in canvas coords
-  //   gameEnv.pongLeaderboard                       — front-end leaderboard ref
   class PongGame extends GameObject {
     static PADDLE_W   = 10;
     static BASE_SPEED = 4.0;
@@ -3461,15 +3460,13 @@ search_exclude: true
       if (b.x < 0) {
         stats.playerScore++;
         this.flash = 40;
-        if (playerMode && this.gameEnv.pongLeaderboard)
-          this.gameEnv.pongLeaderboard.submitScore('You', stats.playerScore);
+
         this._resetBall();
       }
       if (b.x > W) {
         stats.aiScore++;
         this.flash = 40;
-        if (playerMode && this.gameEnv.pongLeaderboard)
-          this.gameEnv.pongLeaderboard.submitScore('AI', stats.aiScore);
+
         this._resetBall();
       }
 
@@ -3593,9 +3590,7 @@ search_exclude: true
         }
       };
 
-      // ── Leaderboard: stored on gameEnv so PongGame can access it ─────────
-      env.pongLeaderboard = _buildLeaderboard();
-      env.pongLeaderboard.mount();
+
 
       // ── Play / AI toggle: updates gameEnv.playerMode ─────────────────────
       btn.addEventListener('click', () => {
@@ -3607,58 +3602,7 @@ search_exclude: true
     }
   }
 
-  // ── Leaderboard builder (front-end only, localStorage) ───────────────────
-  function _buildLeaderboard() {
-    return {
-      _key: 'pong_leaderboard',
-      _el: null,
-      _scores() { return JSON.parse(localStorage.getItem(this._key) || '[]'); },
-      submitScore(name, score) {
-        const scores = this._scores();
-        scores.push({ name, score, date: new Date().toLocaleDateString() });
-        scores.sort((a, b) => b.score - a.score);
-        localStorage.setItem(this._key, JSON.stringify(scores.slice(0, 10)));
-        this._render();
-      },
-      _render() {
-        if (!this._el) return;
-        const scores = this._scores();
-        const rows = scores.length
-          ? scores.map((s, i) =>
-              `<tr>
-                <td style="color:var(--gold);padding:3px 10px 3px 0;font-weight:700">#${i+1}</td>
-                <td style="padding:3px 10px 3px 0">${s.name}</td>
-                <td style="color:var(--gold-light);text-align:right">${s.score}</td>
-              </tr>`).join('')
-          : `<tr><td colspan="3" style="color:#888;font-style:italic">No scores yet — play to get on the board!</td></tr>`;
-        this._el.querySelector('tbody').innerHTML = rows;
-      },
-      mount() {
-        const el = document.createElement('div');
-        el.id = 'pong-leaderboard';
-        el.innerHTML = `
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
-            <span style="font-family:Oswald,sans-serif;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)">🏓 Pong Top 10</span>
-            <button id="pong-lb-close" style="background:none;border:none;color:#888;cursor:pointer;font-size:1rem;line-height:1">✕</button>
-          </div>
-          <table style="width:100%;border-collapse:collapse;font-size:0.78rem;color:var(--white)">
-            <tbody></tbody>
-          </table>`;
-        Object.assign(el.style, {
-          position:'fixed', bottom:'24px', left:'24px', zIndex:'999',
-          background:'rgba(10,22,40,0.92)', border:'1px solid rgba(200,151,58,0.4)',
-          borderRadius:'8px', padding:'14px 16px', minWidth:'200px',
-          backdropFilter:'blur(8px)', fontFamily:'Source Sans 3,sans-serif',
-        });
-        document.body.appendChild(el);
-        el.querySelector('#pong-lb-close').addEventListener('click', () => el.remove());
-        this._el = el;
-        this._render();
-      }
-    };
-  }
-
-  // ── Game host object ──────────────────────────────────────────────────────
+// ── Game host object ──────────────────────────────────────────────────────
   const game = {
     path: BASE,
     gameContainer: container,
