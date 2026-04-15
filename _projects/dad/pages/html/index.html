@@ -461,6 +461,151 @@ search_exclude: true
     #pong-toggle:hover { background: rgba(200,151,58,0.28); border-color: var(--gold); }
     #pong-toggle.active { background: rgba(200,151,58,0.3); border-color: var(--gold); color: var(--gold); }
 
+    /* ── HERO CAROUSEL & PONG BACKDROP ── */
+    #pong-game-container {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      display: none;
+    }
+    #pong-game-container.active {
+      display: block;
+    }
+    #pong-game-container canvas {
+      opacity: 0.13;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    #pong-game-container.player-mode canvas {
+      opacity: 0.55;
+      pointer-events: auto;
+      cursor: none;
+    }
+
+    .hero-carousel-backdrop {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: auto;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hero-carousel-backdrop.hidden {
+      display: none;
+      pointer-events: none;
+    }
+
+    .hero-carousel-backdrop .carousel-items {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .hero-carousel-backdrop .carousel-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .hero-carousel-backdrop .carousel-item.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .hero-carousel-backdrop .carousel-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-carousel-backdrop .carousel-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10,22,40,0.9) 60%, rgba(10,22,40,1) 100%);
+      padding: 30px 24px 20px;
+      min-height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-carousel-backdrop .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(200, 151, 58, 0.85);
+      color: var(--navy);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 4px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 10;
+      font-weight: 700;
+    }
+
+    .hero-carousel-backdrop .carousel-nav:hover {
+      background: var(--gold);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .hero-carousel-backdrop .carousel-nav.prev {
+      left: 20px;
+    }
+
+    .hero-carousel-backdrop .carousel-nav.next {
+      right: 20px;
+    }
+
+    /* Small toggle button for changing view */
+    .carousel-pong-toggle {
+      position: absolute;
+      bottom: 24px;
+      right: 28px;
+      z-index: 20;
+      background: rgba(10,22,40,0.7);
+      border: 1px solid rgba(200,151,58,0.6);
+      color: rgba(200,151,58,0.9);
+      font-size: 1.2rem;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: block;
+      line-height: 1;
+      width: auto;
+    }
+
+    .carousel-pong-toggle:hover {
+      background: rgba(200,151,58,0.3);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .carousel-pong-toggle.pong-mode {
+      background: rgba(200,151,58,0.3);
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
     .hero-badges {
       display: flex;
       gap: 12px;
@@ -1516,7 +1661,7 @@ search_exclude: true
     .carousel-section {
       background: var(--white);
       padding: 60px 40px;
-      border-top: 1px solid var(--off-white);
+      border-top: none;
     }
 
     .carousel-header {
@@ -2116,8 +2261,6 @@ search_exclude: true
 
   <!-- HERO + PROGRAMS combined landing section -->
   <section class="hero" id="programs">
-    <div id="pong-game-container" aria-hidden="true"></div>
-    <button id="pong-toggle" title="Play Pong">🏓 Play</button>
     <div class="hero-bg"></div>
     <div class="hero-pattern"></div>
     <div class="hero-content">
@@ -2160,6 +2303,39 @@ search_exclude: true
       <a href="#donate" class="card-btn card-btn-primary">Donate</a>
       <a href="#contact" class="card-btn card-btn-outline">Get Involved</a>
     </div>
+
+    <!-- CAROUSEL BEHIND PROGRAMS (z-index layering) -->
+    <div class="hero-carousel-backdrop" id="hero-carousel-backdrop">
+      <div class="carousel-items" id="carousel-items-hero">
+        <!-- Items will be populated by JavaScript -->
+      </div>
+      <!-- Loading State -->
+      <div class="carousel-loading" id="carousel-loading-hero" style="display: none;">
+        <div class="carousel-spinner"></div>
+      </div>
+      <!-- Error State -->
+      <div class="carousel-error" id="carousel-error-hero" style="display: none;">
+        <div class="carousel-error-icon">⚠️</div>
+        <div class="carousel-error-title">Unable to Load Carousel</div>
+        <div class="carousel-error-message" id="carousel-error-message-hero">We're having trouble loading the carousel. Please try refreshing the page.</div>
+      </div>
+      <!-- Empty State -->
+      <div class="carousel-empty" id="carousel-empty-hero" style="display: none;">
+        <div class="carousel-empty-icon">🖼️</div>
+        <div class="carousel-empty-title">No Deeds Yet</div>
+        <div class="carousel-empty-message">Featured community deeds will appear here soon. Check back later!</div>
+      </div>
+      <!-- Controls -->
+      <button class="carousel-nav prev" id="carousel-prev-hero" aria-label="Previous slide" style="display: none;">‹</button>
+      <button class="carousel-nav next" id="carousel-next-hero" aria-label="Next slide" style="display: none;">›</button>
+      <div class="carousel-dots" id="carousel-dots-hero" style="display: none;"></div>
+    </div>
+
+    <!-- PONG GAME BEHIND PROGRAMS -->
+    <div id="pong-game-container" aria-hidden="true"></div>
+
+    <!-- TOGGLE BUTTON (bottom right) -->
+    <button id="carousel-pong-toggle" class="carousel-pong-toggle" title="Switch view">🏓</button>
   </section>
 
   <!-- QUICK LINKS -->
@@ -2185,67 +2361,6 @@ search_exclude: true
         <span class="quick-label">Get Involved</span>
         <span class="quick-read">Read More →</span>
       </a>
-    </div>
-  </div>
-
-  <!-- FEATURED DEEDS CAROUSEL -->
-  <section class="carousel-section">
-    <div class="carousel-container">
-      <div class="carousel-header">
-        <div class="section-label">Community Impact</div>
-        <h2 class="carousel-title-main">Featured <em>Deeds</em></h2>
-      </div>
-      <div class="carousel-wrapper">
-        <div class="carousel-items" id="carousel-items">
-          <!-- Items will be populated by JavaScript -->
-        </div>
-
-        <!-- Loading State -->
-        <div class="carousel-loading" id="carousel-loading" style="display: none;">
-          <div class="carousel-spinner"></div>
-        </div>
-
-        <!-- Error State -->
-        <div class="carousel-error" id="carousel-error" style="display: none;">
-          <div class="carousel-error-icon">⚠️</div>
-          <div class="carousel-error-title">Unable to Load Carousel</div>
-          <div class="carousel-error-message" id="carousel-error-message">
-            We're having trouble loading the carousel. Please try refreshing the page.
-          </div>
-        </div>
-
-        <!-- Empty State -->
-        <div class="carousel-empty" id="carousel-empty" style="display: none;">
-          <div class="carousel-empty-icon">🖼️</div>
-          <div class="carousel-empty-title">No Deeds Yet</div>
-          <div class="carousel-empty-message">
-            Featured community deeds will appear here soon. Check back later!
-          </div>
-        </div>
-
-        <!-- Controls (hidden until items load) -->
-        <button class="carousel-nav prev" id="carousel-prev" aria-label="Previous slide" style="display: none;">‹</button>
-        <button class="carousel-nav next" id="carousel-next" aria-label="Next slide" style="display: none;">›</button>
-        <div class="carousel-dots" id="carousel-dots" style="display: none;"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CAROUSEL DETAIL MODAL -->
-  <div class="carousel-modal" id="carousel-modal">
-    <div class="carousel-modal-content">
-      <div class="carousel-modal-header">
-        <h2 class="carousel-modal-title">Deed Details</h2>
-        <button class="carousel-modal-close" id="carousel-modal-close" aria-label="Close details">×</button>
-      </div>
-      <img class="carousel-modal-image" id="carousel-modal-image" src="" alt="">
-      <div class="carousel-modal-body">
-        <div class="carousel-modal-meta">
-          <span class="carousel-modal-badge" id="carousel-modal-category"></span>
-          <span class="carousel-modal-by" id="carousel-modal-by"></span>
-        </div>
-        <div class="carousel-modal-description" id="carousel-modal-description"></div>
-      </div>
     </div>
   </div>
 
@@ -2789,15 +2904,16 @@ search_exclude: true
       }
 
       initElements() {
-        this.itemsContainer = document.getElementById('carousel-items');
-        this.loadingEl = document.getElementById('carousel-loading');
-        this.errorEl = document.getElementById('carousel-error');
-        this.errorMessageEl = document.getElementById('carousel-error-message');
-        this.emptyEl = document.getElementById('carousel-empty');
-        this.prevBtn = document.getElementById('carousel-prev');
-        this.nextBtn = document.getElementById('carousel-next');
-        this.dotsContainer = document.getElementById('carousel-dots');
-        this.wrapper = document.querySelector('.carousel-wrapper');
+        this.itemsContainer = document.getElementById('carousel-items-hero');
+        this.loadingEl = document.getElementById('carousel-loading-hero');
+        this.errorEl = document.getElementById('carousel-error-hero');
+        this.errorMessageEl = document.getElementById('carousel-error-message-hero');
+        this.emptyEl = document.getElementById('carousel-empty-hero');
+        this.prevBtn = document.getElementById('carousel-prev-hero');
+        this.nextBtn = document.getElementById('carousel-next-hero');
+        this.dotsContainer = document.getElementById('carousel-dots-hero');
+        this.backdrop = document.getElementById('hero-carousel-backdrop');
+        this.wrapper = this.backdrop;
       }
 
       attachEventListeners() {
@@ -3174,6 +3290,41 @@ search_exclude: true
     }
   </script>
 
+  <!-- HERO CAROUSEL/PONG TOGGLE -->
+  <script>
+    (function() {
+      const pongContainer = document.getElementById('pong-game-container');
+      const carouselBackdrop = document.getElementById('hero-carousel-backdrop');
+      const toggleBtn = document.getElementById('carousel-pong-toggle');
+
+      // Toggle function
+      function switchView(view) {
+        if (view === 'pong') {
+          pongContainer.classList.add('active');
+          carouselBackdrop.classList.add('hidden');
+          toggleBtn.classList.add('pong-mode');
+          toggleBtn.title = 'Back to carousel';
+        } else {
+          pongContainer.classList.remove('active');
+          carouselBackdrop.classList.remove('hidden');
+          toggleBtn.classList.remove('pong-mode');
+          toggleBtn.title = 'Switch to pong';
+        }
+        localStorage.setItem('dadViewPreference', view);
+      }
+
+      // Event listener for toggle button
+      toggleBtn?.addEventListener('click', () => {
+        const isCurrentlyPong = pongContainer.classList.contains('active');
+        switchView(isCurrentlyPong ? 'carousel' : 'pong');
+      });
+
+      // Initialize based on saved preference or default to carousel
+      const savedView = localStorage.getItem('dadViewPreference') || 'carousel';
+      switchView(savedView);
+    })();
+  </script>
+
   <!-- PONG BACKGROUND GAME — powered by GameEnginev1.1 -->
   <script type="module">
   const BASE = '{{ site.baseurl }}';
@@ -3181,7 +3332,7 @@ search_exclude: true
   const { default: GameObject }  = await import(BASE + '/assets/js/GameEnginev1.1/essentials/GameObject.js');
 
   const container = document.getElementById('pong-game-container');
-  const btn       = document.getElementById('pong-toggle');
+  const btn       = document.getElementById('carousel-pong-toggle');
   if (!container || !btn) throw new Error('Pong: missing DOM elements');
 
   const hero = container.closest('.hero');
