@@ -284,6 +284,7 @@ search_exclude: true
       justify-content: center;
       overflow: hidden;
       background: var(--navy);
+      contain: layout style;
     }
 
     .hero-bg {
@@ -485,12 +486,14 @@ search_exclude: true
 
     .hero-carousel-backdrop {
       position: absolute;
-      inset: 0;
+      inset: 7%;
       z-index: 1;
       pointer-events: auto;
-      width: 100%;
-      height: 100%;
+      width: auto;
+      height: auto;
       display: block;
+      border-radius: 8px;
+      overflow: hidden;
     }
     .hero-carousel-backdrop.hidden {
       display: none;
@@ -515,10 +518,11 @@ search_exclude: true
       align-items: center;
       justify-content: center;
       pointer-events: none;
+      filter: brightness(0.6) blur(2px);
     }
 
     .hero-carousel-backdrop .carousel-item.active {
-      opacity: 1;
+      opacity: 0.25;
       pointer-events: auto;
     }
 
@@ -604,6 +608,47 @@ search_exclude: true
       background: rgba(200,151,58,0.3);
       border-color: var(--gold);
       color: var(--gold);
+    }
+
+    /* Focused carousel mode */
+    .hero-carousel-backdrop.focused {
+      inset: 9% !important;
+      width: auto !important;
+      height: auto !important;
+      border-radius: 8px;
+      z-index: 100;
+      overflow: hidden !important;
+      max-width: calc(100% - 18%);
+      max-height: calc(100% - 18%);
+    }
+
+    .hero-carousel-backdrop.focused .carousel-item {
+      opacity: 0 !important;
+      filter: brightness(1) blur(0px) !important;
+    }
+
+    .hero-carousel-backdrop.focused .carousel-item.active {
+      opacity: 1 !important;
+    }
+
+    .hero-carousel-backdrop.focused .carousel-nav {
+      display: flex !important;
+      z-index: 15;
+    }
+
+    .hero-programs {
+      transition: opacity 0.3s, visibility 0.3s;
+    }
+
+    .hero-programs.hidden-for-focus {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Focus button positioning */
+    #focus-carousel-btn {
+      transition: all 0.3s ease;
     }
 
     .hero-badges {
@@ -1048,7 +1093,7 @@ search_exclude: true
       z-index: 2;
       width: 100%;
       max-width: 1200px;
-      padding: 16px 40px 40px;
+      padding: 60px 40px 40px;
       display: flex;
       align-items: center;
       gap: 12px;
@@ -2302,6 +2347,7 @@ search_exclude: true
       <span class="hero-programs-cta-label">Support these programs</span>
       <a href="#donate" class="card-btn card-btn-primary">Donate</a>
       <a href="#contact" class="card-btn card-btn-outline">Get Involved</a>
+      <button id="focus-carousel-btn" class="card-btn card-btn-outline" style="background: transparent; border: 1px solid rgba(200,151,58,0.5); color: rgba(200,151,58,0.8); cursor: pointer; transition: all 0.2s;">📸 View Deeds</button>
     </div>
 
     <!-- CAROUSEL BEHIND PROGRAMS (z-index layering) -->
@@ -2333,10 +2379,25 @@ search_exclude: true
 
     <!-- PONG GAME BEHIND PROGRAMS -->
     <div id="pong-game-container" aria-hidden="true"></div>
-
-    <!-- TOGGLE BUTTON (bottom right) -->
-    <button id="carousel-pong-toggle" class="carousel-pong-toggle" title="Switch view">🏓</button>
   </section>
+
+  <!-- CAROUSEL DETAIL MODAL -->
+  <div class="carousel-modal" id="carousel-modal">
+    <div class="carousel-modal-content">
+      <div class="carousel-modal-header">
+        <h2 class="carousel-modal-title">Deed Details</h2>
+        <button class="carousel-modal-close" id="carousel-modal-close" aria-label="Close details">×</button>
+      </div>
+      <img class="carousel-modal-image" id="carousel-modal-image" src="" alt="">
+      <div class="carousel-modal-body">
+        <div class="carousel-modal-meta">
+          <span class="carousel-modal-badge" id="carousel-modal-category"></span>
+          <span class="carousel-modal-by" id="carousel-modal-by"></span>
+        </div>
+        <div class="carousel-modal-description" id="carousel-modal-description"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- QUICK LINKS -->
   <div class="quick-links">
@@ -2549,6 +2610,7 @@ search_exclude: true
           <a href="#" class="social-btn" title="Twitter">𝕏</a>
           <a href="#" class="social-btn" title="Facebook">f</a>
           <a href="#" class="social-btn" title="YouTube">▶</a>
+          <button id="carousel-pong-toggle" class="social-btn" title="Secret game" style="background: none; border: none; cursor: pointer; opacity: 0.5; transition: opacity 0.2s; font-size: 0.9rem;">🏓</button>
         </div>
       </div>
     </div>
@@ -3296,6 +3358,10 @@ search_exclude: true
       const pongContainer = document.getElementById('pong-game-container');
       const carouselBackdrop = document.getElementById('hero-carousel-backdrop');
       const toggleBtn = document.getElementById('carousel-pong-toggle');
+      const focusBtn = document.getElementById('focus-carousel-btn');
+      const heroPrograms = document.querySelector('.hero-programs');
+
+      let isFocused = false;
 
       // Toggle function
       function switchView(view) {
@@ -3308,12 +3374,27 @@ search_exclude: true
           pongContainer.classList.remove('active');
           carouselBackdrop.classList.remove('hidden');
           toggleBtn.classList.remove('pong-mode');
-          toggleBtn.title = 'Switch to pong';
+          toggleBtn.title = 'Secret game';
         }
         localStorage.setItem('dadViewPreference', view);
       }
 
-      // Event listener for toggle button
+      // Focus carousel function
+      function toggleFocus() {
+        isFocused = !isFocused;
+        if (isFocused) {
+          carouselBackdrop.classList.add('focused');
+          heroPrograms.classList.add('hidden-for-focus');
+          focusBtn.textContent = '← Back';
+        } else {
+          carouselBackdrop.classList.remove('focused');
+          heroPrograms.classList.remove('hidden-for-focus');
+          focusBtn.textContent = '📸 View Deeds';
+        }
+      }
+
+      // Event listeners
+      focusBtn?.addEventListener('click', toggleFocus);
       toggleBtn?.addEventListener('click', () => {
         const isCurrentlyPong = pongContainer.classList.contains('active');
         switchView(isCurrentlyPong ? 'carousel' : 'pong');
