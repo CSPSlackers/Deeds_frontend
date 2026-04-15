@@ -424,6 +424,43 @@ search_exclude: true
       margin: 0 auto 36px;
     }
 
+    /* ── PONG BACKGROUND ── */
+    #pong-game-container {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+    #pong-game-container canvas {
+      opacity: 0.13;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    #pong-game-container.player-mode canvas {
+      opacity: 0.55;
+      pointer-events: auto;
+      cursor: none;
+    }
+    #pong-toggle {
+      position: absolute;
+      bottom: 24px;
+      right: 28px;
+      z-index: 10;
+      background: rgba(10,22,40,0.55);
+      border: 1px solid rgba(200,151,58,0.5);
+      color: rgba(200,151,58,0.85);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 7px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    #pong-toggle:hover { background: rgba(200,151,58,0.28); border-color: var(--gold); }
+    #pong-toggle.active { background: rgba(200,151,58,0.3); border-color: var(--gold); color: var(--gold); }
+
     .hero-badges {
       display: flex;
       gap: 12px;
@@ -2079,6 +2116,8 @@ search_exclude: true
 
   <!-- HERO + PROGRAMS combined landing section -->
   <section class="hero" id="programs">
+    <div id="pong-game-container" aria-hidden="true"></div>
+    <button id="pong-toggle" title="Play Pong">🏓 Play</button>
     <div class="hero-bg"></div>
     <div class="hero-pattern"></div>
     <div class="hero-content">
@@ -3133,6 +3172,363 @@ search_exclude: true
     } else {
       new Carousel();
     }
+  </script>
+
+  <!-- PONG BACKGROUND GAME — powered by GameEnginev1.1 -->
+  <script type="module">
+  const BASE = '{{ site.baseurl }}';
+  const { default: GameControl } = await import(BASE + '/assets/js/GameEnginev1.1/essentials/GameControl.js');
+  const { default: GameObject }  = await import(BASE + '/assets/js/GameEnginev1.1/essentials/GameObject.js');
+
+  const container = document.getElementById('pong-game-container');
+  const btn       = document.getElementById('pong-toggle');
+  if (!container || !btn) throw new Error('Pong: missing DOM elements');
+
+  const hero = container.closest('.hero');
+
+  // ── PongGame : GameObject ─────────────────────────────────────────────────
+  // All mutable state lives on gameEnv (engine-native pattern):
+  //   gameEnv.stats.playerScore / aiScore / hits   — score & difficulty
+  //   gameEnv.playerMode                            — true = human controls right paddle
+  //   gameEnv.mouseY                                — latest mouse Y in canvas coords
+  //   gameEnv.pongLeaderboard                       — front-end leaderboard ref
+  class PongGame extends GameObject {
+    static PADDLE_W   = 10;
+    static BASE_SPEED = 4.0;
+    static MAX_SPEED  = 22;
+    static MIN_PADDLE = 28;
+
+    constructor(data, gameEnv) {
+      super(gameEnv);
+      this.canvas = gameEnv.canvas;
+      this.flash  = 0;
+
+      // Mouse tracking registered here, removed in destroy() — fully self-contained
+      this._onMouseMove = e => {
+        const rect = this.canvas.getBoundingClientRect();
+        this.gameEnv.mouseY = e.clientY - rect.top;
+      };
+      hero.addEventListener('mousemove', this._onMouseMove);
+
+      this._initPaddles();
+      this._resetBall();
+    }
+
+    _dim()  { return { W: this.gameEnv.innerWidth, H: this.gameEnv.innerHeight }; }
+    _diff() { return Math.min(1, (this.gameEnv.stats.hits || 0) / 120); }
+
+    _paddleHeight() {
+      const { H } = this._dim();
+      const base = Math.max(80, H * 0.14);
+      return base - (base - PongGame.MIN_PADDLE) * this._diff();
+    }
+
+    _aiSpeed() { return 3.5 + this._diff() * 8; }
+
+    _initPaddles() {
+      const { H } = this._dim();
+      const ph = this._paddleHeight();
+      this.left  = { y: H / 2, h: ph };
+      this.right = { y: H / 2, h: ph };
+    }
+
+    _resetBall() {
+      const { W, H } = this._dim();
+      const speed = PongGame.BASE_SPEED + this._diff() * 5;
+      const angle = (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1);
+      this.ball = {
+        x: W / 2, y: H / 2,
+        vx: (Math.random() > 0.5 ? 1 : -1) * speed * Math.cos(angle),
+        vy: speed * Math.sin(angle),
+        r: 6,
+      };
+      const ph = this._paddleHeight();
+      if (this.left)  this.left.h  = ph;
+      if (this.right) this.right.h = ph;
+    }
+
+    _aiMove(paddle, targetY, speed) {
+      const { H } = this._dim();
+      const noise = this.gameEnv.playerMode ? 0 : (Math.random() - 0.5) * 6;
+      const diff  = (targetY + noise) - paddle.y;
+      paddle.y += Math.sign(diff) * Math.min(Math.abs(diff), speed);
+      paddle.y  = Math.max(paddle.h / 2, Math.min(H - paddle.h / 2, paddle.y));
+    }
+
+    update() {
+      const { W, H } = this._dim();
+      const PW         = PongGame.PADDLE_W;
+      const b          = this.ball;
+      const stats      = this.gameEnv.stats;
+      const playerMode = this.gameEnv.playerMode;
+      const mouseY     = this.gameEnv.mouseY || 0;
+
+      if (this.flash > 0) this.flash--;
+
+      // Smoothly interpolate paddle height as difficulty increases
+      const targetH = this._paddleHeight();
+      this.left.h  += (targetH - this.left.h)  * 0.02;
+      this.right.h += (targetH - this.right.h) * 0.02;
+
+      // Move paddles — right paddle follows mouse in playerMode, AI otherwise
+      const aiSpd = this._aiSpeed();
+      this._aiMove(this.left,  b.y,    aiSpd);
+      this._aiMove(this.right, playerMode ? mouseY : b.y, playerMode ? 999 : aiSpd * 0.95);
+
+      b.x += b.vx;
+      b.y += b.vy;
+
+      // Bounce off top/bottom walls
+      if (b.y - b.r < 0) { b.y = b.r;     b.vy *= -1; }
+      if (b.y + b.r > H) { b.y = H - b.r; b.vy *= -1; }
+
+      // Left paddle collision
+      const lx = PW + 10;
+      if (b.vx < 0 && b.x - b.r < lx + PW && b.x - b.r > lx - 6 &&
+          b.y > this.left.y - this.left.h / 2 && b.y < this.left.y + this.left.h / 2) {
+        b.x = lx + PW + b.r;
+        const rel = (b.y - this.left.y) / (this.left.h / 2);
+        const spd = Math.min(Math.hypot(b.vx, b.vy) * 1.06, PongGame.MAX_SPEED);
+        b.vx =  spd * Math.cos(rel * 1.1);
+        b.vy =  spd * Math.sin(rel * 1.1);
+        stats.hits++;  // gameEnv.stats tracks difficulty
+      }
+
+      // Right paddle collision
+      const rx = W - PW - 10;
+      if (b.vx > 0 && b.x + b.r > rx - PW && b.x + b.r < rx + 6 &&
+          b.y > this.right.y - this.right.h / 2 && b.y < this.right.y + this.right.h / 2) {
+        b.x = rx - PW - b.r;
+        const rel = (b.y - this.right.y) / (this.right.h / 2);
+        const spd = Math.min(Math.hypot(b.vx, b.vy) * 1.06, PongGame.MAX_SPEED);
+        b.vx = -spd * Math.cos(rel * 1.1);
+        b.vy =  spd * Math.sin(rel * 1.1);
+        stats.hits++;  // gameEnv.stats tracks difficulty
+      }
+
+      // Scoring — write to gameEnv.stats (engine-native)
+      if (b.x < 0) {
+        stats.playerScore++;
+        this.flash = 40;
+        if (playerMode && this.gameEnv.pongLeaderboard)
+          this.gameEnv.pongLeaderboard.submitScore('You', stats.playerScore);
+        this._resetBall();
+      }
+      if (b.x > W) {
+        stats.aiScore++;
+        this.flash = 40;
+        if (playerMode && this.gameEnv.pongLeaderboard)
+          this.gameEnv.pongLeaderboard.submitScore('AI', stats.aiScore);
+        this._resetBall();
+      }
+
+      this.draw();
+    }
+
+    draw() {
+      const ctx        = this.gameEnv.ctx;
+      const { W, H }  = this._dim();
+      const PW         = PongGame.PADDLE_W;
+      const GOLD       = '#c8973a';
+      const WHITE      = '#f9f7f2';
+      const stats      = this.gameEnv.stats;
+      const playerMode = this.gameEnv.playerMode;
+      const diff       = this._diff();
+      const speed      = Math.hypot(this.ball.vx, this.ball.vy);
+      const hotness    = Math.max(0, (speed - 8) / (PongGame.MAX_SPEED - 8));
+
+      // Red danger tint at high difficulty in player mode
+      if (diff > 0.5 && playerMode) {
+        ctx.fillStyle = `rgba(176,48,48,${(diff - 0.5) * 0.08})`;
+        ctx.fillRect(0, 0, W, H);
+      }
+
+      // Center divider
+      ctx.setLineDash([6, 10]);
+      ctx.strokeStyle = GOLD; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H); ctx.stroke();
+      ctx.setLineDash([]);
+
+      // Scores from gameEnv.stats
+      ctx.fillStyle = this.flash > 0 ? WHITE : GOLD;
+      ctx.globalAlpha = 0.9;
+      ctx.font = `bold ${Math.round(H * 0.07)}px Oswald,sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.fillText(stats.aiScore,     W/2 - W*0.12, H*0.1);
+      ctx.fillText(stats.playerScore, W/2 + W*0.12, H*0.1);
+      ctx.globalAlpha = 1;
+
+      // Paddles (color shifts hot at high speed)
+      const pColor = hotness > 0
+        ? `rgb(${Math.round(249-hotness*60)},${Math.round(247-hotness*120)},${Math.round(242-hotness*200)})`
+        : WHITE;
+      const drawPaddle = (p, x) => {
+        ctx.fillStyle = pColor;
+        ctx.beginPath(); ctx.roundRect(x, p.y - p.h/2, PW, p.h, 4); ctx.fill();
+      };
+      drawPaddle(this.left,  10);
+      drawPaddle(this.right, W - PW - 10);
+
+      // Ball
+      const b = this.ball;
+      ctx.fillStyle = hotness > 0
+        ? `rgb(255,${Math.round(249-hotness*200)},${Math.round(242-hotness*242)})`
+        : WHITE;
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.r + hotness * 3, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Speed bar
+      const barW = W * 0.18;
+      ctx.fillStyle = 'rgba(200,151,58,0.25)';
+      ctx.fillRect(W/2 - barW/2, H-8, barW, 3);
+      ctx.fillStyle = hotness > 0 ? `rgba(255,${Math.round(100-hotness*100)},0,0.7)` : 'rgba(200,151,58,0.7)';
+      ctx.fillRect(W/2 - barW/2, H-8, (speed/PongGame.MAX_SPEED)*barW, 3);
+
+      // Player-mode label
+      if (playerMode) {
+        ctx.fillStyle = GOLD;
+        ctx.font = `600 ${Math.round(H*0.022)}px Oswald,sans-serif`;
+        ctx.textAlign = 'right';
+        ctx.fillText('YOU →', W - 28, H - 14);
+      }
+    }
+
+    // Called by GameLevel.resize() after gameEnv dimensions are already updated
+    resize() {
+      const ph = this._paddleHeight();
+      if (this.left)  this.left.h  = ph;
+      if (this.right) this.right.h = ph;
+      this.draw();
+    }
+
+    destroy() {
+      // Remove mouse listener — fully self-contained cleanup
+      hero.removeEventListener('mousemove', this._onMouseMove);
+    }
+  }
+
+  // ── PongLevel ─────────────────────────────────────────────────────────────
+  class PongLevel {
+    constructor(gameEnv) {
+      this.gameEnv = gameEnv;
+
+      // Initialize on gameEnv NOW so PongGame constructor can safely read them
+      gameEnv.stats      = { playerScore: 0, aiScore: 0, hits: 0 };
+      gameEnv.playerMode = false;
+      gameEnv.mouseY     = 0;
+
+      this.classes = [{ class: PongGame, data: {} }];
+    }
+
+    // Engine calls initialize() after all gameObjects are created —
+    // use it for things that reference the DOM or need the canvas to exist
+    initialize() {
+      const env = this.gameEnv;
+
+      // ── Resize patch: prevent GameEnv.resize() from stacking new canvases ─
+      // GameEnv.resize() calls create() → setCanvas() which appends a new canvas.
+      // Override it to resize the existing canvas in-place instead.
+      env.resize = () => {
+        const w = hero.offsetWidth, h = hero.offsetHeight;
+        env.game.environment.innerWidth  = w;
+        env.game.environment.innerHeight = h;
+        env.innerWidth  = w;
+        env.innerHeight = h;
+        if (env.canvas) {
+          env.canvas.width  = w; env.canvas.height = h;
+          env.canvas.style.width  = w + 'px';
+          env.canvas.style.height = h + 'px';
+        }
+      };
+
+      // ── Leaderboard: stored on gameEnv so PongGame can access it ─────────
+      env.pongLeaderboard = _buildLeaderboard();
+      env.pongLeaderboard.mount();
+
+      // ── Play / AI toggle: updates gameEnv.playerMode ─────────────────────
+      btn.addEventListener('click', () => {
+        env.playerMode = !env.playerMode;
+        container.classList.toggle('player-mode', env.playerMode);
+        btn.classList.toggle('active', env.playerMode);
+        btn.textContent = env.playerMode ? '🤖 Watch AI' : '🏓 Play';
+      });
+    }
+  }
+
+  // ── Leaderboard builder (front-end only, localStorage) ───────────────────
+  function _buildLeaderboard() {
+    return {
+      _key: 'pong_leaderboard',
+      _el: null,
+      _scores() { return JSON.parse(localStorage.getItem(this._key) || '[]'); },
+      submitScore(name, score) {
+        const scores = this._scores();
+        scores.push({ name, score, date: new Date().toLocaleDateString() });
+        scores.sort((a, b) => b.score - a.score);
+        localStorage.setItem(this._key, JSON.stringify(scores.slice(0, 10)));
+        this._render();
+      },
+      _render() {
+        if (!this._el) return;
+        const scores = this._scores();
+        const rows = scores.length
+          ? scores.map((s, i) =>
+              `<tr>
+                <td style="color:var(--gold);padding:3px 10px 3px 0;font-weight:700">#${i+1}</td>
+                <td style="padding:3px 10px 3px 0">${s.name}</td>
+                <td style="color:var(--gold-light);text-align:right">${s.score}</td>
+              </tr>`).join('')
+          : `<tr><td colspan="3" style="color:#888;font-style:italic">No scores yet — play to get on the board!</td></tr>`;
+        this._el.querySelector('tbody').innerHTML = rows;
+      },
+      mount() {
+        const el = document.createElement('div');
+        el.id = 'pong-leaderboard';
+        el.innerHTML = `
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <span style="font-family:Oswald,sans-serif;font-size:0.8rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold)">🏓 Pong Top 10</span>
+            <button id="pong-lb-close" style="background:none;border:none;color:#888;cursor:pointer;font-size:1rem;line-height:1">✕</button>
+          </div>
+          <table style="width:100%;border-collapse:collapse;font-size:0.78rem;color:var(--white)">
+            <tbody></tbody>
+          </table>`;
+        Object.assign(el.style, {
+          position:'fixed', bottom:'24px', left:'24px', zIndex:'999',
+          background:'rgba(10,22,40,0.92)', border:'1px solid rgba(200,151,58,0.4)',
+          borderRadius:'8px', padding:'14px 16px', minWidth:'200px',
+          backdropFilter:'blur(8px)', fontFamily:'Source Sans 3,sans-serif',
+        });
+        document.body.appendChild(el);
+        el.querySelector('#pong-lb-close').addEventListener('click', () => el.remove());
+        this._el = el;
+        this._render();
+      }
+    };
+  }
+
+  // ── Game host object ──────────────────────────────────────────────────────
+  const game = {
+    path: BASE,
+    gameContainer: container,
+    environment: { innerWidth: hero.offsetWidth, innerHeight: hero.offsetHeight },
+    activeGameControl: null,
+  };
+
+  // ── Boot ──────────────────────────────────────────────────────────────────
+  const gc = new GameControl(game, [PongLevel]);
+  gc.start();
+  // initialize() has now run — gameEnv.stats, playerMode, mouseY, resize patch all set
+
+  // ── Container resize observer ─────────────────────────────────────────────
+  // GameLevel already handles window 'resize' events. This observer catches
+  // hero-div size changes that don't trigger a window resize (e.g. layout shifts).
+  // gc.currentLevel.resize() safely calls our patched gameEnv.resize() first,
+  // then each gameObject.resize() — no new canvases created.
+  const ro = new ResizeObserver(() => {
+    if (gc.currentLevel) gc.currentLevel.resize();
+  });
+  ro.observe(hero);
   </script>
 
 </body>
