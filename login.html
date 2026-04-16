@@ -9,8 +9,8 @@
   <style>
     :root {
       --navy: #0a1628;
-      --gold: #c8973a;
-      --gold-light: #e8b55a;
+      --red: #FF3333;
+      --red-light: #FF5555;
       --white: #f9f7f2;
       --off-white: #ede9e0;
       --gray: #6b6b6b;
@@ -36,7 +36,7 @@
       min-height: 100vh;
       background: var(--navy);
       background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(200,151,58,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 20% 50%, rgba(255,51,51,0.12) 0%, transparent 55%),
         radial-gradient(ellipse at 80% 30%, rgba(10,22,40,0.8) 0%, transparent 60%);
       display: flex;
       align-items: center;
@@ -86,7 +86,7 @@
       position: absolute;
       top: 24px;
       left: 24px;
-      background: var(--gold);
+      background: var(--red);
       color: var(--navy) !important;
       text-decoration: none;
       padding: 8px 16px;
@@ -102,7 +102,7 @@
     }
 
     .back-button:hover {
-      background: var(--gold-light);
+      background: var(--red-light);
       transform: translateX(-4px);
       box-shadow: 0 4px 12px rgba(200, 151, 58, 0.3);
     }
@@ -115,7 +115,7 @@
     }
 
     .user-btn {
-      background: var(--gold);
+      background: var(--red);
       color: var(--navy) !important;
       padding: 8px 16px;
       border: none;
@@ -135,7 +135,7 @@
     }
 
     .user-btn:hover {
-      background: var(--gold-light);
+      background: var(--red-light);
       transform: translateX(4px);
       box-shadow: 0 4px 12px rgba(200, 151, 58, 0.3);
     }
@@ -221,7 +221,7 @@
     .auth-card {
       background: var(--white) !important;
       border-radius: 2px;
-      border-top: 3px solid var(--gold);
+      border-top: 3px solid var(--red);
       padding: 32px 28px;
       box-shadow: 0 8px 24px rgba(0,0,0,0.15);
       display: flex;
@@ -274,7 +274,7 @@
     }
 
     .form-group.has-value label {
-      color: var(--gold);
+      color: var(--red);
     }
 
     .form-group.focused label {
@@ -320,7 +320,7 @@
     .form-group input:focus,
     .form-group select:focus {
       outline: none;
-      border-color: var(--gold);
+      border-color: var(--red);
       box-shadow: 0 0 0 3px rgba(200, 151, 58, 0.15), inset 0 0 6px rgba(200, 151, 58, 0.05);
       transform: scale(1.01);
     }
@@ -349,7 +349,7 @@
     .btn-submit {
       width: 100%;
       padding: 12px 20px;
-      background: var(--gold) !important;
+      background: var(--red) !important;
       color: var(--navy) !important;
       border: none;
       border-radius: 2px;
@@ -380,7 +380,7 @@
     }
 
     .btn-submit:hover:not(:disabled) {
-      background: var(--gold-light) !important;
+      background: var(--red-light) !important;
       transform: translateY(-3px);
       box-shadow: 0 8px 20px rgba(200, 151, 58, 0.35);
     }
@@ -408,7 +408,7 @@
     }
 
     .form-footer a {
-      color: var(--gold) !important;
+      color: var(--red) !important;
       text-decoration: none;
       font-weight: 600;
       cursor: pointer;
@@ -424,12 +424,12 @@
       left: 0;
       width: 0;
       height: 2px;
-      background: var(--gold);
+      background: var(--red);
       transition: width 0.3s ease;
     }
 
     .form-footer a:hover {
-      color: var(--gold-light) !important;
+      color: var(--red-light) !important;
     }
 
     .form-footer a:hover::after {

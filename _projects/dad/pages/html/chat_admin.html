@@ -14,8 +14,8 @@ search_exclude: true
   <style>
     :root {
       --navy: #0a1628;
-      --gold: #c8973a;
-      --gold-light: #e8b55a;
+      --red: #FF3333;
+      --red-light: #FF5555;
       --white: #f9f7f2;
       --off-white: #ede9e0;
       --dark-gray: #2a2a2a;
@@ -34,7 +34,7 @@ search_exclude: true
     /* ── TOP BAR ── */
     .top-bar {
       background: var(--navy);
-      border-bottom: 3px solid var(--gold);
+      border-bottom: 3px solid var(--red);
       padding: 0 24px;
       height: 64px;
       display: flex;
@@ -50,7 +50,7 @@ search_exclude: true
       text-transform: uppercase;
       color: var(--white);
     }
-    .top-bar-title span { color: var(--gold); }
+    .top-bar-title span { color: var(--red); }
     .header-back {
       font-family: 'Oswald', sans-serif;
       font-size: 0.72rem;
@@ -62,7 +62,7 @@ search_exclude: true
       padding: 6px 14px;
       transition: color 0.2s, border-color 0.2s;
     }
-    .header-back:hover { color: var(--gold); border-color: var(--gold); }
+    .header-back:hover { color: var(--red); border-color: var(--red); }
 
     /* ── LAYOUT ── */
     .layout {
@@ -75,26 +75,26 @@ search_exclude: true
     .sidebar {
       width: 260px;
       background: var(--white);
-      border-right: 1px solid rgba(200,151,58,0.2);
+      border-right: 1px solid rgba(255,51,51,0.2);
       display: flex;
       flex-direction: column;
       flex-shrink: 0;
     }
     .sidebar-header {
       padding: 16px 18px;
-      border-bottom: 1px solid rgba(200,151,58,0.15);
+      border-bottom: 1px solid rgba(255,51,51,0.15);
       font-family: 'Oswald', sans-serif;
       font-size: 0.68rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--gold);
+      color: var(--red);
     }
     .user-list {
       flex: 1;
       overflow-y: auto;
     }
     .user-list::-webkit-scrollbar { width: 3px; }
-    .user-list::-webkit-scrollbar-thumb { background: rgba(200,151,58,0.3); }
+    .user-list::-webkit-scrollbar-thumb { background: rgba(255,51,51,0.3); }
 
     .user-item {
       padding: 14px 18px;
@@ -106,7 +106,7 @@ search_exclude: true
       transition: background 0.15s;
     }
     .user-item:hover { background: var(--off-white); }
-    .user-item.active { background: rgba(200,151,58,0.12); border-left: 3px solid var(--gold); }
+    .user-item.active { background: rgba(255,51,51,0.12); border-left: 3px solid var(--red); }
 
     .user-avatar {
       width: 36px; height: 36px;
@@ -115,7 +115,7 @@ search_exclude: true
       display: flex; align-items: center; justify-content: center;
       font-family: 'Oswald', sans-serif;
       font-size: 0.65rem; font-weight: 700;
-      color: var(--gold);
+      color: var(--red);
       flex-shrink: 0;
     }
     .user-info { flex: 1; min-width: 0; }
@@ -135,7 +135,7 @@ search_exclude: true
       letter-spacing: 0.06em;
     }
     .unread-badge {
-      background: var(--gold);
+      background: var(--red);
       color: var(--navy);
       font-family: 'Oswald', sans-serif;
       font-size: 0.65rem;
@@ -164,7 +164,7 @@ search_exclude: true
 
     .chat-panel-header {
       background: var(--white);
-      border-bottom: 1px solid rgba(200,151,58,0.2);
+      border-bottom: 1px solid rgba(255,51,51,0.2);
       padding: 0 24px;
       height: 56px;
       display: flex;
@@ -179,7 +179,7 @@ search_exclude: true
       display: flex; align-items: center; justify-content: center;
       font-family: 'Oswald', sans-serif;
       font-size: 0.6rem; font-weight: 700;
-      color: var(--gold);
+      color: var(--red);
     }
     .panel-name {
       font-family: 'Oswald', sans-serif;
@@ -200,7 +200,7 @@ search_exclude: true
       gap: 12px;
     }
     #messages::-webkit-scrollbar { width: 4px; }
-    #messages::-webkit-scrollbar-thumb { background: rgba(200,151,58,0.3); border-radius: 2px; }
+    #messages::-webkit-scrollbar-thumb { background: rgba(255,51,51,0.3); border-radius: 2px; }
 
     .msg-row { display: flex; gap: 10px; align-items: flex-end; }
     .msg-row.mine { flex-direction: row-reverse; }
@@ -212,10 +212,10 @@ search_exclude: true
       display: flex; align-items: center; justify-content: center;
       font-family: 'Oswald', sans-serif;
       font-size: 0.55rem; font-weight: 700;
-      color: var(--gold);
+      color: var(--red);
       flex-shrink: 0;
     }
-    .msg-row.mine .msg-avatar { background: var(--gold); color: var(--navy); }
+    .msg-row.mine .msg-avatar { background: var(--red); color: var(--navy); }
 
     .msg-wrap { display: flex; flex-direction: column; max-width: 60%; }
     .msg-row.mine .msg-wrap { align-items: flex-end; }
@@ -227,7 +227,7 @@ search_exclude: true
       border-radius: 2px;
     }
     .msg-row.theirs .msg-bubble { background: var(--navy); color: var(--white); border-bottom-left-radius: 0; }
-    .msg-row.mine .msg-bubble { background: var(--gold); color: var(--navy); font-weight: 500; border-bottom-right-radius: 0; }
+    .msg-row.mine .msg-bubble { background: var(--red); color: var(--navy); font-weight: 500; border-bottom-right-radius: 0; }
 
     .msg-time { font-size: 0.6rem; color: #aaa; margin-top: 3px; }
     .msg-row.theirs .msg-time { text-align: left; }
@@ -251,7 +251,7 @@ search_exclude: true
     /* ── INPUT ── */
     .input-bar {
       background: var(--white);
-      border-top: 1px solid rgba(200,151,58,0.2);
+      border-top: 1px solid rgba(255,51,51,0.2);
       padding: 12px 24px;
       display: flex;
       gap: 10px;
@@ -260,7 +260,7 @@ search_exclude: true
     }
     #msg-input {
       flex: 1;
-      border: 1px solid rgba(200,151,58,0.3);
+      border: 1px solid rgba(255,51,51,0.3);
       outline: none;
       padding: 10px 14px;
       font-family: 'Source Sans 3', sans-serif;
@@ -271,9 +271,9 @@ search_exclude: true
       border-radius: 2px;
       max-height: 100px;
     }
-    #msg-input:focus { border-color: var(--gold); }
+    #msg-input:focus { border-color: var(--red); }
     #send-btn {
-      background: var(--gold);
+      background: var(--red);
       border: none;
       cursor: pointer;
       width: 44px; height: 44px;
@@ -282,7 +282,7 @@ search_exclude: true
       flex-shrink: 0;
       transition: background 0.2s;
     }
-    #send-btn:hover { background: var(--gold-light); }
+    #send-btn:hover { background: var(--red-light); }
     #send-btn svg { width: 18px; height: 18px; fill: var(--navy); }
     #send-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -306,7 +306,7 @@ search_exclude: true
     }
     .auth-wall p { font-size: 0.9rem; color: #666; }
     .btn-gold {
-      background: var(--gold);
+      background: var(--red);
       color: var(--navy);
       font-family: 'Oswald', sans-serif;
       font-weight: 600;

@@ -14,8 +14,8 @@ title: Submit a Deed
     <style>
         :root {
             --navy: #0a1628;
-            --gold: #c8973a;
-            --gold-light: #e8b55a;
+            --red: #FF3333;
+            --red-light: #FF5555;
             --white: #f9f7f2;
             --off-white: #ede9e0;
             --gray: #6b6b6b;
@@ -45,7 +45,7 @@ title: Submit a Deed
         /* ── TOP BAR ── */
         .top-bar {
             background: var(--navy);
-            color: var(--gold);
+            color: var(--red);
             text-align: center;
             font-family: 'Oswald', sans-serif;
             font-size: 0.72rem;
@@ -60,7 +60,7 @@ title: Submit a Deed
             top: 0;
             z-index: 100;
             background: var(--white);
-            border-bottom: 3px solid var(--gold);
+            border-bottom: 3px solid var(--red);
             box-shadow: 0 2px 16px rgba(0,0,0,0.08);
         }
 
@@ -82,19 +82,28 @@ title: Submit a Deed
         }
 
         .nav-logo {
-            width: 52px;
-            height: 42px;
-            background: var(--navy);
-            border-radius: 4px;
+            width: auto;
+            height: 52px;
+            background: transparent;
+            border-radius: 0;
             display: flex;
             align-items: center;
             justify-content: center;
             font-family: 'Oswald', sans-serif;
             font-weight: 700;
             font-size: 1rem;
-            color: var(--gold);
+            color: var(--red);
             letter-spacing: 0.05em;
             flex-shrink: 0;
+            min-width: 100px;
+        }
+
+        .nav-logo img {
+            height: 100%;
+            width: auto;
+            max-width: 150px;
+            object-fit: contain;
+            display: block;
         }
 
         .nav-title {
@@ -114,7 +123,7 @@ title: Submit a Deed
 
         .nav-title .sub {
             font-size: 0.62rem;
-            color: var(--gold);
+            color: var(--red);
             letter-spacing: 0.12em;
             text-transform: uppercase;
             font-weight: 600;
@@ -141,7 +150,7 @@ title: Submit a Deed
         }
 
         .nav-links a:hover {
-            color: var(--gold);
+            color: var(--red);
         }
 
         #loginArea {
@@ -198,7 +207,7 @@ title: Submit a Deed
         }
 
         .login-required a:hover {
-            background: var(--gold);
+            background: var(--red);
             color: var(--navy);
         }
 
@@ -244,7 +253,7 @@ title: Submit a Deed
         .form-input:focus,
         .form-textarea:focus {
             outline: none;
-            border-color: var(--gold);
+            border-color: var(--red);
             box-shadow: 0 0 0 3px rgba(200, 151, 58, 0.1);
         }
 
@@ -273,12 +282,12 @@ title: Submit a Deed
         }
 
         .image-upload-area:hover {
-            border-color: var(--gold);
+            border-color: var(--red);
             background: rgba(200, 151, 58, 0.05);
         }
 
         .image-upload-area.dragging {
-            border-color: var(--gold);
+            border-color: var(--red);
             background: rgba(200, 151, 58, 0.1);
             transform: scale(1.02);
         }
@@ -327,7 +336,7 @@ title: Submit a Deed
 
         .btn-submit {
             background: var(--navy);
-            color: var(--gold);
+            color: var(--red);
             width: 100%;
             padding: 14px 24px;
             font-size: 0.95rem;
@@ -336,7 +345,7 @@ title: Submit a Deed
         }
 
         .btn-submit:hover {
-            background: var(--gold);
+            background: var(--red);
             color: var(--navy);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(10, 22, 40, 0.15);
@@ -422,7 +431,7 @@ title: Submit a Deed
     <nav>
         <div class="nav-inner">
             <a href="/" class="nav-brand">
-                <div class="nav-logo">D.A.D.</div>
+                <div class="nav-logo"><img src="/images/projects/dad/dad-logo.png" alt="D.A.D. Logo" onerror="this.style.display='none'"></div>
                 <div class="nav-title">
                     <div class="name">D.A.D.</div>
                     <div class="sub">Doing Exceptional Deeds</div>
