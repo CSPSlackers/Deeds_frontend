@@ -325,12 +325,34 @@ search_exclude: true
       mix-blend-mode: luminosity;
     }
 
+    /* ── HERO SPLIT LAYOUT ── */
+    .hero-split {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1200px;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+      min-height: 100vh;
+      align-items: center;
+      padding: 80px 40px;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      padding-right: 52px;
+      border-right: 1px solid rgba(255,51,51,0.18);
+    }
+
+    .hero-right {
+      padding-left: 40px;
+    }
+
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 760px;
-      padding: 48px 40px 24px;
-      text-align: center;
       animation: fadeUp 0.9s ease both;
     }
 
@@ -339,12 +361,30 @@ search_exclude: true
       position: relative;
       z-index: 2;
       width: 100%;
-      max-width: 1200px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 2px;
-      padding: 0 40px 60px;
       animation: fadeUp 1.1s ease both;
+    }
+
+    @media (max-width: 860px) {
+      .hero-split {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 60px 24px;
+      }
+      .hero-left {
+        padding-right: 0;
+        border-right: none;
+        padding-bottom: 32px;
+        border-bottom: 1px solid rgba(255,51,51,0.18);
+      }
+      .hero-right { padding-left: 0; }
+      .hero-programs { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .hero-programs { grid-template-columns: 1fr; }
     }
 
     .hero-program-card {
@@ -427,11 +467,10 @@ search_exclude: true
 
     .hero-sub {
       font-family: 'Source Sans 3', sans-serif;
-      font-size: 1.1rem;
-      color: rgba(249,247,242,0.75);
+      font-size: 1rem;
+      color: rgba(249,247,242,0.72);
       line-height: 1.7;
-      max-width: 560px;
-      margin: 0 auto 36px;
+      margin: 0;
     }
 
     /* ── PONG BACKGROUND ── */
@@ -682,8 +721,8 @@ search_exclude: true
 
     .hero-ctas {
       display: flex;
-      gap: 14px;
-      justify-content: center;
+      gap: 12px;
+      justify-content: flex-start;
       flex-wrap: wrap;
     }
 
@@ -2340,46 +2379,58 @@ search_exclude: true
   <section class="hero" id="programs">
     <div class="hero-bg"></div>
     <div class="hero-pattern"></div>
-    <div class="hero-content">
-      <h1 class="hero-title">Building <span>Communities</span><br>One Deed at a Time</h1>
-    </div>
-    <div class="hero-programs">
-      <div class="hero-program-card">
-        <div class="program-num">01</div>
-        <div class="program-title">Youth Wellness &amp; Student Success (6–12)</div>
-        <p class="program-desc">School-aligned programming for middle and high school students focused on wellness, life skills, and academic accountability.</p>
+    <div class="hero-split">
+
+      <!-- LEFT: title + tagline + CTAs -->
+      <div class="hero-left">
+        <div class="hero-content">
+          <div class="hero-eyebrow">Our Programs</div>
+          <h1 class="hero-title">Building <span>Communities</span><br>One Deed at a Time</h1>
+          <p class="hero-sub">Six programs. One mission — uplifting youth, athletes, and seniors through education-first initiatives that build real futures.</p>
+        </div>
+        <div class="hero-ctas">
+          <a href="#donate" class="btn-primary">Donate Now</a>
+          <a href="#contact" class="btn-outline">Get Involved</a>
+          <button id="focus-carousel-btn" class="btn-outline" style="background:transparent;cursor:pointer;">📸 View Deeds</button>
+        </div>
       </div>
-      <div class="hero-program-card">
-        <div class="program-num">02</div>
-        <div class="program-title">Athlete Education &amp; Transition Portal</div>
-        <p class="program-desc">Post-secondary education and career transition support designed specifically for student-athletes navigating life beyond sports.</p>
+
+      <!-- RIGHT: 2-column program cards -->
+      <div class="hero-right">
+        <div class="hero-programs">
+          <div class="hero-program-card">
+            <div class="program-num">01</div>
+            <div class="program-title">Youth Wellness &amp; Student Success (6–12)</div>
+            <p class="program-desc">School-aligned programming for middle and high school students focused on wellness, life skills, and academic accountability.</p>
+          </div>
+          <div class="hero-program-card">
+            <div class="program-num">02</div>
+            <div class="program-title">Athlete Education &amp; Transition Portal</div>
+            <p class="program-desc">Post-secondary education and career transition support designed specifically for student-athletes navigating life beyond sports.</p>
+          </div>
+          <div class="hero-program-card">
+            <div class="program-num">03</div>
+            <div class="program-title">Athlete Development &amp; Wellness Program</div>
+            <p class="program-desc">Comprehensive wellness and development resources to support athletes holistically — mentally, physically, and academically.</p>
+          </div>
+          <div class="hero-program-card">
+            <div class="program-num">04</div>
+            <div class="program-title">Student Success Advisory Pilot</div>
+            <p class="program-desc">A continuity-based advisory model that follows students across grade levels, providing consistent mentorship and goal-setting support.</p>
+          </div>
+          <div class="hero-program-card">
+            <div class="program-num">05</div>
+            <div class="program-title">Industry Voices (Pilot)</div>
+            <p class="program-desc">Career exposure and industry mentorship connecting students with professionals across sectors to expand their vision of the future.</p>
+          </div>
+          <div class="hero-program-card">
+            <div class="program-num">06</div>
+            <div class="program-title">Athlete &amp; Family Education Support</div>
+            <p class="program-desc">Resources and guidance for student-athletes and their families to navigate academic, financial, and life planning decisions together.</p>
+          </div>
+        </div>
       </div>
-      <div class="hero-program-card">
-        <div class="program-num">03</div>
-        <div class="program-title">Athlete Development &amp; Wellness Program</div>
-        <p class="program-desc">Comprehensive wellness and development resources to support athletes holistically — mentally, physically, and academically.</p>
-      </div>
-      <div class="hero-program-card">
-        <div class="program-num">04</div>
-        <div class="program-title">Student Success Advisory Pilot</div>
-        <p class="program-desc">A continuity-based advisory model that follows students across grade levels, providing consistent mentorship and goal-setting support.</p>
-      </div>
-      <div class="hero-program-card">
-        <div class="program-num">05</div>
-        <div class="program-title">Industry Voices (Pilot)</div>
-        <p class="program-desc">Career exposure and industry mentorship connecting students with professionals across sectors to expand their vision of the future.</p>
-      </div>
-      <div class="hero-program-card">
-        <div class="program-num">06</div>
-        <div class="program-title">Athlete &amp; Family Education Support</div>
-        <p class="program-desc">Resources and guidance for student-athletes and their families to navigate academic, financial, and life planning decisions together.</p>
-      </div>
-    </div>
-    <div class="hero-programs-cta">
-      <span class="hero-programs-cta-label">Support these programs</span>
-      <a href="#donate" class="card-btn card-btn-primary">Donate</a>
-      <a href="#contact" class="card-btn card-btn-outline">Get Involved</a>
-      <button id="focus-carousel-btn" class="card-btn card-btn-outline" style="background: transparent; border: 1px solid rgba(255,51,51,0.5); color: rgba(255,51,51,0.8); cursor: pointer; transition: all 0.2s;">📸 View Deeds</button>
+
     </div>
 
     <!-- CAROUSEL BEHIND PROGRAMS (z-index layering) -->
