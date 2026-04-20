@@ -533,19 +533,28 @@ search_exclude: true
     }
 
     .hero-carousel-backdrop {
-      position: absolute;
-      inset: 7%;
-      z-index: 1;
-      pointer-events: auto;
-      width: auto;
-      height: auto;
-      display: block;
+      position: relative;
+      width: 100%;
+      height: 220px;
+      z-index: 2;
       border-radius: 8px;
       overflow: hidden;
+      border: 1px solid rgba(255,51,51,0.2);
     }
     .hero-carousel-backdrop.hidden {
       display: none;
-      pointer-events: none;
+    }
+
+    /* When expanded, go full-screen fixed overlay */
+    .hero-carousel-backdrop.focused {
+      position: fixed !important;
+      inset: 4% !important;
+      width: auto !important;
+      height: auto !important;
+      border-radius: 12px;
+      z-index: 1000 !important;
+      overflow: hidden !important;
+      box-shadow: 0 0 0 9999px rgba(0,0,0,0.7);
     }
 
     .hero-carousel-backdrop .carousel-items {
@@ -566,11 +575,10 @@ search_exclude: true
       align-items: center;
       justify-content: center;
       pointer-events: none;
-      filter: brightness(0.6) blur(2px);
     }
 
     .hero-carousel-backdrop .carousel-item.active {
-      opacity: 0.25;
+      opacity: 1;
       pointer-events: auto;
     }
 
@@ -658,21 +666,8 @@ search_exclude: true
       color: var(--red);
     }
 
-    /* Focused carousel mode */
-    .hero-carousel-backdrop.focused {
-      inset: 9% !important;
-      width: auto !important;
-      height: auto !important;
-      border-radius: 8px;
-      z-index: 100;
-      overflow: hidden !important;
-      max-width: calc(100% - 18%);
-      max-height: calc(100% - 18%);
-    }
-
     .hero-carousel-backdrop.focused .carousel-item {
       opacity: 0 !important;
-      filter: brightness(1) blur(0px) !important;
     }
 
     .hero-carousel-backdrop.focused .carousel-item.active {
@@ -2381,17 +2376,41 @@ search_exclude: true
     <div class="hero-pattern"></div>
     <div class="hero-split">
 
-      <!-- LEFT: title + tagline + CTAs -->
+      <!-- LEFT: title + carousel + CTAs -->
       <div class="hero-left">
         <div class="hero-content">
           <div class="hero-eyebrow">Our Programs</div>
           <h1 class="hero-title">Building <span>Communities</span><br>One Deed at a Time</h1>
           <p class="hero-sub">Six programs. One mission — uplifting youth, athletes, and seniors through education-first initiatives that build real futures.</p>
         </div>
+
+        <!-- CAROUSEL — inline photo strip alongside the program cards -->
+        <div class="hero-carousel-backdrop" id="hero-carousel-backdrop">
+          <div class="carousel-items" id="carousel-items-hero">
+            <!-- Items populated by JavaScript -->
+          </div>
+          <div class="carousel-loading" id="carousel-loading-hero" style="display:none;">
+            <div class="carousel-spinner"></div>
+          </div>
+          <div class="carousel-error" id="carousel-error-hero" style="display:none;">
+            <div class="carousel-error-icon">⚠️</div>
+            <div class="carousel-error-title">Unable to Load</div>
+            <div class="carousel-error-message" id="carousel-error-message-hero">Couldn't load photos. Try refreshing.</div>
+          </div>
+          <div class="carousel-empty" id="carousel-empty-hero" style="display:none;">
+            <div class="carousel-empty-icon">🖼️</div>
+            <div class="carousel-empty-title">No Deeds Yet</div>
+            <div class="carousel-empty-message">Community deeds will appear here soon.</div>
+          </div>
+          <button class="carousel-nav prev" id="carousel-prev-hero" aria-label="Previous slide" style="display:none;">‹</button>
+          <button class="carousel-nav next" id="carousel-next-hero" aria-label="Next slide" style="display:none;">›</button>
+          <div class="carousel-dots" id="carousel-dots-hero" style="display:none;"></div>
+        </div>
+
         <div class="hero-ctas">
           <a href="#donate" class="btn-primary">Donate Now</a>
           <a href="#contact" class="btn-outline">Get Involved</a>
-          <button id="focus-carousel-btn" class="btn-outline" style="background:transparent;cursor:pointer;">📸 View Deeds</button>
+          <button id="focus-carousel-btn" class="btn-outline" style="background:transparent;cursor:pointer;">🔍 Expand</button>
         </div>
       </div>
 
@@ -2431,33 +2450,6 @@ search_exclude: true
         </div>
       </div>
 
-    </div>
-
-    <!-- CAROUSEL BEHIND PROGRAMS (z-index layering) -->
-    <div class="hero-carousel-backdrop" id="hero-carousel-backdrop">
-      <div class="carousel-items" id="carousel-items-hero">
-        <!-- Items will be populated by JavaScript -->
-      </div>
-      <!-- Loading State -->
-      <div class="carousel-loading" id="carousel-loading-hero" style="display: none;">
-        <div class="carousel-spinner"></div>
-      </div>
-      <!-- Error State -->
-      <div class="carousel-error" id="carousel-error-hero" style="display: none;">
-        <div class="carousel-error-icon">⚠️</div>
-        <div class="carousel-error-title">Unable to Load Carousel</div>
-        <div class="carousel-error-message" id="carousel-error-message-hero">We're having trouble loading the carousel. Please try refreshing the page.</div>
-      </div>
-      <!-- Empty State -->
-      <div class="carousel-empty" id="carousel-empty-hero" style="display: none;">
-        <div class="carousel-empty-icon">🖼️</div>
-        <div class="carousel-empty-title">No Deeds Yet</div>
-        <div class="carousel-empty-message">Featured community deeds will appear here soon. Check back later!</div>
-      </div>
-      <!-- Controls -->
-      <button class="carousel-nav prev" id="carousel-prev-hero" aria-label="Previous slide" style="display: none;">‹</button>
-      <button class="carousel-nav next" id="carousel-next-hero" aria-label="Next slide" style="display: none;">›</button>
-      <div class="carousel-dots" id="carousel-dots-hero" style="display: none;"></div>
     </div>
 
     <!-- PONG GAME BEHIND PROGRAMS -->
@@ -3468,11 +3460,11 @@ search_exclude: true
         if (isFocused) {
           carouselBackdrop.classList.add('focused');
           heroPrograms.classList.add('hidden-for-focus');
-          focusBtn.textContent = '← Back';
+          focusBtn.textContent = '← Collapse';
         } else {
           carouselBackdrop.classList.remove('focused');
           heroPrograms.classList.remove('hidden-for-focus');
-          focusBtn.textContent = '📸 View Deeds';
+          focusBtn.textContent = '🔍 Expand';
         }
       }
 
