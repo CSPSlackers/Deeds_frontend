@@ -1,0 +1,149 @@
+---
+permalink: /program6
+search_exclude: true
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Program 06 — Athlete &amp; Family Education Support | D.A.D.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --navy: #0a1628; --red: #FF3333; --red-light: #FF5555; --white: #f9f7f2; --off-white: #ede9e0; --gray: #6b6b6b; --dark-gray: #2a2a2a; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--white); color: var(--dark-gray); overflow-x: hidden; }
+    .top-bar { background: var(--navy); color: var(--red); text-align: center; font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; padding: 6px 20px; text-transform: uppercase; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--red); box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 72px; }
+    .nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .nav-logo { width: auto; height: 52px; display: flex; align-items: center; }
+    .nav-logo img { height: 100%; width: auto; max-width: 150px; object-fit: contain; display: block; }
+    .nav-title { display: flex; flex-direction: column; line-height: 1.15; }
+    .nav-title .name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--navy); }
+    .nav-title .sub { font-size: 0.68rem; color: var(--gray); letter-spacing: 0.05em; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links > li > a { font-family: 'Oswald', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 12px; }
+    .nav-links > li > a:hover { color: var(--red); }
+    .nav-donate { background: var(--red); color: var(--navy) !important; border-radius: 4px; padding: 8px 18px !important; font-weight: 600; }
+    .program-hero { background: var(--navy); color: var(--white); padding: 100px 40px 80px; position: relative; overflow: hidden; }
+    .program-hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,51,51,0.03) 60px, rgba(255,51,51,0.03) 61px); }
+    .program-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .program-num-badge { display: inline-block; font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); border: 1px solid rgba(255,51,51,0.4); padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; }
+    .program-hero h1 { font-family: 'Oswald', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.1; color: var(--white); margin-bottom: 24px; }
+    .program-hero h1 span { color: var(--red); }
+    .program-hero-desc { font-size: 1.2rem; line-height: 1.7; color: rgba(249,247,242,0.75); max-width: 680px; }
+    .program-content { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+    .content-section { margin-bottom: 60px; }
+    .content-section h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 600; color: var(--navy); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--red); }
+    .content-section p { font-size: 1.05rem; line-height: 1.75; color: var(--dark-gray); margin-bottom: 16px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 28px; }
+    .feature-card { background: var(--off-white); border-radius: 8px; padding: 28px 24px; border-left: 4px solid var(--red); }
+    .feature-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 10px; }
+    .feature-card p { font-size: 0.95rem; color: var(--gray); line-height: 1.6; margin: 0; }
+    .eligibility-list { list-style: none; padding: 0; margin-top: 20px; }
+    .eligibility-list li { padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.07); font-size: 1rem; color: var(--dark-gray); display: flex; align-items: flex-start; gap: 12px; }
+    .eligibility-list li::before { content: '✓'; color: var(--red); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .cta-section { background: var(--navy); color: var(--white); border-radius: 12px; padding: 56px 48px; text-align: center; margin-top: 60px; }
+    .cta-section h2 { font-family: 'Oswald', sans-serif; font-size: 2rem; margin-bottom: 16px; }
+    .cta-section p { color: rgba(249,247,242,0.7); font-size: 1.05rem; margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--red); color: var(--navy); font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 32px; border-radius: 4px; text-decoration: none; display: inline-block; }
+    .btn-outline { border: 2px solid rgba(249,247,242,0.5); color: var(--white); font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 32px; border-radius: 4px; text-decoration: none; display: inline-block; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; font-family: 'Oswald', sans-serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); text-decoration: none; margin-bottom: 40px; }
+    .back-link:hover { opacity: 0.8; }
+    footer { background: var(--navy); color: rgba(249,247,242,0.6); text-align: center; padding: 32px; font-size: 0.85rem; }
+    footer a { color: var(--red); text-decoration: none; }
+    @media (max-width: 768px) { .program-hero { padding: 80px 24px 60px; } .program-content { padding: 60px 24px; } .cta-section { padding: 40px 24px; } }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">501(c)(3) Nonprofit Organization &nbsp;|&nbsp; MBE #23002138 &nbsp;|&nbsp; San Marcos, CA</div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/dad" class="nav-brand">
+        <div class="nav-logo"><img src="/images/projects/dad/dad-logo.png" alt="D.A.D. Logo" onerror="this.style.display='none'"></div>
+        <div class="nav-title">
+          <span class="name">Doing Exceptional Deeds</span>
+          <span class="sub">A 501c(3) Nonprofit &nbsp;·&nbsp; MBE #23002138</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/dad#programs">Programs</a></li>
+        <li><a href="/dad#about">About</a></li>
+        <li><a href="/dad#seniors">Seniors</a></li>
+        <li><a href="/dad#contact">Contact</a></li>
+        <li><a href="/dad#donate" class="nav-donate">Donate</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="program-hero">
+    <div class="program-hero-inner">
+      <div class="program-num-badge">Program 06</div>
+      <h1>Athlete &amp; Family<br><span>Education Support</span></h1>
+      <p class="program-hero-desc">Resources and guidance for student-athletes and their families to navigate academic, financial, and life planning decisions together.</p>
+    </div>
+  </section>
+
+  <div class="program-content">
+    <a href="/dad#programs" class="back-link">← Back to All Programs</a>
+
+    <div class="content-section">
+      <h2>About This Program</h2>
+      <p>A student-athlete's success is rarely theirs alone. Behind every young person navigating academics, athletics, and the future is a family trying to help — often without a roadmap. The Athlete &amp; Family Education Support program gives families the resources and confidence to guide their students through it.</p>
+      <p>From understanding NCAA eligibility rules to navigating FAFSA, from mental health conversations to life planning after sports — this program puts practical, accessible information in the hands of the people who matter most.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>What We Offer</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Family Workshops</h3>
+          <p>Interactive sessions covering college recruiting, financial aid, academic requirements, and how to best support a student-athlete at home.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Financial Literacy &amp; Aid Navigation</h3>
+          <p>Practical guidance on FAFSA, scholarships, athletic aid, and building a financial plan for post-secondary education.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Recruiting &amp; Eligibility Guidance</h3>
+          <p>Clear explanations of NCAA/NAIA eligibility requirements, recruiting timelines, and what families can and can't do during the process.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Life Planning Resources</h3>
+          <p>Tools for families to have meaningful conversations about life beyond sports — career, identity, finances, and long-term goals.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Who Can Participate</h2>
+      <ul class="eligibility-list">
+        <li>Parents and guardians of current or aspiring student-athletes</li>
+        <li>Student-athletes at any level seeking family-inclusive support</li>
+        <li>Families navigating the college recruiting process for the first time</li>
+        <li>Community members who want to better support youth athletes in their network</li>
+      </ul>
+    </div>
+
+    <div class="cta-section">
+      <h2>Support the Whole Family</h2>
+      <p>Great athletes are built by great support systems. Let us help yours become one.</p>
+      <div class="cta-btns">
+        <a href="/dad#contact" class="btn-primary">Get Resources &amp; Support</a>
+        <a href="/dad#donate" class="btn-outline">Support This Program</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2021 Doing Exceptional Deeds (D.A.D.). All rights reserved. &nbsp;·&nbsp; <a href="/dad">Home</a> &nbsp;·&nbsp; 420 Smilax Road, San Marcos, CA 92078</p>
+  </footer>
+
+</body>
+</html>

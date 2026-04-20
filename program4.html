@@ -1,0 +1,151 @@
+---
+permalink: /program4
+search_exclude: true
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Program 04 — Student Success Advisory Pilot | D.A.D.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root { --navy: #0a1628; --red: #FF3333; --red-light: #FF5555; --white: #f9f7f2; --off-white: #ede9e0; --gray: #6b6b6b; --dark-gray: #2a2a2a; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Source Sans 3', sans-serif; background: var(--white); color: var(--dark-gray); overflow-x: hidden; }
+    .top-bar { background: var(--navy); color: var(--red); text-align: center; font-family: 'Oswald', sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; padding: 6px 20px; text-transform: uppercase; }
+    nav { position: sticky; top: 0; z-index: 100; background: var(--white); border-bottom: 3px solid var(--red); box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+    .nav-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 0 32px; height: 72px; }
+    .nav-brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+    .nav-logo { width: auto; height: 52px; display: flex; align-items: center; }
+    .nav-logo img { height: 100%; width: auto; max-width: 150px; object-fit: contain; display: block; }
+    .nav-title { display: flex; flex-direction: column; line-height: 1.15; }
+    .nav-title .name { font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 1.05rem; color: var(--navy); }
+    .nav-title .sub { font-size: 0.68rem; color: var(--gray); letter-spacing: 0.05em; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links > li > a { font-family: 'Oswald', sans-serif; font-size: 0.82rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--navy); text-decoration: none; padding: 8px 12px; }
+    .nav-links > li > a:hover { color: var(--red); }
+    .nav-donate { background: var(--red); color: var(--navy) !important; border-radius: 4px; padding: 8px 18px !important; font-weight: 600; }
+    .program-hero { background: var(--navy); color: var(--white); padding: 100px 40px 80px; position: relative; overflow: hidden; }
+    .program-hero::before { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(90deg, transparent, transparent 60px, rgba(255,51,51,0.03) 60px, rgba(255,51,51,0.03) 61px); }
+    .program-hero-inner { max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .program-num-badge { display: inline-block; font-family: 'Oswald', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); border: 1px solid rgba(255,51,51,0.4); padding: 4px 14px; border-radius: 20px; margin-bottom: 20px; }
+    .program-hero h1 { font-family: 'Oswald', sans-serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 700; line-height: 1.1; color: var(--white); margin-bottom: 24px; }
+    .program-hero h1 span { color: var(--red); }
+    .program-hero-desc { font-size: 1.2rem; line-height: 1.7; color: rgba(249,247,242,0.75); max-width: 680px; }
+    .program-content { max-width: 900px; margin: 0 auto; padding: 80px 40px; }
+    .content-section { margin-bottom: 60px; }
+    .content-section h2 { font-family: 'Oswald', sans-serif; font-size: 1.8rem; font-weight: 600; color: var(--navy); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--red); }
+    .content-section p { font-size: 1.05rem; line-height: 1.75; color: var(--dark-gray); margin-bottom: 16px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; margin-top: 28px; }
+    .feature-card { background: var(--off-white); border-radius: 8px; padding: 28px 24px; border-left: 4px solid var(--red); }
+    .feature-card h3 { font-family: 'Oswald', sans-serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 10px; }
+    .feature-card p { font-size: 0.95rem; color: var(--gray); line-height: 1.6; margin: 0; }
+    .eligibility-list { list-style: none; padding: 0; margin-top: 20px; }
+    .eligibility-list li { padding: 12px 0; border-bottom: 1px solid rgba(0,0,0,0.07); font-size: 1rem; color: var(--dark-gray); display: flex; align-items: flex-start; gap: 12px; }
+    .eligibility-list li::before { content: '✓'; color: var(--red); font-weight: 700; font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .pilot-badge { display: inline-block; background: rgba(255,51,51,0.1); color: var(--red); font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 6px 16px; border-radius: 4px; border: 1px solid rgba(255,51,51,0.3); margin-bottom: 24px; }
+    .cta-section { background: var(--navy); color: var(--white); border-radius: 12px; padding: 56px 48px; text-align: center; margin-top: 60px; }
+    .cta-section h2 { font-family: 'Oswald', sans-serif; font-size: 2rem; margin-bottom: 16px; }
+    .cta-section p { color: rgba(249,247,242,0.7); font-size: 1.05rem; margin-bottom: 32px; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary { background: var(--red); color: var(--navy); font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 32px; border-radius: 4px; text-decoration: none; display: inline-block; }
+    .btn-outline { border: 2px solid rgba(249,247,242,0.5); color: var(--white); font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 32px; border-radius: 4px; text-decoration: none; display: inline-block; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; font-family: 'Oswald', sans-serif; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); text-decoration: none; margin-bottom: 40px; }
+    .back-link:hover { opacity: 0.8; }
+    footer { background: var(--navy); color: rgba(249,247,242,0.6); text-align: center; padding: 32px; font-size: 0.85rem; }
+    footer a { color: var(--red); text-decoration: none; }
+    @media (max-width: 768px) { .program-hero { padding: 80px 24px 60px; } .program-content { padding: 60px 24px; } .cta-section { padding: 40px 24px; } }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar">501(c)(3) Nonprofit Organization &nbsp;|&nbsp; MBE #23002138 &nbsp;|&nbsp; San Marcos, CA</div>
+
+  <nav>
+    <div class="nav-inner">
+      <a href="/dad" class="nav-brand">
+        <div class="nav-logo"><img src="/images/projects/dad/dad-logo.png" alt="D.A.D. Logo" onerror="this.style.display='none'"></div>
+        <div class="nav-title">
+          <span class="name">Doing Exceptional Deeds</span>
+          <span class="sub">A 501c(3) Nonprofit &nbsp;·&nbsp; MBE #23002138</span>
+        </div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="/dad#programs">Programs</a></li>
+        <li><a href="/dad#about">About</a></li>
+        <li><a href="/dad#seniors">Seniors</a></li>
+        <li><a href="/dad#contact">Contact</a></li>
+        <li><a href="/dad#donate" class="nav-donate">Donate</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="program-hero">
+    <div class="program-hero-inner">
+      <div class="program-num-badge">Program 04 &nbsp;·&nbsp; Pilot</div>
+      <h1>Student Success<br><span>Advisory Pilot</span></h1>
+      <p class="program-hero-desc">A continuity-based advisory model that follows students across grade levels, providing consistent mentorship and goal-setting support throughout their academic journey.</p>
+    </div>
+  </section>
+
+  <div class="program-content">
+    <a href="/dad#programs" class="back-link">← Back to All Programs</a>
+
+    <div class="content-section">
+      <div class="pilot-badge">Currently in Pilot Phase — Accepting Middle School Cohorts</div>
+      <h2>About This Program</h2>
+      <p>Most advisory programs reset every year — a new advisor, a new relationship, starting over. The Student Success Advisory Pilot is different. Advisors stay with the same students across multiple grade levels, building the kind of trust and consistency that actually changes outcomes.</p>
+      <p>This continuity model means advisors know each student's history, understand their growth trajectory, and can provide genuinely personalized guidance — not generic advice handed down from a stranger every fall.</p>
+    </div>
+
+    <div class="content-section">
+      <h2>What We Offer</h2>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <h3>Longitudinal Mentorship</h3>
+          <p>Advisors follow the same students across grade levels — no re-introducing yourself, no losing context. Real relationships built over time.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Goal Tracking</h3>
+          <p>Structured goal-setting sessions at the start of each term with ongoing check-ins to monitor progress and adapt strategies.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Transition Planning</h3>
+          <p>Intentional planning at each academic transition point — middle to high school, high school to post-secondary — so students are never caught off guard.</p>
+        </div>
+        <div class="feature-card">
+          <h3>Family Engagement</h3>
+          <p>Parents and guardians are looped in at key milestones, ensuring home and school environments reinforce the same goals.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="content-section">
+      <h2>Who Can Participate</h2>
+      <ul class="eligibility-list">
+        <li>Middle school students (Grades 6–8) in the pilot cohort schools</li>
+        <li>Students who commit to multi-year participation for full continuity benefit</li>
+        <li>School partners willing to integrate advisory scheduling into the school day</li>
+        <li>Families who want to be actively engaged in their student's advisory journey</li>
+      </ul>
+    </div>
+
+    <div class="cta-section">
+      <h2>Join the Pilot Cohort</h2>
+      <p>We're currently accepting new middle school students and school partners for the next cohort. Spots are limited — reach out early.</p>
+      <div class="cta-btns">
+        <a href="/dad#contact" class="btn-primary">Apply for the Pilot</a>
+        <a href="/dad#donate" class="btn-outline">Support This Program</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2021 Doing Exceptional Deeds (D.A.D.). All rights reserved. &nbsp;·&nbsp; <a href="/dad">Home</a> &nbsp;·&nbsp; 420 Smilax Road, San Marcos, CA 92078</p>
+  </footer>
+
+</body>
+</html>

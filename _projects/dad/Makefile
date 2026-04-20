@@ -45,7 +45,7 @@ assets:
 # Clean distributed files (keeps source intact)
 clean:
 	@echo "🧹 Cleaning $(PROJECT_NAME) distribution..."
-	@rm -f $(ROOT_DEST)/index.html $(ROOT_DEST)/login.html $(ROOT_DEST)/chat_user.html $(ROOT_DEST)/chat_admin.html $(ROOT_DEST)/public-submit.html
+	@rm -f $(ROOT_DEST)/index.html $(ROOT_DEST)/login.html $(ROOT_DEST)/chat_user.html $(ROOT_DEST)/chat_admin.html $(ROOT_DEST)/public-submit.html $(ROOT_DEST)/program1.html $(ROOT_DEST)/program2.html $(ROOT_DEST)/program3.html $(ROOT_DEST)/program4.html $(ROOT_DEST)/program5.html $(ROOT_DEST)/program6.html
 	@rm -rf $(API_DEST)
 	@rm -rf $(IMAGES_DEST)
 	@echo "✓ $(PROJECT_NAME) cleaned"
