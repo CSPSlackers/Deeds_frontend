@@ -3825,10 +3825,34 @@ D.A.D. also has a public deed submission page where community members can submit
       if (b.y - b.r < 0) { b.y = b.r;     b.vy *= -1; }
       if (b.y + b.r > H) { b.y = H - b.r; b.vy *= -1; }
 
-      // Engine collision detection — checks this canvas rect against all other
-      // GameObject canvases (PongPaddleLeft, PongPaddleRight) in gameEnv.gameObjects.
-      // Calls handleCollisionReaction() below when overlap is detected.
-      this.collisionChecks();
+      // Direct positional collision — replaces getBoundingClientRect()-based engine
+      // detection which tunnels at high ball speeds (ball moves >10px/frame, paddle is 10px wide).
+      const leftEdge  = 10 + PADDLE_W;
+      const rightEdge = W - 10 - PADDLE_W;
+
+      if (b.vx < 0 && b.x - b.r <= leftEdge) {
+        const paddle = this.gameEnv.paddleLeft;
+        if (paddle && Math.abs(b.y - paddle.y) <= paddle.h / 2 + b.r) {
+          const rel = (b.y - paddle.y) / (paddle.h / 2);
+          const spd = Math.min(Math.hypot(b.vx, b.vy) * 1.06, MAX_SPEED);
+          b.vx = spd * Math.cos(rel * 1.1);
+          b.vy = spd * Math.sin(rel * 1.1);
+          b.x  = leftEdge + b.r + 1;
+          stats.hits++;
+        }
+      }
+
+      if (b.vx > 0 && b.x + b.r >= rightEdge) {
+        const paddle = this.gameEnv.paddleRight;
+        if (paddle && Math.abs(b.y - paddle.y) <= paddle.h / 2 + b.r) {
+          const rel = (b.y - paddle.y) / (paddle.h / 2);
+          const spd = Math.min(Math.hypot(b.vx, b.vy) * 1.06, MAX_SPEED);
+          b.vx = -spd * Math.cos(rel * 1.1);
+          b.vy =  spd * Math.sin(rel * 1.1);
+          b.x  = rightEdge - b.r - 1;
+          stats.hits++;
+        }
+      }
 
       // Scoring — write to gameEnv.stats
       if (b.x < 0) { stats.playerScore++; this.gameEnv.flash = 40; this._resetBall(); }
