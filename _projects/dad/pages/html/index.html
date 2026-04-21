@@ -194,6 +194,45 @@ search_exclude: true
 
     .nav-donate:hover { background: var(--red-light) !important; }
 
+    .nav-get-involved {
+      border: 1.5px solid var(--navy);
+      color: var(--navy) !important;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 8px 18px;
+      font-weight: 600;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nav-get-involved:hover { border-color: var(--red); color: var(--red) !important; }
+
+    .carousel-expand-btn {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      background: rgba(10,22,40,0.6);
+      border: 1px solid rgba(255,51,51,0.4);
+      color: rgba(249,247,242,0.8);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .carousel-expand-btn:hover { border-color: var(--red); color: var(--white); background: rgba(255,51,51,0.15); }
+    .hero-carousel-backdrop.focused .carousel-expand-btn {
+      bottom: 16px;
+      z-index: 1010;
+    }
+
     .user-display {
       display: flex;
       align-items: center;
@@ -510,15 +549,33 @@ search_exclude: true
     #pong-toggle:hover { background: rgba(255,51,51,0.28); border-color: var(--red); }
     #pong-toggle.active { background: rgba(255,51,51,0.3); border-color: var(--red); color: var(--red); }
 
+    #pong-player-btn {
+      position: absolute;
+      bottom: 20px;
+      right: 24px;
+      z-index: 10;
+      background: rgba(10,22,40,0.65);
+      border: 1px solid rgba(255,51,51,0.45);
+      color: rgba(255,51,51,0.85);
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    #pong-player-btn:hover { background: rgba(255,51,51,0.22); border-color: var(--red); color: var(--red); }
+    #pong-player-btn.active { background: rgba(255,51,51,0.28); border-color: var(--red); color: var(--white); }
+
     /* ── HERO CAROUSEL & PONG BACKDROP ── */
     #pong-game-container {
       position: absolute;
       inset: 0;
       z-index: 0;
       pointer-events: none;
-      display: none;
-    }
-    #pong-game-container.active {
       display: block;
     }
     #pong-game-container canvas {
@@ -2343,7 +2400,8 @@ search_exclude: true
             <button class="user-logout">Log Out</button>
           </div>
         </li>
-        <li><a href="#donate" class="nav-donate">Donate</a></li>
+        <li><a href="#donate" class="nav-donate">Donate Now</a></li>
+        <li><a href="#contact" class="nav-get-involved">Get Involved</a></li>
       </ul>
       <div class="hamburger">
         <span></span><span></span><span></span>
@@ -2405,12 +2463,7 @@ search_exclude: true
           <button class="carousel-nav prev" id="carousel-prev-hero" aria-label="Previous slide" style="display:none;">‹</button>
           <button class="carousel-nav next" id="carousel-next-hero" aria-label="Next slide" style="display:none;">›</button>
           <div class="carousel-dots" id="carousel-dots-hero" style="display:none;"></div>
-        </div>
-
-        <div class="hero-ctas">
-          <a href="#donate" class="btn-primary">Donate Now</a>
-          <a href="#contact" class="btn-outline">Get Involved</a>
-          <button id="focus-carousel-btn" class="btn-outline" style="background:transparent;cursor:pointer;">🔍 Expand</button>
+          <button id="focus-carousel-btn" class="carousel-expand-btn" aria-label="Expand carousel">🔍 Expand</button>
         </div>
       </div>
 
@@ -2454,6 +2507,9 @@ search_exclude: true
 
     <!-- PONG GAME BEHIND PROGRAMS -->
     <div id="pong-game-container" aria-hidden="true"></div>
+
+    <!-- PLAYER MODE TOGGLE — bottom-right of hero grid -->
+    <button id="pong-player-btn" title="Play Pong">🏓 Play</button>
   </section>
 
   <!-- CAROUSEL DETAIL MODAL -->
@@ -3494,29 +3550,13 @@ D.A.D. also has a public deed submission page where community members can submit
 
       let isFocused = false;
 
-      // Toggle function
-      function switchView(view) {
-        if (view === 'pong') {
-          pongContainer.classList.add('active');
-          carouselBackdrop.classList.add('hidden');
-          toggleBtn.classList.add('pong-mode');
-          toggleBtn.title = 'Back to carousel';
-        } else {
-          pongContainer.classList.remove('active');
-          carouselBackdrop.classList.remove('hidden');
-          toggleBtn.classList.remove('pong-mode');
-          toggleBtn.title = 'Secret game';
-        }
-        localStorage.setItem('dadViewPreference', view);
-      }
-
       // Focus carousel function
       function toggleFocus() {
         isFocused = !isFocused;
         if (isFocused) {
           carouselBackdrop.classList.add('focused');
           heroPrograms.classList.add('hidden-for-focus');
-          focusBtn.textContent = '← Collapse';
+          focusBtn.textContent = '✕ Collapse';
         } else {
           carouselBackdrop.classList.remove('focused');
           heroPrograms.classList.remove('hidden-for-focus');
@@ -3524,16 +3564,13 @@ D.A.D. also has a public deed submission page where community members can submit
         }
       }
 
-      // Event listeners
       focusBtn?.addEventListener('click', toggleFocus);
-      toggleBtn?.addEventListener('click', () => {
-        const isCurrentlyPong = pongContainer.classList.contains('active');
-        switchView(isCurrentlyPong ? 'carousel' : 'pong');
-      });
 
-      // Initialize based on saved preference or default to carousel
-      const savedView = localStorage.getItem('dadViewPreference') || 'carousel';
-      switchView(savedView);
+      // Escape key or clicking the dark backdrop area also collapses
+      document.addEventListener('keydown', e => { if (e.key === 'Escape' && isFocused) toggleFocus(); });
+      carouselBackdrop?.addEventListener('click', e => {
+        if (isFocused && e.target === carouselBackdrop) toggleFocus();
+      });
     })();
   </script>
 
@@ -3544,161 +3581,56 @@ D.A.D. also has a public deed submission page where community members can submit
   const { default: GameObject }  = await import(BASE + '/assets/js/GameEnginev1.1/essentials/GameObject.js');
 
   const container = document.getElementById('pong-game-container');
-  const btn       = document.getElementById('carousel-pong-toggle');
+  const btn       = document.getElementById('pong-player-btn');
   if (!container || !btn) throw new Error('Pong: missing DOM elements');
 
   const hero = container.closest('.hero');
 
-  // ── PongGame : GameObject ─────────────────────────────────────────────────
-  // All mutable state lives on gameEnv (engine-native pattern):
-  //   gameEnv.stats.playerScore / aiScore / hits   — score & difficulty
-  //   gameEnv.playerMode                            — true = human controls right paddle
-  //   gameEnv.mouseY                                — latest mouse Y in canvas coords
-  class PongGame extends GameObject {
-    static PADDLE_W   = 10;
-    static BASE_SPEED = 4.0;
-    static MAX_SPEED  = 22;
-    static MIN_PADDLE = 28;
+  // ── Shared Pong constants ─────────────────────────────────────────────────
+  const PADDLE_W   = 10;
+  const BASE_SPEED = 4.0;
+  const MAX_SPEED  = 22;
+  const MIN_PADDLE = 28;
 
+  // ── PongCourt : GameObject ────────────────────────────────────────────────
+  // Owns the full-size background canvas. Draws the center divider, scores,
+  // speed bar, and danger tint — identical canvas ownership pattern to Background.js.
+  class PongCourt extends GameObject {
     constructor(data, gameEnv) {
       super(gameEnv);
-      this.canvas = gameEnv.canvas;
-      this.flash  = 0;
-
-      // Mouse tracking registered here, removed in destroy() — fully self-contained
-      this._onMouseMove = e => {
-        const rect = this.canvas.getBoundingClientRect();
-        this.gameEnv.mouseY = e.clientY - rect.top;
-      };
-      hero.addEventListener('mousemove', this._onMouseMove);
-
-      this._initPaddles();
-      this._resetBall();
+      this.canvas = document.createElement('canvas');
+      this.canvas.id = 'pong-court';
+      this.canvas.style.cssText = 'position:absolute;inset:0;z-index:1;pointer-events:none;';
+      this.ctx = this.canvas.getContext('2d');
+      gameEnv.container.appendChild(this.canvas);
+      this.resize();
     }
 
     _dim()  { return { W: this.gameEnv.innerWidth, H: this.gameEnv.innerHeight }; }
     _diff() { return Math.min(1, (this.gameEnv.stats.hits || 0) / 120); }
 
-    _paddleHeight() {
-      const { H } = this._dim();
-      const base = Math.max(80, H * 0.14);
-      return base - (base - PongGame.MIN_PADDLE) * this._diff();
-    }
-
-    _aiSpeed() { return 3.5 + this._diff() * 8; }
-
-    _initPaddles() {
-      const { H } = this._dim();
-      const ph = this._paddleHeight();
-      this.left  = { y: H / 2, h: ph };
-      this.right = { y: H / 2, h: ph };
-    }
-
-    _resetBall() {
-      const { W, H } = this._dim();
-      const speed = PongGame.BASE_SPEED + this._diff() * 5;
-      const angle = (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1);
-      this.ball = {
-        x: W / 2, y: H / 2,
-        vx: (Math.random() > 0.5 ? 1 : -1) * speed * Math.cos(angle),
-        vy: speed * Math.sin(angle),
-        r: 6,
-      };
-      const ph = this._paddleHeight();
-      if (this.left)  this.left.h  = ph;
-      if (this.right) this.right.h = ph;
-    }
-
-    _aiMove(paddle, targetY, speed) {
-      const { H } = this._dim();
-      const noise = this.gameEnv.playerMode ? 0 : (Math.random() - 0.5) * 6;
-      const diff  = (targetY + noise) - paddle.y;
-      paddle.y += Math.sign(diff) * Math.min(Math.abs(diff), speed);
-      paddle.y  = Math.max(paddle.h / 2, Math.min(H - paddle.h / 2, paddle.y));
-    }
-
-    update() {
-      const { W, H } = this._dim();
-      const PW         = PongGame.PADDLE_W;
-      const b          = this.ball;
-      const stats      = this.gameEnv.stats;
-      const playerMode = this.gameEnv.playerMode;
-      const mouseY     = this.gameEnv.mouseY || 0;
-
-      if (this.flash > 0) this.flash--;
-
-      // Smoothly interpolate paddle height as difficulty increases
-      const targetH = this._paddleHeight();
-      this.left.h  += (targetH - this.left.h)  * 0.02;
-      this.right.h += (targetH - this.right.h) * 0.02;
-
-      // Move paddles — right paddle follows mouse in playerMode, AI otherwise
-      const aiSpd = this._aiSpeed();
-      this._aiMove(this.left,  b.y,    aiSpd);
-      this._aiMove(this.right, playerMode ? mouseY : b.y, playerMode ? 999 : aiSpd * 0.95);
-
-      b.x += b.vx;
-      b.y += b.vy;
-
-      // Bounce off top/bottom walls
-      if (b.y - b.r < 0) { b.y = b.r;     b.vy *= -1; }
-      if (b.y + b.r > H) { b.y = H - b.r; b.vy *= -1; }
-
-      // Left paddle collision
-      const lx = PW + 10;
-      if (b.vx < 0 && b.x - b.r < lx + PW && b.x - b.r > lx - 6 &&
-          b.y > this.left.y - this.left.h / 2 && b.y < this.left.y + this.left.h / 2) {
-        b.x = lx + PW + b.r;
-        const rel = (b.y - this.left.y) / (this.left.h / 2);
-        const spd = Math.min(Math.hypot(b.vx, b.vy) * 1.06, PongGame.MAX_SPEED);
-        b.vx =  spd * Math.cos(rel * 1.1);
-        b.vy =  spd * Math.sin(rel * 1.1);
-        stats.hits++;  // gameEnv.stats tracks difficulty
-      }
-
-      // Right paddle collision
-      const rx = W - PW - 10;
-      if (b.vx > 0 && b.x + b.r > rx - PW && b.x + b.r < rx + 6 &&
-          b.y > this.right.y - this.right.h / 2 && b.y < this.right.y + this.right.h / 2) {
-        b.x = rx - PW - b.r;
-        const rel = (b.y - this.right.y) / (this.right.h / 2);
-        const spd = Math.min(Math.hypot(b.vx, b.vy) * 1.06, PongGame.MAX_SPEED);
-        b.vx = -spd * Math.cos(rel * 1.1);
-        b.vy =  spd * Math.sin(rel * 1.1);
-        stats.hits++;  // gameEnv.stats tracks difficulty
-      }
-
-      // Scoring — write to gameEnv.stats (engine-native)
-      if (b.x < 0) {
-        stats.playerScore++;
-        this.flash = 40;
-
-        this._resetBall();
-      }
-      if (b.x > W) {
-        stats.aiScore++;
-        this.flash = 40;
-
-        this._resetBall();
-      }
-
-      this.draw();
-    }
+    update() { this.draw(); }
 
     draw() {
-      const ctx        = this.gameEnv.ctx;
-      const { W, H }  = this._dim();
-      const PW         = PongGame.PADDLE_W;
-      const GOLD       = '#FF3333';
-      const WHITE      = '#f9f7f2';
-      const stats      = this.gameEnv.stats;
-      const playerMode = this.gameEnv.playerMode;
-      const diff       = this._diff();
-      const speed      = Math.hypot(this.ball.vx, this.ball.vy);
-      const hotness    = Math.max(0, (speed - 8) / (PongGame.MAX_SPEED - 8));
+      const { W, H } = this._dim();
+      const ctx      = this.ctx;
+      const stats    = this.gameEnv.stats;
+      const ball     = this.gameEnv.ball;
+      const GOLD     = '#FF3333';
+      const WHITE    = '#f9f7f2';
 
-      // Red danger tint at high difficulty in player mode
-      if (diff > 0.5 && playerMode) {
+      ctx.clearRect(0, 0, W, H);
+
+      // Flash tint on score
+      if (this.gameEnv.flash > 0) {
+        ctx.fillStyle = 'rgba(255,255,255,0.06)';
+        ctx.fillRect(0, 0, W, H);
+        this.gameEnv.flash--;
+      }
+
+      // Danger tint at high difficulty in player mode
+      const diff = this._diff();
+      if (diff > 0.5 && this.gameEnv.playerMode) {
         ctx.fillStyle = `rgba(176,48,48,${(diff - 0.5) * 0.08})`;
         ctx.fillRect(0, 0, W, H);
       }
@@ -3710,7 +3642,7 @@ D.A.D. also has a public deed submission page where community members can submit
       ctx.setLineDash([]);
 
       // Scores from gameEnv.stats
-      ctx.fillStyle = this.flash > 0 ? WHITE : GOLD;
+      ctx.fillStyle = GOLD;
       ctx.globalAlpha = 0.9;
       ctx.font = `bold ${Math.round(H * 0.07)}px Oswald,sans-serif`;
       ctx.textAlign = 'center';
@@ -3718,35 +3650,17 @@ D.A.D. also has a public deed submission page where community members can submit
       ctx.fillText(stats.playerScore, W/2 + W*0.12, H*0.1);
       ctx.globalAlpha = 1;
 
-      // Paddles (color shifts hot at high speed)
-      const pColor = hotness > 0
-        ? `rgb(${Math.round(249-hotness*60)},${Math.round(247-hotness*120)},${Math.round(242-hotness*200)})`
-        : WHITE;
-      const drawPaddle = (p, x) => {
-        ctx.fillStyle = pColor;
-        ctx.beginPath(); ctx.roundRect(x, p.y - p.h/2, PW, p.h, 4); ctx.fill();
-      };
-      drawPaddle(this.left,  10);
-      drawPaddle(this.right, W - PW - 10);
-
-      // Ball
-      const b = this.ball;
-      ctx.fillStyle = hotness > 0
-        ? `rgb(255,${Math.round(249-hotness*200)},${Math.round(242-hotness*242)})`
-        : WHITE;
-      ctx.beginPath();
-      ctx.arc(b.x, b.y, b.r + hotness * 3, 0, Math.PI * 2);
-      ctx.fill();
-
       // Speed bar
+      const speed = ball ? Math.hypot(ball.vx, ball.vy) : 0;
+      const hotness = Math.max(0, (speed - 8) / (MAX_SPEED - 8));
       const barW = W * 0.18;
       ctx.fillStyle = 'rgba(255,51,51,0.25)';
       ctx.fillRect(W/2 - barW/2, H-8, barW, 3);
       ctx.fillStyle = hotness > 0 ? `rgba(255,${Math.round(100-hotness*100)},0,0.7)` : 'rgba(255,51,51,0.7)';
-      ctx.fillRect(W/2 - barW/2, H-8, (speed/PongGame.MAX_SPEED)*barW, 3);
+      ctx.fillRect(W/2 - barW/2, H-8, (speed/MAX_SPEED)*barW, 3);
 
-      // Player-mode label
-      if (playerMode) {
+      // Player mode label
+      if (this.gameEnv.playerMode) {
         ctx.fillStyle = GOLD;
         ctx.font = `600 ${Math.round(H*0.022)}px Oswald,sans-serif`;
         ctx.textAlign = 'right';
@@ -3754,41 +3668,263 @@ D.A.D. also has a public deed submission page where community members can submit
       }
     }
 
-    // Called by GameLevel.resize() after gameEnv dimensions are already updated
     resize() {
-      const ph = this._paddleHeight();
-      if (this.left)  this.left.h  = ph;
-      if (this.right) this.right.h = ph;
+      const { W, H } = this._dim();
+      this.canvas.width  = W;
+      this.canvas.height = H;
+      this.canvas.style.width  = W + 'px';
+      this.canvas.style.height = H + 'px';
       this.draw();
     }
 
     destroy() {
-      // Remove mouse listener — fully self-contained cleanup
-      hero.removeEventListener('mousemove', this._onMouseMove);
+      if (this.canvas.parentNode) this.canvas.parentNode.removeChild(this.canvas);
+    }
+  }
+
+  // ── PongPaddle : GameObject ───────────────────────────────────────────────
+  // Each paddle is its own GameObject with its own small canvas, positioned
+  // absolutely at the paddle's location — same pattern as Character.js.
+  // data.side = 'left' | 'right'
+  class PongPaddle extends GameObject {
+    constructor(data, gameEnv) {
+      super(gameEnv);
+      this.side = data.side;
+      this.stateKey = this.side === 'left' ? 'paddleLeft' : 'paddleRight';
+
+      this.canvas = document.createElement('canvas');
+      this.canvas.id = `pong-paddle-${this.side}`;
+      this.canvas.style.cssText = 'position:absolute;z-index:3;pointer-events:none;';
+      this.ctx = this.canvas.getContext('2d');
+      gameEnv.container.appendChild(this.canvas);
+
+      // Initialize this paddle's state on gameEnv so PongBall can read it
+      gameEnv[this.stateKey] = { y: gameEnv.innerHeight / 2, h: this._paddleHeight() };
+      this._syncCanvas();
+    }
+
+    _dim()  { return { W: this.gameEnv.innerWidth, H: this.gameEnv.innerHeight }; }
+    _diff() { return Math.min(1, (this.gameEnv.stats.hits || 0) / 120); }
+    _paddleHeight() {
+      const { H } = this._dim();
+      const base = Math.max(80, H * 0.14);
+      return base - (base - MIN_PADDLE) * this._diff();
+    }
+    _aiSpeed() { return 3.5 + this._diff() * 8; }
+
+    update() {
+      const { H }   = this._dim();
+      const paddle  = this.gameEnv[this.stateKey];
+      const ball    = this.gameEnv.ball;
+
+      // Smooth paddle height toward current difficulty target
+      paddle.h += (this._paddleHeight() - paddle.h) * 0.02;
+
+      // Move — player controls right paddle in playerMode, AI otherwise
+      if (this.side === 'right' && this.gameEnv.playerMode) {
+        const diff = (this.gameEnv.mouseY || H/2) - paddle.y;
+        paddle.y += Math.sign(diff) * Math.min(Math.abs(diff), 999);
+      } else {
+        const targetY = ball ? ball.y : H/2;
+        const noise   = (Math.random() - 0.5) * 6;
+        const speed   = this.side === 'right' ? this._aiSpeed() * 0.95 : this._aiSpeed();
+        const diff    = (targetY + noise) - paddle.y;
+        paddle.y += Math.sign(diff) * Math.min(Math.abs(diff), speed);
+      }
+      paddle.y = Math.max(paddle.h/2, Math.min(H - paddle.h/2, paddle.y));
+
+      this._syncCanvas();
+      this.draw();
+    }
+
+    // Position and size the canvas to exactly cover the paddle — engine collision
+    // system uses getBoundingClientRect() on this canvas for overlap detection.
+    _syncCanvas() {
+      const { W }   = this._dim();
+      const paddle  = this.gameEnv[this.stateKey];
+      if (!paddle) return;
+      const x = this.side === 'left' ? 10 : W - PADDLE_W - 10;
+      const h = Math.max(1, Math.ceil(paddle.h));
+      this.canvas.width  = PADDLE_W;
+      this.canvas.height = h;
+      this.canvas.style.left   = x + 'px';
+      this.canvas.style.top    = Math.round(paddle.y - paddle.h/2) + 'px';
+      this.canvas.style.width  = PADDLE_W + 'px';
+      this.canvas.style.height = h + 'px';
+    }
+
+    draw() {
+      const paddle  = this.gameEnv[this.stateKey];
+      const ball    = this.gameEnv.ball;
+      const speed   = ball ? Math.hypot(ball.vx, ball.vy) : 0;
+      const hotness = Math.max(0, (speed - 8) / (MAX_SPEED - 8));
+      const color   = hotness > 0
+        ? `rgb(${Math.round(249-hotness*60)},${Math.round(247-hotness*120)},${Math.round(242-hotness*200)})`
+        : '#f9f7f2';
+      const h = Math.max(1, Math.ceil(paddle.h));
+      this.ctx.clearRect(0, 0, PADDLE_W, h);
+      this.ctx.fillStyle = color;
+      this.ctx.beginPath();
+      this.ctx.roundRect(0, 0, PADDLE_W, h, 4);
+      this.ctx.fill();
+    }
+
+    resize() {
+      const paddle = this.gameEnv[this.stateKey];
+      if (paddle) {
+        paddle.h = this._paddleHeight();
+        this._syncCanvas();
+        this.draw();
+      }
+    }
+
+    destroy() {
+      if (this.canvas.parentNode) this.canvas.parentNode.removeChild(this.canvas);
+    }
+  }
+
+  // ── PongBall : GameObject ─────────────────────────────────────────────────
+  // Owns a small canvas positioned at the ball's location each frame.
+  // Uses the engine's collisionChecks() → handleCollisionReaction() to detect
+  // hits against PongPaddle canvases via getBoundingClientRect() overlap.
+  class PongBall extends GameObject {
+    constructor(data, gameEnv) {
+      super(gameEnv);
+      this.canvas = document.createElement('canvas');
+      this.canvas.id = 'pong-ball';
+      this.canvas.style.cssText = 'position:absolute;z-index:4;pointer-events:none;';
+      this.ctx = this.canvas.getContext('2d');
+      gameEnv.container.appendChild(this.canvas);
+      this._resetBall();
+    }
+
+    _dim()  { return { W: this.gameEnv.innerWidth, H: this.gameEnv.innerHeight }; }
+    _diff() { return Math.min(1, (this.gameEnv.stats.hits || 0) / 120); }
+
+    _resetBall() {
+      const { W, H } = this._dim();
+      const speed = BASE_SPEED + this._diff() * 5;
+      const angle = (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1);
+      this.gameEnv.ball = {
+        x: W/2, y: H/2,
+        vx: (Math.random() > 0.5 ? 1 : -1) * speed * Math.cos(angle),
+        vy: speed * Math.sin(angle),
+        r: 6,
+      };
+    }
+
+    update() {
+      const { W, H } = this._dim();
+      const b        = this.gameEnv.ball;
+      const stats    = this.gameEnv.stats;
+
+      b.x += b.vx;
+      b.y += b.vy;
+
+      // Wall bounces (top/bottom)
+      if (b.y - b.r < 0) { b.y = b.r;     b.vy *= -1; }
+      if (b.y + b.r > H) { b.y = H - b.r; b.vy *= -1; }
+
+      // Engine collision detection — checks this canvas rect against all other
+      // GameObject canvases (PongPaddleLeft, PongPaddleRight) in gameEnv.gameObjects.
+      // Calls handleCollisionReaction() below when overlap is detected.
+      this.collisionChecks();
+
+      // Scoring — write to gameEnv.stats
+      if (b.x < 0) { stats.playerScore++; this.gameEnv.flash = 40; this._resetBall(); }
+      if (b.x > W) { stats.aiScore++;     this.gameEnv.flash = 40; this._resetBall(); }
+
+      // Reposition canvas to ball location
+      const S = b.r * 2 + 10;
+      this.canvas.width  = S;
+      this.canvas.height = S;
+      this.canvas.style.left   = Math.round(b.x - S/2) + 'px';
+      this.canvas.style.top    = Math.round(b.y - S/2) + 'px';
+      this.canvas.style.width  = S + 'px';
+      this.canvas.style.height = S + 'px';
+
+      this.draw();
+    }
+
+    // Engine calls this when collisionChecks() detects overlap with another canvas.
+    // We override to apply Pong physics instead of the default dialogue reaction.
+    handleCollisionReaction(other) {
+      const b      = this.gameEnv.ball;
+      const { W }  = this._dim();
+
+      if (other.id === 'pong-paddle-left' && b.vx < 0) {
+        const paddle = this.gameEnv.paddleLeft;
+        const rel    = paddle ? (b.y - paddle.y) / (paddle.h / 2) : 0;
+        const spd    = Math.min(Math.hypot(b.vx, b.vy) * 1.06, MAX_SPEED);
+        b.vx = spd * Math.cos(rel * 1.1);
+        b.vy = spd * Math.sin(rel * 1.1);
+        b.x  = 10 + PADDLE_W + b.r + 1;
+        this.gameEnv.stats.hits++;
+      } else if (other.id === 'pong-paddle-right' && b.vx > 0) {
+        const paddle = this.gameEnv.paddleRight;
+        const rel    = paddle ? (b.y - paddle.y) / (paddle.h / 2) : 0;
+        const spd    = Math.min(Math.hypot(b.vx, b.vy) * 1.06, MAX_SPEED);
+        b.vx = -spd * Math.cos(rel * 1.1);
+        b.vy =  spd * Math.sin(rel * 1.1);
+        b.x  = W - 10 - PADDLE_W - b.r - 1;
+        this.gameEnv.stats.hits++;
+      }
+    }
+
+    draw() {
+      const b       = this.gameEnv.ball;
+      const S       = b.r * 2 + 10;
+      const speed   = Math.hypot(b.vx, b.vy);
+      const hotness = Math.max(0, (speed - 8) / (MAX_SPEED - 8));
+      this.ctx.clearRect(0, 0, S, S);
+      this.ctx.fillStyle = hotness > 0
+        ? `rgb(255,${Math.round(249-hotness*200)},${Math.round(242-hotness*242)})`
+        : '#f9f7f2';
+      this.ctx.beginPath();
+      this.ctx.arc(S/2, S/2, b.r + hotness * 3, 0, Math.PI * 2);
+      this.ctx.fill();
+    }
+
+    // Override — engine's default reads this.velocity which Pong doesn't use
+    handleCollisionState() {}
+
+    resize() { /* ball canvas repositions itself every update() frame */ }
+
+    destroy() {
+      if (this.canvas.parentNode) this.canvas.parentNode.removeChild(this.canvas);
     }
   }
 
   // ── PongLevel ─────────────────────────────────────────────────────────────
+  // Declares the 4 GameObjects and wires up input/toggle in initialize().
   class PongLevel {
     constructor(gameEnv) {
       this.gameEnv = gameEnv;
 
-      // Initialize on gameEnv NOW so PongGame constructor can safely read them
-      gameEnv.stats      = { playerScore: 0, aiScore: 0, hits: 0 };
-      gameEnv.playerMode = false;
-      gameEnv.mouseY     = 0;
+      // Seed all shared state on gameEnv before any GameObject constructor runs
+      gameEnv.stats       = { playerScore: 0, aiScore: 0, hits: 0 };
+      gameEnv.playerMode  = false;
+      gameEnv.mouseY      = 0;
+      gameEnv.flash       = 0;
+      gameEnv.ball        = null;
+      gameEnv.paddleLeft  = null;
+      gameEnv.paddleRight = null;
 
-      this.classes = [{ class: PongGame, data: {} }];
+      // Engine reads this.classes to instantiate GameObjects via GameLevel.create()
+      this.classes = [
+        { class: PongCourt,  data: {} },
+        { class: PongPaddle, data: { side: 'left'  } },
+        { class: PongPaddle, data: { side: 'right' } },
+        { class: PongBall,   data: {} },
+      ];
     }
 
-    // Engine calls initialize() after all gameObjects are created —
-    // use it for things that reference the DOM or need the canvas to exist
+    // Engine calls initialize() after all GameObjects are created
     initialize() {
       const env = this.gameEnv;
 
-      // ── Resize patch: prevent GameEnv.resize() from stacking new canvases ─
-      // GameEnv.resize() calls create() → setCanvas() which appends a new canvas.
-      // Override it to resize the existing canvas in-place instead.
+      // Resize patch: GameEnv.resize() → create() → setCanvas() appends a NEW canvas
+      // without removing the old one. Override to resize the existing canvas in-place.
       env.resize = () => {
         const w = hero.offsetWidth, h = hero.offsetHeight;
         env.game.environment.innerWidth  = w;
@@ -3796,15 +3932,19 @@ D.A.D. also has a public deed submission page where community members can submit
         env.innerWidth  = w;
         env.innerHeight = h;
         if (env.canvas) {
-          env.canvas.width  = w; env.canvas.height = h;
-          env.canvas.style.width  = w + 'px';
-          env.canvas.style.height = h + 'px';
+          env.canvas.width = w; env.canvas.height = h;
+          env.canvas.style.width = w + 'px'; env.canvas.style.height = h + 'px';
         }
       };
 
+      // Mouse tracking for player-controlled right paddle
+      this._onMouseMove = e => {
+        const rect = env.container.getBoundingClientRect();
+        env.mouseY = e.clientY - rect.top;
+      };
+      env.container.addEventListener('mousemove', this._onMouseMove);
 
-
-      // ── Play / AI toggle: updates gameEnv.playerMode ─────────────────────
+      // Player mode toggle button
       btn.addEventListener('click', () => {
         env.playerMode = !env.playerMode;
         container.classList.toggle('player-mode', env.playerMode);
@@ -3812,9 +3952,15 @@ D.A.D. also has a public deed submission page where community members can submit
         btn.textContent = env.playerMode ? '🤖 Watch AI' : '🏓 Play';
       });
     }
+
+    destroy() {
+      if (this._onMouseMove) {
+        this.gameEnv.container.removeEventListener('mousemove', this._onMouseMove);
+      }
+    }
   }
 
-// ── Game host object ──────────────────────────────────────────────────────
+  // ── Game host ─────────────────────────────────────────────────────────────
   const game = {
     path: BASE,
     gameContainer: container,
@@ -3825,13 +3971,8 @@ D.A.D. also has a public deed submission page where community members can submit
   // ── Boot ──────────────────────────────────────────────────────────────────
   const gc = new GameControl(game, [PongLevel]);
   gc.start();
-  // initialize() has now run — gameEnv.stats, playerMode, mouseY, resize patch all set
 
-  // ── Container resize observer ─────────────────────────────────────────────
-  // GameLevel already handles window 'resize' events. This observer catches
-  // hero-div size changes that don't trigger a window resize (e.g. layout shifts).
-  // gc.currentLevel.resize() safely calls our patched gameEnv.resize() first,
-  // then each gameObject.resize() — no new canvases created.
+  // ResizeObserver catches hero layout shifts that don't fire window resize
   const ro = new ResizeObserver(() => {
     if (gc.currentLevel) gc.currentLevel.resize();
   });
