@@ -3722,14 +3722,15 @@ D.A.D. also has a public deed submission page where community members can submit
 
       // Move — player controls right paddle in playerMode, AI otherwise
       if (this.side === 'right' && this.gameEnv.playerMode) {
-        const diff = (this.gameEnv.mouseY || H/2) - paddle.y;
-        paddle.y += Math.sign(diff) * Math.min(Math.abs(diff), 999);
+        const target = this.gameEnv.mouseY || H/2;
+        paddle.y += (target - paddle.y) * 0.08;
       } else {
         const targetY = ball ? ball.y : H/2;
         const noise   = (Math.random() - 0.5) * 6;
         const speed   = this.side === 'right' ? this._aiSpeed() * 0.95 : this._aiSpeed();
         const diff    = (targetY + noise) - paddle.y;
-        paddle.y += Math.sign(diff) * Math.min(Math.abs(diff), speed);
+        const raw     = paddle.y + Math.sign(diff) * Math.min(Math.abs(diff), speed);
+        paddle.y += (raw - paddle.y) * 0.10;
       }
       paddle.y = Math.max(paddle.h/2, Math.min(H - paddle.h/2, paddle.y));
 
