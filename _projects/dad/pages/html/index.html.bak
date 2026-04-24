@@ -338,84 +338,19 @@ search_exclude: true
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(160deg, #0a1628 0%, #0d1e38 50%, #0a1628 100%);
-    }
-
-    /* Aurora orbs */
-    .hero-aurora {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .aurora-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.55;
-      animation: aurora-drift linear infinite;
-    }
-    .aurora-orb:nth-child(1) {
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(255,51,51,0.35) 0%, transparent 70%);
-      top: -200px; left: -150px;
-      animation-duration: 18s;
-    }
-    .aurora-orb:nth-child(2) {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(20,60,120,0.7) 0%, transparent 70%);
-      top: 30%; right: -100px;
-      animation-duration: 22s;
-      animation-delay: -6s;
-    }
-    .aurora-orb:nth-child(3) {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(255,51,51,0.2) 0%, transparent 70%);
-      bottom: -100px; left: 35%;
-      animation-duration: 26s;
-      animation-delay: -12s;
-    }
-    .aurora-orb:nth-child(4) {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(10,40,100,0.8) 0%, transparent 70%);
-      top: 10%; left: 45%;
-      animation-duration: 20s;
-      animation-delay: -4s;
-    }
-    @keyframes aurora-drift {
-      0%   { transform: translate(0, 0) scale(1); }
-      25%  { transform: translate(60px, -40px) scale(1.08); }
-      50%  { transform: translate(-40px, 60px) scale(0.95); }
-      75%  { transform: translate(30px, 30px) scale(1.05); }
-      100% { transform: translate(0, 0) scale(1); }
-    }
-
-    /* Particle canvas */
-    #particle-canvas {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.5;
+      background:
+        radial-gradient(ellipse at 20% 50%, rgba(255,51,51,0.15) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 30%, rgba(10,22,40,0.8) 0%, transparent 60%),
+        linear-gradient(160deg, #0a1628 0%, #152240 50%, #0d1e38 100%);
     }
 
     .hero-pattern {
       position: absolute;
       inset: 0;
-      opacity: 0.025;
+      opacity: 0.04;
       background-image:
         repeating-linear-gradient(0deg, #fff 0, #fff 1px, transparent 1px, transparent 60px),
         repeating-linear-gradient(90deg, #fff 0, #fff 1px, transparent 1px, transparent 60px);
-    }
-
-    /* Cursor spotlight */
-    .hero-spotlight {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background: radial-gradient(circle 350px at var(--mx, 50%) var(--my, 50%), rgba(255,51,51,0.07) 0%, transparent 70%);
-      transition: background 0.05s;
     }
 
     .hero-img {
@@ -502,35 +437,6 @@ search_exclude: true
       overflow: hidden;
       transition: background 0.2s, transform 0.2s;
     }
-
-    .hero-program-card {
-      background: rgba(255,255,255,0.04) !important;
-      border: 1px solid rgba(255,51,51,0.15) !important;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 2px;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease !important;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-    .hero-program-card:hover {
-      background: rgba(255,51,51,0.08) !important;
-      border-color: rgba(255,51,51,0.5) !important;
-      box-shadow: 0 0 24px rgba(255,51,51,0.25), 0 8px 32px rgba(0,0,0,0.4) !important;
-      transform: translateY(-4px) !important;
-    }
-    /* Glow trace border on hover */
-    .hero-program-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 2px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      background: linear-gradient(135deg, rgba(255,51,51,0.3), transparent 60%);
-      pointer-events: none;
-    }
-    .hero-program-card:hover::after { opacity: 1; }
 
     .hero-program-card::before {
       content: '';
@@ -1224,8 +1130,7 @@ search_exclude: true
     }
 
     .program-card:hover::before { transform: scaleX(1); }
-    .program-card:hover { transform: translateY(-6px) rotateX(2deg); box-shadow: 0 20px 48px rgba(255,51,51,0.25), 0 0 0 1px rgba(255,51,51,0.3); background: rgba(255,51,51,0.04); }
-    .program-card { transform-style: preserve-3d; transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease; }
+    .program-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255,51,51,0.2); background: rgba(255,51,51,0.03); }
 
     .program-num {
       font-family: 'Oswald', sans-serif;
@@ -2464,88 +2369,6 @@ search_exclude: true
         max-height: 300px;
       }
     }
-
-    /* ── BUTTON SHIMMER ── */
-    .btn-primary, .btn-outline, .card-btn, .card-btn-outline, .nav-btn-primary, .nav-btn-outline {
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary::after, .btn-outline::after, .card-btn::after, .card-btn-outline::after,
-    .nav-btn-primary::after, .nav-btn-outline::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.5s ease;
-      pointer-events: none;
-    }
-    .btn-primary:hover::after, .btn-outline:hover::after, .card-btn:hover::after,
-    .card-btn-outline:hover::after, .nav-btn-primary:hover::after, .nav-btn-outline:hover::after {
-      left: 160%;
-    }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-    .reveal-delay-5 { transition-delay: 0.5s; }
-    .reveal-delay-6 { transition-delay: 0.6s; }
-
-    /* ── HEADLINE WORD REVEAL ── */
-    .hero-title .word {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(28px);
-      animation: word-reveal 0.6s ease forwards;
-    }
-    @keyframes word-reveal {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── NAV GLOW ON SCROLL ── */
-    nav.scrolled {
-      box-shadow: 0 2px 32px rgba(255,51,51,0.18), 0 2px 8px rgba(0,0,0,0.12);
-    }
-
-    /* ── HERO STAT COUNTER ── */
-    .hero-stats {
-      display: flex;
-      gap: 28px;
-      margin-top: 8px;
-      flex-wrap: wrap;
-    }
-    .hero-stat {
-      display: flex;
-      flex-direction: column;
-    }
-    .hero-stat-num {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--red);
-      line-height: 1;
-    }
-    .hero-stat-label {
-      font-size: 0.72rem;
-      color: rgba(249,247,242,0.55);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 2px;
-    }
-
   </style>
 </head>
 <body>
@@ -2608,14 +2431,6 @@ search_exclude: true
   <!-- HERO + PROGRAMS combined landing section -->
   <section class="hero" id="programs">
     <div class="hero-bg"></div>
-    <div class="hero-aurora">
-      <div class="aurora-orb"></div>
-      <div class="aurora-orb"></div>
-      <div class="aurora-orb"></div>
-      <div class="aurora-orb"></div>
-    </div>
-    <canvas id="particle-canvas"></canvas>
-    <div class="hero-spotlight" id="hero-spotlight"></div>
     <div class="hero-pattern"></div>
     <div class="hero-split">
 
@@ -2623,13 +2438,8 @@ search_exclude: true
       <div class="hero-left">
         <div class="hero-content">
           <div class="hero-eyebrow">Our Programs</div>
-          <h1 class="hero-title" id="hero-title">Building <span>Communities</span><br>One Deed at a Time</h1>
+          <h1 class="hero-title">Building <span>Communities</span><br>One Deed at a Time</h1>
           <p class="hero-sub">Six programs. One mission — uplifting youth, athletes, and seniors through education-first initiatives that build real futures.</p>
-          <div class="hero-stats">
-            <div class="hero-stat"><span class="hero-stat-num" data-target="500">0</span><span class="hero-stat-label">Youth Served</span></div>
-            <div class="hero-stat"><span class="hero-stat-num" data-target="6">0</span><span class="hero-stat-label">Programs</span></div>
-            <div class="hero-stat"><span class="hero-stat-num" data-target="3">0</span><span class="hero-stat-label">Communities</span></div>
-          </div>
         </div>
 
         <!-- CAROUSEL — inline photo strip alongside the program cards -->
@@ -2660,32 +2470,32 @@ search_exclude: true
       <!-- RIGHT: 2-column program cards -->
       <div class="hero-right">
         <div class="hero-programs">
-          <a href="/program1" class="hero-program-card reveal reveal-delay-1">
+          <a href="/program1" class="hero-program-card">
             <div class="program-num">01</div>
             <div class="program-title">Youth Wellness &amp; Student Success (6–12)</div>
             <p class="program-desc">School-aligned programming for middle and high school students focused on wellness, life skills, and academic accountability.</p>
           </a>
-          <a href="/program2" class="hero-program-card reveal reveal-delay-2">
+          <a href="/program2" class="hero-program-card">
             <div class="program-num">02</div>
             <div class="program-title">Athlete Education &amp; Transition Portal</div>
             <p class="program-desc">Post-secondary education and career transition support designed specifically for student-athletes navigating life beyond sports.</p>
           </a>
-          <a href="/program3" class="hero-program-card reveal reveal-delay-3">
+          <a href="/program3" class="hero-program-card">
             <div class="program-num">03</div>
             <div class="program-title">Athlete Development &amp; Wellness Program</div>
             <p class="program-desc">Comprehensive wellness and development resources to support athletes holistically — mentally, physically, and academically.</p>
           </a>
-          <a href="/program4" class="hero-program-card reveal reveal-delay-4">
+          <a href="/program4" class="hero-program-card">
             <div class="program-num">04</div>
             <div class="program-title">Student Success Advisory Pilot</div>
             <p class="program-desc">A continuity-based advisory model that follows students across grade levels, providing consistent mentorship and goal-setting support.</p>
           </a>
-          <a href="/program5" class="hero-program-card reveal reveal-delay-5">
+          <a href="/program5" class="hero-program-card">
             <div class="program-num">05</div>
             <div class="program-title">Industry Voices (Pilot)</div>
             <p class="program-desc">Career exposure and industry mentorship connecting students with professionals across sectors to expand their vision of the future.</p>
           </a>
-          <a href="/program6" class="hero-program-card reveal reveal-delay-6">
+          <a href="/program6" class="hero-program-card">
             <div class="program-num">06</div>
             <div class="program-title">Athlete &amp; Family Education Support</div>
             <p class="program-desc">Resources and guidance for student-athletes and their families to navigate academic, financial, and life planning decisions together.</p>
@@ -4192,175 +4002,6 @@ D.A.D. also has a public deed submission page where community members can submit
     if (gc.currentLevel) gc.currentLevel.resize();
   });
   ro.observe(hero);
-  </script>
-
-  <script>
-  /* ── WOW FACTOR ─────────────────────────────────────────────────────── */
-
-  // 1. PARTICLE CONSTELLATION
-  (function() {
-    const canvas = document.getElementById('particle-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const hero = document.getElementById('programs');
-    let W, H, particles = [];
-    const COUNT = 70, CONNECT_DIST = 130;
-
-    function resize() {
-      W = canvas.width  = hero.offsetWidth;
-      H = canvas.height = hero.offsetHeight;
-    }
-
-    function mkParticle() {
-      return {
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 1.5 + 0.5,
-      };
-    }
-
-    function init() {
-      resize();
-      particles = Array.from({ length: COUNT }, mkParticle);
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.6)';
-        ctx.fill();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const q = particles[j];
-          const dx = p.x - q.x, dy = p.y - q.y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * 0.3;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(255,80,80,${alpha})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(draw);
-    }
-
-    init();
-    draw();
-    window.addEventListener('resize', init);
-  })();
-
-  // 2. CURSOR SPOTLIGHT
-  (function() {
-    const hero = document.getElementById('programs');
-    const spotlight = document.getElementById('hero-spotlight');
-    if (!hero || !spotlight) return;
-    hero.addEventListener('mousemove', e => {
-      const rect = hero.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%';
-      const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1) + '%';
-      spotlight.style.setProperty('--mx', x);
-      spotlight.style.setProperty('--my', y);
-    });
-  })();
-
-  // 3. HERO HEADLINE WORD REVEAL
-  (function() {
-    const title = document.getElementById('hero-title');
-    if (!title) return;
-    title.childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        const words = node.textContent.trim().split(/\s+/);
-        if (!words[0]) return;
-        const frag = document.createDocumentFragment();
-        words.forEach((w, i) => {
-          const span = document.createElement('span');
-          span.className = 'word';
-          span.style.animationDelay = (0.1 + i * 0.12) + 's';
-          span.textContent = w;
-          frag.appendChild(span);
-          if (i < words.length - 1) frag.appendChild(document.createTextNode(' '));
-        });
-        node.replaceWith(frag);
-      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'BR') {
-        node.classList.add('word');
-        node.style.animationDelay = '0.3s';
-      }
-    });
-  })();
-
-  // 4. SCROLL REVEAL
-  (function() {
-    const els = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    els.forEach(el => io.observe(el));
-    // Mark hero cards visible immediately since they're in the viewport
-    document.querySelectorAll('.hero-program-card.reveal').forEach(el => {
-      setTimeout(() => el.classList.add('visible'), 200);
-    });
-  })();
-
-  // 5. ANIMATED STAT COUNTERS
-  (function() {
-    const counters = document.querySelectorAll('.hero-stat-num[data-target]');
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const el = e.target;
-        const target = +el.dataset.target;
-        const suffix = target >= 100 ? '+' : '';
-        let start = 0;
-        const step = target / 50;
-        const tick = () => {
-          start = Math.min(start + step, target);
-          el.textContent = Math.floor(start) + (start >= target ? suffix : '');
-          if (start < target) requestAnimationFrame(tick);
-        };
-        tick();
-        io.unobserve(el);
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(c => io.observe(c));
-  })();
-
-  // 6. NAV SCROLL GLOW
-  (function() {
-    const nav = document.querySelector('nav');
-    if (!nav) return;
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-  })();
-
-  // 7. CARD 3D TILT
-  (function() {
-    document.querySelectorAll('.hero-program-card, .program-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width  - 0.5;
-        const y = (e.clientY - r.top)  / r.height - 0.5;
-        card.style.transform = `translateY(-4px) rotateX(${(-y * 8).toFixed(1)}deg) rotateY(${(x * 8).toFixed(1)}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-  })();
-
   </script>
 
 </body>
