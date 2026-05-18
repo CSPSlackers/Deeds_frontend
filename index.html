@@ -1,4367 +1,668 @@
 ---
 permalink: /dad
+layout: none
 search_exclude: true
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>D.A.D. | Doing Exceptional Deeds</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+  <title>Doing Exceptional Deeds (D.A.D.)</title>
+  <meta name="description" content="D.A.D. is a 501(c)(3) nonprofit empowering youth through athlete education, life skills, and community programs in San Marcos, CA." />
+  <meta name="keywords" content="youth development nonprofit, athlete education, life skills, doing exceptional deeds, 501c3 San Marcos, community programs" />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="Doing Exceptional Deeds (D.A.D.)" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pages.opencodingsociety.com/dad" />
+  <meta property="og:title" content="D.A.D. — Doing Exceptional Deeds | 501(c)(3) Nonprofit" />
+  <meta property="og:description" content="D.A.D. is a 501(c)(3) nonprofit empowering youth through athlete education, life skills, and community programs in San Marcos, CA." />
+  <meta property="og:image" content="https://dadnonprofit-kfp2ps9o.manus.space/manus-storage/dad-hero_5f8a0057.jpg" />
+  <meta property="og:site_name" content="Doing Exceptional Deeds (D.A.D.)" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="D.A.D. — Doing Exceptional Deeds | 501(c)(3) Nonprofit" />
+  <meta name="twitter:description" content="D.A.D. is a 501(c)(3) nonprofit empowering youth through athlete education, life skills, and community programs in San Marcos, CA." />
+  <meta name="twitter:image" content="https://dadnonprofit-kfp2ps9o.manus.space/manus-storage/dad-hero_5f8a0057.jpg" />
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NGO",
+    "name": "Doing Exceptional Deeds (D.A.D.)",
+    "url": "https://pages.opencodingsociety.com/dad",
+    "description": "D.A.D. is a 501(c)(3) nonprofit developing disciplined, prepared, and informed individuals.",
+    "foundingDate": "2023",
+    "nonprofitStatus": "Nonprofit501c3",
+    "taxID": "MBE #23002138",
+    "address": { "@type": "PostalAddress", "addressLocality": "San Marcos", "addressRegion": "CA" }
+  }
+  </script>
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <meta name="theme-color" content="#1B4332" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Source+Sans+3:ital,wght@0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Site CSS + JS (from doingexceptionaldeeds.org) -->
+  <link rel="stylesheet" href="/assets/dad-site/index.css" />
+  <script type="module" src="/assets/dad-site/index.js"></script>
+
   <style>
     :root {
-      --navy: #0a1628;
-      --red: #FF3333;
-      --red-light: #FF5555;
-      --white: #f9f7f2;
-      --off-white: #ede9e0;
-      --gray: #6b6b6b;
-      --dark-gray: #2a2a2a;
-      --red-accent: #FF3333;
-    }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Source Sans 3', sans-serif;
-      background: var(--white);
-      color: var(--dark-gray);
-      overflow-x: hidden;
-    }
-
-    /* ── TOP BAR ── */
-    .top-bar {
-      background: var(--navy);
-      color: var(--red);
-      text-align: center;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      padding: 6px 20px;
-      text-transform: uppercase;
-    }
-
-    /* ── NAV ── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--white);
-      border-bottom: 3px solid var(--red);
-      box-shadow: 0 2px 16px rgba(0,0,0,0.08);
-    }
-
-    .nav-inner {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 32px;
-      height: 72px;
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-    }
-
-    .nav-logo {
-      width: auto;
-      height: 52px;
-      background: transparent;
-      border-radius: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 1rem;
-      color: var(--red);
-      letter-spacing: 0.05em;
-      flex-shrink: 0;
-      min-width: 100px;
-    }
-
-    .nav-logo img {
-      height: 100%;
-      width: auto;
-      max-width: 150px;
-      object-fit: contain;
-      display: block;
-    }
-
-    .nav-title {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.15;
-    }
-
-    .nav-title .name {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--navy);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
-    .nav-title .sub {
-      font-size: 0.62rem;
-      color: var(--red);
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      list-style: none;
-    }
-
-    .nav-links > li {
-      position: relative;
-    }
-
-    .nav-links > li > a,
-    .nav-links > li > span {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--navy);
-      text-decoration: none;
-      padding: 8px 10px;
-      cursor: pointer;
-      display: block;
-      transition: color 0.2s;
-      white-space: nowrap;
-    }
-
-    .nav-links > li > a:hover,
-    .nav-links > li > span:hover { color: var(--red); }
-
-    .nav-links > li:hover .dropdown { display: block; }
-
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--navy);
-      min-width: 220px;
-      border-top: 3px solid var(--red);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    }
-
-    .dropdown a {
-      display: block;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.05em;
-      color: var(--off-white);
-      text-decoration: none;
-      padding: 10px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .dropdown a:hover {
-      background: var(--red);
-      color: var(--navy);
-    }
-
-    .nav-donate {
-      background: var(--red);
-      color: var(--navy) !important;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 9px 18px;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-
-    .nav-donate:hover { background: var(--red-light) !important; }
-
-    .nav-get-involved {
-      border: 1.5px solid var(--navy);
-      color: var(--navy) !important;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 8px 18px;
-      font-weight: 600;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .nav-get-involved:hover { border-color: var(--red); color: var(--red) !important; }
-
-    .carousel-expand-btn {
-      position: absolute;
-      bottom: 10px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 10;
-      background: rgba(10,22,40,0.6);
-      border: 1px solid rgba(255,51,51,0.4);
-      color: rgba(249,247,242,0.8);
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 5px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-    }
-    .carousel-expand-btn:hover { border-color: var(--red); color: var(--white); background: rgba(255,51,51,0.15); }
-    .hero-carousel-backdrop.focused .carousel-expand-btn {
-      bottom: 16px;
-      z-index: 1010;
-    }
-
-    .user-display {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--navy);
-    }
-
-    .user-name {
-      color: var(--red);
-      font-weight: 600;
-      display: none;
-    }
-
-    .user-name.active {
-      display: inline;
-    }
-
-    .user-logout {
-      background: var(--red-accent);
-      color: white !important;
-      text-decoration: none;
-      padding: 8px 14px;
-      border-radius: 2px;
-      font-weight: 600;
-      transition: background 0.2s;
-      cursor: pointer;
-      border: none;
-      display: none;
-    }
-
-    .user-logout.active {
-      display: inline-block;
-    }
-
-    .user-logout:hover {
-      background: #8b2424;
-    }
-
-    .user-login {
-      background: var(--red);
-      color: var(--navy) !important;
-      text-decoration: none;
-      padding: 9px 18px;
-      border-radius: 2px;
-      font-weight: 600;
-      transition: background 0.2s;
-    }
-
-    .user-login:hover {
-      background: var(--red-light) !important;
-    }
-
-    .user-dropdown { position: relative; }
-    .user-dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      right: 0;
-      background: var(--navy);
-      min-width: 190px;
-      border-top: 3px solid var(--red);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-      z-index: 200;
-    }
-    .user-dropdown-menu a,
-    .user-dropdown-menu button {
-      display: block;
-      width: 100%;
-      text-align: left;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.82rem;
-      color: var(--off-white);
-      text-decoration: none;
-      padding: 10px 16px;
-      border: none;
-      background: none;
-      cursor: pointer;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      transition: background 0.15s, color 0.15s;
-      box-sizing: border-box;
-    }
-    .user-dropdown-menu a:hover,
-    .user-dropdown-menu button:hover { background: var(--red); color: var(--navy); }
-    .user-dropdown.open .user-dropdown-menu { display: block; }
-
-    /* ── HERO ── */
-    .hero {
-      position: relative;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: var(--navy);
-      contain: layout style;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(160deg, #0a1628 0%, #0d1e38 50%, #0a1628 100%);
-    }
-
-    /* Aurora orbs */
-    .hero-aurora {
-      position: absolute;
-      inset: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .aurora-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.55;
-      animation: aurora-drift linear infinite;
-    }
-    .aurora-orb:nth-child(1) {
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(255,51,51,0.35) 0%, transparent 70%);
-      top: -200px; left: -150px;
-      animation-duration: 18s;
-    }
-    .aurora-orb:nth-child(2) {
-      width: 600px; height: 600px;
-      background: radial-gradient(circle, rgba(20,60,120,0.7) 0%, transparent 70%);
-      top: 30%; right: -100px;
-      animation-duration: 22s;
-      animation-delay: -6s;
-    }
-    .aurora-orb:nth-child(3) {
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(255,51,51,0.2) 0%, transparent 70%);
-      bottom: -100px; left: 35%;
-      animation-duration: 26s;
-      animation-delay: -12s;
-    }
-    .aurora-orb:nth-child(4) {
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(10,40,100,0.8) 0%, transparent 70%);
-      top: 10%; left: 45%;
-      animation-duration: 20s;
-      animation-delay: -4s;
-    }
-    @keyframes aurora-drift {
-      0%   { transform: translate(0, 0) scale(1); }
-      25%  { transform: translate(60px, -40px) scale(1.08); }
-      50%  { transform: translate(-40px, 60px) scale(0.95); }
-      75%  { transform: translate(30px, 30px) scale(1.05); }
-      100% { transform: translate(0, 0) scale(1); }
-    }
-
-    /* Particle canvas */
-    #particle-canvas {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      opacity: 0.5;
-    }
-
-    .hero-pattern {
-      position: absolute;
-      inset: 0;
-      opacity: 0.025;
-      background-image:
-        repeating-linear-gradient(0deg, #fff 0, #fff 1px, transparent 1px, transparent 60px),
-        repeating-linear-gradient(90deg, #fff 0, #fff 1px, transparent 1px, transparent 60px);
-    }
-
-    /* Cursor spotlight */
-    .hero-spotlight {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-      background: radial-gradient(circle 350px at var(--mx, 50%) var(--my, 50%), rgba(255,51,51,0.07) 0%, transparent 70%);
-      transition: background 0.05s;
-    }
-
-    .hero-img {
-      position: absolute;
-      right: 0;
-      top: 0;
-      bottom: 0;
-      width: 52%;
-      object-fit: cover;
-      opacity: 0.22;
-      mix-blend-mode: luminosity;
-    }
-
-    /* ── HERO SPLIT LAYOUT ── */
-    .hero-split {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 1200px;
-      display: grid;
-      grid-template-columns: 5fr 7fr;
-      min-height: 100vh;
-      align-items: center;
-      padding: 80px 40px;
-    }
-
-    .hero-left {
-      display: flex;
-      flex-direction: column;
-      gap: 28px;
-      padding-right: 52px;
-      border-right: 1px solid rgba(255,51,51,0.18);
-    }
-
-    .hero-right {
-      padding-left: 40px;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      animation: fadeUp 0.9s ease both;
-    }
-
-    /* ── HERO PROGRAM CARDS ── */
-    .hero-programs {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2px;
-      animation: fadeUp 1.1s ease both;
-    }
-
-    @media (max-width: 860px) {
-      .hero-split {
-        grid-template-columns: 1fr;
-        min-height: auto;
-        padding: 60px 24px;
-      }
-      .hero-left {
-        padding-right: 0;
-        border-right: none;
-        padding-bottom: 32px;
-        border-bottom: 1px solid rgba(255,51,51,0.18);
-      }
-      .hero-right { padding-left: 0; }
-      .hero-programs { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 480px) {
-      .hero-programs { grid-template-columns: 1fr; }
-    }
-
-    .hero-program-card {
-      background: rgba(255,255,255,0.04);
-      border-top: 1px solid rgba(255,51,51,0.18);
-      border-left: 1px solid rgba(255,255,255,0.05);
-      padding: 24px 22px;
-      text-decoration: none;
-      display: block;
-      position: relative;
-      overflow: hidden;
-      transition: background 0.2s, transform 0.2s;
-    }
-
-    .hero-program-card {
-      background: rgba(255,255,255,0.04) !important;
-      border: 1px solid rgba(255,51,51,0.15) !important;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-radius: 2px;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease !important;
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-    .hero-program-card:hover {
-      background: rgba(255,51,51,0.08) !important;
-      border-color: rgba(255,51,51,0.5) !important;
-      box-shadow: 0 0 24px rgba(255,51,51,0.25), 0 8px 32px rgba(0,0,0,0.4) !important;
-      transform: translateY(-4px) !important;
-    }
-    /* Glow trace border on hover */
-    .hero-program-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 2px;
-      opacity: 0;
-      transition: opacity 0.3s;
-      background: linear-gradient(135deg, rgba(255,51,51,0.3), transparent 60%);
-      pointer-events: none;
-    }
-    .hero-program-card:hover::after { opacity: 1; }
-
-    .hero-program-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--red);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
-    }
-
-    .hero-program-card:hover::before { transform: scaleX(1); }
-    .hero-program-card:hover { background: rgba(255,51,51,0.08); transform: translateY(-3px); }
-
-    .hero-program-card .program-num { color: var(--red); opacity: 0.35; }
-    .hero-program-card .program-title { color: var(--white); }
-    .hero-program-card .program-desc { color: rgba(249,247,242,0.58); }
-    .hero-program-card .program-link { color: var(--red); border-bottom-color: rgba(255,51,51,0.5); }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(32px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero-eyebrow {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .hero-eyebrow::before,
-    .hero-eyebrow::after {
-      content: '';
-      height: 1px;
-      width: 48px;
-      background: var(--red);
-      opacity: 0.6;
-    }
-
-    .hero-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(1.8rem, 3.5vw, 3rem);
-      font-weight: 700;
-      color: var(--white);
-      line-height: 1.05;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-
-    .hero-title span {
-      color: var(--red);
-      font-style: italic;
-      font-family: 'Libre Baskerville', serif;
-      font-weight: 400;
-      text-transform: none;
-      font-size: 90%;
-    }
-
-    .hero-sub {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 1rem;
-      color: rgba(249,247,242,0.72);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    /* ── PONG BACKGROUND ── */
-    #pong-game-container {
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
-    #pong-game-container canvas {
-      opacity: 0.13;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-    #pong-game-container.player-mode canvas {
-      opacity: 0.55;
-      pointer-events: auto;
-      cursor: none;
-    }
-    #pong-toggle {
-      position: absolute;
-      bottom: 24px;
-      right: 28px;
-      z-index: 10;
-      background: rgba(10,22,40,0.55);
-      border: 1px solid rgba(255,51,51,0.5);
-      color: rgba(255,51,51,0.85);
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 7px 14px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    #pong-toggle:hover { background: rgba(255,51,51,0.28); border-color: var(--red); }
-    #pong-toggle.active { background: rgba(255,51,51,0.3); border-color: var(--red); color: var(--red); }
-
-    #pong-player-btn {
-      position: absolute;
-      bottom: 20px;
-      right: 24px;
-      z-index: 10;
-      background: rgba(10,22,40,0.65);
-      border: 1px solid rgba(255,51,51,0.45);
-      color: rgba(255,51,51,0.85);
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 4px;
-      cursor: pointer;
-      backdrop-filter: blur(4px);
-      transition: background 0.2s, border-color 0.2s, color 0.2s;
-    }
-    #pong-player-btn:hover { background: rgba(255,51,51,0.22); border-color: var(--red); color: var(--red); }
-    #pong-player-btn.active { background: rgba(255,51,51,0.28); border-color: var(--red); color: var(--white); }
-
-    /* ── HERO CAROUSEL & PONG BACKDROP ── */
-    #pong-game-container {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      display: block;
-    }
-    #pong-game-container canvas {
-      opacity: 0.13;
-      transition: opacity 0.3s;
-      pointer-events: none;
-    }
-    #pong-game-container.player-mode canvas {
-      opacity: 0.55;
-      pointer-events: auto;
-      cursor: none;
-    }
-
-    .hero-carousel-backdrop {
-      position: relative;
-      width: 100%;
-      height: 220px;
-      z-index: 2;
-      border-radius: 8px;
-      overflow: hidden;
-      border: 1px solid rgba(255,51,51,0.2);
-    }
-    .hero-carousel-backdrop.hidden {
-      display: none;
-    }
-
-    /* When expanded, go full-screen fixed overlay */
-    .hero-carousel-backdrop.focused {
-      position: fixed !important;
-      inset: 4% !important;
-      width: auto !important;
-      height: auto !important;
-      border-radius: 12px;
-      z-index: 1000 !important;
-      overflow: hidden !important;
-      box-shadow: 0 0 0 9999px rgba(0,0,0,0.7);
-    }
-
-    .hero-carousel-backdrop .carousel-items {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .hero-carousel-backdrop .carousel-item {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    }
-
-    .hero-carousel-backdrop .carousel-item.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .hero-carousel-backdrop .carousel-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .hero-carousel-backdrop .carousel-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10,22,40,0.9) 60%, rgba(10,22,40,1) 100%);
-      padding: 30px 24px 20px;
-      min-height: 120px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .hero-carousel-backdrop .carousel-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(200, 151, 58, 0.85);
-      color: var(--navy);
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 4px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      transition: background 0.2s, transform 0.2s;
-      z-index: 10;
-      font-weight: 700;
-    }
-
-    .hero-carousel-backdrop .carousel-nav:hover {
-      background: var(--red);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .hero-carousel-backdrop .carousel-nav.prev {
-      left: 20px;
-    }
-
-    .hero-carousel-backdrop .carousel-nav.next {
-      right: 20px;
-    }
-
-    /* Small toggle button for changing view */
-    .carousel-pong-toggle {
-      position: absolute;
-      bottom: 24px;
-      right: 28px;
-      z-index: 20;
-      background: rgba(10,22,40,0.7);
-      border: 1px solid rgba(255,51,51,0.6);
-      color: rgba(255,51,51,0.9);
-      font-size: 1.2rem;
-      padding: 8px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.2s;
-      display: block;
-      line-height: 1;
-      width: auto;
-    }
-
-    .carousel-pong-toggle:hover {
-      background: rgba(255,51,51,0.3);
-      border-color: var(--red);
-      color: var(--red);
-    }
-
-    .carousel-pong-toggle.pong-mode {
-      background: rgba(255,51,51,0.3);
-      border-color: var(--red);
-      color: var(--red);
-    }
-
-    .hero-carousel-backdrop.focused .carousel-item {
-      opacity: 0 !important;
-    }
-
-    .hero-carousel-backdrop.focused .carousel-item.active {
-      opacity: 1 !important;
-    }
-
-    .hero-carousel-backdrop.focused .carousel-nav {
-      display: flex !important;
-      z-index: 15;
-    }
-
-    .hero-programs {
-      transition: opacity 0.3s, visibility 0.3s;
-    }
-
-    .hero-programs.hidden-for-focus {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-    }
-
-    /* Focus button positioning */
-    #focus-carousel-btn {
-      transition: all 0.3s ease;
-    }
-
-    .hero-badges {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 40px;
-    }
-
-    .badge {
-      background: rgba(255,51,51,0.15);
-      border: 1px solid rgba(255,51,51,0.4);
-      color: var(--red-light);
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border-radius: 2px;
-    }
-
-    .hero-ctas {
-      display: flex;
-      gap: 12px;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: var(--red);
-      color: var(--navy);
-      font-family: 'Oswald', sans-serif;
-      font-weight: 600;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 14px 32px;
-      transition: background 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-
-    .btn-primary:hover { background: var(--red-light); transform: translateY(-2px); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--white);
-      border: 2px solid rgba(249,247,242,0.35);
-      font-family: 'Oswald', sans-serif;
-      font-weight: 500;
-      font-size: 0.85rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 12px 30px;
-      transition: border-color 0.2s, color 0.2s, transform 0.15s;
-      display: inline-block;
-    }
-
-    .btn-outline:hover {
-      border-color: var(--red);
-      color: var(--red);
-      transform: translateY(-2px);
-    }
-
-    /* ── QUICK LINKS ── */
-    .quick-links {
-      background: var(--navy);
-      padding: 0;
-      border-top: 6px solid var(--red);
-    }
-
-    .quick-grid {
-      max-width: 1280px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    .quick-item {
-      text-decoration: none;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 20px 20px;
-      border-right: 1px solid rgba(255,255,255,0.07);
-      border-bottom: 3px solid var(--red);
-      transition: background 0.2s, border-color 0.2s;
-      gap: 12px;
-    }
-
-    .quick-item:last-child { border-right: none; border-bottom: 3px solid var(--red); }
-    .quick-item:hover { background: rgba(255,51,51,0.15); border-bottom-color: var(--red-light); }
-
-    .quick-icon {
-      width: 48px;
-      height: 48px;
-      border: 2px solid var(--red);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--red);
-      font-size: 1.3rem;
-    }
-
-    .quick-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--off-white);
-    }
-
-    .quick-read {
-      font-size: 0.65rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--red);
-      font-family: 'Oswald', sans-serif;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.2s;
-    }
-
-    .quick-item:hover .quick-read { border-bottom-color: var(--red); }
-
-    /* ── MISSION ── */
-    .mission {
-      padding: 56px 40px;
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-      position: relative;
-    }
-
-    .mission::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 8%; right: 8%;
-      height: 4px;
-      background: linear-gradient(90deg, transparent, var(--red), transparent);
-    }
-
-    .mission-img-wrap {
-      position: relative;
-    }
-
-    .mission-img-wrap::before {
-      content: '';
-      position: absolute;
-      top: -18px;
-      left: -18px;
-      right: 18px;
-      bottom: 18px;
-      border: 3px solid var(--red);
-      opacity: 0.4;
-      z-index: 0;
-    }
-
-    .mission-img {
-      position: relative;
-      z-index: 1;
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      background: var(--off-white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .mission-img-placeholder {
-      width: 100%;
-      aspect-ratio: 4/3;
-      background: linear-gradient(135deg, #1a2a44 0%, #0d1e38 100%);
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-    }
-
-    .mission-img-placeholder::after {
-      content: 'D.A.D.';
-      font-family: 'Oswald', sans-serif;
-      font-size: 4rem;
-      font-weight: 700;
-      color: rgba(255,51,51,0.2);
-      letter-spacing: 0.2em;
-    }
-
-    .section-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-label::after {
-      content: '';
-      height: 1px;
-      flex: 1;
-      max-width: 40px;
-      background: var(--red);
-      opacity: 0.5;
-    }
-
-    .section-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(1.8rem, 3vw, 2.8rem);
-      font-weight: 700;
-      color: var(--navy);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      line-height: 1.1;
-      margin-bottom: 16px;
-    }
-
-    .section-title em {
-      font-family: 'Libre Baskerville', serif;
-      font-style: italic;
-      color: var(--red);
-      text-transform: none;
-      font-weight: 400;
-    }
-
-    .section-body {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #444;
-      margin-bottom: 16px;
-    }
-
-    /* ── UPDATES TICKER ── */
-    .updates-ticker {
-      background: var(--red);
-      overflow: hidden;
-      padding: 8px 0;
-      white-space: nowrap;
-    }
-
-    .ticker-track {
-      display: inline-flex;
-      gap: 0;
-      animation: ticker-scroll 30s linear infinite;
-    }
-
-    .updates-ticker:hover .ticker-track { animation-play-state: paused; }
-
-    @keyframes ticker-scroll {
-      from { transform: translateX(0); }
-      to   { transform: translateX(-50%); }
-    }
-
-    .ticker-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--navy);
-      padding: 0 32px;
-    }
-
-    .ticker-dot {
-      width: 5px; height: 5px;
-      background: var(--navy);
-      border-radius: 50%;
-      opacity: 0.4;
-      flex-shrink: 0;
-    }
-
-    /* ── ADVISORY CALLOUT ── */
-    .advisory {
-      background: var(--navy);
-      padding: 32px 40px;
-      border-top: 6px solid var(--red);
-    }
-
-    .advisory-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-    }
-
-    .advisory blockquote {
-      font-family: 'Libre Baskerville', serif;
-      font-style: italic;
-      font-size: 1.25rem;
-      line-height: 1.75;
-      color: var(--off-white);
-      margin-bottom: 20px;
-      position: relative;
-      padding: 0 20px;
-    }
-
-    .advisory blockquote::before {
-      content: '\201C';
-      font-size: 5rem;
-      color: var(--red);
-      opacity: 0.3;
-      position: absolute;
-      top: -20px;
-      left: -10px;
-      line-height: 1;
-    }
-
-    .advisory .note {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.85rem;
-      color: rgba(255,51,51,0.7);
-      letter-spacing: 0.08em;
-      margin-top: 10px;
-    }
-
-    /* ── PROGRAMS GRID ── */
-    .programs-section {
-      padding: 40px 40px;
-      background: var(--off-white);
-      position: relative;
-    }
-
-    .programs-section::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 6px;
-      background: var(--red);
-    }
-
-    .programs-section .section-header {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-
-    .programs-grid {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      background: var(--red);
-      padding: 2px;
-    }
-
-    .program-card {
-      background: var(--white);
-      padding: 24px 22px;
-      text-decoration: none;
-      display: block;
-      border-top: 4px solid var(--red);
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.2s;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .program-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 4px;
-      background: var(--red-light);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
-    }
-
-    .program-card:hover::before { transform: scaleX(1); }
-    .program-card:hover { transform: translateY(-6px) rotateX(2deg); box-shadow: 0 20px 48px rgba(255,51,51,0.25), 0 0 0 1px rgba(255,51,51,0.3); background: rgba(255,51,51,0.04); }
-    .program-card { transform-style: preserve-3d; transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease; }
-
-    .program-num {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--red);
-      opacity: 0.3;
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-
-    .program-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin-bottom: 8px;
-      line-height: 1.3;
-    }
-
-    .program-desc {
-      font-size: 0.82rem;
-      color: #555;
-      line-height: 1.55;
-    }
-
-    .program-link {
-      display: inline-block;
-      margin-top: 12px;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.66rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--red);
-      border-bottom: 1px solid var(--red);
-      padding-bottom: 2px;
-    }
-
-    .card-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 14px;
-      flex-wrap: wrap;
-    }
-
-    .card-btn {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      text-decoration: none;
-      padding: 5px 12px;
-      border-radius: 2px;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .card-btn-primary {
-      background: var(--red);
-      color: var(--navy);
-    }
-    .card-btn-primary:hover { background: var(--red-light); }
-
-    .card-btn-outline {
-      border: 1px solid var(--navy);
-      color: var(--navy);
-    }
-    .card-btn-outline:hover { background: var(--navy); color: var(--white); }
-
-    /* dark variant (inside hero) */
-    .hero-program-card .card-btn-outline,
-    .hero-programs-cta .card-btn-outline {
-      border-color: rgba(249,247,242,0.5);
-      color: var(--off-white);
-    }
-    .hero-program-card .card-btn-outline:hover,
-    .hero-programs-cta .card-btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--red); color: var(--red); }
-
-    /* ── HERO PROGRAMS CTA BAR ── */
-    .hero-programs-cta {
-      position: relative;
-      z-index: 2;
-      width: 100%;
-      max-width: 1200px;
-      padding: 60px 40px 40px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .hero-programs-cta-label {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.68rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: rgba(249,247,242,0.45);
-      margin-right: 4px;
-    }
-
-    /* ── CARD STAGGER ANIMATION ── */
-    .hero-program-card {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease, background 0.2s;
-    }
-    .hero-program-card.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── ABOUT SECTION ── */
-    .about-section {
-      padding: 40px 40px;
-      background: var(--white);
-    }
-
-    .about-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: start;
-    }
-
-    .about-img-stack {
-      position: relative;
-      height: 480px;
-    }
-
-    .about-img-main {
-      position: absolute;
-      top: 0; left: 0;
-      width: 78%;
-      height: 78%;
-      background: linear-gradient(135deg, #152240 0%, #0a1628 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .about-img-main::after {
-      content: 'COMMUNITY\AFIRST';
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 1.1rem;
-      letter-spacing: 0.15em;
-      color: rgba(255,51,51,0.35);
-      text-align: center;
-      white-space: pre;
-    }
-
-    .about-img-accent {
-      position: absolute;
-      bottom: 0; right: 0;
-      width: 52%;
-      height: 52%;
-      background: var(--red);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .about-img-accent::after {
-      content: 'Est. 2021';
-      font-family: 'Libre Baskerville', serif;
-      font-style: italic;
-      font-size: 1.3rem;
-      color: var(--navy);
-    }
-
-    /* ── STATS ── */
-    .stats-bar {
-      background: var(--red);
-      padding: 28px 40px;
-    }
-
-    .stats-grid {
-      max-width: 1000px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      text-align: center;
-    }
-
-    .stat-num {
-      font-family: 'Oswald', sans-serif;
-      font-size: 2.8rem;
-      font-weight: 700;
-      color: var(--navy);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .stat-label {
-      font-size: 0.75rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(10,22,40,0.65);
-      font-weight: 600;
-    }
-
-    /* ── SENIORS ── */
-    .seniors-section {
-      padding: 40px 40px;
-      background: #f0ebe0;
-    }
-
-    .seniors-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .seniors-card {
-      background: var(--navy);
-      padding: 48px 40px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .seniors-card::after {
-      content: '';
-      position: absolute;
-      bottom: -30px; right: -30px;
-      width: 120px; height: 120px;
-      border-radius: 50%;
-      border: 3px solid rgba(255,51,51,0.2);
-    }
-
-    .seniors-card .section-title { color: var(--white); }
-    .seniors-card .section-body { color: rgba(249,247,242,0.72); }
-
-    /* ── DONATE ── */
-    .donate-section {
-      padding: 40px 40px;
-      background: var(--navy);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .donate-section::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(ellipse at 30% 50%, rgba(255,51,51,0.12) 0%, transparent 60%),
-        radial-gradient(ellipse at 70% 50%, rgba(255,51,51,0.08) 0%, transparent 60%);
-    }
-
-    .donate-section .section-label { justify-content: center; }
-    .donate-section .section-label::after { display: none; }
-    .donate-section .section-label::before {
-      content: '';
-      height: 1px;
-      width: 40px;
-      background: var(--red);
-      opacity: 0.5;
-    }
-
-    .donate-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .donate-section .section-title { color: var(--white); }
-    .donate-section .section-body { color: rgba(249,247,242,0.72); }
-
-    /* ── FOOTER ── */
-    footer {
-      background: #060e1c;
-      padding: 60px 40px 30px;
-      color: rgba(249,247,242,0.6);
-    }
-
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-top {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 48px;
-      margin-bottom: 48px;
-      padding-bottom: 40px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .footer-brand .name {
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--white);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 6px;
-    }
-
-    .footer-brand .tagline {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 16px;
-    }
-
-    .footer-brand p {
-      font-size: 0.85rem;
-      line-height: 1.65;
-      margin-bottom: 20px;
-    }
-
-    .footer-col h4 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.72rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--red);
-      margin-bottom: 16px;
-    }
-
-    .footer-col ul { list-style: none; }
-
-    .footer-col ul li {
-      margin-bottom: 8px;
-    }
-
-    .footer-col ul li a {
-      font-size: 0.82rem;
-      color: rgba(249,247,242,0.55);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .footer-col ul li a:hover { color: var(--red); }
-
-    .footer-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.75rem;
-      color: rgba(249,247,242,0.3);
-    }
-
-    .footer-social {
-      display: flex;
-      gap: 10px;
-    }
-
-    .social-btn {
-      width: 32px; height: 32px;
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: rgba(249,247,242,0.5);
-      text-decoration: none;
-      font-size: 0.75rem;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .social-btn:hover { border-color: var(--red); color: var(--red); }
-
-    .address {
-      font-size: 0.82rem;
-      line-height: 1.6;
-      color: rgba(249,247,242,0.5);
-    }
-
-    /* ── MOBILE ── */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 4px;
-    }
-    .hamburger span {
-      width: 22px; height: 2px;
-      background: var(--navy);
-      transition: 0.3s;
-    }
-
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .hamburger { display: flex; }
-      .mission, .about-inner, .seniors-inner { grid-template-columns: 1fr; gap: 40px; }
-      .quick-grid { grid-template-columns: repeat(2, 1fr); }
-      .programs-grid { grid-template-columns: 1fr; }
-      .hero-programs { grid-template-columns: 1fr; padding: 0 20px 40px; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
-      .footer-bottom { flex-direction: column; gap: 16px; }
-      .about-img-stack { height: 300px; }
-    }
-
-    /* ── AI CHATBOT ── */
+      --dad-green:      #1B4332;
+      --dad-green-dark: #163828;
+      --dad-orange:     #FF6B35;
+      --dad-off-white:  #f8f8f7;
+      --dad-dark:       #1a1a19;
+      --dad-gray:       #858481;
+    }
+
+    /* === PHOTO CAROUSEL === */
+    #dad-carousel-section {
+      background: var(--dad-off-white);
+      padding: 64px 32px;
+      border-top: 1px solid rgba(27,67,50,0.12);
+    }
+    #dad-carousel-section .cs-header { text-align:center; margin-bottom:40px; }
+    #dad-carousel-section .cs-label {
+      font-family:'Space Grotesk',sans-serif; font-size:0.7rem;
+      letter-spacing:0.22em; text-transform:uppercase; color:var(--dad-orange); margin-bottom:10px;
+    }
+    #dad-carousel-section .cs-title {
+      font-family:'Space Grotesk',sans-serif;
+      font-size:clamp(1.6rem,3vw,2.4rem); font-weight:700;
+      color:var(--dad-green); line-height:1.15;
+    }
+    .cs-track-wrap { max-width:1100px; margin:0 auto; position:relative; }
+    .cs-viewport {
+      position:relative; width:100%; aspect-ratio:16/7; max-height:400px;
+      overflow:hidden; border-radius:12px; background:var(--dad-green-dark);
+    }
+    .cs-slide { position:absolute; inset:0; opacity:0; transition:opacity .55s ease; }
+    .cs-slide.active { opacity:1; }
+    .cs-slide img { width:100%; height:100%; object-fit:cover; display:block; }
+    .cs-slide-overlay {
+      position:absolute; bottom:0; left:0; right:0;
+      background:linear-gradient(0deg,rgba(22,56,40,.85) 0%,transparent 100%);
+      padding:32px 28px 22px;
+    }
+    .cs-slide-badge {
+      font-family:'Space Grotesk',sans-serif; font-size:0.62rem;
+      letter-spacing:.16em; text-transform:uppercase; color:var(--dad-orange);
+      background:rgba(255,107,53,.15); border:1px solid rgba(255,107,53,.35);
+      padding:3px 10px; border-radius:4px; display:inline-block; margin-bottom:6px;
+    }
+    .cs-slide-title {
+      font-family:'Space Grotesk',sans-serif; font-size:0.95rem;
+      font-weight:600; color:#fff; line-height:1.35;
+    }
+    .cs-btn {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(27,67,50,.7); border:1px solid rgba(255,107,53,.5);
+      color:#fff; width:42px; height:42px; border-radius:50%; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem; transition:background .2s; z-index:5; backdrop-filter:blur(4px);
+    }
+    .cs-btn:hover { background:var(--dad-orange); border-color:var(--dad-orange); }
+    .cs-btn.prev { left:14px; }
+    .cs-btn.next { right:14px; }
+    .cs-dots { display:flex; justify-content:center; gap:7px; margin-top:18px; }
+    .cs-dot {
+      width:8px; height:8px; border-radius:50%;
+      background:rgba(27,67,50,.25); border:none; cursor:pointer;
+      transition:background .2s, transform .2s;
+    }
+    .cs-dot.active { background:var(--dad-green); transform:scale(1.3); }
+    .cs-empty {
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      height:100%; color:rgba(255,255,255,.5);
+      font-family:'Space Grotesk',sans-serif; font-size:.9rem; gap:10px;
+    }
+
+    /* === AI CHATBOT === */
     #dad-chat-toggle {
-      position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 9999;
-      width: 58px;
-      height: 58px;
-      background: var(--red);
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.28);
-      transition: background 0.2s, transform 0.2s;
+      position:fixed; bottom:28px; right:28px; z-index:9999;
+      width:58px; height:58px; background:var(--dad-green); border:none;
+      border-radius:50%; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 20px rgba(0,0,0,.3); transition:background .2s, transform .2s;
     }
-
-    #dad-chat-toggle:hover {
-      background: var(--red-light);
-      transform: scale(1.07);
-    }
-
-    #dad-chat-toggle svg {
-      width: 26px;
-      height: 26px;
-      fill: var(--navy);
-      transition: opacity 0.2s;
-    }
-
-    #dad-chat-toggle .icon-close {
-      display: none;
-    }
-
-    #dad-chat-toggle.open .icon-chat {
-      display: none;
-    }
-
-    #dad-chat-toggle.open .icon-close {
-      display: block;
-    }
+    #dad-chat-toggle:hover { background:var(--dad-green-dark); transform:scale(1.07); }
+    #dad-chat-toggle svg { width:26px; height:26px; fill:#fff; transition:opacity .2s; }
+    #dad-chat-toggle .icon-close { display:none; }
+    #dad-chat-toggle.open .icon-chat { display:none; }
+    #dad-chat-toggle.open .icon-close { display:block; }
 
     #dad-chat-window {
-      position: fixed;
-      bottom: 98px;
-      right: 28px;
-      z-index: 9998;
-      width: 360px;
-      max-height: 520px;
-      background: var(--white);
-      border-radius: 4px;
-      box-shadow: 0 8px 40px rgba(0,0,0,0.22);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      border: 1px solid rgba(255,51,51,0.25);
-      transform: translateY(16px) scale(0.97);
-      opacity: 0;
-      pointer-events: none;
-      transition: transform 0.25s ease, opacity 0.25s ease;
+      position:fixed; bottom:100px; right:28px; z-index:9998;
+      width:360px; max-height:540px; background:var(--dad-off-white);
+      border-radius:12px; box-shadow:0 8px 40px rgba(0,0,0,.22);
+      display:flex; flex-direction:column; overflow:hidden;
+      border:1px solid rgba(27,67,50,.2);
+      transform:translateY(16px) scale(.97); opacity:0; pointer-events:none;
+      transition:transform .25s ease, opacity .25s ease;
     }
+    #dad-chat-window.open { transform:translateY(0) scale(1); opacity:1; pointer-events:all; }
 
-    #dad-chat-window.open {
-      transform: translateY(0) scale(1);
-      opacity: 1;
-      pointer-events: all;
+    .dcw-header {
+      background:var(--dad-green); padding:14px 18px;
+      display:flex; align-items:center; gap:12px; flex-shrink:0;
     }
-
-    .chat-header {
-      background: var(--navy);
-      padding: 14px 18px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-bottom: 3px solid var(--red);
-      flex-shrink: 0;
+    .dcw-avatar {
+      width:36px; height:36px; background:var(--dad-orange); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:.75rem; color:#fff; flex-shrink:0;
     }
-
-    .chat-header-avatar {
-      width: 36px;
-      height: 36px;
-      background: var(--red);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Oswald', sans-serif;
-      font-weight: 700;
-      font-size: 0.75rem;
-      color: var(--navy);
-      letter-spacing: 0.04em;
-      flex-shrink: 0;
+    .dcw-info { flex:1; }
+    .dcw-name {
+      font-family:'Space Grotesk',sans-serif; font-size:.82rem; font-weight:700;
+      letter-spacing:.04em; text-transform:uppercase; color:#fff; line-height:1.2;
     }
-
-    .chat-header-info {
-      flex: 1;
+    .dcw-status { font-size:.65rem; color:var(--dad-orange); letter-spacing:.08em; text-transform:uppercase; }
+    .dcw-admin-link {
+      font-family:'Space Grotesk',sans-serif; font-size:.62rem;
+      letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.7);
+      text-decoration:none; border:1px solid rgba(255,255,255,.2);
+      padding:4px 10px; border-radius:4px; transition:color .2s, border-color .2s; white-space:nowrap;
     }
+    .dcw-admin-link:hover { color:var(--dad-orange); border-color:var(--dad-orange); }
 
-    .chat-header-name {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--white);
-      line-height: 1.2;
+    .dcw-messages {
+      flex:1; overflow-y:auto; padding:16px;
+      display:flex; flex-direction:column; gap:12px; background:#f1efe8;
     }
-
-    .chat-header-status {
-      font-size: 0.65rem;
-      color: var(--red);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+    .dcw-messages::-webkit-scrollbar { width:4px; }
+    .dcw-messages::-webkit-scrollbar-thumb { background:rgba(27,67,50,.25); border-radius:2px; }
+    .dcw-msg { display:flex; gap:8px; align-items:flex-end; }
+    .dcw-msg.user { flex-direction:row-reverse; }
+    .dcw-bubble {
+      max-width:80%; padding:10px 14px;
+      font-family:'Source Sans 3',sans-serif; font-size:.85rem; line-height:1.55; border-radius:10px;
     }
-
-    .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 18px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      background: #f4f1ea;
+    .dcw-msg.bot .dcw-bubble { background:var(--dad-green); color:#fff; border-bottom-left-radius:2px; }
+    .dcw-msg.user .dcw-bubble { background:var(--dad-orange); color:#fff; border-bottom-right-radius:2px; font-weight:500; }
+    .dcw-msg-avatar {
+      width:26px; height:26px; border-radius:50%; background:var(--dad-green);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Space Grotesk',sans-serif; font-size:.6rem; font-weight:700; color:#fff; flex-shrink:0;
     }
-
-    .chat-messages::-webkit-scrollbar {
-      width: 4px;
+    .dcw-msg.user .dcw-msg-avatar { background:var(--dad-orange); }
+    .dcw-typing {
+      display:flex; align-items:center; gap:4px;
+      padding:10px 14px; background:var(--dad-green);
+      border-radius:10px; border-bottom-left-radius:2px; width:fit-content;
     }
-
-    .chat-messages::-webkit-scrollbar-track {
-      background: transparent;
+    .dcw-typing span {
+      width:6px; height:6px; background:rgba(255,255,255,.7);
+      border-radius:50%; animation:dcw-dot 1.2s infinite;
     }
-
-    .chat-messages::-webkit-scrollbar-thumb {
-      background: rgba(255,51,51,0.3);
-      border-radius: 2px;
+    .dcw-typing span:nth-child(2) { animation-delay:.2s; }
+    .dcw-typing span:nth-child(3) { animation-delay:.4s; }
+    @keyframes dcw-dot {
+      0%,60%,100% { opacity:.3; transform:translateY(0); }
+      30% { opacity:1; transform:translateY(-3px); }
     }
-
-    .chat-msg {
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
+    .dcw-input-row {
+      display:flex; align-items:center;
+      border-top:1px solid rgba(27,67,50,.12);
+      background:var(--dad-off-white); flex-shrink:0;
     }
-
-    .chat-msg.user {
-      flex-direction: row-reverse;
-    }
-
-    .chat-bubble {
-      max-width: 78%;
-      padding: 10px 14px;
-      font-size: 0.85rem;
-      line-height: 1.55;
-      border-radius: 2px;
-    }
-
-    .chat-msg.bot .chat-bubble {
-      background: var(--navy);
-      color: var(--off-white);
-      border-bottom-left-radius: 0;
-    }
-
-    .chat-msg.user .chat-bubble {
-      background: var(--red);
-      color: var(--navy);
-      border-bottom-right-radius: 0;
-      font-weight: 500;
-    }
-
-    .chat-msg-avatar {
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      background: var(--red);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.6rem;
-      font-weight: 700;
-      color: var(--navy);
-      flex-shrink: 0;
-    }
-
-    .chat-msg.user .chat-msg-avatar {
-      background: var(--navy);
-      color: var(--red);
-    }
-
-    .chat-typing {
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      padding: 10px 14px;
-      background: var(--navy);
-      border-radius: 2px;
-      border-bottom-left-radius: 0;
-      width: fit-content;
-    }
-
-    .chat-typing span {
-      width: 6px;
-      height: 6px;
-      background: var(--red);
-      border-radius: 50%;
-      animation: typing-dot 1.2s infinite;
-    }
-
-    .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
-    .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
-
-    @keyframes typing-dot {
-      0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
-      30% { opacity: 1; transform: translateY(-3px); }
-    }
-
-    .chat-input-row {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      border-top: 1px solid rgba(255,51,51,0.2);
-      background: var(--white);
-      flex-shrink: 0;
-    }
-
     #dad-chat-input {
-      flex: 1;
-      border: none;
-      outline: none;
-      background: transparent;
-      padding: 14px 16px;
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.88rem;
-      color: var(--dark-gray);
-      resize: none;
+      flex:1; border:none; outline:none; background:transparent;
+      padding:13px 16px; font-family:'Source Sans 3',sans-serif;
+      font-size:.88rem; color:var(--dad-dark); resize:none;
     }
-
-    #dad-chat-input::placeholder {
-      color: #aaa;
-    }
-
+    #dad-chat-input::placeholder { color:#aaa; }
     #dad-chat-send {
-      width: 46px;
-      height: 46px;
-      background: var(--red);
-      border: none;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      transition: background 0.2s;
-      margin: 4px;
-      border-radius: 2px;
-    }
-
-    #dad-chat-send:hover {
-      background: var(--red-light);
-    }
-
-    #dad-chat-send svg {
-      width: 18px;
-      height: 18px;
-      fill: var(--navy);
-    }
-
-    .chat-footer-note {
-      text-align: center;
-      font-size: 0.6rem;
-      letter-spacing: 0.08em;
-      color: #bbb;
-      padding: 6px 16px 8px;
-      background: var(--white);
-      text-transform: uppercase;
-      border-top: 1px solid rgba(0,0,0,0.05);
-    }
-
-    @media (max-width: 480px) {
-      #dad-chat-window {
-        right: 12px;
-        left: 12px;
-        width: auto;
-        bottom: 88px;
-      }
-      #dad-chat-toggle {
-        right: 16px;
-        bottom: 16px;
-      }
-    }
-
-    /* ── CAROUSEL ── */
-    .carousel-section {
-      background: var(--white);
-      padding: 60px 40px;
-      border-top: none;
-    }
-
-    .carousel-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .carousel-title-main {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-      font-weight: 700;
-      color: var(--navy);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      line-height: 1.1;
-    }
-
-    .carousel-title-main em {
-      color: var(--red);
-      font-family: 'Libre Baskerville', serif;
-      font-style: italic;
-      font-weight: 400;
-      text-transform: none;
-      font-size: 90%;
-    }
-
-    .carousel-container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 32px;
-      position: relative;
-    }
-
-    .carousel-wrapper {
-      position: relative;
-      width: 100%;
-      aspect-ratio: 16 / 9;
-      max-height: 380px;
-      overflow: hidden;
-      border-radius: 8px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-      background: var(--navy);
-    }
-
-    .carousel-items {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .carousel-item {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none; /* Disable clicks on inactive items */
-    }
-
-    .carousel-item.active {
-      opacity: 1;
-      pointer-events: auto; /* Enable clicks on active item */
-    }
-
-    .carousel-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .carousel-overlay {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(10,22,40,0.9) 60%, rgba(10,22,40,1) 100%);
-      padding: 30px 24px 20px;
-      min-height: 120px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .carousel-description {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.85rem;
-      color: rgba(249, 247, 242, 0.85);
-      line-height: 1.4;
-      margin-top: 12px;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      cursor: pointer;
-      transition: color 0.2s;
-    }
-
-    .carousel-description:hover {
-      color: var(--red);
-    }
-
-    .carousel-description-expand {
-      display: inline;
-      margin-left: 4px;
-      color: var(--red);
-      font-weight: 600;
-    }
-
-    .carousel-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--white);
-      letter-spacing: 0.05em;
-      margin-bottom: 4px;
-      text-transform: uppercase;
-    }
-
-    .carousel-attribution {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.8rem;
-      color: var(--red);
-      font-weight: 600;
-      letter-spacing: 0.05em;
-    }
-
-    .carousel-category {
-      display: inline-block;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--red);
-      background: rgba(200, 151, 58, 0.15);
-      padding: 4px 12px;
-      border-radius: 20px;
-      margin-top: 12px;
-    }
-
-    /* ── CAROUSEL CONTROLS ── */
-    .carousel-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(200, 151, 58, 0.85);
-      color: var(--navy);
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 4px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      transition: background 0.2s, transform 0.2s;
-      z-index: 10;
-      font-weight: 700;
-    }
-
-    .carousel-nav:hover {
-      background: var(--red);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .carousel-nav:active {
-      transform: translateY(-50%) scale(0.95);
-    }
-
-    .carousel-nav.prev {
-      left: 20px;
-    }
-
-    .carousel-nav.next {
-      right: 20px;
-    }
-
-    .carousel-dots {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      z-index: 10;
-    }
-
-    .carousel-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.4);
-      cursor: pointer;
-      transition: background 0.3s, transform 0.3s;
-      border: none;
-      padding: 0;
-    }
-
-    .carousel-dot:hover {
-      background: rgba(255, 255, 255, 0.7);
-      transform: scale(1.15);
-    }
-
-    .carousel-dot.active {
-      background: var(--red);
-      transform: scale(1.2);
-    }
-
-    /* ── CAROUSEL STATES ── */
-    .carousel-loading {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--navy);
-      z-index: 5;
-    }
-
-    .carousel-spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid rgba(200, 151, 58, 0.2);
-      border-top-color: var(--red);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    .carousel-error,
-    .carousel-empty {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      background: var(--navy);
-      color: var(--white);
-      text-align: center;
-      padding: 40px;
-      z-index: 5;
-    }
-
-    .carousel-error-icon,
-    .carousel-empty-icon {
-      font-size: 3rem;
-      margin-bottom: 16px;
-      opacity: 0.6;
-    }
-
-    .carousel-error-title,
-    .carousel-empty-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.2rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
-      color: var(--red);
-      text-transform: uppercase;
-    }
-
-    .carousel-error-message,
-    .carousel-empty-message {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.95rem;
-      color: rgba(249, 247, 242, 0.7);
-      max-width: 400px;
-    }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .carousel-section {
-        padding: 50px 20px;
-      }
+      width:44px; height:44px; background:var(--dad-green); border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; transition:background .2s; margin:4px; border-radius:8px;
+    }
+    #dad-chat-send:hover { background:var(--dad-green-dark); }
+    #dad-chat-send svg { width:18px; height:18px; fill:#fff; }
+    .dcw-footer-note {
+      text-align:center; font-size:.6rem; letter-spacing:.08em;
+      color:#bbb; padding:5px 16px 8px; background:var(--dad-off-white);
+      text-transform:uppercase; border-top:1px solid rgba(0,0,0,.05);
+    }
+
+    /* === SUBMIT DEED BUTTON === */
+    #dad-submit-btn {
+      position:fixed; bottom:28px; left:28px; z-index:9999;
+      background:var(--dad-orange); color:#fff; border:none; border-radius:50px;
+      padding:12px 22px; font-family:'Space Grotesk',sans-serif;
+      font-size:.78rem; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+      cursor:pointer; display:flex; align-items:center; gap:8px;
+      box-shadow:0 4px 20px rgba(0,0,0,.25); transition:background .2s, transform .15s;
+    }
+    #dad-submit-btn:hover { background:#e85c28; transform:translateY(-2px); }
+    #dad-submit-btn svg { width:16px; height:16px; fill:#fff; }
+
+    /* === SUBMIT DEED MODAL === */
+    #dad-submit-modal {
+      position:fixed; inset:0; z-index:10000;
+      background:rgba(22,56,40,.75); backdrop-filter:blur(4px);
+      display:flex; align-items:center; justify-content:center; padding:20px;
+      opacity:0; pointer-events:none; transition:opacity .25s ease;
+    }
+    #dad-submit-modal.open { opacity:1; pointer-events:all; }
+    .dsm-card {
+      background:var(--dad-off-white); border-radius:14px;
+      width:100%; max-width:520px; max-height:90vh; overflow-y:auto;
+      box-shadow:0 20px 60px rgba(0,0,0,.3);
+    }
+    .dsm-header {
+      background:var(--dad-green); padding:20px 24px;
+      display:flex; align-items:center; justify-content:space-between;
+      border-radius:14px 14px 0 0;
+    }
+    .dsm-title {
+      font-family:'Space Grotesk',sans-serif; font-size:1rem; font-weight:700;
+      text-transform:uppercase; letter-spacing:.06em; color:#fff;
+    }
+    .dsm-close {
+      background:none; border:none; cursor:pointer;
+      color:rgba(255,255,255,.7); font-size:1.4rem; line-height:1; transition:color .2s;
+    }
+    .dsm-close:hover { color:var(--dad-orange); }
+    .dsm-body { padding:28px 24px; }
+    .dsm-login-required {
+      background:rgba(255,107,53,.1); border:1.5px solid rgba(255,107,53,.35);
+      border-radius:8px; padding:16px; margin-bottom:20px; text-align:center; display:none;
+    }
+    .dsm-login-required p { font-size:.9rem; color:var(--dad-dark); margin-bottom:10px; }
+    .dsm-login-required a {
+      background:var(--dad-green); color:#fff; padding:8px 20px; border-radius:6px;
+      text-decoration:none; font-weight:600; font-size:.85rem; transition:background .2s;
+    }
+    .dsm-login-required a:hover { background:var(--dad-green-dark); }
+    .dsm-label {
+      display:block; font-family:'Space Grotesk',sans-serif; font-size:.75rem; font-weight:600;
+      letter-spacing:.1em; text-transform:uppercase; color:var(--dad-green); margin-bottom:8px;
+    }
+    .dsm-group { margin-bottom:20px; }
+    .dsm-input, .dsm-textarea, .dsm-select {
+      width:100%; padding:11px 14px;
+      border:1.5px solid rgba(27,67,50,.18); border-radius:8px;
+      font-family:'Source Sans 3',sans-serif; font-size:.9rem; color:var(--dad-dark);
+      background:#fff; transition:border-color .2s, box-shadow .2s;
+    }
+    .dsm-input:focus, .dsm-textarea:focus, .dsm-select:focus {
+      outline:none; border-color:var(--dad-green); box-shadow:0 0 0 3px rgba(27,67,50,.1);
+    }
+    .dsm-textarea { min-height:110px; resize:vertical; }
+    .dsm-upload-area {
+      border:2px dashed rgba(27,67,50,.25); border-radius:8px;
+      padding:24px 16px; text-align:center; cursor:pointer;
+      transition:all .2s; background:rgba(27,67,50,.02);
+    }
+    .dsm-upload-area:hover { border-color:var(--dad-green); background:rgba(27,67,50,.04); }
+    .dsm-upload-area.dragging { border-color:var(--dad-orange); background:rgba(255,107,53,.05); }
+    .dsm-upload-icon { font-size:28px; margin-bottom:8px; }
+    .dsm-upload-text { font-size:.85rem; color:var(--dad-green); font-weight:600; }
+    .dsm-upload-hint { font-size:.75rem; color:var(--dad-gray); margin-top:4px; }
+    .dsm-img-preview { display:none; margin-top:12px; }
+    .dsm-img-preview img { max-width:100%; max-height:200px; border-radius:6px; }
+    .dsm-char { font-size:.75rem; color:var(--dad-gray); text-align:right; margin-top:5px; }
+    .dsm-submit-btn {
+      width:100%; padding:13px 24px; background:var(--dad-green); color:#fff;
+      border:none; border-radius:8px; font-family:'Space Grotesk',sans-serif;
+      font-size:.85rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+      cursor:pointer; transition:background .2s, transform .15s; margin-top:8px;
+    }
+    .dsm-submit-btn:hover { background:var(--dad-green-dark); transform:translateY(-1px); }
+    .dsm-submit-btn:disabled { background:var(--dad-gray); cursor:not-allowed; transform:none; }
+    .dsm-alert {
+      padding:12px 16px; border-radius:6px; margin-bottom:16px; font-size:.88rem; display:none;
+    }
+    .dsm-alert.success { background:#d4edda; color:#155724; border:1px solid #c3e6cb; }
+    .dsm-alert.error   { background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; }
+    .dsm-alert.show    { display:block; }
 
-      .carousel-header {
-        margin-bottom: 32px;
-      }
-
-      .carousel-container {
-        padding: 0 20px;
-      }
-
-      .carousel-wrapper {
-        aspect-ratio: 4 / 3;
-        max-height: 340px;
-      }
-
-      .carousel-nav {
-        width: 36px;
-        height: 36px;
-        font-size: 0.95rem;
-      }
-
-      .carousel-nav.prev {
-        left: 12px;
-      }
-
-      .carousel-nav.next {
-        right: 12px;
-      }
-
-      .carousel-overlay {
-        min-height: 110px;
-        padding: 24px 18px 16px;
-      }
-
-      .carousel-title {
-        font-size: 0.9rem;
-      }
-
-      .carousel-attribution {
-        font-size: 0.75rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .carousel-section {
-        padding: 40px 16px;
-      }
-
-      .carousel-header {
-        margin-bottom: 24px;
-      }
-
-      .carousel-container {
-        padding: 0 16px;
-      }
-
-      .carousel-wrapper {
-        aspect-ratio: 3 / 2;
-        max-height: 300px;
-      }
-
-      .carousel-nav {
-        width: 32px;
-        height: 32px;
-        font-size: 0.8rem;
-      }
-
-      .carousel-nav.prev {
-        left: 8px;
-      }
-
-      .carousel-nav.next {
-        right: 8px;
-      }
-
-      .carousel-overlay {
-        min-height: 110px;
-        padding: 24px 16px 16px;
-      }
-
-      .carousel-title {
-        font-size: 0.95rem;
-      }
-
-      .carousel-attribution {
-        font-size: 0.75rem;
-      }
-
-      .carousel-category {
-        font-size: 0.6rem;
-        margin-top: 8px;
-        padding: 3px 8px;
-      }
-
-      .carousel-dots {
-        bottom: 12px;
-        gap: 6px;
-      }
-
-      .carousel-dot {
-        width: 8px;
-        height: 8px;
-      }
-    }
-
-    /* ── CAROUSEL DETAIL MODAL ── */
-    .carousel-modal {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.6);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      animation: fadeIn 0.2s ease-out;
-    }
-
-    .carousel-modal.active {
-      display: flex;
-    }
-
-    .carousel-modal-content {
-      background: var(--white);
-      border-radius: 8px;
-      max-width: 600px;
-      width: 100%;
-      max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-      animation: slideUp 0.3s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
-    .carousel-modal-header {
-      position: sticky;
-      top: 0;
-      background: var(--navy);
-      color: var(--white);
-      padding: 24px 28px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--red);
-      z-index: 1010;
-    }
-
-    .carousel-modal-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--red);
-    }
-
-    .carousel-modal-close {
-      background: none;
-      border: none;
-      color: var(--white);
-      font-size: 1.8rem;
-      cursor: pointer;
-      padding: 0;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.2s;
+    @media (max-width:480px) {
+      #dad-chat-window { right:10px; left:10px; width:auto; bottom:90px; }
+      #dad-chat-toggle { right:16px; bottom:16px; }
+      #dad-submit-btn  { left:16px; bottom:16px; font-size:0; padding:14px; border-radius:50%; }
+      #dad-submit-btn svg { width:22px; height:22px; }
     }
-
-    .carousel-modal-close:hover {
-      color: var(--red);
-    }
-
-    .carousel-modal-image {
-      width: 100%;
-      max-height: 400px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .carousel-modal-body {
-      padding: 28px;
-    }
-
-    .carousel-modal-meta {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-
-    .carousel-modal-badge {
-      display: inline-block;
-      background: rgba(200, 151, 58, 0.12);
-      border: 1px solid var(--red);
-      color: var(--navy);
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .carousel-modal-by {
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.85rem;
-      color: var(--red);
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-
-    .carousel-modal-description {
-      font-family: 'Source Sans 3', sans-serif;
-      font-size: 0.95rem;
-      color: var(--dark-gray);
-      line-height: 1.6;
-      white-space: pre-wrap;
-      word-wrap: break-word;
-    }
-
-    @media (max-width: 480px) {
-      .carousel-modal-content {
-        border-radius: 8px 8px 0 0;
-        max-height: 85vh;
-      }
-
-      .carousel-modal-header {
-        padding: 20px 20px;
-      }
-
-      .carousel-modal-title {
-        font-size: 1.1rem;
-      }
-
-      .carousel-modal-body {
-        padding: 20px;
-      }
-
-      .carousel-modal-image {
-        max-height: 300px;
-      }
-    }
-
-    /* ── BUTTON SHIMMER ── */
-    .btn-primary, .btn-outline, .card-btn, .card-btn-outline, .nav-btn-primary, .nav-btn-outline {
-      position: relative;
-      overflow: hidden;
-    }
-    .btn-primary::after, .btn-outline::after, .card-btn::after, .card-btn-outline::after,
-    .nav-btn-primary::after, .nav-btn-outline::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
-      transform: skewX(-20deg);
-      transition: left 0.5s ease;
-      pointer-events: none;
-    }
-    .btn-primary:hover::after, .btn-outline:hover::after, .card-btn:hover::after,
-    .card-btn-outline:hover::after, .nav-btn-primary:hover::after, .nav-btn-outline:hover::after {
-      left: 160%;
-    }
-
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
-    .reveal-delay-4 { transition-delay: 0.4s; }
-    .reveal-delay-5 { transition-delay: 0.5s; }
-    .reveal-delay-6 { transition-delay: 0.6s; }
-
-    /* ── HEADLINE WORD REVEAL ── */
-    .hero-title .word {
-      display: inline-block;
-      opacity: 0;
-      transform: translateY(28px);
-      animation: word-reveal 0.6s ease forwards;
-    }
-    @keyframes word-reveal {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ── NAV GLOW ON SCROLL ── */
-    nav.scrolled {
-      box-shadow: 0 2px 32px rgba(255,51,51,0.18), 0 2px 8px rgba(0,0,0,0.12);
-    }
-
-    /* ── HERO STAT COUNTER ── */
-    .hero-stats {
-      display: flex;
-      gap: 28px;
-      margin-top: 8px;
-      flex-wrap: wrap;
-    }
-    .hero-stat {
-      display: flex;
-      flex-direction: column;
-    }
-    .hero-stat-num {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--red);
-      line-height: 1;
-    }
-    .hero-stat-label {
-      font-size: 0.72rem;
-      color: rgba(249,247,242,0.55);
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      margin-top: 2px;
-    }
-
   </style>
 </head>
 <body>
 
-  <!-- TOP BAR -->
-  <div class="top-bar">501(c)(3) Nonprofit Organization &nbsp;|&nbsp; MBE #23002138 &nbsp;|&nbsp; San Marcos, CA</div>
+  <!-- React app renders full doingexceptionaldeeds.org site here -->
+  <div id="root"></div>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-inner">
-      <a href="#" class="nav-brand">
-        <div class="nav-logo"><img src="/images/projects/dad/dad-logo.png" alt="D.A.D. Logo" onerror="this.style.display='none'"></div>
-        <div class="nav-title">
-          <span class="name">Doing Exceptional Deeds</span>
-          <span class="sub">A 501c(3) Nonprofit &nbsp;·&nbsp; MBE #23002138</span>
-        </div>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#programs">Programs</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#seniors">Seniors</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="/public-submit">Submit a Deed</a></li>
-        <li><a href="login" class="user-login nav-donate">Log In</a></li>
-        <li class="user-display user-dropdown" style="display:none;">
-          <span class="user-name" id="user-name-toggle" style="padding: 8px 12px; color: var(--red); font-weight: 600; font-family: 'Oswald', sans-serif; font-size: 0.78rem; letter-spacing: 0.1em; text-transform: uppercase; cursor:pointer;"></span>
-          <div class="user-dropdown-menu">
-            <a href="/chat" id="dropdown-chat-link">Chat with Admin</a>
-            <button class="user-logout">Log Out</button>
-          </div>
-        </li>
-        <li><a href="#donate" class="nav-donate">Donate Now</a></li>
-        <li><a href="#contact" class="nav-get-involved">Get Involved</a></li>
-      </ul>
-      <div class="hamburger">
-        <span></span><span></span><span></span>
-      </div>
+  <!-- PHOTO CAROUSEL (injected below React app after it mounts) -->
+  <div id="dad-carousel-section" style="display:none;">
+    <div class="cs-header">
+      <div class="cs-label">Community Impact</div>
+      <h2 class="cs-title">Deeds In Action</h2>
     </div>
-  </nav>
-
-  <!-- UPDATES TICKER -->
-  <div class="updates-ticker" aria-label="Latest updates">
-    <div class="ticker-track" id="ticker-track">
-      <span class="ticker-item"><span class="ticker-dot"></span>Now Enrolling — Youth Wellness Program (6–12)</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Industry Voices Pilot launching Spring 2025</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>New: Athlete & Family Education workshops available</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Senior Engagement Program — Holiday events open for sign-up</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Student Success Advisory: now accepting middle school cohorts</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>501(c)(3) Nonprofit · MBE #23002138 · San Marcos, CA</span>
-      <!-- duplicated for seamless loop -->
-      <span class="ticker-item"><span class="ticker-dot"></span>Now Enrolling — Youth Wellness Program (6–12)</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Industry Voices Pilot launching Spring 2025</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>New: Athlete & Family Education workshops available</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Senior Engagement Program — Holiday events open for sign-up</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>Student Success Advisory: now accepting middle school cohorts</span>
-      <span class="ticker-item"><span class="ticker-dot"></span>501(c)(3) Nonprofit · MBE #23002138 · San Marcos, CA</span>
+    <div class="cs-track-wrap">
+      <div class="cs-viewport" id="cs-viewport">
+        <div class="cs-empty" id="cs-empty">
+          <span style="font-size:2rem;">&#128444;</span>
+          <span>Community deeds will appear here soon.</span>
+        </div>
+      </div>
+      <button class="cs-btn prev" id="cs-prev" aria-label="Previous" style="display:none;">&#8249;</button>
+      <button class="cs-btn next" id="cs-next" aria-label="Next"     style="display:none;">&#8250;</button>
+      <div class="cs-dots" id="cs-dots"></div>
     </div>
   </div>
 
-  <!-- HERO + PROGRAMS combined landing section -->
-  <section class="hero" id="programs">
-    <div class="hero-bg"></div>
-    <div class="hero-aurora">
-      <div class="aurora-orb"></div>
-      <div class="aurora-orb"></div>
-      <div class="aurora-orb"></div>
-      <div class="aurora-orb"></div>
-    </div>
-    <canvas id="particle-canvas"></canvas>
-    <div class="hero-spotlight" id="hero-spotlight"></div>
-    <div class="hero-pattern"></div>
-    <div class="hero-split">
-
-      <!-- LEFT: title + carousel + CTAs -->
-      <div class="hero-left">
-        <div class="hero-content">
-          <div class="hero-eyebrow">Our Programs</div>
-          <h1 class="hero-title" id="hero-title">Building <span>Communities</span><br>One Deed at a Time</h1>
-          <p class="hero-sub">Six programs. One mission — uplifting youth, athletes, and seniors through education-first initiatives that build real futures.</p>
-          <div class="hero-stats">
-            <div class="hero-stat"><span class="hero-stat-num" data-target="500">0</span><span class="hero-stat-label">Youth Served</span></div>
-            <div class="hero-stat"><span class="hero-stat-num" data-target="6">0</span><span class="hero-stat-label">Programs</span></div>
-            <div class="hero-stat"><span class="hero-stat-num" data-target="3">0</span><span class="hero-stat-label">Communities</span></div>
-          </div>
-        </div>
-
-        <!-- CAROUSEL — inline photo strip alongside the program cards -->
-        <div class="hero-carousel-backdrop" id="hero-carousel-backdrop">
-          <div class="carousel-items" id="carousel-items-hero">
-            <!-- Items populated by JavaScript -->
-          </div>
-          <div class="carousel-loading" id="carousel-loading-hero" style="display:none;">
-            <div class="carousel-spinner"></div>
-          </div>
-          <div class="carousel-error" id="carousel-error-hero" style="display:none;">
-            <div class="carousel-error-icon">⚠️</div>
-            <div class="carousel-error-title">Unable to Load</div>
-            <div class="carousel-error-message" id="carousel-error-message-hero">Couldn't load photos. Try refreshing.</div>
-          </div>
-          <div class="carousel-empty" id="carousel-empty-hero" style="display:none;">
-            <div class="carousel-empty-icon">🖼️</div>
-            <div class="carousel-empty-title">No Deeds Yet</div>
-            <div class="carousel-empty-message">Community deeds will appear here soon.</div>
-          </div>
-          <button class="carousel-nav prev" id="carousel-prev-hero" aria-label="Previous slide" style="display:none;">‹</button>
-          <button class="carousel-nav next" id="carousel-next-hero" aria-label="Next slide" style="display:none;">›</button>
-          <div class="carousel-dots" id="carousel-dots-hero" style="display:none;"></div>
-          <button id="focus-carousel-btn" class="carousel-expand-btn" aria-label="Expand carousel">🔍 Expand</button>
-        </div>
-      </div>
-
-      <!-- RIGHT: 2-column program cards -->
-      <div class="hero-right">
-        <div class="hero-programs">
-          <a href="/program1" class="hero-program-card reveal reveal-delay-1">
-            <div class="program-num">01</div>
-            <div class="program-title">Youth Wellness &amp; Student Success (6–12)</div>
-            <p class="program-desc">School-aligned programming for middle and high school students focused on wellness, life skills, and academic accountability.</p>
-          </a>
-          <a href="/program2" class="hero-program-card reveal reveal-delay-2">
-            <div class="program-num">02</div>
-            <div class="program-title">Athlete Education &amp; Transition Portal</div>
-            <p class="program-desc">Post-secondary education and career transition support designed specifically for student-athletes navigating life beyond sports.</p>
-          </a>
-          <a href="/program3" class="hero-program-card reveal reveal-delay-3">
-            <div class="program-num">03</div>
-            <div class="program-title">Athlete Development &amp; Wellness Program</div>
-            <p class="program-desc">Comprehensive wellness and development resources to support athletes holistically — mentally, physically, and academically.</p>
-          </a>
-          <a href="/program4" class="hero-program-card reveal reveal-delay-4">
-            <div class="program-num">04</div>
-            <div class="program-title">Student Success Advisory Pilot</div>
-            <p class="program-desc">A continuity-based advisory model that follows students across grade levels, providing consistent mentorship and goal-setting support.</p>
-          </a>
-          <a href="/program5" class="hero-program-card reveal reveal-delay-5">
-            <div class="program-num">05</div>
-            <div class="program-title">Industry Voices (Pilot)</div>
-            <p class="program-desc">Career exposure and industry mentorship connecting students with professionals across sectors to expand their vision of the future.</p>
-          </a>
-          <a href="/program6" class="hero-program-card reveal reveal-delay-6">
-            <div class="program-num">06</div>
-            <div class="program-title">Athlete &amp; Family Education Support</div>
-            <p class="program-desc">Resources and guidance for student-athletes and their families to navigate academic, financial, and life planning decisions together.</p>
-          </a>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- PONG GAME BEHIND PROGRAMS -->
-    <div id="pong-game-container" aria-hidden="true"></div>
-
-    <!-- PLAYER MODE TOGGLE — bottom-right of hero grid -->
-    <button id="pong-player-btn" title="Play Pong">🏓 Play</button>
-  </section>
-
-  <!-- CAROUSEL DETAIL MODAL -->
-  <div class="carousel-modal" id="carousel-modal">
-    <div class="carousel-modal-content">
-      <div class="carousel-modal-header">
-        <h2 class="carousel-modal-title">Deed Details</h2>
-        <button class="carousel-modal-close" id="carousel-modal-close" aria-label="Close details">×</button>
-      </div>
-      <img class="carousel-modal-image" id="carousel-modal-image" src="" alt="">
-      <div class="carousel-modal-body">
-        <div class="carousel-modal-meta">
-          <span class="carousel-modal-badge" id="carousel-modal-category"></span>
-          <span class="carousel-modal-by" id="carousel-modal-by"></span>
-        </div>
-        <div class="carousel-modal-description" id="carousel-modal-description"></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- QUICK LINKS -->
-  <div class="quick-links">
-    <div class="quick-grid">
-      <a href="#about" class="quick-item">
-        <div class="quick-icon">👥</div>
-        <span class="quick-label">About Us</span>
-        <span class="quick-read">Meet Our Team →</span>
-      </a>
-      <a href="#programs" class="quick-item">
-        <div class="quick-icon">🏆</div>
-        <span class="quick-label">Our Programs</span>
-        <span class="quick-read">View All 6 →</span>
-      </a>
-      <a href="#donate" class="quick-item">
-        <div class="quick-icon">❤️</div>
-        <span class="quick-label">Donate</span>
-        <span class="quick-read">Give Now →</span>
-      </a>
-      <a href="#contact" class="quick-item">
-        <div class="quick-icon">🤝</div>
-        <span class="quick-label">Get Involved</span>
-        <span class="quick-read">Join Us →</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- MISSION -->
-  <section style="padding: 36px 40px; background: var(--white);">
-    <div class="mission" style="padding: 0;">
-      <div class="mission-img-wrap">
-        <div class="mission-img-placeholder"></div>
-      </div>
-      <div>
-        <div class="section-label">Our Mission</div>
-        <h2 class="section-title">Empowering <em>Every</em> Generation</h2>
-        <p class="section-body">
-          At Doing Exceptional Deeds (D.A.D.), our mission is to uplift individuals and strengthen communities across generations through education-first programs that build confidence, character, accountability, and purpose.
-        </p>
-        <p class="section-body">
-          We serve youth, young adults, student-athletes, and seniors through thoughtfully designed initiatives that support personal growth, life skills development, mentorship, and community engagement — meeting people where they are and guiding them toward their full potential.
-        </p>
-        <p class="section-body">
-          Our work begins locally, extends nationally, and is built to scale globally — recognizing that the challenges facing today's youth and communities transcend borders, backgrounds, and generations.
-        </p>
-        <a href="#about" class="btn-primary" style="margin-top: 10px;">Who We Are →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ADVISORY CALLOUT -->
-  <section class="advisory">
-    <div class="advisory-inner">
-      <div class="section-label" style="justify-content:center; color: var(--red);">Student Success</div>
-      <blockquote>
-        Doing Exceptional Deeds now offers a continuity-based Student Success Advisory model designed to support students from middle school through high school — providing consistent adult guidance, goal-setting, accountability, and reflection that follows students across grade levels and key transitions.
-      </blockquote>
-      <p class="note">Rooted in high expectations, personal responsibility, and support delivered with care.</p>
-    </div>
-  </section>
-
-  <!-- STATS -->
-  <div class="stats-bar">
-    <div class="stats-grid">
-      <div>
-        <div class="stat-num">501c3</div>
-        <div class="stat-label">Nonprofit Status</div>
-      </div>
-      <div>
-        <div class="stat-num" data-count="6" data-suffix="+">6+</div>
-        <div class="stat-label">Active Programs</div>
-      </div>
-      <div>
-        <div class="stat-num">K–12</div>
-        <div class="stat-label">School Partnerships</div>
-      </div>
-      <div>
-        <div class="stat-num" data-count="2021" data-suffix="">2021</div>
-        <div class="stat-label">Year Founded</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ABOUT -->
-  <section class="about-section" id="about">
-    <div class="about-inner">
-      <div class="about-img-stack">
-        <div class="about-img-main"></div>
-        <div class="about-img-accent"></div>
-      </div>
-      <div>
-        <div class="section-label">Who We Are</div>
-        <h2 class="section-title">Doing. <em>ExceptionAl.</em> Deeds.</h2>
-        <p class="section-body">
-          At Doing Exceptional Deeds, our mission is to uplift underserved communities through programs that inspire, empower, and address the needs of today while shaping a better tomorrow.
-        </p>
-        <p class="section-body">
-          We believe in the potential of every child, and through sports, mental health initiatives, and community engagement, we strive to unlock that potential and provide the tools and support they need to thrive. By fostering resilience, teamwork, and personal growth, we empower tomorrow's youth to be leaders, dreamers, and changemakers.
-        </p>
-        <p class="section-body">
-          Our commitment extends beyond youth. We embrace the wisdom and value of our seniors, creating meaningful connections that bridge generations through intergenerational programs that keep seniors engaged, connected, and inspired.
-        </p>
-        <div style="display:flex; gap: 12px; margin-top: 28px; flex-wrap: wrap;">
-          <a href="#programs" class="btn-primary">See Our Programs →</a>
-          <a href="#contact" class="btn-outline" style="border-color: var(--navy); color: var(--navy);">Volunteer With Us →</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SENIORS -->
-  <section class="seniors-section" id="seniors">
-    <div class="seniors-inner">
-      <div>
-        <div class="section-label">Intergenerational Impact</div>
-        <h2 class="section-title">Seniors &amp; <em>Community</em></h2>
-        <p class="section-body">
-          We embrace the wisdom and value of our senior community members, creating meaningful intergenerational connections — especially during the holidays — that provide seniors opportunities to stay engaged, connected, and inspired.
-        </p>
-        <p class="section-body">
-          Through our Senior Engagement Program, we partner seniors with youth in mentorship and community service, building bridges across generations that strengthen our entire community.
-        </p>
-        <a href="#" class="btn-primary">Join the Program →</a>
-      </div>
-      <div class="seniors-card">
-        <div class="section-label" style="color: var(--red);">Program Highlights</div>
-        <h3 style="font-family:'Oswald',sans-serif; color:white; font-size:1.2rem; letter-spacing:0.06em; text-transform:uppercase; margin-bottom:24px;">Bridging <em style='font-family:Libre Baskerville,serif; text-transform:none; font-style:italic;'>Generations</em></h3>
-        <ul style="list-style:none; display:flex; flex-direction:column; gap:14px;">
-          <li style="display:flex; gap:12px; align-items:flex-start; color:rgba(249,247,242,0.75); font-size:0.9rem; line-height:1.5;">
-            <span style="color:var(--red); font-size:1rem; margin-top:1px;">✦</span>
-            Holiday intergenerational events and shared programming
-          </li>
-          <li style="display:flex; gap:12px; align-items:flex-start; color:rgba(249,247,242,0.75); font-size:0.9rem; line-height:1.5;">
-            <span style="color:var(--red); font-size:1rem; margin-top:1px;">✦</span>
-            Senior mentorship pairings with student participants
-          </li>
-          <li style="display:flex; gap:12px; align-items:flex-start; color:rgba(249,247,242,0.75); font-size:0.9rem; line-height:1.5;">
-            <span style="color:var(--red); font-size:1rem; margin-top:1px;">✦</span>
-            Community engagement and volunteer opportunities
-          </li>
-          <li style="display:flex; gap:12px; align-items:flex-start; color:rgba(249,247,242,0.75); font-size:0.9rem; line-height:1.5;">
-            <span style="color:var(--red); font-size:1rem; margin-top:1px;">✦</span>
-            Connection and social wellness activities for seniors
-          </li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- DONATE -->
-  <section class="donate-section" id="donate">
-    <div class="donate-inner">
-      <div class="section-label" style="justify-content:center; color:var(--red);">Support Our Work</div>
-      <h2 class="section-title" style="color:var(--white);">Help Us Do <em>Exceptional</em> Deeds</h2>
-      <p class="section-body" style="color:rgba(249,247,242,0.7); margin-bottom:36px;">
-        Your donation directly funds programs that serve youth, student-athletes, and seniors across our community. Every contribution — large or small — creates lasting impact in lives that need it most.
-      </p>
-      <a href="#" class="btn-primary" style="font-size:1rem; padding:16px 40px;">Donate Now</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer id="contact">
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="name">Doing Exceptional Deeds</div>
-          <div class="tagline">A 501c(3) Nonprofit · MBE #23002138</div>
-          <p>Uplifting individuals and strengthening communities across generations through education-first programs that build confidence, character, accountability, and purpose.</p>
-          <div class="address">
-            420 Smilax Road<br>
-            San Marcos, CA 92078
-          </div>
-        </div>
-        <div class="footer-col">
-          <h4>Programs</h4>
-          <ul>
-            <li><a href="#">Youth Wellness (6–12)</a></li>
-            <li><a href="#">Athlete Education Portal</a></li>
-            <li><a href="#">Student Success Advisory</a></li>
-            <li><a href="#">Industry Voices</a></li>
-            <li><a href="#">Family Support</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Partners</h4>
-          <ul>
-            <li><a href="#">K–12 School Districts</a></li>
-            <li><a href="#">Post-Secondary</a></li>
-            <li><a href="#">Higher Education</a></li>
-            <li><a href="#">Compliance & Safeguards</a></li>
-            <li><a href="#">Sponsors & Foundations</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Organization</h4>
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Exceptional Projects</a></li>
-            <li><a href="#">Seniors & Community</a></li>
-            <li><a href="#">Volunteers</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Donate</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span>© 2021 Doing Exceptional Deeds (D.A.D.). All rights reserved.</span>
-        <div class="footer-social">
-          <a href="#" class="social-btn" title="Twitter">𝕏</a>
-          <a href="#" class="social-btn" title="Facebook">f</a>
-          <a href="#" class="social-btn" title="YouTube">▶</a>
-          <button id="carousel-pong-toggle" class="social-btn" title="Secret game" style="background: none; border: none; cursor: pointer; opacity: 0.5; transition: opacity 0.2s; font-size: 0.9rem;">🏓</button>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ── AI CHATBOT WIDGET ── -->
-
-  <!-- Toggle Button -->
-  <button id="dad-chat-toggle" aria-label="Open chat assistant" title="Chat with D.A.D. Assistant">
-    <!-- Chat icon -->
-    <svg class="icon-chat" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z"/>
-    </svg>
-    <!-- Close icon -->
-    <svg class="icon-close" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-    </svg>
+  <!-- AI CHATBOT TOGGLE -->
+  <button id="dad-chat-toggle" aria-label="Open D.A.D. assistant" title="Chat with D.A.D. Assistant">
+    <svg class="icon-chat" viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 12H6l-2 2V4h16v10z"/></svg>
+    <svg class="icon-close" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
   </button>
 
-  <!-- Chat Window -->
+  <!-- AI CHATBOT WINDOW -->
   <div id="dad-chat-window" role="dialog" aria-label="D.A.D. Chat Assistant">
-
-    <!-- Header -->
-    <div class="chat-header">
-      <div class="chat-header-avatar">D.A.D.</div>
-      <div class="chat-header-info">
-        <div class="chat-header-name">D.A.D. Assistant</div>
-        <div class="chat-header-status">● Online — Ask us anything</div>
+    <div class="dcw-header">
+      <div class="dcw-avatar">D</div>
+      <div class="dcw-info">
+        <div class="dcw-name">D.A.D. Assistant</div>
+        <div class="dcw-status">&#x25CF; Online</div>
+      </div>
+      <a href="/chat" id="dcw-admin-link" class="dcw-admin-link" style="display:none;">Talk to Admin</a>
+    </div>
+    <div class="dcw-messages" id="dad-chat-messages">
+      <div class="dcw-msg bot">
+        <div class="dcw-msg-avatar">D</div>
+        <div class="dcw-bubble">Hi! &#x1F44B; I'm the D.A.D. assistant. Ask me about our programs, how to donate, or how to get involved!</div>
       </div>
     </div>
+    <div class="dcw-input-row">
+      <textarea id="dad-chat-input" placeholder="Type your message&#x2026;" rows="1" aria-label="Chat message"></textarea>
+      <button id="dad-chat-send" aria-label="Send">
+        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+      </button>
+    </div>
+    <div class="dcw-footer-note">Powered by D.A.D. &middot; Doing Exceptional Deeds</div>
+  </div>
 
-    <!-- Messages -->
-    <div class="chat-messages" id="dad-chat-messages">
-      <!-- Initial bot greeting -->
-      <div class="chat-msg bot">
-        <div class="chat-msg-avatar">D</div>
-        <div class="chat-bubble">
-          Hi! 👋 I'm the D.A.D. assistant. I can help you learn about our programs, how to get involved, or how to donate. What can I help you with today?
+  <!-- SUBMIT A DEED -->
+  <button id="dad-submit-btn" aria-label="Submit a deed">
+    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
+    Submit a Deed
+  </button>
+
+  <div id="dad-submit-modal" role="dialog" aria-label="Submit a Deed">
+    <div class="dsm-card">
+      <div class="dsm-header">
+        <span class="dsm-title">Submit Your Deed</span>
+        <button class="dsm-close" id="dsm-close" aria-label="Close">&#215;</button>
+      </div>
+      <div class="dsm-body">
+        <div class="dsm-alert" id="dsm-alert"></div>
+        <div class="dsm-login-required" id="dsm-login-required">
+          <p>You must be logged in to submit a deed.</p>
+          <a href="/login">Log In Now</a>
+        </div>
+        <div id="dsm-form">
+          <div class="dsm-group">
+            <label class="dsm-label" for="dsm-category">Category</label>
+            <select id="dsm-category" class="dsm-select">
+              <option value="">Select a category&#x2026;</option>
+              <option value="volunteer">Volunteer</option>
+              <option value="charity">Charity</option>
+              <option value="environmental">Environmental</option>
+              <option value="mentoring">Mentoring</option>
+              <option value="community">Community</option>
+              <option value="fundraising">Fundraising</option>
+              <option value="cleanup">Cleanup</option>
+              <option value="donation">Donation</option>
+              <option value="support">Support</option>
+              <option value="Misc">Miscellaneous</option>
+            </select>
+          </div>
+          <div class="dsm-group">
+            <label class="dsm-label" for="dsm-desc">Description</label>
+            <textarea id="dsm-desc" class="dsm-textarea" placeholder="Describe the deed you want to submit&#x2026;" maxlength="2000"></textarea>
+            <div class="dsm-char"><span id="dsm-char-count">0</span>/2000</div>
+          </div>
+          <div class="dsm-group">
+            <label class="dsm-label">Photo (Optional)</label>
+            <div class="dsm-upload-area" id="dsm-upload-area">
+              <div class="dsm-upload-icon">&#x1F4F8;</div>
+              <div class="dsm-upload-text">Click to upload or drag &amp; drop</div>
+              <div class="dsm-upload-hint">PNG, JPG, GIF, WEBP &mdash; max 10 MB</div>
+              <input type="file" id="dsm-file" style="display:none;" accept="image/*">
+            </div>
+            <div class="dsm-img-preview" id="dsm-preview">
+              <img id="dsm-preview-img" alt="Preview">
+              <button type="button" id="dsm-remove-img" style="margin-top:8px;background:none;border:1px solid var(--dad-gray);color:var(--dad-gray);padding:5px 12px;border-radius:4px;cursor:pointer;font-size:.78rem;">Remove Image</button>
+            </div>
+          </div>
+          <button class="dsm-submit-btn" id="dsm-submit-btn" disabled>Submit Deed</button>
         </div>
       </div>
     </div>
-
-    <!-- Input Row -->
-    <div class="chat-input-row">
-      <textarea
-        id="dad-chat-input"
-        placeholder="Type your message…"
-        rows="1"
-        aria-label="Chat message input"
-      ></textarea>
-      <button id="dad-chat-send" aria-label="Send message">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Footer note -->
-    <div class="chat-footer-note">Powered by D.A.D. · Doing Exceptional Deeds</div>
   </div>
 
-  <script>
-    /* ── Card stagger entrance ── */
-    (function () {
-      const cards = document.querySelectorAll('.hero-program-card');
-      const observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            const card = entry.target;
-            const idx = Array.from(cards).indexOf(card);
-            setTimeout(function () { card.classList.add('visible'); }, idx * 80);
-            observer.unobserve(card);
-          }
-        });
-      }, { threshold: 0.1 });
-      cards.forEach(function (c) { observer.observe(c); });
-    })();
-
-    /* ── Stat counter animation ── */
-    (function () {
-      function animateCount(el, target, suffix) {
-        var start = 0, duration = 1200, startTime = null;
-        function step(ts) {
-          if (!startTime) startTime = ts;
-          var progress = Math.min((ts - startTime) / duration, 1);
-          var val = Math.floor(progress * target);
-          el.textContent = val + suffix;
-          if (progress < 1) requestAnimationFrame(step);
-          else el.textContent = target + suffix;
-        }
-        requestAnimationFrame(step);
-      }
-
-      var statEls = document.querySelectorAll('.stat-num[data-count]');
-      var statObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            var el = entry.target;
-            animateCount(el, parseInt(el.dataset.count), el.dataset.suffix || '');
-            statObserver.unobserve(el);
-          }
-        });
-      }, { threshold: 0.5 });
-      statEls.forEach(function (el) { statObserver.observe(el); });
-    })();
-  </script>
-
   <script type="module">
-    import { pythonURI } from './assets/js/api/config.js';
+    import { pythonURI, fetchOptions } from '/assets/js/api/config.js';
+
+    /* ── Inject carousel below React app once it renders ── */
+    (function injectCarousel() {
+      var root = document.getElementById('root');
+      if (!root || root.children.length === 0) { setTimeout(injectCarousel, 300); return; }
+      var cs = document.getElementById('dad-carousel-section');
+      if (cs) { cs.style.display = ''; root.after(cs); }
+    })();
+
+    /* ── Auth check ── */
+    fetch(pythonURI + '/api/id', fetchOptions)
+      .then(function(r){ return r.ok ? r.json() : null; })
+      .then(function(user){
+        if (user) {
+          var al = document.getElementById('dcw-admin-link');
+          if (al) al.style.display = 'inline-block';
+          var sb = document.getElementById('dsm-submit-btn');
+          if (sb) sb.disabled = false;
+        } else {
+          var lr = document.getElementById('dsm-login-required');
+          if (lr) lr.style.display = 'block';
+          var frm = document.getElementById('dsm-form');
+          if (frm) { frm.style.opacity='.5'; frm.style.pointerEvents='none'; }
+        }
+      })
+      .catch(function(){
+        var lr = document.getElementById('dsm-login-required');
+        if (lr) lr.style.display = 'block';
+      });
+
+    /* ── Photo carousel ── */
+    (function(){
+      var slides=[], current=0, timer;
+      fetch(pythonURI + '/api/carousel', fetchOptions)
+        .then(function(r){ return r.ok ? r.json() : []; })
+        .then(function(items){
+          var viewport = document.getElementById('cs-viewport');
+          var dotsEl   = document.getElementById('cs-dots');
+          var prevBtn  = document.getElementById('cs-prev');
+          var nextBtn  = document.getElementById('cs-next');
+          var empty    = document.getElementById('cs-empty');
+          if (!items || !items.length) return;
+          if (empty) empty.style.display = 'none';
+          if (prevBtn) prevBtn.style.display = '';
+          if (nextBtn) nextBtn.style.display = '';
+          items.forEach(function(item, i){
+            var slide = document.createElement('div');
+            slide.className = 'cs-slide' + (i===0?' active':'');
+            var imgSrc = item.image_url || (item.image ? pythonURI+'/uploads/'+item.image : '');
+            slide.innerHTML = imgSrc
+              ? '<img src="'+imgSrc+'" alt="'+(item.title||'Deed photo')+'" loading="lazy">'
+                +'<div class="cs-slide-overlay"><span class="cs-slide-badge">'+(item.category||'Deed')+'</span>'
+                +'<div class="cs-slide-title">'+(item.title||item.description||'')+'</div></div>'
+              : '<div style="width:100%;height:100%;background:var(--dad-green-dark);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.3);font-size:3rem;">&#x1F91D;</div>';
+            viewport.appendChild(slide);
+            var dot = document.createElement('button');
+            dot.className = 'cs-dot'+(i===0?' active':'');
+            dot.setAttribute('aria-label','Slide '+(i+1));
+            dot.addEventListener('click', function(){ goTo(i); });
+            dotsEl.appendChild(dot);
+            slides.push(slide);
+          });
+          if (slides.length > 1) {
+            prevBtn.addEventListener('click', function(){ goTo((current-1+slides.length)%slides.length); });
+            nextBtn.addEventListener('click', function(){ goTo((current+1)%slides.length); });
+            timer = setInterval(function(){ goTo((current+1)%slides.length); }, 5000);
+          } else {
+            if (prevBtn) prevBtn.style.display='none';
+            if (nextBtn) nextBtn.style.display='none';
+          }
+        }).catch(function(){});
+
+      function goTo(idx){
+        if (!slides.length) return;
+        slides[current].classList.remove('active');
+        var dots=document.querySelectorAll('.cs-dot');
+        if (dots[current]) dots[current].classList.remove('active');
+        current=idx;
+        slides[current].classList.add('active');
+        if (dots[current]) dots[current].classList.add('active');
+        clearInterval(timer);
+        if (slides.length>1) timer=setInterval(function(){ goTo((current+1)%slides.length); },5000);
+      }
+    })();
 
     /* ── AI Chatbot ── */
-    (function () {
-      
-      const toggleBtn  = document.getElementById('dad-chat-toggle');
-      const chatWindow = document.getElementById('dad-chat-window');
-      const messagesEl = document.getElementById('dad-chat-messages');
-      const inputEl    = document.getElementById('dad-chat-input');
-      const sendBtn    = document.getElementById('dad-chat-send');
+    (function(){
+      var toggle   = document.getElementById('dad-chat-toggle');
+      var win      = document.getElementById('dad-chat-window');
+      var messages = document.getElementById('dad-chat-messages');
+      var input    = document.getElementById('dad-chat-input');
+      var send     = document.getElementById('dad-chat-send');
 
-      /* ── Toggle open/close ── */
-      toggleBtn.addEventListener('click', function () {
-        const isOpen = chatWindow.classList.toggle('open');
-        toggleBtn.classList.toggle('open', isOpen);
-        toggleBtn.setAttribute('aria-label', isOpen ? 'Close chat assistant' : 'Open chat assistant');
-        if (isOpen) inputEl.focus();
+      toggle.addEventListener('click', function(){
+        var open = win.classList.toggle('open');
+        toggle.classList.toggle('open', open);
+        if (open) input.focus();
       });
+      input.addEventListener('input', function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,96)+'px'; });
+      input.addEventListener('keydown', function(e){ if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();handleSend();} });
+      send.addEventListener('click', handleSend);
 
-      /* ── Auto-resize textarea ── */
-      inputEl.addEventListener('input', function () {
-        this.style.height = 'auto';
-        this.style.height = Math.min(this.scrollHeight, 96) + 'px';
-      });
-
-      /* ── Send on Enter (Shift+Enter = newline) ── */
-      inputEl.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' && !e.shiftKey) {
-          e.preventDefault();
-          handleSend();
-        }
-      });
-
-      sendBtn.addEventListener('click', handleSend);
-
-      /* ── Append a message bubble ── */
-      function appendMessage(role, text) {
-        const wrap   = document.createElement('div');
-        wrap.className = 'chat-msg ' + role;
-
-        const avatar = document.createElement('div');
-        avatar.className = 'chat-msg-avatar';
-        avatar.textContent = role === 'bot' ? 'D' : 'You';
-
-        const bubble = document.createElement('div');
-        bubble.className = 'chat-bubble';
-        bubble.textContent = text;
-
-        wrap.appendChild(avatar);
-        wrap.appendChild(bubble);
-        messagesEl.appendChild(wrap);
-        scrollToBottom();
-        return wrap;
+      function appendMsg(role,text){
+        var wrap=document.createElement('div'); wrap.className='dcw-msg '+role;
+        var av=document.createElement('div'); av.className='dcw-msg-avatar'; av.textContent=role==='bot'?'D':'You';
+        var b=document.createElement('div'); b.className='dcw-bubble'; b.textContent=text;
+        wrap.appendChild(av); wrap.appendChild(b); messages.appendChild(wrap);
+        messages.scrollTop=messages.scrollHeight;
       }
-
-      /* ── Typing indicator ── */
-      function showTyping() {
-        const wrap = document.createElement('div');
-        wrap.className = 'chat-msg bot';
-        wrap.id = 'dad-typing-indicator';
-
-        const avatar = document.createElement('div');
-        avatar.className = 'chat-msg-avatar';
-        avatar.textContent = 'D';
-
-        const dots = document.createElement('div');
-        dots.className = 'chat-typing';
-        dots.innerHTML = '<span></span><span></span><span></span>';
-
-        wrap.appendChild(avatar);
-        wrap.appendChild(dots);
-        messagesEl.appendChild(wrap);
-        scrollToBottom();
+      function showTyping(){
+        var w=document.createElement('div'); w.className='dcw-msg bot'; w.id='dcw-typing';
+        var av=document.createElement('div'); av.className='dcw-msg-avatar'; av.textContent='D';
+        var t=document.createElement('div'); t.className='dcw-typing';
+        t.innerHTML='<span></span><span></span><span></span>';
+        w.appendChild(av); w.appendChild(t); messages.appendChild(w); messages.scrollTop=messages.scrollHeight;
       }
+      function hideTyping(){ var el=document.getElementById('dcw-typing'); if(el)el.remove(); }
 
-      function hideTyping() {
-        const indicator = document.getElementById('dad-typing-indicator');
-        if (indicator) indicator.remove();
-      }
+      var history=[{role:'system',content:'You are the official assistant for Doing Exceptional Deeds (D.A.D.), a 501(c)(3) nonprofit (MBE #23002138). You ONLY answer questions about D.A.D. For anything unrelated, politely decline and redirect. Keep answers warm, concise, and helpful.\n\nORGANIZATION: Founded 2023. Address: 420 Smilax Road, San Marcos, CA 92078. Mission: Develop disciplined, prepared, and informed individuals through athletics, workforce education, and real-world career exposure.\n\nPROGRAMS: (1) Youth Wellness & Student Success (6-12), (2) Athlete Education & Transition Portal (18+, Pilot), (3) Industry Voices (Pilot) - short educational videos from professionals, (4) Athlete Education & Family Support, (5) Student Success Advisory - continuity model middle through high school, (6) Golden Connections - senior & youth intergenerational program.\n\nTHE SYSTEM: Community to Development to Career — not just participation, but progression.\n\nPARTNERS: San Marcos United, Tri-City Medical Center, Scripps Oceanside, Stampede Elite, SDSU Track & Field.\n\nFUNDING TIERS: 760 Legacy (monthly), 760 Support (one-time), 760 Commitment (annual).\n\nDONATE: All donations fund programs. 501(c)(3) — tax-deductible.\n\nVOLUNTEER: See Contact section or click "Talk to Admin" in this chat.'}];
 
-      /* ── Scroll to bottom of messages ── */
-      function scrollToBottom() {
-        messagesEl.scrollTop = messagesEl.scrollHeight;
-      }
-
-      /* ── Conversation history (kept in memory for context) ── */
-      var conversationHistory = [
-        {
-          role: 'system',
-          content: `You are the official assistant for Doing Exceptional Deeds (D.A.D.), a nonprofit organization. You ONLY answer questions about D.A.D. and its programs. If someone asks anything unrelated — directions, other organizations, general knowledge, news, etc. — politely decline and redirect: "I can only help with questions about D.A.D. and our programs. What can I help you with?" Keep answers warm, concise, and helpful.
-
-=== ORGANIZATION OVERVIEW ===
-Name: Doing Exceptional Deeds (D.A.D.)
-Status: 501(c)(3) nonprofit | MBE #23002138
-Founded: 2021
-Location: 420 Smilax Road, San Marcos, CA 92078
-Mission: Uplift individuals and strengthen communities across generations through education-first programs that build confidence, character, accountability, and purpose.
-Scope: Serves youth (grades 6–12), young adults, student-athletes, and seniors. Work begins locally, extends nationally, and is built to scale globally.
-
-=== THE 6 PROGRAMS ===
-
-PROGRAM 1 — Youth Wellness & Student Success (Grades 6–12)
-School-aligned programming for middle and high school students. Focuses on wellness, life skills, and academic accountability. Designed to support students where they are and guide them toward their full potential. Partners with K–12 school districts.
-
-PROGRAM 2 — Athlete Education & Transition Portal
-Post-secondary education and career transition support for student-athletes navigating life beyond sports. Helps athletes plan academically, financially, and professionally for what comes after their athletic career.
-
-PROGRAM 3 — Athlete Development & Wellness Program
-Comprehensive wellness and development resources to support athletes holistically — mentally, physically, and academically. Addresses the full person, not just athletic performance.
-
-PROGRAM 4 — Student Success Advisory Pilot
-A continuity-based advisory model that follows students from middle school through high school. Provides consistent adult guidance, goal-setting, accountability, and reflection across grade levels and key transitions. Rooted in high expectations, personal responsibility, and support delivered with care. Currently accepting middle school cohorts.
-
-PROGRAM 5 — Industry Voices (Pilot)
-Career exposure and industry mentorship connecting students with professionals across sectors. Expands students' vision of the future by introducing them to real career paths. Currently piloting — launching Spring 2025.
-
-PROGRAM 6 — Athlete & Family Education Support
-Resources and guidance for student-athletes and their families to navigate academic, financial, and life planning decisions together. Recognizes that family is a key part of student success.
-
-=== SENIOR ENGAGEMENT PROGRAM ===
-D.A.D. runs a Senior Engagement Program that creates meaningful intergenerational connections — especially during the holidays. Key offerings:
-- Holiday intergenerational events and shared programming
-- Senior mentorship pairings with student participants
-- Community engagement and volunteer opportunities for seniors
-- Connection and social wellness activities
-Partners seniors with youth in mentorship and community service, building bridges across generations.
-
-=== HOW TO DONATE ===
-Donations directly fund all six programs serving youth, student-athletes, and seniors. Every contribution — large or small — creates lasting impact. To donate, visit the Donate section of the website or ask about specific ways to give. D.A.D. is a 501(c)(3) so donations may be tax-deductible.
-
-=== HOW TO GET INVOLVED / VOLUNTEER ===
-Volunteers can get involved by visiting the Contact section or reaching out directly. Opportunities include program support, mentorship, event volunteering, and community engagement. Use the "Volunteer With Us" button or contact us at the address below.
-
-=== CONTACT & LOCATION ===
-Address: 420 Smilax Road, San Marcos, CA 92078
-Website programs: #programs section
-Contact form: #contact section (footer)
-D.A.D. also has a public deed submission page where community members can submit stories.
-
-=== KEY FACTS FOR COMMON QUESTIONS ===
-- Is D.A.D. a registered nonprofit? Yes — 501(c)(3), MBE certified #23002138
-- When was D.A.D. founded? 2021
-- What age groups do you serve? Primarily grades 6–12, student-athletes of all ages, and seniors
-- Do you work with schools? Yes — K–12 school district partnerships
-- Is there a chat with a real person? Users can contact the admin team through the site's chat or contact form
-- How many programs? 6 active programs plus the Senior Engagement Program`
-        }
-      ];
-
-      /* ── Handle send ── */
-      function handleSend() {
-        var text = inputEl.value.trim();
-        if (!text) return;
-
-        appendMessage('user', text);
-        inputEl.value = '';
-        inputEl.style.height = 'auto';
-
-        conversationHistory.push({ role: 'user', content: text });
-
-        showTyping();
-        sendBtn.disabled = true;
-
-        fetch(pythonURI + '/api/groq/chat', {
-          ...fetchOptions,
-          method: 'POST',
-          body: JSON.stringify({
-            messages: conversationHistory,
-            model: 'llama-3.3-70b-versatile',
-            temperature: 0.7,
-            max_tokens: 300
-          })
+      function handleSend(){
+        var text=input.value.trim(); if(!text)return;
+        appendMsg('user',text); input.value=''; input.style.height='auto';
+        history.push({role:'user',content:text}); showTyping(); send.disabled=true;
+        fetch(pythonURI+'/api/groq/chat',Object.assign({},fetchOptions,{
+          method:'POST',
+          body:JSON.stringify({messages:history,model:'llama-3.3-70b-versatile',temperature:.7,max_tokens:300})
+        }))
+        .then(function(r){return r.json();})
+        .then(function(data){
+          hideTyping(); send.disabled=false;
+          var reply=data.success&&data.response?data.response:'Sorry, I had trouble responding. Please try again or reach out at 420 Smilax Road, San Marcos, CA.';
+          history.push({role:'assistant',content:reply}); appendMsg('bot',reply);
         })
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          hideTyping();
-          sendBtn.disabled = false;
-          if (data.success && data.response) {
-            conversationHistory.push({ role: 'assistant', content: data.response });
-            appendMessage('bot', data.response);
-          } else {
-            appendMessage('bot', 'Sorry, I had trouble getting a response. Please try again or contact us at 420 Smilax Road, San Marcos, CA 92078.');
-          }
-        })
-        .catch(function() {
-          hideTyping();
-          sendBtn.disabled = false;
-          appendMessage('bot', 'Connection error. Please check your internet connection and try again.');
-        });
+        .catch(function(){ hideTyping(); send.disabled=false; appendMsg('bot','Connection error. Please try again.'); });
       }
-
     })();
-  </script>
 
-  <script type="module">
-    // Import configuration from config.js
-    import { pythonURI, fetchOptions, getFullURL } from './assets/js/api/config.js';
+    /* ── Submit Deed Modal ── */
+    (function(){
+      var openBtn=document.getElementById('dad-submit-btn');
+      var modal=document.getElementById('dad-submit-modal');
+      var closeBtn=document.getElementById('dsm-close');
+      var uploadedImage=null;
 
-    // User authentication display
-    async function updateUserDisplay() {
-      const userLoginEl = document.querySelector('.user-login');
-      const userDisplayLi = document.querySelector('.user-display');
-      const userNameEl = document.querySelector('.user-name');
+      openBtn.addEventListener('click',function(){ modal.classList.add('open'); });
+      closeBtn.addEventListener('click',function(){ modal.classList.remove('open'); });
+      modal.addEventListener('click',function(e){ if(e.target===modal)modal.classList.remove('open'); });
 
-      try {
-        // Fetch current logged-in user from /api/id
-        const response = await fetch(`${pythonURI}/api/id`, fetchOptions);
-        
-        if (response.ok) {
-          const userData = await response.json();
-          
-          // Check if user data exists and has a name property
-          if (userData && (userData.name || userData.username || userData.firstName)) {
-            const displayName = userData.name || userData.username || userData.firstName;
-            
-            // Show username and logout, hide login
-            userNameEl.textContent = displayName + ' ▾';
-            userDisplayLi.style.display = 'flex';
-            userLoginEl.style.display = 'none';
+      var desc=document.getElementById('dsm-desc');
+      desc.addEventListener('input',function(){ document.getElementById('dsm-char-count').textContent=desc.value.length; });
 
-            // Set admin chat link
-            const chatLink = document.getElementById('dropdown-chat-link');
-            if (chatLink && (userData.role === 'Admin' || userData._role === 'Admin')) {
-              chatLink.href = '/chat-admin';
-              chatLink.textContent = 'Admin Chat Panel';
-            }
-          } else {
-            // No user data, show login
-            userDisplayLi.style.display = 'none';
-            userLoginEl.style.display = 'block';
-          }
-        } else {
-          // Not authenticated, show login
-          userDisplayLi.style.display = 'none';
-          userLoginEl.style.display = 'block';
-        }
-      } catch (error) {
-        console.log('Error fetching user data:', error);
-        // Show login button on error
-        userDisplayLi.style.display = 'none';
-        userLoginEl.style.display = 'block';
-      }
-    }
+      var uploadArea=document.getElementById('dsm-upload-area');
+      var fileInput=document.getElementById('dsm-file');
+      uploadArea.addEventListener('click',function(){ fileInput.click(); });
+      uploadArea.addEventListener('dragover',function(e){ e.preventDefault(); uploadArea.classList.add('dragging'); });
+      uploadArea.addEventListener('dragleave',function(){ uploadArea.classList.remove('dragging'); });
+      uploadArea.addEventListener('drop',function(e){
+        e.preventDefault(); uploadArea.classList.remove('dragging');
+        if(e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+      });
+      fileInput.addEventListener('change',function(e){ if(e.target.files.length)handleFile(e.target.files[0]); });
+      document.getElementById('dsm-remove-img').addEventListener('click',function(){
+        uploadedImage=null; fileInput.value=''; document.getElementById('dsm-preview').style.display='none';
+      });
 
-    // Log out functionality - use event delegation on the nav
-    document.addEventListener('click', async function(e) {
-      if (e.target && e.target.classList.contains('user-logout')) {
-        try {
-          // Clear the jwt_python_flask cookie
-          document.cookie = "jwt_python_flask=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-          
-          // Optionally call a logout endpoint if available
-          // await fetch(`${pythonURI}/api/logout`, { method: 'POST', ...fetchOptions });
-          
-          // Refresh the page to clear session and update UI
-          window.location.href = getFullURL('/dad');
-        } catch (error) {
-          console.log('Error during logout:', error);
-          window.location.href = getFullURL('/dad');
-        }
-      }
-    });
-
-    // Dropdown toggle
-    document.getElementById('user-name-toggle')?.addEventListener('click', function(e) {
-      e.stopPropagation();
-      document.querySelector('.user-dropdown')?.classList.toggle('open');
-    });
-    document.addEventListener('click', function() {
-      document.querySelector('.user-dropdown')?.classList.remove('open');
-    });
-
-    // Update user display when page loads
-    document.addEventListener('DOMContentLoaded', updateUserDisplay);
-    
-    // Also run immediately in case DOM is already loaded
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', updateUserDisplay);
-    } else {
-      updateUserDisplay();
-    }
-  </script>
-
-  <!-- CAROUSEL SCRIPT -->
-  <script type="module">
-    import { pythonURI, fetchOptions, getFullURL } from './assets/js/api/config.js';
-
-    class Carousel {
-      constructor() {
-        this.items = [];
-        this.submissionData = {}; // Store submission data by index
-        this.currentIndex = 0;
-        this.autoplayInterval = null;
-        this.isAutoplayEnabled = true;
-        this.isTransitioning = false;
-        this.imageCache = new Map(); // Cache base64 images to avoid re-decoding
-
-        this.initElements();
-        this.attachEventListeners();
-        this.loadCarousel();
-      }
-
-      initElements() {
-        this.itemsContainer = document.getElementById('carousel-items-hero');
-        this.loadingEl = document.getElementById('carousel-loading-hero');
-        this.errorEl = document.getElementById('carousel-error-hero');
-        this.errorMessageEl = document.getElementById('carousel-error-message-hero');
-        this.emptyEl = document.getElementById('carousel-empty-hero');
-        this.prevBtn = document.getElementById('carousel-prev-hero');
-        this.nextBtn = document.getElementById('carousel-next-hero');
-        this.dotsContainer = document.getElementById('carousel-dots-hero');
-        this.backdrop = document.getElementById('hero-carousel-backdrop');
-        this.wrapper = this.backdrop;
-      }
-
-      attachEventListeners() {
-        // Navigation buttons
-        this.prevBtn?.addEventListener('click', () => this.goToPrevious());
-        this.nextBtn?.addEventListener('click', () => this.goToNext());
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'ArrowLeft') this.goToPrevious();
-          if (e.key === 'ArrowRight') this.goToNext();
-        });
-
-        // Pause autoplay on hover
-        this.wrapper?.addEventListener('mouseenter', () => this.stopAutoplay());
-        this.wrapper?.addEventListener('mouseleave', () => this.startAutoplay());
-
-        // Touch/swipe support
-        let touchStartX = 0;
-        this.wrapper?.addEventListener('touchstart', (e) => {
-          touchStartX = e.touches[0].clientX;
-          this.stopAutoplay();
-        });
-        this.wrapper?.addEventListener('touchend', (e) => {
-          const touchEndX = e.changedTouches[0].clientX;
-          const diff = touchStartX - touchEndX;
-          if (Math.abs(diff) > 50) {
-            if (diff > 0) this.goToNext();
-            else this.goToPrevious();
-          }
-          this.startAutoplay();
-        });
-
-        // Modal event listeners
-        const modal = document.getElementById('carousel-modal');
-        const modalClose = document.getElementById('carousel-modal-close');
-        
-        modalClose?.addEventListener('click', () => this.closeDetailModal());
-        
-        // Close on background click
-        modal?.addEventListener('click', (e) => {
-          if (e.target === modal) {
-            this.closeDetailModal();
-          }
-        });
-        
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            this.closeDetailModal();
-          }
-        });
-      }
-
-      async loadCarousel() {
-        try {
-          // Show loading state
-          this.loadingEl.style.display = 'flex';
-          this.errorEl.style.display = 'none';
-          this.emptyEl.style.display = 'none';
-          this.itemsContainer.innerHTML = '';
-          this.currentIndex = 0;
-
-          // Fetch carousel data
-          const response = await fetch(`${pythonURI}/carousel/`, fetchOptions);
-
-          if (!response.ok) {
-            throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-          }
-
-          const data = await response.json();
-
-          // Handle empty carousel
-          if (!data || !Array.isArray(data) || data.length === 0) {
-            this.showEmpty();
-            return;
-          }
-
-          this.items = data;
-          this.renderItems();
-          this.renderDots();
-          this.showControls();
-          this.loadingEl.style.display = 'none';
-          this.startAutoplay();
-        } catch (error) {
-          console.error('Carousel loading error:', error);
-          this.showError(error.message);
-        }
-      }
-
-      renderItems() {
-        this.itemsContainer.innerHTML = '';
-        this.submissionData = {}; // Reset submission data
-        console.log('renderItems called with', this.items.length, 'items');
-
-        this.items.forEach((item, index) => {
-          const div = document.createElement('div');
-          div.className = `carousel-item ${index === 0 ? 'active' : ''}`;
-          div.setAttribute('data-index', index);
-
-          const submission = item.submission || {};
-          const imageBase64 = submission.image || '';
-          const userName = submission.user_name || 'Anonymous';
-          const category = submission.category || 'deed';
-          // Get description from content field (or fallback to other possible names)
-          const description = submission.content || submission.description || submission.text || submission.message || submission.story || '';
-
-          // Store submission data in the carousel instance (not in HTML)
-          this.submissionData[index] = {
-            userName,
-            category,
-            imageBase64,
-            description
-          };
-          
-          console.log(`[Carousel] Index ${index}: userName="${userName}", hasDescription=${!!description}, descLength=${description ? description.length : 0}`);
-          console.log(`[Carousel] Stored in submissionData[${index}]:`, this.submissionData[index].userName);
-
-          // Create image element with error handling
-          const img = document.createElement('img');
-          img.className = 'carousel-img';
-          img.alt = `${userName}'s deed`;
-
-          // Set the image source as data URI
-          if (imageBase64) {
-            try {
-              // Check if it's already a full data URI
-              if (imageBase64.startsWith('data:')) {
-                img.src = imageBase64;
-              } else {
-                // Assume it's base64 encoded PNG
-                img.src = `data:image/png;base64,${imageBase64}`;
-              }
-
-              // Handle image load errors
-              img.addEventListener('error', () => {
-                console.warn(`Failed to load image for ${userName}`);
-                img.style.display = 'none';
-                // Show a placeholder overlay
-                div.style.background = 'linear-gradient(135deg, #FF3333 0%, #0a1628 100%)';
-              });
-            } catch (e) {
-              console.error('Image processing error:', e);
-              img.style.display = 'none';
-            }
-          } else {
-            img.style.display = 'none';
-          }
-
-          div.appendChild(img);
-
-          // Add overlay with text
-          const overlay = document.createElement('div');
-          overlay.className = 'carousel-overlay';
-          
-          // Truncate description if needed
-          const maxDescLength = 80;
-          const truncatedDesc = description && description.length > maxDescLength 
-            ? description.substring(0, maxDescLength) + '...' 
-            : description;
-          
-          let descriptionHtml = '';
-          if (description) {
-            descriptionHtml = `<div class="carousel-description" style="cursor: pointer;">${this.escapeHTML(truncatedDesc)}<span class="carousel-description-expand">Read More</span></div>`;
-          }
-          
-          overlay.innerHTML = `
-            <span class="carousel-category">${this.formatCategory(category)}</span>
-            <div class="carousel-title">Featured Deed</div>
-            <div class="carousel-attribution">By ${this.escapeHTML(userName)}</div>
-            ${descriptionHtml}
-          `;
-          
-          div.appendChild(overlay);
-
-          this.itemsContainer.appendChild(div);
-        });
-        
-        console.log('[Carousel] Final submissionData:', this.submissionData);
-        console.log('[Carousel] All carousel items in DOM:', Array.from(this.itemsContainer.querySelectorAll('.carousel-item')).map(el => ({
-          domIndex: el.getAttribute('data-index'),
-          userName: el.querySelector('.carousel-attribution')?.textContent || 'N/A'
-        })));
-        
-        // Add event delegation for all description clicks
-        this.itemsContainer.removeEventListener('click', this.descriptionClickHandler);
-        this.descriptionClickHandler = (e) => {
-          const descElem = e.target.closest('.carousel-description');
-          if (descElem) {
-            // Get index from the carousel-item parent
-            const itemDiv = e.target.closest('.carousel-item');
-            const clickedIndex = parseInt(itemDiv.getAttribute('data-index'), 10);
-            console.log(`[Carousel] Read More clicked - itemDiv data-index="${itemDiv.getAttribute('data-index')}", parsed index=${clickedIndex}`);
-            console.log(`[Carousel] submissionData[${clickedIndex}]:`, this.submissionData[clickedIndex]);
-            this.openDetailModal(clickedIndex);
-          }
+      function handleFile(file){
+        if(file.size>10*1024*1024){ showAlert('File exceeds 10 MB limit.','error'); return; }
+        var reader=new FileReader();
+        reader.onload=function(e){
+          uploadedImage=e.target.result.split(',')[1];
+          document.getElementById('dsm-preview-img').src=e.target.result;
+          document.getElementById('dsm-preview').style.display='block';
         };
-        this.itemsContainer.addEventListener('click', this.descriptionClickHandler.bind(this));
+        reader.readAsDataURL(file);
       }
 
-      openDetailModal(index) {
-        console.log(`[Carousel] openDetailModal called with index: ${index}`);
-        console.log('[Carousel] Available indices:', Object.keys(this.submissionData));
-        
-        const modal = document.getElementById('carousel-modal');
-        const modalImage = document.getElementById('carousel-modal-image');
-        const modalCategory = document.getElementById('carousel-modal-category');
-        const modalBy = document.getElementById('carousel-modal-by');
-        const modalDescription = document.getElementById('carousel-modal-description');
-        
-        // Get data from the stored submission data
-        const data = this.submissionData[index];
-        if (!data) {
-          console.error(`[Carousel] No submission data found for index: ${index}`);
-          return;
-        }
-        
-        console.log(`[Carousel] Opening modal for: ${data.userName}`);
-        const { imageBase64, userName, category, description } = data;
-        
-        // Set image
-        if (imageBase64) {
-          try {
-            if (imageBase64.startsWith('data:')) {
-              modalImage.src = imageBase64;
+      function showAlert(msg,type){
+        var el=document.getElementById('dsm-alert');
+        el.textContent=msg; el.className='dsm-alert '+type+' show';
+      }
+
+      document.getElementById('dsm-submit-btn').addEventListener('click',function(){
+        var category=document.getElementById('dsm-category').value;
+        var description=desc.value.trim();
+        if(!category){ showAlert('Please select a category.','error'); return; }
+        if(!description){ showAlert('Please enter a description.','error'); return; }
+        this.disabled=true; this.textContent='Submitting…';
+        var payload={content:description,category:category};
+        if(uploadedImage) payload.image=uploadedImage;
+        var btn=this;
+        fetch(pythonURI+'/submit/create',Object.assign({},fetchOptions,{method:'POST',body:JSON.stringify(payload)}))
+          .then(function(r){ return r.json().then(function(d){return{ok:r.ok,d:d};}); })
+          .then(function(res){
+            btn.disabled=false; btn.textContent='Submit Deed';
+            if(res.ok&&res.d.id){
+              showAlert('✅ Deed submitted! Thank you.','success');
+              document.getElementById('dsm-category').value='';
+              desc.value=''; document.getElementById('dsm-char-count').textContent='0';
+              document.getElementById('dsm-remove-img').click();
             } else {
-              modalImage.src = `data:image/png;base64,${imageBase64}`;
+              showAlert('Error: '+(res.d.message||'Submission failed.'),'error');
             }
-            modalImage.style.display = 'block';
-          } catch (e) {
-            console.error('Error setting modal image:', e);
-            modalImage.style.display = 'none';
-          }
-        } else {
-          modalImage.style.display = 'none';
-        }
-        
-        // Set content
-        modalCategory.textContent = this.formatCategory(category);
-        modalBy.textContent = `By ${this.escapeHTML(userName)}`;
-        modalDescription.textContent = description;
-        
-        // Show modal
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
-
-      closeDetailModal() {
-        const modal = document.getElementById('carousel-modal');
-        modal.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-
-      renderDots() {
-        this.dotsContainer.innerHTML = '';
-
-        for (let i = 0; i < this.items.length; i++) {
-          const dot = document.createElement('button');
-          dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
-          dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-          dot.onclick = () => this.goToSlide(i);
-          this.dotsContainer.appendChild(dot);
-        }
-      }
-
-      showControls() {
-        if (this.items.length > 1) {
-          this.prevBtn.style.display = 'flex';
-          this.nextBtn.style.display = 'flex';
-          this.dotsContainer.style.display = 'flex';
-        } else {
-          this.prevBtn.style.display = 'none';
-          this.nextBtn.style.display = 'none';
-          this.dotsContainer.style.display = 'none';
-        }
-      }
-
-      goToSlide(index) {
-        if (this.isTransitioning || this.items.length === 0) return;
-
-        this.isTransitioning = true;
-        this.currentIndex = (index + this.items.length) % this.items.length;
-        this.updateCarousel();
-
-        // Reset transition flag after animation completes
-        setTimeout(() => {
-          this.isTransitioning = false;
-        }, 500);
-
-        // Reset autoplay
-        this.stopAutoplay();
-        this.startAutoplay();
-      }
-
-      goToNext() {
-        this.goToSlide(this.currentIndex + 1);
-      }
-
-      goToPrevious() {
-        this.goToSlide(this.currentIndex - 1);
-      }
-
-      updateCarousel() {
-        // Update active item
-        const items = this.itemsContainer.querySelectorAll('.carousel-item');
-        items.forEach((item, index) => {
-          item.classList.toggle('active', index === this.currentIndex);
-        });
-
-        // Update active dot
-        const dots = this.dotsContainer.querySelectorAll('.carousel-dot');
-        dots.forEach((dot, index) => {
-          dot.classList.toggle('active', index === this.currentIndex);
-        });
-      }
-
-      startAutoplay() {
-        if (!this.isAutoplayEnabled || this.items.length <= 1) return;
-
-        this.stopAutoplay();
-        this.autoplayInterval = setInterval(() => {
-          this.goToNext();
-        }, 5000); // 5 seconds per slide
-      }
-
-      stopAutoplay() {
-        if (this.autoplayInterval) {
-          clearInterval(this.autoplayInterval);
-          this.autoplayInterval = null;
-        }
-      }
-
-      showError(message = '') {
-        this.loadingEl.style.display = 'none';
-        this.emptyEl.style.display = 'none';
-        this.errorEl.style.display = 'flex';
-        this.errorMessageEl.textContent = message || 'We\'re having trouble loading the carousel. Please try refreshing the page.';
-        this.itemsContainer.innerHTML = '';
-      }
-
-      showEmpty() {
-        this.loadingEl.style.display = 'none';
-        this.errorEl.style.display = 'none';
-        this.emptyEl.style.display = 'flex';
-        this.itemsContainer.innerHTML = '';
-      }
-
-      formatCategory(category) {
-        const categoryMap = {
-          'volunteer': '✦ Volunteer Deed',
-          'donation': '♡ Donation',
-          'community': '👥 Community',
-          'youth': '🎓 Youth Program',
-          'elderly': '👴 Senior Support',
-          'default': '✦ Exceptional Deed'
-        };
-        return categoryMap[category] || categoryMap['default'];
-      }
-
-      escapeHTML(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-    }
-
-    // Initialize carousel when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        new Carousel();
-      });
-    } else {
-      new Carousel();
-    }
-  </script>
-
-  <!-- HERO CAROUSEL/PONG TOGGLE -->
-  <script>
-    (function() {
-      const pongContainer = document.getElementById('pong-game-container');
-      const carouselBackdrop = document.getElementById('hero-carousel-backdrop');
-      const toggleBtn = document.getElementById('carousel-pong-toggle');
-      const focusBtn = document.getElementById('focus-carousel-btn');
-      const heroPrograms = document.querySelector('.hero-programs');
-
-      let isFocused = false;
-
-      // Focus carousel function
-      function toggleFocus() {
-        isFocused = !isFocused;
-        if (isFocused) {
-          carouselBackdrop.classList.add('focused');
-          heroPrograms.classList.add('hidden-for-focus');
-          focusBtn.textContent = '✕ Collapse';
-        } else {
-          carouselBackdrop.classList.remove('focused');
-          heroPrograms.classList.remove('hidden-for-focus');
-          focusBtn.textContent = '🔍 Expand';
-        }
-      }
-
-      focusBtn?.addEventListener('click', toggleFocus);
-
-      // Escape key or clicking the dark backdrop area also collapses
-      document.addEventListener('keydown', e => { if (e.key === 'Escape' && isFocused) toggleFocus(); });
-      carouselBackdrop?.addEventListener('click', e => {
-        if (isFocused && e.target === carouselBackdrop) toggleFocus();
+          })
+          .catch(function(){ btn.disabled=false; btn.textContent='Submit Deed'; showAlert('Connection error.','error'); });
       });
     })();
-  </script>
-
-  <!-- PONG BACKGROUND GAME — powered by GameEnginev1.1 -->
-  <script type="module">
-  const BASE = '{{ site.baseurl }}';
-  const { default: GameControl } = await import(BASE + '/assets/js/GameEnginev1.1/essentials/GameControl.js');
-  const { default: GameObject }  = await import(BASE + '/assets/js/GameEnginev1.1/essentials/GameObject.js');
-
-  const container = document.getElementById('pong-game-container');
-  const btn       = document.getElementById('pong-player-btn');
-  if (!container || !btn) throw new Error('Pong: missing DOM elements');
-
-  const hero = container.closest('.hero');
-
-  // ── Shared Pong constants ─────────────────────────────────────────────────
-  const PADDLE_W   = 10;
-  const BASE_SPEED = 4.0;
-  const MAX_SPEED  = 22;
-  const MIN_PADDLE = 28;
-
-  // ── PongCourt : GameObject ────────────────────────────────────────────────
-  // Owns the full-size background canvas. Draws the center divider, scores,
-  // speed bar, and danger tint — identical canvas ownership pattern to Background.js.
-  class PongCourt extends GameObject {
-    constructor(data, gameEnv) {
-      super(gameEnv);
-      this.canvas = document.createElement('canvas');
-      this.canvas.id = 'pong-court';
-      this.canvas.style.cssText = 'position:absolute;inset:0;z-index:1;pointer-events:none;';
-      this.ctx = this.canvas.getContext('2d');
-      gameEnv.container.appendChild(this.canvas);
-      this.resize();
-    }
-
-    _dim()  { return { W: this.gameEnv.innerWidth, H: this.gameEnv.innerHeight }; }
-    _diff() { return Math.min(1, (this.gameEnv.stats.hits || 0) / 120); }
-
-    update() { this.draw(); }
-
-    draw() {
-      const { W, H } = this._dim();
-      const ctx      = this.ctx;
-      const stats    = this.gameEnv.stats;
-      const ball     = this.gameEnv.ball;
-      const GOLD     = '#FF3333';
-      const WHITE    = '#f9f7f2';
-
-      ctx.clearRect(0, 0, W, H);
-
-      // Flash tint on score
-      if (this.gameEnv.flash > 0) {
-        ctx.fillStyle = 'rgba(255,255,255,0.06)';
-        ctx.fillRect(0, 0, W, H);
-        this.gameEnv.flash--;
-      }
-
-      // Danger tint at high difficulty in player mode
-      const diff = this._diff();
-      if (diff > 0.5 && this.gameEnv.playerMode) {
-        ctx.fillStyle = `rgba(176,48,48,${(diff - 0.5) * 0.08})`;
-        ctx.fillRect(0, 0, W, H);
-      }
-
-      // Center divider
-      ctx.setLineDash([6, 10]);
-      ctx.strokeStyle = GOLD; ctx.lineWidth = 1.5;
-      ctx.beginPath(); ctx.moveTo(W/2, 0); ctx.lineTo(W/2, H); ctx.stroke();
-      ctx.setLineDash([]);
-
-      // Scores from gameEnv.stats
-      ctx.fillStyle = GOLD;
-      ctx.globalAlpha = 0.9;
-      ctx.font = `bold ${Math.round(H * 0.07)}px Oswald,sans-serif`;
-      ctx.textAlign = 'center';
-      ctx.fillText(stats.aiScore,     W/2 - W*0.12, H*0.1);
-      ctx.fillText(stats.playerScore, W/2 + W*0.12, H*0.1);
-      ctx.globalAlpha = 1;
-
-      // Speed bar
-      const speed = ball ? Math.hypot(ball.vx, ball.vy) : 0;
-      const hotness = Math.max(0, (speed - 8) / (MAX_SPEED - 8));
-      const barW = W * 0.18;
-      ctx.fillStyle = 'rgba(255,51,51,0.25)';
-      ctx.fillRect(W/2 - barW/2, H-8, barW, 3);
-      ctx.fillStyle = hotness > 0 ? `rgba(255,${Math.round(100-hotness*100)},0,0.7)` : 'rgba(255,51,51,0.7)';
-      ctx.fillRect(W/2 - barW/2, H-8, (speed/MAX_SPEED)*barW, 3);
-
-      // Player mode label
-      if (this.gameEnv.playerMode) {
-        ctx.fillStyle = GOLD;
-        ctx.font = `600 ${Math.round(H*0.022)}px Oswald,sans-serif`;
-        ctx.textAlign = 'right';
-        ctx.fillText('YOU →', W - 28, H - 14);
-      }
-    }
-
-    resize() {
-      const { W, H } = this._dim();
-      this.canvas.width  = W;
-      this.canvas.height = H;
-      this.canvas.style.width  = W + 'px';
-      this.canvas.style.height = H + 'px';
-      this.draw();
-    }
-
-    destroy() {
-      if (this.canvas.parentNode) this.canvas.parentNode.removeChild(this.canvas);
-    }
-  }
-
-  // ── PongPaddle : GameObject ───────────────────────────────────────────────
-  // Each paddle is its own GameObject with its own small canvas, positioned
-  // absolutely at the paddle's location — same pattern as Character.js.
-  // data.side = 'left' | 'right'
-  class PongPaddle extends GameObject {
-    constructor(data, gameEnv) {
-      super(gameEnv);
-      this.side = data.side;
-      this.stateKey = this.side === 'left' ? 'paddleLeft' : 'paddleRight';
-
-      this.canvas = document.createElement('canvas');
-      this.canvas.id = `pong-paddle-${this.side}`;
-      this.canvas.style.cssText = 'position:absolute;z-index:3;pointer-events:none;';
-      this.ctx = this.canvas.getContext('2d');
-      gameEnv.container.appendChild(this.canvas);
-
-      // Initialize this paddle's state on gameEnv so PongBall can read it
-      gameEnv[this.stateKey] = { y: gameEnv.innerHeight / 2, h: this._paddleHeight() };
-      this._syncCanvas();
-    }
-
-    _dim()  { return { W: this.gameEnv.innerWidth, H: this.gameEnv.innerHeight }; }
-    _diff() { return Math.min(1, (this.gameEnv.stats.hits || 0) / 120); }
-    _paddleHeight() {
-      const { H } = this._dim();
-      const base = Math.max(80, H * 0.14);
-      return base - (base - MIN_PADDLE) * this._diff();
-    }
-    _aiSpeed() { return 3.5 + this._diff() * 8; }
-
-    update() {
-      const { H }   = this._dim();
-      const paddle  = this.gameEnv[this.stateKey];
-      const ball    = this.gameEnv.ball;
-
-      // Smooth paddle height toward current difficulty target
-      paddle.h += (this._paddleHeight() - paddle.h) * 0.02;
-
-      // Move — player controls right paddle in playerMode, AI otherwise
-      if (this.side === 'right' && this.gameEnv.playerMode) {
-        const target = this.gameEnv.mouseY || H/2;
-        paddle.y += (target - paddle.y) * 0.08;
-      } else {
-        const targetY = ball ? ball.y : H/2;
-        const noise   = (Math.random() - 0.5) * 6;
-        const speed   = this.side === 'right' ? this._aiSpeed() * 0.95 : this._aiSpeed();
-        const diff    = (targetY + noise) - paddle.y;
-        const raw     = paddle.y + Math.sign(diff) * Math.min(Math.abs(diff), speed);
-        paddle.y += (raw - paddle.y) * 0.10;
-      }
-      paddle.y = Math.max(paddle.h/2, Math.min(H - paddle.h/2, paddle.y));
-
-      this._syncCanvas();
-      this.draw();
-    }
-
-    // Position and size the canvas to exactly cover the paddle — engine collision
-    // system uses getBoundingClientRect() on this canvas for overlap detection.
-    _syncCanvas() {
-      const { W }   = this._dim();
-      const paddle  = this.gameEnv[this.stateKey];
-      if (!paddle) return;
-      const x = this.side === 'left' ? 10 : W - PADDLE_W - 10;
-      const h = Math.max(1, Math.ceil(paddle.h));
-      this.canvas.width  = PADDLE_W;
-      this.canvas.height = h;
-      this.canvas.style.left   = x + 'px';
-      this.canvas.style.top    = Math.round(paddle.y - paddle.h/2) + 'px';
-      this.canvas.style.width  = PADDLE_W + 'px';
-      this.canvas.style.height = h + 'px';
-    }
-
-    draw() {
-      const paddle  = this.gameEnv[this.stateKey];
-      const ball    = this.gameEnv.ball;
-      const speed   = ball ? Math.hypot(ball.vx, ball.vy) : 0;
-      const hotness = Math.max(0, (speed - 8) / (MAX_SPEED - 8));
-      const color   = hotness > 0
-        ? `rgb(${Math.round(249-hotness*60)},${Math.round(247-hotness*120)},${Math.round(242-hotness*200)})`
-        : '#f9f7f2';
-      const h = Math.max(1, Math.ceil(paddle.h));
-      this.ctx.clearRect(0, 0, PADDLE_W, h);
-      this.ctx.fillStyle = color;
-      this.ctx.beginPath();
-      this.ctx.roundRect(0, 0, PADDLE_W, h, 4);
-      this.ctx.fill();
-    }
-
-    resize() {
-      const paddle = this.gameEnv[this.stateKey];
-      if (paddle) {
-        paddle.h = this._paddleHeight();
-        this._syncCanvas();
-        this.draw();
-      }
-    }
-
-    destroy() {
-      if (this.canvas.parentNode) this.canvas.parentNode.removeChild(this.canvas);
-    }
-  }
-
-  // ── PongBall : GameObject ─────────────────────────────────────────────────
-  // Owns a small canvas positioned at the ball's location each frame.
-  // Uses the engine's collisionChecks() → handleCollisionReaction() to detect
-  // hits against PongPaddle canvases via getBoundingClientRect() overlap.
-  class PongBall extends GameObject {
-    constructor(data, gameEnv) {
-      super(gameEnv);
-      this.canvas = document.createElement('canvas');
-      this.canvas.id = 'pong-ball';
-      this.canvas.style.cssText = 'position:absolute;z-index:4;pointer-events:none;';
-      this.ctx = this.canvas.getContext('2d');
-      gameEnv.container.appendChild(this.canvas);
-      this._resetBall();
-    }
-
-    _dim()  { return { W: this.gameEnv.innerWidth, H: this.gameEnv.innerHeight }; }
-    _diff() { return Math.min(1, (this.gameEnv.stats.hits || 0) / 120); }
-
-    _resetBall() {
-      const { W, H } = this._dim();
-      const speed = BASE_SPEED + this._diff() * 5;
-      const angle = (Math.random() * 0.6 + 0.2) * (Math.random() > 0.5 ? 1 : -1);
-      this.gameEnv.ball = {
-        x: W/2, y: H/2,
-        vx: (Math.random() > 0.5 ? 1 : -1) * speed * Math.cos(angle),
-        vy: speed * Math.sin(angle),
-        r: 6,
-      };
-    }
-
-    update() {
-      const { W, H } = this._dim();
-      const b        = this.gameEnv.ball;
-      const stats    = this.gameEnv.stats;
-
-      b.x += b.vx;
-      b.y += b.vy;
-
-      // Wall bounces (top/bottom)
-      if (b.y - b.r < 0) { b.y = b.r;     b.vy *= -1; }
-      if (b.y + b.r > H) { b.y = H - b.r; b.vy *= -1; }
-
-      // Direct positional collision — replaces getBoundingClientRect()-based engine
-      // detection which tunnels at high ball speeds (ball moves >10px/frame, paddle is 10px wide).
-      const leftEdge  = 10 + PADDLE_W;
-      const rightEdge = W - 10 - PADDLE_W;
-
-      if (b.vx < 0 && b.x - b.r <= leftEdge) {
-        const paddle = this.gameEnv.paddleLeft;
-        if (paddle && Math.abs(b.y - paddle.y) <= paddle.h / 2 + b.r) {
-          const rel = (b.y - paddle.y) / (paddle.h / 2);
-          const spd = Math.min(Math.hypot(b.vx, b.vy) * 1.06, MAX_SPEED);
-          b.vx = spd * Math.cos(rel * 1.1);
-          b.vy = spd * Math.sin(rel * 1.1);
-          b.x  = leftEdge + b.r + 1;
-          stats.hits++;
-        }
-      }
-
-      if (b.vx > 0 && b.x + b.r >= rightEdge) {
-        const paddle = this.gameEnv.paddleRight;
-        if (paddle && Math.abs(b.y - paddle.y) <= paddle.h / 2 + b.r) {
-          const rel = (b.y - paddle.y) / (paddle.h / 2);
-          const spd = Math.min(Math.hypot(b.vx, b.vy) * 1.06, MAX_SPEED);
-          b.vx = -spd * Math.cos(rel * 1.1);
-          b.vy =  spd * Math.sin(rel * 1.1);
-          b.x  = rightEdge - b.r - 1;
-          stats.hits++;
-        }
-      }
-
-      // Scoring — write to gameEnv.stats
-      if (b.x < 0) { stats.playerScore++; this.gameEnv.flash = 40; this._resetBall(); }
-      if (b.x > W) { stats.aiScore++;     this.gameEnv.flash = 40; this._resetBall(); }
-
-      // Reposition canvas to ball location
-      const S = b.r * 2 + 10;
-      this.canvas.width  = S;
-      this.canvas.height = S;
-      this.canvas.style.left   = Math.round(b.x - S/2) + 'px';
-      this.canvas.style.top    = Math.round(b.y - S/2) + 'px';
-      this.canvas.style.width  = S + 'px';
-      this.canvas.style.height = S + 'px';
-
-      this.draw();
-    }
-
-    // Engine calls this when collisionChecks() detects overlap with another canvas.
-    // We override to apply Pong physics instead of the default dialogue reaction.
-    handleCollisionReaction(other) {
-      const b      = this.gameEnv.ball;
-      const { W }  = this._dim();
-
-      if (other.id === 'pong-paddle-left' && b.vx < 0) {
-        const paddle = this.gameEnv.paddleLeft;
-        const rel    = paddle ? (b.y - paddle.y) / (paddle.h / 2) : 0;
-        const spd    = Math.min(Math.hypot(b.vx, b.vy) * 1.06, MAX_SPEED);
-        b.vx = spd * Math.cos(rel * 1.1);
-        b.vy = spd * Math.sin(rel * 1.1);
-        b.x  = 10 + PADDLE_W + b.r + 1;
-        this.gameEnv.stats.hits++;
-      } else if (other.id === 'pong-paddle-right' && b.vx > 0) {
-        const paddle = this.gameEnv.paddleRight;
-        const rel    = paddle ? (b.y - paddle.y) / (paddle.h / 2) : 0;
-        const spd    = Math.min(Math.hypot(b.vx, b.vy) * 1.06, MAX_SPEED);
-        b.vx = -spd * Math.cos(rel * 1.1);
-        b.vy =  spd * Math.sin(rel * 1.1);
-        b.x  = W - 10 - PADDLE_W - b.r - 1;
-        this.gameEnv.stats.hits++;
-      }
-    }
-
-    draw() {
-      const b       = this.gameEnv.ball;
-      const S       = b.r * 2 + 10;
-      const speed   = Math.hypot(b.vx, b.vy);
-      const hotness = Math.max(0, (speed - 8) / (MAX_SPEED - 8));
-      this.ctx.clearRect(0, 0, S, S);
-      this.ctx.fillStyle = hotness > 0
-        ? `rgb(255,${Math.round(249-hotness*200)},${Math.round(242-hotness*242)})`
-        : '#f9f7f2';
-      this.ctx.beginPath();
-      this.ctx.arc(S/2, S/2, b.r + hotness * 3, 0, Math.PI * 2);
-      this.ctx.fill();
-    }
-
-    // Override — engine's default reads this.velocity which Pong doesn't use
-    handleCollisionState() {}
-
-    resize() { /* ball canvas repositions itself every update() frame */ }
-
-    destroy() {
-      if (this.canvas.parentNode) this.canvas.parentNode.removeChild(this.canvas);
-    }
-  }
-
-  // ── PongLevel ─────────────────────────────────────────────────────────────
-  // Declares the 4 GameObjects and wires up input/toggle in initialize().
-  class PongLevel {
-    constructor(gameEnv) {
-      this.gameEnv = gameEnv;
-
-      // Seed all shared state on gameEnv before any GameObject constructor runs
-      gameEnv.stats       = { playerScore: 0, aiScore: 0, hits: 0 };
-      gameEnv.playerMode  = false;
-      gameEnv.mouseY      = 0;
-      gameEnv.flash       = 0;
-      gameEnv.ball        = null;
-      gameEnv.paddleLeft  = null;
-      gameEnv.paddleRight = null;
-
-      // Engine reads this.classes to instantiate GameObjects via GameLevel.create()
-      this.classes = [
-        { class: PongCourt,  data: {} },
-        { class: PongPaddle, data: { side: 'left'  } },
-        { class: PongPaddle, data: { side: 'right' } },
-        { class: PongBall,   data: {} },
-      ];
-    }
-
-    // Engine calls initialize() after all GameObjects are created
-    initialize() {
-      const env = this.gameEnv;
-
-      // Resize patch: GameEnv.resize() → create() → setCanvas() appends a NEW canvas
-      // without removing the old one. Override to resize the existing canvas in-place.
-      env.resize = () => {
-        const w = hero.offsetWidth, h = hero.offsetHeight;
-        env.game.environment.innerWidth  = w;
-        env.game.environment.innerHeight = h;
-        env.innerWidth  = w;
-        env.innerHeight = h;
-        if (env.canvas) {
-          env.canvas.width = w; env.canvas.height = h;
-          env.canvas.style.width = w + 'px'; env.canvas.style.height = h + 'px';
-        }
-      };
-
-      // Mouse tracking for player-controlled right paddle
-      this._onMouseMove = e => {
-        const rect = env.container.getBoundingClientRect();
-        env.mouseY = e.clientY - rect.top;
-      };
-      env.container.addEventListener('mousemove', this._onMouseMove);
-
-      // Player mode toggle button
-      btn.addEventListener('click', () => {
-        env.playerMode = !env.playerMode;
-        container.classList.toggle('player-mode', env.playerMode);
-        btn.classList.toggle('active', env.playerMode);
-        btn.textContent = env.playerMode ? '🤖 Watch AI' : '🏓 Play';
-      });
-    }
-
-    destroy() {
-      if (this._onMouseMove) {
-        this.gameEnv.container.removeEventListener('mousemove', this._onMouseMove);
-      }
-    }
-  }
-
-  // ── Game host ─────────────────────────────────────────────────────────────
-  const game = {
-    path: BASE,
-    gameContainer: container,
-    environment: { innerWidth: hero.offsetWidth, innerHeight: hero.offsetHeight },
-    activeGameControl: null,
-  };
-
-  // ── Boot ──────────────────────────────────────────────────────────────────
-  const gc = new GameControl(game, [PongLevel]);
-  gc.start();
-
-  // ResizeObserver catches hero layout shifts that don't fire window resize
-  const ro = new ResizeObserver(() => {
-    if (gc.currentLevel) gc.currentLevel.resize();
-  });
-  ro.observe(hero);
-  </script>
-
-  <script>
-  /* ── WOW FACTOR ─────────────────────────────────────────────────────── */
-
-  // 1. PARTICLE CONSTELLATION
-  (function() {
-    const canvas = document.getElementById('particle-canvas');
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    const hero = document.getElementById('programs');
-    let W, H, particles = [];
-    const COUNT = 70, CONNECT_DIST = 130;
-
-    function resize() {
-      W = canvas.width  = hero.offsetWidth;
-      H = canvas.height = hero.offsetHeight;
-    }
-
-    function mkParticle() {
-      return {
-        x: Math.random() * W,
-        y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        r: Math.random() * 1.5 + 0.5,
-      };
-    }
-
-    function init() {
-      resize();
-      particles = Array.from({ length: COUNT }, mkParticle);
-    }
-
-    function draw() {
-      ctx.clearRect(0, 0, W, H);
-      for (let i = 0; i < particles.length; i++) {
-        const p = particles[i];
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(255,255,255,0.6)';
-        ctx.fill();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const q = particles[j];
-          const dx = p.x - q.x, dy = p.y - q.y;
-          const dist = Math.sqrt(dx*dx + dy*dy);
-          if (dist < CONNECT_DIST) {
-            const alpha = (1 - dist / CONNECT_DIST) * 0.3;
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(q.x, q.y);
-            ctx.strokeStyle = `rgba(255,80,80,${alpha})`;
-            ctx.lineWidth = 0.6;
-            ctx.stroke();
-          }
-        }
-      }
-      requestAnimationFrame(draw);
-    }
-
-    init();
-    draw();
-    window.addEventListener('resize', init);
-  })();
-
-  // 2. CURSOR SPOTLIGHT
-  (function() {
-    const hero = document.getElementById('programs');
-    const spotlight = document.getElementById('hero-spotlight');
-    if (!hero || !spotlight) return;
-    hero.addEventListener('mousemove', e => {
-      const rect = hero.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width * 100).toFixed(1) + '%';
-      const y = ((e.clientY - rect.top)  / rect.height * 100).toFixed(1) + '%';
-      spotlight.style.setProperty('--mx', x);
-      spotlight.style.setProperty('--my', y);
-    });
-  })();
-
-  // 3. HERO HEADLINE WORD REVEAL
-  (function() {
-    const title = document.getElementById('hero-title');
-    if (!title) return;
-    title.childNodes.forEach(node => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        const words = node.textContent.trim().split(/\s+/);
-        if (!words[0]) return;
-        const frag = document.createDocumentFragment();
-        words.forEach((w, i) => {
-          const span = document.createElement('span');
-          span.className = 'word';
-          span.style.animationDelay = (0.1 + i * 0.12) + 's';
-          span.textContent = w;
-          frag.appendChild(span);
-          if (i < words.length - 1) frag.appendChild(document.createTextNode(' '));
-        });
-        node.replaceWith(frag);
-      } else if (node.nodeType === Node.ELEMENT_NODE && node.tagName !== 'BR') {
-        node.classList.add('word');
-        node.style.animationDelay = '0.3s';
-      }
-    });
-  })();
-
-  // 4. SCROLL REVEAL
-  (function() {
-    const els = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
-    }, { threshold: 0.12 });
-    els.forEach(el => io.observe(el));
-    // Mark hero cards visible immediately since they're in the viewport
-    document.querySelectorAll('.hero-program-card.reveal').forEach(el => {
-      setTimeout(() => el.classList.add('visible'), 200);
-    });
-  })();
-
-  // 5. ANIMATED STAT COUNTERS
-  (function() {
-    const counters = document.querySelectorAll('.hero-stat-num[data-target]');
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (!e.isIntersecting) return;
-        const el = e.target;
-        const target = +el.dataset.target;
-        const suffix = target >= 100 ? '+' : '';
-        let start = 0;
-        const step = target / 50;
-        const tick = () => {
-          start = Math.min(start + step, target);
-          el.textContent = Math.floor(start) + (start >= target ? suffix : '');
-          if (start < target) requestAnimationFrame(tick);
-        };
-        tick();
-        io.unobserve(el);
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(c => io.observe(c));
-  })();
-
-  // 6. NAV SCROLL GLOW
-  (function() {
-    const nav = document.querySelector('nav');
-    if (!nav) return;
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-  })();
-
-  // 7. CARD 3D TILT
-  (function() {
-    document.querySelectorAll('.hero-program-card, .program-card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const r = card.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width  - 0.5;
-        const y = (e.clientY - r.top)  / r.height - 0.5;
-        card.style.transform = `translateY(-4px) rotateX(${(-y * 8).toFixed(1)}deg) rotateY(${(x * 8).toFixed(1)}deg)`;
-      });
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = '';
-      });
-    });
-  })();
-
   </script>
 
 </body>
-</html
+</html>
