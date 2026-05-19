@@ -8,6 +8,13 @@ search_exclude: true
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <!-- Rewrite /dad → / so the React app's internal router doesn't 404 -->
+  <script>
+    (function(){
+      var p = location.pathname;
+      if (p === '/dad' || p === '/dad/') history.replaceState(null, '', '/');
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
   <title>Doing Exceptional Deeds (D.A.D.)</title>
   <meta name="description" content="D.A.D. is a 501(c)(3) nonprofit empowering youth through athlete education, life skills, and community programs in San Marcos, CA." />
