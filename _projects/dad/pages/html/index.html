@@ -510,7 +510,9 @@ search_exclude: true
           items.forEach(function(item, i){
             var slide = document.createElement('div');
             slide.className = 'cs-slide' + (i===0?' active':'');
-            var imgSrc = item.image_url || (item.image ? pythonURI+'/uploads/'+item.image : '');
+            var imgSrc = item.image_url
+              ? (item.image_url.startsWith('http') ? item.image_url : pythonURI + item.image_url)
+              : (item.image ? 'data:image/jpeg;base64,' + item.image : '');
             slide.innerHTML = imgSrc
               ? '<img src="'+imgSrc+'" alt="'+(item.title||'Deed photo')+'" loading="lazy">'
                 +'<div class="cs-slide-overlay"><span class="cs-slide-badge">'+(item.category||'Deed')+'</span>'
