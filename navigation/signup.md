@@ -1,6 +1,5 @@
 ---
 layout: none
-permalink: /signup
 search_exclude: true
 ---
 <!doctype html>
