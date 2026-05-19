@@ -14,9 +14,9 @@ search_exclude: true
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-    :root { --green:#1B4332; --green-dark:#163828; --orange:#FF6B35; --orange-dark:#e55a25; --off-white:#f4f7f5; }
-    html, body { height:100%; font-family:'Space Grotesk',sans-serif; }
-    body { display:flex; min-height:100vh; }
+    :root { --green:#1B4332; --orange:#FF6B35; --orange-dark:#e55a25; --off-white:#f4f7f5; }
+    html, body { height:100%; font-family:'Space Grotesk',sans-serif; overflow:hidden; }
+    body { display:flex; height:100vh; }
 
     .left-panel {
       flex:1; background:var(--green);
@@ -25,43 +25,63 @@ search_exclude: true
     }
     .left-panel::before { content:''; position:absolute; width:420px; height:420px; border-radius:50%; background:rgba(255,107,53,0.08); top:-80px; left:-80px; }
     .left-panel::after  { content:''; position:absolute; width:300px; height:300px; border-radius:50%; background:rgba(255,107,53,0.06); bottom:-60px; right:-60px; }
-    .left-logo { width:90px; height:90px; border-radius:50%; border:3px solid rgba(255,107,53,0.6); object-fit:cover; margin-bottom:1.5rem; position:relative; z-index:1; }
+    .left-logo { width:90px; height:90px; border-radius:50%; border:3px solid rgba(255,107,53,0.5); object-fit:cover; margin-bottom:1.5rem; position:relative; z-index:1; }
     .left-panel h1 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:700; color:#fff; text-align:center; line-height:1.15; margin-bottom:0.75rem; position:relative; z-index:1; }
     .left-panel h1 span { color:var(--orange); }
-    .left-panel p { font-size:0.95rem; color:rgba(255,255,255,0.65); text-align:center; max-width:300px; line-height:1.6; position:relative; z-index:1; }
-    .left-tagline { margin-top:2.5rem; display:flex; flex-direction:column; gap:0.75rem; width:100%; max-width:300px; position:relative; z-index:1; }
-    .left-tagline-item { display:flex; align-items:center; gap:0.6rem; font-size:0.88rem; color:rgba(255,255,255,0.75); }
+    .left-panel p { font-size:0.95rem; color:rgba(255,255,255,0.6); text-align:center; max-width:280px; line-height:1.6; position:relative; z-index:1; }
+    .left-tagline { margin-top:2rem; display:flex; flex-direction:column; gap:0.65rem; width:100%; max-width:280px; position:relative; z-index:1; }
+    .left-tagline-item { display:flex; align-items:center; gap:0.6rem; font-size:0.88rem; color:rgba(255,255,255,0.7); }
     .left-tagline-item::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--orange); flex-shrink:0; }
 
-    .right-panel { width:480px; background:var(--off-white); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:3rem 2.5rem; }
-    .form-card { width:100%; max-width:380px; }
-    .form-card h2 { font-size:1.6rem; font-weight:700; color:var(--green); margin-bottom:0.3rem; }
-    .form-card .subtitle { font-size:0.9rem; color:#6b7280; margin-bottom:2rem; }
-    .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1.25rem; }
-    .form-group label { font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--green); }
-    .form-group input { padding:0.8rem 1rem; border:2px solid #d1e7da; border-radius:8px; font-size:1rem; font-family:inherit; color:#1a1a1a; background:#fff; outline:none; transition:border-color 0.2s, box-shadow 0.2s; }
+    .right-panel {
+      width:480px; background:var(--off-white);
+      display:flex; align-items:center; justify-content:center;
+      padding:2rem 2.5rem;
+    }
+    .form-card { width:100%; max-width:360px; }
+    .form-card h2 { font-size:1.5rem; font-weight:700; color:var(--green); margin-bottom:0.25rem; }
+    .form-card .subtitle { font-size:0.9rem; color:#6b7280; margin-bottom:1.75rem; }
+
+    .form-group { display:flex; flex-direction:column; gap:0.35rem; margin-bottom:1rem; }
+    .form-group label { font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--green); }
+    .form-group input {
+      padding:0.75rem 1rem; border:2px solid #d1e7da; border-radius:8px;
+      font-size:0.95rem; font-family:inherit; color:#1a1a1a;
+      background:#fff; outline:none; transition:border-color 0.2s, box-shadow 0.2s;
+    }
     .form-group input:focus { border-color:var(--green); box-shadow:0 0 0 3px rgba(27,67,50,0.1); }
 
-    .btn-signin { width:100%; padding:0.9rem; background:var(--orange); color:#fff; border:none; border-radius:8px; font-family:inherit; font-size:1rem; font-weight:700; letter-spacing:0.03em; cursor:pointer; transition:background 0.2s, transform 0.15s, box-shadow 0.2s; margin-top:0.5rem; }
+    .btn-signin {
+      width:100%; padding:0.85rem; background:var(--orange); color:#fff;
+      border:none; border-radius:8px; font-family:inherit; font-size:1rem;
+      font-weight:700; cursor:pointer; margin-top:0.5rem;
+      transition:background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
     .btn-signin:hover { background:var(--orange-dark); transform:translateY(-2px); box-shadow:0 6px 20px rgba(255,107,53,0.35); }
     .btn-signin:active { transform:translateY(0); }
     .btn-signin:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
 
-    #error-msg { background:#fff3f0; color:#c0392b; border-left:4px solid #e74c3c; padding:0.75rem 1rem; border-radius:6px; font-size:0.9rem; margin-bottom:1rem; display:none; }
-    .footer-link { text-align:center; margin-top:1.25rem; font-size:0.88rem; color:#6b7280; }
+    #error-msg { background:#fff3f0; color:#c0392b; border-left:4px solid #e74c3c; padding:0.65rem 0.9rem; border-radius:6px; font-size:0.88rem; margin-bottom:1rem; display:none; }
+
+    .footer-link { text-align:center; margin-top:1rem; font-size:0.87rem; color:#6b7280; }
     .footer-link a { color:var(--green); font-weight:600; text-decoration:none; }
     .footer-link a:hover { text-decoration:underline; }
 
-    @media (max-width:700px) {
+    @media (max-width:750px) {
+      html, body { overflow:auto; height:auto; }
       body { flex-direction:column; }
-      .left-panel { padding:2rem 1.5rem; min-height:220px; }
-      .right-panel { width:100%; padding:2rem 1.5rem; }
+      .left-panel { min-height:220px; padding:2rem 1.5rem; }
+      .left-tagline { display:none; }
+      .right-panel { width:100%; padding:1.5rem; }
     }
   </style>
 </head>
 <body>
+
   <div class="left-panel">
-    <img class="left-logo" src="https://dadnonprofit-kfp2ps9o.manus.space/manus-storage/dad-logo_0ef8f3a8.png" onerror="this.style.display='none'" alt="D.A.D. Logo"/>
+    <img class="left-logo"
+         src="https://dadnonprofit-kfp2ps9o.manus.space/manus-storage/dad-logo_0ef8f3a8.png"
+         onerror="this.style.display='none'" alt="D.A.D. Logo"/>
     <h1>Doing<br><span>Exceptional</span><br>Deeds</h1>
     <p>A 501(c)(3) nonprofit empowering youth through athletics, education, and community.</p>
     <div class="left-tagline">
@@ -75,29 +95,33 @@ search_exclude: true
     <div class="form-card">
       <h2>Welcome back</h2>
       <p class="subtitle">Sign in to your D.A.D. account</p>
+
       <div id="error-msg"></div>
+
       <form id="login-form">
         <div class="form-group">
-          <label for="uid">User ID</label>
-          <input id="uid" type="text" placeholder="Enter your user ID" required autocomplete="username"/>
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="jane@example.com" required autocomplete="email"/>
         </div>
         <div class="form-group">
           <label for="password">Password</label>
-          <input id="password" type="password" placeholder="Enter your password" required autocomplete="current-password"/>
+          <input id="password" type="password" placeholder="Your password" required autocomplete="current-password"/>
         </div>
         <button type="submit" class="btn-signin" id="submit-btn">Sign In</button>
       </form>
-      <p class="footer-link">Don't have an account? <a href="/signup">Create one</a></p>
+
+      <p class="footer-link">Don't have an account? <a href="/signup">Create one for free</a></p>
       <p class="footer-link"><a href="/dad">&larr; Back to site</a></p>
     </div>
   </div>
 
   <script type="module">
     import { pythonURI, fetchOptions } from '/assets/js/api/config.js';
-    const form = document.getElementById('login-form');
+    const form   = document.getElementById('login-form');
     const errBox = document.getElementById('error-msg');
-    const btn = document.getElementById('submit-btn');
+    const btn    = document.getElementById('submit-btn');
 
+    // Skip login if already authenticated
     fetch(pythonURI + '/api/id', fetchOptions)
       .then(r => r.ok ? r.json() : null)
       .then(user => { if (user) window.location.href = '/dad'; })
@@ -106,27 +130,27 @@ search_exclude: true
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       errBox.style.display = 'none';
-      btn.disabled = true;
-      btn.textContent = 'Signing in…';
-      const uid = document.getElementById('uid').value.trim();
+      btn.disabled = true; btn.textContent = 'Signing in…';
+
+      const email    = document.getElementById('email').value.trim().toLowerCase();
       const password = document.getElementById('password').value;
+
       try {
         const resp = await fetch(pythonURI + '/api/authenticate', {
-          ...fetchOptions, method: 'POST', body: JSON.stringify({ uid, password })
+          ...fetchOptions, method:'POST',
+          body: JSON.stringify({ uid: email, password })
         });
         if (resp.ok) {
           window.location.href = '/dad';
         } else {
-          const data = await resp.json().catch(() => ({}));
-          errBox.textContent = data.message || 'Invalid user ID or password.';
+          errBox.textContent = 'Incorrect email or password. Please try again.';
           errBox.style.display = 'block';
         }
       } catch(err) {
-        errBox.textContent = 'Cannot reach server. Please try again.';
+        errBox.textContent = 'Cannot reach server. Please try again later.';
         errBox.style.display = 'block';
       }
-      btn.disabled = false;
-      btn.textContent = 'Sign In';
+      btn.disabled = false; btn.textContent = 'Sign In';
     });
   </script>
 </body>
