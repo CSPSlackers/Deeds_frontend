@@ -1,606 +1,133 @@
-<!DOCTYPE html>
+---
+permalink: /login
+layout: none
+search_exclude: true
+---
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https:; style-src 'self' 'unsafe-inline' https:; img-src 'self' data: https:; font-src 'self' data: https:; connect-src 'self' http://localhost:* https:;">
-  <title>D.A.D. | Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+  <title>D.A.D. | Sign In</title>
+  <meta name="robots" content="noindex"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet"/>
   <style>
-    :root {
-      --navy: #0a1628;
-      --red: #FF3333;
-      --red-light: #FF5555;
-      --white: #f9f7f2;
-      --off-white: #ede9e0;
-      --gray: #6b6b6b;
-      --dark-gray: #2a2a2a;
-      --red-accent: #b03030;
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    :root { --green:#1B4332; --green-dark:#163828; --orange:#FF6B35; --orange-dark:#e55a25; --off-white:#f4f7f5; }
+    html, body { height:100%; font-family:'Space Grotesk',sans-serif; }
+    body { display:flex; min-height:100vh; }
+
+    .left-panel {
+      flex:1; background:var(--green);
+      display:flex; flex-direction:column; align-items:center; justify-content:center;
+      padding:3rem 2.5rem; position:relative; overflow:hidden;
     }
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { 
-      scroll-behavior: smooth;
-      background: var(--white) !important;
-    }
-
-    body {
-      font-family: 'Source Sans 3', sans-serif;
-      background: var(--white) !important;
-      color: var(--dark-gray);
-      overflow-x: hidden;
-    }
-
-    .auth-container {
-      min-height: 100vh;
-      background: var(--navy);
-      background-image:
-        radial-gradient(ellipse at 20% 50%, rgba(255,51,51,0.12) 0%, transparent 55%),
-        radial-gradient(ellipse at 80% 30%, rgba(10,22,40,0.8) 0%, transparent 60%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px 20px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .auth-container::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 25% 25%, rgba(200, 151, 58, 0.04) 0%, transparent 40%),
-        radial-gradient(circle at 75% 75%, rgba(200, 151, 58, 0.03) 0%, transparent 40%);
-      animation: glowPulse 8s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    .auth-container::after {
-      content: '';
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(200, 151, 58, 0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      top: -100px;
-      right: -100px;
-      animation: floatOrb1 20s ease-in-out infinite;
-      pointer-events: none;
-    }
-
-    @keyframes glowPulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-
-    @keyframes floatOrb1 {
-      0%, 100% { transform: translate(0, 0); }
-      25% { transform: translate(-30px, -50px); }
-      50% { transform: translate(-50px, 20px); }
-      75% { transform: translate(20px, -30px); }
-    }
-
-    .back-button {
-      position: absolute;
-      top: 24px;
-      left: 24px;
-      background: var(--red);
-      color: var(--navy) !important;
-      text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 2px;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      transition: all 0.3s ease;
-      z-index: 10;
-      animation: slideInLeft 0.6s ease;
-    }
-
-    .back-button:hover {
-      background: var(--red-light);
-      transform: translateX(-4px);
-      box-shadow: 0 4px 12px rgba(200, 151, 58, 0.3);
-    }
-
-    .user-menu {
-      position: absolute;
-      top: 24px;
-      right: 24px;
-      z-index: 10;
-    }
-
-    .user-btn {
-      background: var(--red);
-      color: var(--navy) !important;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 2px;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      animation: slideInRight 0.6s ease;
-      max-width: 150px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .user-btn:hover {
-      background: var(--red-light);
-      transform: translateX(4px);
-      box-shadow: 0 4px 12px rgba(200, 151, 58, 0.3);
-    }
-
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    .auth-wrapper {
-      width: 100%;
-      max-width: 1100px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .auth-header {
-      text-align: center;
-      margin-bottom: 40px;
-      padding: 24px 20px;
-      animation: fadeInDown 0.8s ease;
-    }
-
-    .auth-header h1 {
-      font-family: 'Oswald', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      font-weight: 700;
-      color: var(--white);
-      margin-bottom: 8px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      background: linear-gradient(135deg, #f9f7f2 0%, rgba(232, 181, 90, 0.8) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .auth-header p {
-      font-size: 0.95rem;
-      color: rgba(249,247,242,0.75);
-      max-width: 500px;
-      margin: 0 auto;
-      animation: fadeInUp 0.8s ease 0.1s both;
-    }
-
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .auth-inner {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      width: 100%;
-      max-width: 440px;
-      margin: 0 auto;
-    }
-
-    .auth-card {
-      background: var(--white) !important;
-      border-radius: 2px;
-      border-top: 3px solid var(--red);
-      padding: 32px 28px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      position: relative;
-      order: 1;
-      animation: scaleInUp 0.6s ease both;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-
-    .auth-card:last-child {
-      display: none;
-      animation: scaleInUp 0.6s ease both;
-    }
-
-    .auth-card:last-child.active {
-      display: flex;
-    }
-
-    @keyframes scaleInUp {
-      from {
-        opacity: 0;
-        transform: scale(0.95) translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-    }
-
-    .auth-card:hover {
-      box-shadow: 0 16px 40px rgba(0,0,0,0.2), 0 0 20px rgba(200, 151, 58, 0.1);
-      transform: translateY(-4px);
-    }
-
-    .auth-card h2 {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--navy) !important;
-      margin: 0 0 20px 0;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-      position: relative;
-    }
-
-    .form-group.has-value label {
-      color: var(--red);
-    }
-
-    .form-group.focused label {
-      animation: labelShift 0.3s ease both;
-    }
-
-    @keyframes labelShift {
-      from { transform: translateY(0); }
-      to { transform: translateY(-2px); }
-    }
-
-    .form-group label {
-      display: block;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gray);
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-
-    .form-group input,
-    .form-group select {
-      width: 100%;
-      padding: 12px 16px;
-      border: 1px solid #d4d0c8;
-      border-radius: 2px;
-      font-size: 1rem;
-      font-family: inherit;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      box-sizing: border-box;
-      color: var(--dark-gray) !important;
-      background: #ffffff !important;
-      position: relative;
-    }
-
-    .form-group input::placeholder {
-      color: var(--gray);
-      transition: color 0.3s ease;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--red);
-      box-shadow: 0 0 0 3px rgba(200, 151, 58, 0.15), inset 0 0 6px rgba(200, 151, 58, 0.05);
-      transform: scale(1.01);
-    }
-
-    .form-group.error input {
-      border-color: var(--red-accent);
-    }
-
-    .error-message {
-      color: var(--red-accent);
-      font-size: 0.85rem;
-      margin-top: 6px;
-      display: none;
-    }
-
-    .error-message.show {
-      display: block;
-    }
-
-    .validation-success {
-      color: #16a34a;
-      font-size: 0.85rem;
-      margin-top: 6px;
-    }
-
-    .btn-submit {
-      width: 100%;
-      padding: 12px 20px;
-      background: var(--red) !important;
-      color: var(--navy) !important;
-      border: none;
-      border-radius: 2px;
-      font-family: 'Oswald', sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      margin-top: 16px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 12px rgba(200, 151, 58, 0.2);
-    }
-
-    .btn-submit::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 0;
-      height: 0;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.3);
-      transform: translate(-50%, -50%);
-      transition: width 0.6s, height 0.6s;
-    }
-
-    .btn-submit:hover:not(:disabled) {
-      background: var(--red-light) !important;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(200, 151, 58, 0.35);
-    }
-
-    .btn-submit:hover:not(:disabled)::before {
-      width: 300px;
-      height: 300px;
-    }
-
-    .btn-submit:active:not(:disabled) {
-      transform: translateY(-1px);
-    }
-
-    .btn-submit:disabled {
-      background: #ccc !important;
-      cursor: not-allowed;
-      opacity: 0.6;
-    }
-
-    .form-footer {
-      margin-top: 16px;
-      text-align: center;
-      font-size: 0.85rem;
-      color: var(--gray);
-    }
-
-    .form-footer a {
-      color: var(--red) !important;
-      text-decoration: none;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      display: inline-block;
-    }
-
-    .form-footer a::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--red);
-      transition: width 0.3s ease;
-    }
-
-    .form-footer a:hover {
-      color: var(--red-light) !important;
-    }
-
-    .form-footer a:hover::after {
-      width: 100%;
-    }
-
-    #message {
-      color: var(--red-accent);
-      font-size: 0.85rem;
-      margin-top: 12px;
-      text-align: center;
-      display: none;
-    }
-
-    #message.show {
-      display: block;
-    }
-
-    .status-message {
-      padding: 12px 16px;
-      border-radius: 2px;
-      margin-top: 16px;
-      font-size: 0.85rem;
-      display: none;
-    }
-
-    .status-message.show {
-      display: block;
-    }
-
-    .status-message.success {
-      background: rgba(16, 185, 129, 0.1);
-      color: #047857;
-      border-left: 3px solid #10b981;
-    }
-
-    .status-message.error {
-      background: rgba(239, 68, 68, 0.1);
-      color: #991b1b;
-      border-left: 3px solid #ef4444;
-    }
-
-    @media (max-width: 900px) {
-      .auth-inner {
-        max-width: 100%;
-      }
-
-      .auth-card {
-        padding: 28px 24px;
-      }
-
-      .auth-header {
-        margin-bottom: 32px;
-      }
-
-      .auth-header h1 {
-        font-size: 1.6rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .auth-container {
-        padding: 60px 16px 40px 16px;
-      }
-
-      .back-button {
-        top: 16px;
-        left: 16px;
-        padding: 6px 12px;
-        font-size: 0.6rem;
-      }
-
-      .auth-card {
-        padding: 24px 18px;
-      }
-
-      .auth-header {
-        padding: 16px 12px;
-        margin-bottom: 24px;
-      }
-
-      .auth-header h1 {
-        font-size: 1.3rem;
-      }
-
-      .auth-header p {
-        font-size: 0.85rem;
-      }
-
-      .form-group input,
-      .form-group select {
-        padding: 10px 12px;
-      }
+    .left-panel::before { content:''; position:absolute; width:420px; height:420px; border-radius:50%; background:rgba(255,107,53,0.08); top:-80px; left:-80px; }
+    .left-panel::after  { content:''; position:absolute; width:300px; height:300px; border-radius:50%; background:rgba(255,107,53,0.06); bottom:-60px; right:-60px; }
+    .left-logo { width:90px; height:90px; border-radius:50%; border:3px solid rgba(255,107,53,0.6); object-fit:cover; margin-bottom:1.5rem; position:relative; z-index:1; }
+    .left-panel h1 { font-size:clamp(1.6rem,3vw,2.4rem); font-weight:700; color:#fff; text-align:center; line-height:1.15; margin-bottom:0.75rem; position:relative; z-index:1; }
+    .left-panel h1 span { color:var(--orange); }
+    .left-panel p { font-size:0.95rem; color:rgba(255,255,255,0.65); text-align:center; max-width:300px; line-height:1.6; position:relative; z-index:1; }
+    .left-tagline { margin-top:2.5rem; display:flex; flex-direction:column; gap:0.75rem; width:100%; max-width:300px; position:relative; z-index:1; }
+    .left-tagline-item { display:flex; align-items:center; gap:0.6rem; font-size:0.88rem; color:rgba(255,255,255,0.75); }
+    .left-tagline-item::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--orange); flex-shrink:0; }
+
+    .right-panel { width:480px; background:var(--off-white); display:flex; flex-direction:column; align-items:center; justify-content:center; padding:3rem 2.5rem; }
+    .form-card { width:100%; max-width:380px; }
+    .form-card h2 { font-size:1.6rem; font-weight:700; color:var(--green); margin-bottom:0.3rem; }
+    .form-card .subtitle { font-size:0.9rem; color:#6b7280; margin-bottom:2rem; }
+    .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1.25rem; }
+    .form-group label { font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--green); }
+    .form-group input { padding:0.8rem 1rem; border:2px solid #d1e7da; border-radius:8px; font-size:1rem; font-family:inherit; color:#1a1a1a; background:#fff; outline:none; transition:border-color 0.2s, box-shadow 0.2s; }
+    .form-group input:focus { border-color:var(--green); box-shadow:0 0 0 3px rgba(27,67,50,0.1); }
+
+    .btn-signin { width:100%; padding:0.9rem; background:var(--orange); color:#fff; border:none; border-radius:8px; font-family:inherit; font-size:1rem; font-weight:700; letter-spacing:0.03em; cursor:pointer; transition:background 0.2s, transform 0.15s, box-shadow 0.2s; margin-top:0.5rem; }
+    .btn-signin:hover { background:var(--orange-dark); transform:translateY(-2px); box-shadow:0 6px 20px rgba(255,107,53,0.35); }
+    .btn-signin:active { transform:translateY(0); }
+    .btn-signin:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+    #error-msg { background:#fff3f0; color:#c0392b; border-left:4px solid #e74c3c; padding:0.75rem 1rem; border-radius:6px; font-size:0.9rem; margin-bottom:1rem; display:none; }
+    .footer-link { text-align:center; margin-top:1.25rem; font-size:0.88rem; color:#6b7280; }
+    .footer-link a { color:var(--green); font-weight:600; text-decoration:none; }
+    .footer-link a:hover { text-decoration:underline; }
+
+    @media (max-width:700px) {
+      body { flex-direction:column; }
+      .left-panel { padding:2rem 1.5rem; min-height:220px; }
+      .right-panel { width:100%; padding:2rem 1.5rem; }
     }
   </style>
 </head>
 <body>
-
-<div class="auth-container">
-  <a href="#" onclick="history.back(); return false;" class="back-button">← Back</a>
-  <div id="user-menu" class="user-menu">
-    <button id="user-btn" class="user-btn">Login</button>
-  </div>
-  <div class="auth-wrapper">
-    <div class="auth-header">
-      <h1>Access Your Account</h1>
-      <p>Sign in to your D.A.D. account or create a new one to get started on your journey of exceptional achievement.</p>
-    </div>
-
-    <div class="auth-inner">
-      <!-- Login Card -->
-      <div class="auth-card">
-        <h2>Sign In</h2>
-        <form id="pythonForm" onsubmit="loginBoth(); return false;">
-          <div class="form-group">
-            <label for="uid">Username</label>
-            <input type="text" id="uid" placeholder="Enter your username" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required>
-          </div>
-          <button type="submit" class="btn-submit">Sign In</button>
-          <div id="message"></div>
-        </form>
-        <div class="form-footer">
-          Don't have an account? <a onclick="switchToSignup(event)">Create one</a>
-        </div>
-      </div>
-
-      <!-- Sign Up Card -->
-      <div class="auth-card">
-        <h2>Create Account</h2>
-        <form id="signupForm" onsubmit="handleSignupSubmit(event);">
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input type="text" id="name" placeholder="Your full name" required>
-          </div>
-          <div class="form-group">
-            <label for="signupUid">Username</label>
-            <input type="text" id="signupUid" placeholder="Choose a username" required>
-          </div>
-          <div class="form-group">
-            <label for="signupEmail">Email</label>
-            <input type="email" id="signupEmail" placeholder="Your email address" required>
-          </div>
-          <div class="form-group">
-            <label for="signupPassword">Password</label>
-            <input type="password" id="signupPassword" placeholder="Create a password (min. 8 characters)" required>
-          </div>
-          <div class="form-group">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
-            <div id="password-validation-message" class="error-message"></div>
-          </div>
-          <button type="submit" class="btn-submit">Create Account</button>
-          <div id="signupStatus" class="status-message"></div>
-        </form>
-        <div class="form-footer">
-          Already registered? <a onclick="switchToLogin(event)">Sign in instead</a>
-        </div>
-      </div>
+  <div class="left-panel">
+    <img class="left-logo" src="https://dadnonprofit-kfp2ps9o.manus.space/manus-storage/dad-logo_0ef8f3a8.png" onerror="this.style.display='none'" alt="D.A.D. Logo"/>
+    <h1>Doing<br><span>Exceptional</span><br>Deeds</h1>
+    <p>A 501(c)(3) nonprofit empowering youth through athletics, education, and community.</p>
+    <div class="left-tagline">
+      <div class="left-tagline-item">Youth Wellness &amp; Student Success</div>
+      <div class="left-tagline-item">Athlete Education &amp; Transition</div>
+      <div class="left-tagline-item">Golden Connections &amp; Community</div>
     </div>
   </div>
-</div>
 
-<script>
-console.log('TEST: Inline script is running!');
-</script>
+  <div class="right-panel">
+    <div class="form-card">
+      <h2>Welcome back</h2>
+      <p class="subtitle">Sign in to your D.A.D. account</p>
+      <div id="error-msg"></div>
+      <form id="login-form">
+        <div class="form-group">
+          <label for="uid">User ID</label>
+          <input id="uid" type="text" placeholder="Enter your user ID" required autocomplete="username"/>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input id="password" type="password" placeholder="Enter your password" required autocomplete="current-password"/>
+        </div>
+        <button type="submit" class="btn-signin" id="submit-btn">Sign In</button>
+      </form>
+      <p class="footer-link">Don't have an account? <a href="/signup">Create one</a></p>
+      <p class="footer-link"><a href="/dad">&larr; Back to site</a></p>
+    </div>
+  </div>
 
-<script type="module" src="./assets/js/login.js"></script>
+  <script type="module">
+    import { pythonURI, fetchOptions } from '/assets/js/api/config.js';
+    const form = document.getElementById('login-form');
+    const errBox = document.getElementById('error-msg');
+    const btn = document.getElementById('submit-btn');
 
+    fetch(pythonURI + '/api/id', fetchOptions)
+      .then(r => r.ok ? r.json() : null)
+      .then(user => { if (user) window.location.href = '/dad'; })
+      .catch(() => {});
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      errBox.style.display = 'none';
+      btn.disabled = true;
+      btn.textContent = 'Signing in…';
+      const uid = document.getElementById('uid').value.trim();
+      const password = document.getElementById('password').value;
+      try {
+        const resp = await fetch(pythonURI + '/api/authenticate', {
+          ...fetchOptions, method: 'POST', body: JSON.stringify({ uid, password })
+        });
+        if (resp.ok) {
+          window.location.href = '/dad';
+        } else {
+          const data = await resp.json().catch(() => ({}));
+          errBox.textContent = data.message || 'Invalid user ID or password.';
+          errBox.style.display = 'block';
+        }
+      } catch(err) {
+        errBox.textContent = 'Cannot reach server. Please try again.';
+        errBox.style.display = 'block';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Sign In';
+    });
+  </script>
 </body>
 </html>
