@@ -111,7 +111,7 @@ search_exclude: true
       </form>
 
       <p class="footer-link">Don't have an account? <a href="/signup">Create one for free</a></p>
-      <p class="footer-link"><a href="/dad">&larr; Back to site</a></p>
+      <p class="footer-link"><a href="/">&larr; Back to site</a></p>
     </div>
   </div>
 
@@ -124,7 +124,7 @@ search_exclude: true
     // Skip login if already authenticated
     fetch(pythonURI + '/api/id', fetchOptions)
       .then(r => r.ok ? r.json() : null)
-      .then(user => { if (user) window.location.href = '/dad'; })
+      .then(user => { if (user) window.location.href = '/'; })
       .catch(() => {});
 
     form.addEventListener('submit', async function(e) {
@@ -141,7 +141,7 @@ search_exclude: true
           body: JSON.stringify({ uid: email, password })
         });
         if (resp.ok) {
-          window.location.href = '/dad';
+          window.location.href = '/';
         } else {
           errBox.textContent = 'Incorrect email or password. Please try again.';
           errBox.style.display = 'block';

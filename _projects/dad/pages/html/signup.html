@@ -124,7 +124,7 @@ search_exclude: true
       </form>
 
       <p class="footer-link">Already have an account? <a href="/login">Sign in</a></p>
-      <p class="footer-link"><a href="/dad">&larr; Back to site</a></p>
+      <p class="footer-link"><a href="/">&larr; Back to site</a></p>
     </div>
   </div>
 
@@ -168,7 +168,7 @@ search_exclude: true
           });
           sucBox.textContent = 'Account created! Redirecting…';
           sucBox.style.display = 'block';
-          setTimeout(() => { window.location.href = loginResp.ok ? '/dad' : '/login'; }, 1200);
+          setTimeout(() => { window.location.href = loginResp.ok ? '/' : '/login'; }, 1200);
         } else {
           errBox.textContent = data.message && data.message.toLowerCase().includes('exist')
             ? 'An account with that email already exists. Try signing in.'

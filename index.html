@@ -1,5 +1,5 @@
 ---
-permalink: /dad
+permalink: /
 layout: none
 search_exclude: true
 ---
@@ -8,13 +8,7 @@ search_exclude: true
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <!-- Rewrite /dad → / so the React app's internal router doesn't 404 -->
-  <script>
-    (function(){
-      var p = location.pathname;
-      if (p === '/dad' || p === '/dad/') history.replaceState(null, '', '/');
-    })();
-  </script>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
   <title>Doing Exceptional Deeds (D.A.D.)</title>
   <meta name="description" content="D.A.D. is a 501(c)(3) nonprofit empowering youth through athlete education, life skills, and community programs in San Marcos, CA." />
@@ -139,6 +133,30 @@ search_exclude: true
     }
 
     /* === AI CHATBOT === */
+    #dad-auth-pill {
+      display:flex; align-items:center; gap:8px; margin-left:8px;
+    }
+    #dad-signin-btn {
+      font-family:inherit; font-size:0.8rem; font-weight:700;
+      letter-spacing:0.04em; text-decoration:none; cursor:pointer;
+      padding:6px 14px; border-radius:20px; border:none;
+      background:var(--dad-orange); color:#fff;
+      transition:background .2s, transform .15s;
+    }
+    #dad-signin-btn:hover { background:#e55a25; transform:scale(1.03); }
+    #dad-signout-btn {
+      font-family:inherit; font-size:0.8rem; font-weight:700;
+      letter-spacing:0.04em; cursor:pointer;
+      padding:6px 14px; border-radius:20px;
+      background:rgba(255,255,255,0.15); color:#fff;
+      border:1px solid rgba(255,255,255,0.35);
+      transition:background .2s, transform .15s;
+    }
+    #dad-signout-btn:hover { background:rgba(255,255,255,0.25); transform:scale(1.03); }
+    #dad-auth-name {
+      font-size:0.78rem; color:rgba(255,255,255,0.85); font-weight:500; white-space:nowrap;
+    }
+
     #dad-chat-toggle {
       position:fixed; bottom:28px; right:28px; z-index:9999;
       width:58px; height:58px; background:var(--dad-green); border:none;
@@ -348,6 +366,13 @@ search_exclude: true
 </head>
 <body>
 
+  <!-- Auth pill — injected into React nav after it renders -->
+  <div id="dad-auth-pill" style="display:none;">
+    <span id="dad-auth-name"></span>
+    <a href="/login" id="dad-signin-btn">Sign In</a>
+    <button id="dad-signout-btn" style="display:none;">Sign Out</button>
+  </div>
+
   <!-- React app renders full doingexceptionaldeeds.org site here -->
   <div id="root"></div>
 
@@ -463,24 +488,46 @@ search_exclude: true
   <script type="module">
     import { pythonURI, fetchOptions } from '/assets/js/api/config.js';
 
-    /* ── Inject carousel below React app once it renders ── */
+    /* ── Inject carousel after the second section ── */
     (function injectCarousel() {
-      var root = document.getElementById('root');
-      if (!root || root.children.length === 0) { setTimeout(injectCarousel, 300); return; }
+      var sections = document.querySelectorAll('#root section');
+      if (sections.length < 2) { setTimeout(injectCarousel, 300); return; }
       var cs = document.getElementById('dad-carousel-section');
-      if (cs) { cs.style.display = ''; root.after(cs); }
+      if (cs) { cs.style.display = ''; sections[1].after(cs); }
+    })();
+
+    /* ── Inject auth pill into React nav next to Donate button ── */
+    (function injectAuthPill() {
+      var donateLink = document.querySelector('a[href="/donate"]');
+      if (!donateLink) { setTimeout(injectAuthPill, 300); return; }
+      var pill = document.getElementById('dad-auth-pill');
+      if (pill) { pill.style.display = 'flex'; donateLink.after(pill); }
     })();
 
     /* ── Auth check ── */
     fetch(pythonURI + '/api/id', fetchOptions)
       .then(function(r){ return r.ok ? r.json() : null; })
       .then(function(user){
+        var pill = document.getElementById('dad-auth-pill');
+        var signinBtn = document.getElementById('dad-signin-btn');
+        var signoutBtn = document.getElementById('dad-signout-btn');
+        var authName = document.getElementById('dad-auth-name');
+        if (pill) pill.style.display = 'flex';
         if (user) {
+          if (signinBtn) signinBtn.style.display = 'none';
+          if (signoutBtn) signoutBtn.style.display = '';
+          if (authName) authName.textContent = user.name || user._name || '';
+          if (signoutBtn) signoutBtn.addEventListener('click', function() {
+            window.location.href = pythonURI + '/api/signout';
+          });
           var al = document.getElementById('dcw-admin-link');
           if (al) al.style.display = 'inline-block';
           var sb = document.getElementById('dsm-submit-btn');
           if (sb) sb.disabled = false;
         } else {
+          if (signinBtn) signinBtn.style.display = '';
+          if (signoutBtn) signoutBtn.style.display = 'none';
+          if (authName) authName.textContent = '';
           var lr = document.getElementById('dsm-login-required');
           if (lr) lr.style.display = 'block';
           var frm = document.getElementById('dsm-form');
