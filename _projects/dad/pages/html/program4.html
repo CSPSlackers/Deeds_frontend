@@ -57,7 +57,40 @@ search_exclude: true
     .back-link:hover { opacity: 0.8; }
     footer { background: var(--navy); color: rgba(249,247,242,0.6); text-align: center; padding: 32px; font-size: 0.85rem; }
     footer a { color: var(--red); text-decoration: none; }
-    @media (max-width: 768px) { .program-hero { padding: 80px 24px 60px; } .program-content { padding: 60px 24px; } .cta-section { padding: 40px 24px; } }
+    /* hamburger button — hidden on desktop */
+    .nav-hamburger {
+      display: none; flex-direction: column; justify-content: center; gap: 5px;
+      cursor: pointer; padding: 8px; background: none; border: none; border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .nav-hamburger span { display: block; width: 22px; height: 2px; background: var(--navy); border-radius: 2px; transition: transform 0.28s, opacity 0.28s; }
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    @media (max-width: 768px) {
+      .nav-inner { padding: 0 16px; position: relative; }
+      .nav-hamburger { display: flex; }
+      .nav-links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        background: var(--white); border-bottom: 3px solid var(--red);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.12); flex-direction: column;
+        padding: 8px 0; z-index: 200;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links > li > a { padding: 13px 24px; font-size: 0.88rem; border-bottom: 1px solid rgba(0,0,0,0.05); width: 100%; }
+      .nav-links > li:last-child > a { border-bottom: none; }
+      .nav-donate { margin: 8px 20px !important; padding: 12px 20px !important; text-align: center; display: block; }
+      .nav-title .sub { display: none; }
+      .program-hero { padding: 60px 20px 50px; }
+      .program-hero-desc { font-size: 1rem; }
+      .program-content { padding: 50px 20px; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .cta-section { padding: 36px 20px; }
+      .cta-btns { flex-direction: column; align-items: stretch; }
+      .btn-primary, .btn-outline { text-align: center; }
+      footer { padding: 24px 16px; }
+    }
   </style>
 </head>
 <body>
@@ -73,6 +106,9 @@ search_exclude: true
           <span class="sub">A 501c(3) Nonprofit &nbsp;·&nbsp; MBE #23002138</span>
         </div>
       </a>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
       <ul class="nav-links">
         <li><a href="/#programs">Programs</a></li>
         <li><a href="/#about">About</a></li>
@@ -147,5 +183,31 @@ search_exclude: true
     <p>© 2021 Doing Exceptional Deeds (D.A.D.). All rights reserved. &nbsp;·&nbsp; <a href="/">Home</a> &nbsp;·&nbsp; 420 Smilax Road, San Marcos, CA 92078</p>
   </footer>
 
+  <script>
+    (function() {
+      var btn = document.getElementById('nav-hamburger');
+      var menu = document.querySelector('.nav-links');
+      if (!btn || !menu) return;
+      btn.addEventListener('click', function() {
+        var open = menu.classList.toggle('open');
+        btn.classList.toggle('open', open);
+        btn.setAttribute('aria-expanded', String(open));
+      });
+      menu.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+          menu.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+      document.addEventListener('click', function(e) {
+        if (!e.target.closest('nav')) {
+          menu.classList.remove('open');
+          btn.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    })();
+  </script>
 </body>
 </html>

@@ -255,14 +255,70 @@ search_exclude: true
     }
     .btn-back:hover { background: var(--orange-dark); }
 
-    @media (max-width:600px) { .sidebar { width:200px; } }
+    /* mobile-only buttons (hidden on desktop) */
+    .mobile-sidebar-btn, .mobile-back-btn { display: none; }
+
+    @media (max-width: 768px) {
+      body { overflow: hidden; }
+
+      /* sidebar becomes slide-in overlay */
+      .sidebar {
+        position: fixed; top: 64px; left: -100%;
+        width: min(85vw, 300px); height: calc(100vh - 64px);
+        z-index: 500; transition: left 0.25s ease;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.18);
+      }
+      .sidebar.open { left: 0; }
+
+      /* tap-outside backdrop */
+      .sidebar-backdrop {
+        display: none; position: fixed; inset: 0;
+        background: rgba(0,0,0,0.42); z-index: 499;
+      }
+      .sidebar-backdrop.open { display: block; }
+
+      /* show mobile toggle buttons */
+      .mobile-sidebar-btn {
+        display: flex; align-items: center; gap: 6px;
+        background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+        color: #fff; font-family: 'Space Grotesk',sans-serif;
+        font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em;
+        padding: 6px 12px; border-radius: 6px; cursor: pointer;
+      }
+      .mobile-back-btn {
+        display: flex; align-items: center; gap: 5px;
+        background: none; border: none; cursor: pointer;
+        color: var(--green); font-family: 'Space Grotesk',sans-serif;
+        font-size: 0.8rem; font-weight: 600; padding: 4px 0;
+      }
+
+      /* chat panel header on mobile */
+      .chat-panel-header { padding: 0 14px; gap: 10px; }
+
+      /* message area padding */
+      #messages { padding: 14px 14px; }
+      .input-bar { padding: 10px 14px 6px; }
+
+      /* select state hint changes on mobile */
+      .select-state p::before { content: 'Tap ≡ to see conversations'; display: block; font-weight: 600; color: var(--green); margin-bottom: 6px; }
+      .select-state p { font-size: 0; }
+      .select-state p::before { font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
 
+  <!-- Sidebar overlay backdrop (mobile only) -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
   <!-- TOP BAR -->
   <div class="top-bar">
-    <div class="top-bar-title">D.A.D. <span>Admin Chat</span></div>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <button class="mobile-sidebar-btn" id="mobile-sidebar-btn" aria-label="Toggle conversations">
+        ☰ Users
+      </button>
+      <div class="top-bar-title">D.A.D. <span>Admin Chat</span></div>
+    </div>
     <a href="/" class="header-back">← Back to Site</a>
   </div>
 
@@ -296,6 +352,7 @@ search_exclude: true
       <!-- Active chat -->
       <div id="active-chat" style="display:none; flex:1; flex-direction:column; overflow:hidden;">
         <div class="chat-panel-header">
+          <button class="mobile-back-btn" id="mobile-back-btn" aria-label="Back to conversations">← Users</button>
           <div class="panel-avatar" id="panel-avatar">?</div>
           <div>
             <div class="panel-name" id="panel-name">—</div>
@@ -480,6 +537,24 @@ search_exclude: true
     });
 
     checkAuth();
+
+    // ── Mobile sidebar toggle ──
+    const sidebarEl   = document.querySelector('.sidebar');
+    const backdropEl  = document.getElementById('sidebar-backdrop');
+    const sidebarBtn  = document.getElementById('mobile-sidebar-btn');
+    const backBtn     = document.getElementById('mobile-back-btn');
+
+    function openSidebar()  { sidebarEl.classList.add('open');  backdropEl.classList.add('open'); }
+    function closeSidebar() { sidebarEl.classList.remove('open'); backdropEl.classList.remove('open'); }
+
+    if (sidebarBtn)  sidebarBtn.addEventListener('click', openSidebar);
+    if (backdropEl)  backdropEl.addEventListener('click', closeSidebar);
+    if (backBtn)     backBtn.addEventListener('click', openSidebar);
+
+    // Close sidebar when a user is tapped on mobile
+    document.getElementById('user-list').addEventListener('click', () => {
+      if (window.innerWidth <= 768) closeSidebar();
+    });
   </script>
 </body>
 </html>
