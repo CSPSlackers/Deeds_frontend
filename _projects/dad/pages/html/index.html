@@ -176,10 +176,10 @@ search_exclude: true
       border-radius:12px; box-shadow:0 8px 40px rgba(0,0,0,.22);
       display:flex; flex-direction:column; overflow:hidden;
       border:1px solid rgba(27,67,50,.2);
-      transform:translateY(16px) scale(.97); opacity:0; pointer-events:none;
+      transform:translateY(16px) scale(.97); opacity:0; pointer-events:none; visibility:hidden;
       transition:transform .25s ease, opacity .25s ease;
     }
-    #dad-chat-window.open { transform:translateY(0) scale(1); opacity:1; pointer-events:all; }
+    #dad-chat-window.open { transform:translateY(0) scale(1); opacity:1; pointer-events:all; visibility:visible; }
 
     .dcw-header {
       background:var(--dad-green); padding:14px 18px;
@@ -280,9 +280,10 @@ search_exclude: true
       position:fixed; inset:0; z-index:10000;
       background:rgba(22,56,40,.75); backdrop-filter:blur(4px);
       display:flex; align-items:center; justify-content:center; padding:20px;
-      opacity:0; pointer-events:none; transition:opacity .25s ease;
+      opacity:0; pointer-events:none; visibility:hidden;
+      transition:opacity .25s ease, visibility .25s ease;
     }
-    #dad-submit-modal.open { opacity:1; pointer-events:all; }
+    #dad-submit-modal.open { opacity:1; pointer-events:all; visibility:visible; }
     .dsm-card {
       background:var(--dad-off-white); border-radius:14px;
       width:100%; max-width:520px; max-height:90vh; overflow-y:auto;
@@ -650,7 +651,7 @@ search_exclude: true
       }
       function hideTyping(){ var el=document.getElementById('dcw-typing'); if(el)el.remove(); }
 
-      var history=[{role:'system',content:'You are the official assistant for Doing Exceptional Deeds (D.A.D.), a 501(c)(3) nonprofit (MBE #23002138). You ONLY answer questions about D.A.D. For anything unrelated, politely decline and redirect. Keep answers warm, concise, and helpful.\n\nORGANIZATION: Founded 2023. Address: 420 Smilax Road, San Marcos, CA 92078. Mission: Develop disciplined, prepared, and informed individuals through athletics, workforce education, and real-world career exposure.\n\nPROGRAMS: (1) Youth Wellness & Student Success (6-12), (2) Athlete Education & Transition Portal (18+, Pilot), (3) Industry Voices (Pilot) - short educational videos from professionals, (4) Athlete Education & Family Support, (5) Student Success Advisory - continuity model middle through high school, (6) Golden Connections - senior & youth intergenerational program.\n\nTHE SYSTEM: Community to Development to Career — not just participation, but progression.\n\nPARTNERS: San Marcos United, Tri-City Medical Center, Scripps Oceanside, Stampede Elite, SDSU Track & Field.\n\nFUNDING TIERS: 760 Legacy (monthly), 760 Support (one-time), 760 Commitment (annual).\n\nDONATE: All donations fund programs. 501(c)(3) — tax-deductible.\n\nVOLUNTEER: See Contact section or click "Talk to Admin" in this chat.'}];
+      var history=[{role:'system',content:'You are the official assistant for Doing Exceptional Deeds (D.A.D.), a 501(c)(3) nonprofit (MBE #23002138). You ONLY answer questions about D.A.D. For anything unrelated, politely decline and redirect. Keep answers warm, concise, and helpful.\n\nORGANIZATION: Founded 2023. Address: 420 Smilax Road, San Marcos, CA 92078. Mission: Develop disciplined, prepared, and informed individuals through athletics, workforce education, and real-world career exposure.\n\nPROGRAMS: (1) Youth Wellness & Student Success (grades 6-12) — wellness workshops, life skills coaching, academic accountability, community integration. (2) Athlete Education & Transition Portal (18+, Pilot) — career planning for student-athletes transitioning out of sports. (3) Industry Voices (Pilot) — short educational videos from real professionals across industries. (4) Athlete Education & Family Support — resources for athletes and their families navigating education and career. (5) Student Success Advisory — continuity mentoring model from middle school through high school. (6) Golden Connections — intergenerational program connecting seniors and youth.\n\nTHE SYSTEM: Community to Development to Career — not just participation, but progression.\n\nSUBMITTING A DEED: To submit a deed, click the orange "Submit a Deed" button in the bottom-left corner of the homepage. You must be logged in first — if you are not logged in you will see a prompt to sign in. Once logged in, fill out the deed title, description, select a category (volunteer, charity, environmental, mentoring, community, fundraising, cleanup, donation, support, or misc), and optionally attach a photo. Then click Submit. Submitted deeds are reviewed by D.A.D. admins and may be featured in the photo carousel on the homepage.\n\nCREATING AN ACCOUNT / SIGNING IN: Click "Sign In" in the top navigation bar. To create a new account click "Create one" on the sign-in page. You only need a name, email, and password (minimum 8 characters).\n\nCHAT WITH ADMIN: If you want to speak directly with a D.A.D. staff member, click "Talk to Admin" in this chat window, or visit the /chat page. You must be signed in to send messages.\n\nPARTNERS: San Marcos United, Tri-City Medical Center, Scripps Oceanside, Stampede Elite, SDSU Track & Field.\n\nFUNDING TIERS: 760 Legacy (monthly recurring), 760 Support (one-time gift), 760 Commitment (annual pledge). All donations are tax-deductible.\n\nDONATE: Click the Donate button in the navigation or visit the Donate section on the homepage. All donations directly fund D.A.D. programs.\n\nVOLUNTEER / CONTACT: Scroll to the Contact section on the homepage, or click "Talk to Admin" in this chat to reach D.A.D. staff directly.'}];
 
       function handleSend(){
         var text=input.value.trim(); if(!text)return;
