@@ -539,8 +539,9 @@ search_exclude: true
           if (signinBtn) signinBtn.style.display = 'none';
           if (signoutBtn) signoutBtn.style.display = '';
           if (authName) authName.textContent = user.name || user._name || '';
-          if (signoutBtn) signoutBtn.addEventListener('click', function() {
-            window.location.href = pythonURI + '/api/signout';
+          if (signoutBtn) signoutBtn.addEventListener('click', async function() {
+            try { await fetch(pythonURI + '/api/signout', { ...fetchOptions, redirect: 'manual' }); } catch(e) {}
+            window.location.reload();
           });
           var al = document.getElementById('dcw-admin-link');
           if (al) al.style.display = 'inline-block';
